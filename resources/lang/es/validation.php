@@ -148,6 +148,7 @@ return [
 
     'attributes' => [
         'display_name' => 'Nombre',
+        'name' => 'Nombre',
         'user.name' => 'Nombre',
         'user.email' => 'Email',
         'user.password' => 'Contraseña',

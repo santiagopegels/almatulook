@@ -39,6 +39,10 @@ let getters = {
         return state.attributes;
     },
 
+    values: state => {
+        return state.values;
+    },
+
     /** SELECTED */
 
     selected_user: state => {
@@ -55,6 +59,10 @@ let getters = {
 
     selected_attribute: state => {
         return state.selected_attribute;
+    },
+
+    selected_value: state => {
+        return state.selected_value;
     },
 }
 

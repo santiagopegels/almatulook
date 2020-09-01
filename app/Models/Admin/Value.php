@@ -2,24 +2,22 @@
 
 namespace App\Models\Admin;
 
-use App\Traits\Sluggable;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class Attribute
+ * Class Value
  * @package App\Models\Admin
- * @version September 1, 2020, 11:01 am UTC
+ * @version September 1, 2020, 10:12 pm UTC
  *
  * @property string $name
  * @property string $slug
  */
-class Attribute extends Model
+class Value extends Model
 {
     use SoftDeletes;
-    use Sluggable;
 
-    public $table = 'attributes';
+    public $table = 'values';
 
 
     protected $dates = ['deleted_at'];
@@ -48,7 +46,7 @@ class Attribute extends Model
      * @var array
      */
     public static $rules = [
-        'name' => 'required|unique:attributes'
+        'name' => 'required|unique:values'
     ];
 
 

@@ -101,6 +101,12 @@ Vue.component('attributes-list', require('./components/models/attributes/lists.v
 Vue.component('attributes-index', require('./components/models/attributes/index.vue').default);
 Vue.component('attributes-filters', require('./components/models/attributes/filters.vue').default);
 
+// values
+Vue.component('values-form', require('./components/models/values/form.vue').default);
+Vue.component('values-list', require('./components/models/values/lists.vue').default);
+Vue.component('values-index', require('./components/models/values/index.vue').default);
+Vue.component('values-filters', require('./components/models/values/filters.vue').default);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

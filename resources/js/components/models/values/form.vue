@@ -6,7 +6,7 @@
             <span class="float-right">
             <span v-if="hasId" class="badge badge-warning">
                 ID
-                <strong>{{ selected_attribute.id }}</strong>
+                <strong>{{ selected_value.id }}</strong>
             </span>
             <span v-if="hasId" class="ml-1">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"
@@ -20,10 +20,10 @@
             <form method="POST" @submit="handleSubmit" accept-charset="UTF-8">
                 <div class="form-group">
                     <label for="name">Nombre</label>
-                    <input type="text" v-model="selected_attribute.name" v-capitalize id="name" name="name"
-                           class="form-control" placeholder="Talle, Color etc."
-                           :class="{ 'is-invalid': submitted && $v.selected_attribute.name.$error }"/>
-                    <div v-if="submitted && !$v.selected_attribute.name.required" class="invalid-feedback">El nombre del
+                    <input type="text" v-model="selected_value.name" v-capitalize id="name" name="name"
+                           class="form-control" placeholder="M, L, Azul, Rojo etc."
+                           :class="{ 'is-invalid': submitted && $v.selected_value.name.$error }"/>
+                    <div v-if="submitted && !$v.selected_value.name.required" class="invalid-feedback">El nombre del
                         módulo es requerido.
                     </div>
                 </div>
@@ -58,14 +58,14 @@ export default {
     data: function () {
         return {
             submitted: false,
-            model: "attributes",
-            model_name: 'atributo'
+            model: "values",
+            model_name: 'valor'
         };
     },
     validations() {
         if (this.hasSelectedId()) {
             return {
-                selected_attribute: {
+                selected_value: {
                     id: {
                         required,
                         integer
@@ -77,7 +77,7 @@ export default {
             };
         } else {
             return {
-                selected_attribute: {
+                selected_value: {
                     name: {
                         required
                     },
@@ -91,26 +91,26 @@ export default {
     mounted() {
     },
     computed: {
-        ...mapGetters(["isLoading", "selected_attribute", "page"]),
+        ...mapGetters(["isLoading", "selected_value", "page"]),
         hasId() {
             return Boolean(this.hasSelectedId());
         },
         getTitle() {
             return this.hasSelectedId() ?
-                "Editar Atributo" :
-                "Crear Atributo";
+                "Editar Valor" :
+                "Crear Valor";
         },
 
         buttonText() {
             return this.hasSelectedId() ?
-                "Actualizar Atributo" :
-                "Crear Atributo";
+                "Actualizar Valor" :
+                "Crear Valor";
         },
     },
     methods: {
         hasSelectedId() {
-            if (!Boolean(this.selected_attribute)) return false;
-            return Boolean(this.selected_attribute.id > 0);
+            if (!Boolean(this.selected_value)) return false;
+            return Boolean(this.selected_value.id > 0);
         },
 
         async handleSubmit(e) {
@@ -130,8 +130,8 @@ export default {
             await this.$store.dispatch("store", {
                 model: this.model,
                 data: {
-                    name: this.selected_attribute.name,
-                    slug: this.hyphenate(this.selected_attribute.name)
+                    name: this.selected_value.name,
+                    slug: this.hyphenate(this.selected_value.name)
                 }
             })
                 .then(async result => {
@@ -139,10 +139,7 @@ export default {
                     this.$toasted.global.ToastedSuccess({message: `El ${this.model_name} fue creado!`});
                     await this.fetch();
                 })
-                .catch(error => {
-                    console.log(error.message.response.data.errors.name)
-                    this.$toasted.global.ToastedError({message: error.message.response.data.errors.name})
-                });
+                .catch(error => this.$toasted.global.ToastedError({message: error.message.response.data.errors.name}));
         },
 
         async update() {
@@ -150,9 +147,9 @@ export default {
                 model: this.model,
                 data: {
                     _method: "PUT",
-                    id: this.selected_attribute.id,
-                    name: this.selected_attribute.name,
-                    slug: this.hyphenate(this.selected_attribute.name)
+                    id: this.selected_value.id,
+                    name: this.selected_value.name,
+                    slug: this.hyphenate(this.selected_value.name)
                 }
             })
                 .then(async result => {
@@ -160,12 +157,12 @@ export default {
                     this.$toasted.global.ToastedSuccess({message: `El ${this.model_name} fue actualizado!`});
                     await this.fetch();
                 })
-                .catch(error => this.$toasted.global.ToastedError({message: error.message.response.data.errors.name}));
+                .catch(error => this.$toasted.global.ToastedError({message: error.message.message}));
         },
 
         cancelSelectedObject() {
             this.$v.$reset();
-            return this.$store.commit("SET_SELECTED_ATTRIBUTE");
+            return this.$store.commit("SET_SELECTED_VALUE");
         },
 
         capitalize(value) {
@@ -178,8 +175,8 @@ export default {
         },
 
         clearFields() {
-            this.selected_attribute.name = null,
-                this.selected_attribute.slug = null
+            this.selected_value.name = null,
+                this.selected_value.slug = null
         },
 
         async fetch() {

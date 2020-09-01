@@ -736,7 +736,7 @@ let actions = {
                 }
 
             }).catch(error => {
-                console.error(`store.${params.model}`, JSON.stringify(error));
+                console.error(error);
                 commit('SET_LOADING', false);
                 reject({
                     status: false,
@@ -912,6 +912,11 @@ let actions = {
                 await commit('SET_SELECTED_ATTRIBUTE');
                 break;
 
+            case 'values':
+                await commit('SET_VALUES', content.data);
+                await commit('SET_SELECTED_VALUE');
+                break;
+
             default:
                 break;
         }
@@ -945,6 +950,11 @@ let actions = {
                 await commit('SET_SELECTED_ATTRIBUTE');
                 break;
 
+            case 'values':
+                await commit('PUSH_VALUE', content.data);
+                await commit('SET_SELECTED_VALUE');
+                break;
+
             default:
                 break;
         }
@@ -972,6 +982,10 @@ let actions = {
 
             case 'attributes':
                 await commit('SET_SELECTED_ATTRIBUTE');
+                break;
+
+            case 'values':
+                await commit('SET_SELECTED_VALUE');
                 break;
 
             default:

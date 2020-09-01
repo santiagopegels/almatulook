@@ -37,9 +37,16 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('permissions/{id}/restore', ['uses' => 'Admin\PermissionAPIController@restore']);
     Route::post('users/{id}/restore', ['uses' => 'Admin\UserAPIController@restore']);
     Route::post('attributes/{id}/restore', ['uses' => 'Admin\AttributeAPIController@restore']);
+    Route::post('values/{id}/restore', ['uses' => 'Admin\ValueAPIController@restore']);
+
 });
 
 
 Route::group(['prefix' => 'admin'], function () {
     Route::resource('attribute_values', 'Admin\AttributeValueAPIController');
+});
+
+
+Route::group(['prefix' => 'admin'], function () {
+    Route::resource('values', 'Admin\ValueAPIController');
 });

@@ -41,6 +41,10 @@ let mutations = {
         state.attributes = attributes;
     },
 
+    SET_VALUES(state, values) {
+        state.values = values;
+    },
+
     /**
      * SET SELECTED
      */
@@ -91,6 +95,16 @@ let mutations = {
         state.selected_attribute = selected_attribute;
     },
 
+    SET_SELECTED_VALUE(
+        state, selected_value = {
+            id: null,
+            name: "",
+            slug: "",
+        }
+    ) {
+        state.selected_value = selected_value;
+    },
+
     /**
      * PUSH
      */
@@ -109,6 +123,10 @@ let mutations = {
 
     PUSH_ATTRIBUTE(state, attribute) {
         state.attributes.data.push(attribute);
+    },
+
+    PUSH_VALUE(state, value) {
+        state.values.data.push(value);
     },
 
     /**
@@ -156,6 +174,17 @@ let mutations = {
 
         } catch (error) {
             console.error('REMOVE_ATTRIBUTE.error', error);
+        }
+    },
+
+    REMOVE_VALUE(state, value) {
+        try {
+            let index = state.values.data.findIndex(item => item.id === value.id);
+            if (index < 0) return;
+            state.values.data.splice(index, 1);
+
+        } catch (error) {
+            console.error('REMOVE_VALUE.error', error);
         }
     },
 }
