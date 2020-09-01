@@ -29,7 +29,3 @@ Route::get('/home', 'HomeController@index')->middleware('verified');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
