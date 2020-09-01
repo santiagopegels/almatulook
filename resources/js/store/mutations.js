@@ -37,6 +37,10 @@ let mutations = {
         state.permissions = permissions;
     },
 
+    SET_ATTRIBUTES(state, attributes) {
+        state.attributes = attributes;
+    },
+
     /**
      * SET SELECTED
      */
@@ -77,6 +81,16 @@ let mutations = {
         state.selected_permission = selected_permission;
     },
 
+    SET_SELECTED_ATTRIBUTE(
+        state, selected_attribute = {
+            id: null,
+            name: "",
+            slug: "",
+        }
+    ) {
+        state.selected_attribute = selected_attribute;
+    },
+
     /**
      * PUSH
      */
@@ -91,6 +105,10 @@ let mutations = {
 
     PUSH_PERMISSION(state, permission) {
         state.permissions.data.push(permission);
+    },
+
+    PUSH_ATTRIBUTE(state, attribute) {
+        state.attributes.data.push(attribute);
     },
 
     /**
@@ -127,6 +145,17 @@ let mutations = {
 
         } catch (error) {
             console.error('REMOVE_PERMISSION.error', error);
+        }
+    },
+
+    REMOVE_ATTRIBUTE(state, attribute) {
+        try {
+            let index = state.attributes.data.findIndex(item => item.id === attribute.id);
+            if (index < 0) return;
+            state.attributes.data.splice(index, 1);
+
+        } catch (error) {
+            console.error('REMOVE_ATTRIBUTE.error', error);
         }
     },
 }

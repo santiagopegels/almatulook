@@ -29,3 +29,8 @@ Route::get('/home', 'HomeController@index')->middleware('verified');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::group(['prefix' => 'admin'], function () {
+    Route::resource('attributeValues', 'Admin\AttributeValueController', ["as" => 'admin']);
+});

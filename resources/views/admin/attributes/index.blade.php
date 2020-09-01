@@ -1,32 +1,13 @@
-@extends('layouts.app')
+@extends('admin.layouts.app')
 
 @section('content')
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item">Attributes</li>
-    </ol>
+
+    <!-- Breadcrumb-->
+    @include('admin.layouts.breadcrumb', ['title'=>__('model.attributes'), 'link_to'=>'admin.attributes.index'])
+
     <div class="container-fluid">
         <div class="animated fadeIn">
-             @include('flash::message')
-             <div class="row">
-                 <div class="col-lg-12">
-                     <div class="card">
-                         <div class="card-header">
-                             <i class="fa fa-align-justify"></i>
-                             Attributes
-                             <a class="pull-right" href="{{ route('admin.attributes.create') }}"><i class="fa fa-plus-square fa-lg"></i></a>
-                         </div>
-                         <div class="card-body">
-                             @include('admin.attributes.table')
-                              <div class="pull-right mr-3">
-                                     
-        @include('coreui-templates::common.paginate', ['records' => $attributes])
-
-                              </div>
-                         </div>
-                     </div>
-                  </div>
-             </div>
-         </div>
+            <attributes-index title="{!! __('model.attributes') !!}" />
+        </div>
     </div>
 @endsection
-

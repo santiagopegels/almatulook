@@ -30,6 +30,8 @@ let state = {
     users: [],
     roles: [],
     permissions: [],
+    attributes: [],
+
 
     /**
      * Selected item
@@ -57,6 +59,12 @@ let state = {
         name: "",
         display_name: "",
         description: ""
+    },
+
+    selected_attribute: {
+        id: null,
+        name: "",
+        slug: ""
     },
 }
 

@@ -35,6 +35,10 @@ let getters = {
         return state.permissions;
     },
 
+    attributes: state => {
+        return state.attributes;
+    },
+
     /** SELECTED */
 
     selected_user: state => {
@@ -47,6 +51,10 @@ let getters = {
 
     selected_permission: state => {
         return state.selected_permission;
+    },
+
+    selected_attribute: state => {
+        return state.selected_attribute;
     },
 }
 

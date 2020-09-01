@@ -95,6 +95,11 @@ Vue.component('permissions-index', require('./components/models/permissions/inde
 Vue.component('permissions-checkbox', require('./components/models/permissions/checkbox.vue').default);
 Vue.component('permissions-module', require('./components/models/permissions/module.vue').default);
 
+// attributes
+Vue.component('attributes-form', require('./components/models/attributes/form.vue').default);
+Vue.component('attributes-list', require('./components/models/attributes/lists.vue').default);
+Vue.component('attributes-index', require('./components/models/attributes/index.vue').default);
+Vue.component('attributes-filters', require('./components/models/attributes/filters.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

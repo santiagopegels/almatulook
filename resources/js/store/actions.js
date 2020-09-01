@@ -10,9 +10,6 @@ const path_users_all = '/api/admin/users_all';
 const path_roles = '/api/admin/roles';
 const path_roles_all = '/api/admin/roles_all';
 
-const path_store_event = '/api/public/events/store_event';
-
-
 const config = {
     headers: {
         'Content-Type': 'multipart/form-data'
@@ -24,35 +21,6 @@ let actions = {
     // STATUS
     toggleStatus({ commit }) {
         commit('SET_STATUS');
-    },
-
-    /**
-     * PUBLIC EVENT STORE
-     */
-
-    storePublicEvent({ commit }, data) {
-        console.log('actions.storePublicEvent.data', data);
-        console.log('actions.storePublicEvent.path_store_event', path_store_event);
-        return new Promise((resolve, reject) => {
-            commit('SET_LOADING', true);
-            console.log('Promise.actions.storePublicEvent.data', data);
-            window.axios.post(path_store_event, data, {}).then(async response => {
-                console.log('actions.storePublicEvent.response', response);
-                if (response.data.success) {
-                    commit('SET_LOADING', false);
-                    resolve(response.data);
-                } else {
-                    commit('SET_LOADING', false);
-                    reject(response.data);
-                }
-
-            }).catch(error => {
-                console.error('actions.storePublicEvent', error);
-                console.error('actions.storePublicEvent.message', error.message);
-                commit('SET_LOADING', false);
-                reject(error);
-            });
-        });
     },
 
     /**
@@ -939,6 +907,11 @@ let actions = {
                 await commit('SET_SELECTED_PERMISSION');
                 break;
 
+            case 'attributes':
+                await commit('SET_ATTRIBUTES', content.data);
+                await commit('SET_SELECTED_ATTRIBUTE');
+                break;
+
             default:
                 break;
         }
@@ -967,6 +940,11 @@ let actions = {
                 await commit('SET_SELECTED_PERMISSION');
                 break;
 
+            case 'attributes':
+                await commit('PUSH_ATTRIBUTE', content.data);
+                await commit('SET_SELECTED_ATTRIBUTE');
+                break;
+
             default:
                 break;
         }
@@ -990,6 +968,10 @@ let actions = {
 
             case 'permissions':
                 await commit('SET_SELECTED_PERMISSION');
+                break;
+
+            case 'attributes':
+                await commit('SET_SELECTED_ATTRIBUTE');
                 break;
 
             default:

@@ -1,4 +1,11 @@
 @role(['super-administrador',' administrador'])
+<li class="nav-title">Configuración</li>
+<li class="nav-item {{ Request::is('attributes*') ? 'active' : '' }}">
+    <a class="nav-link {{ Request::is('attributes*') ? 'active' : '' }}" href=" {!! route('admin.attributes.index') !!}">
+        <i class="nav-icon icon-cursor"></i>
+        <span>@lang('model.attributes')</span>
+    </a>
+</li>
 <li class="nav-title">Administrador</li>
 <li class="nav-item {{ Request::is('users*') ? 'active' : '' }}">
     <a class="nav-link {{ Request::is('users*') ? 'active' : '' }}" href=" {!! route('admin.users.index') !!}">

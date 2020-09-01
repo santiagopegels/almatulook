@@ -17,6 +17,8 @@ use Response;
 
 class AttributeAPIController extends AppBaseController
 {
+    private static $limit = 10;
+
     /** @var  AttributeRepository */
     private $attributeRepository;
 
@@ -34,11 +36,16 @@ class AttributeAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $attributes = $this->attributeRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
-        );
+        $input = $request->all();
+        $term = isset($input['term']) && !empty($input['term']) ? $input['term'] : null;
+
+        $attributes = Attribute::withTrashed();
+
+        if (!is_null($term)) {
+            $attributes = $attributes->where('name', 'LIKE', "%{$term}%");
+        }
+
+        $attributes = $attributes->paginate(self::$limit);
 
         return $this->sendResponse($attributes->toArray(), 'Attributes retrieved successfully');
     }
@@ -127,5 +134,29 @@ class AttributeAPIController extends AppBaseController
         $attribute->delete();
 
         return $this->sendSuccess('Attribute deleted successfully');
+    }
+
+    /**
+     * Restore the specified Attribute from storage.
+     * POST /attributes/{id}
+     *
+     * @param int $id
+     *
+     * @throws \Exception
+     *
+     * @return Response
+     */
+    public function restore($id)
+    {
+        /** @var Attribute $attribute */
+        $attribute = Attribute::withTrashed()->find($id);
+
+        if (empty($attribute)) {
+            return $this->sendError('Attribute not found');
+        }
+
+        $attribute->restore();
+
+        return $this->sendResponse($attribute, 'Attribute restored successfully');
     }
 }
