@@ -1,12 +1,7 @@
-@extends('layouts.app')
+@extends('admin.layouts.app')
 
 @section('content')
-  <div class="container-fluid">
-        <div class="animated fadeIn">
-             <div class="row">
+    <!-- Breadcrumb-->
+    @include('admin.layouts.breadcrumb', ['title'=>__('general.home'), 'link_to'=>''])
 
-            </div>
-        </div>
-    </div>
-</div>
 @endsection

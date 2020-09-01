@@ -72,7 +72,29 @@ Vue.toasted.register('ToastedSuccess',
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+/**
+ * models
+ */
+
+// users
+Vue.component('users-form', require('./components/models/users/form.vue').default);
+Vue.component('users-list', require('./components/models/users/lists.vue').default);
+Vue.component('users-index', require('./components/models/users/index.vue').default);
+Vue.component('users-filters', require('./components/models/users/filters.vue').default);
+
+// roles
+Vue.component('roles-form', require('./components/models/roles/form.vue').default);
+Vue.component('roles-list', require('./components/models/roles/lists.vue').default);
+Vue.component('roles-index', require('./components/models/roles/index.vue').default);
+Vue.component('roles-checkbox', require('./components/models/roles/checkbox.vue').default);
+
+// permissions
+Vue.component('permissions-form', require('./components/models/permissions/form.vue').default);
+Vue.component('permissions-list', require('./components/models/permissions/lists.vue').default);
+Vue.component('permissions-index', require('./components/models/permissions/index.vue').default);
+Vue.component('permissions-checkbox', require('./components/models/permissions/checkbox.vue').default);
+Vue.component('permissions-module', require('./components/models/permissions/module.vue').default);
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
