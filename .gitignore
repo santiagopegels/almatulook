@@ -19,7 +19,7 @@ Homestead.json
 .phpunit.result.cache
 
 ### Docker ###
-deploy/mysql-data/
+/deploy/mysql-data
 
 ### IDE ###
 .idea/
