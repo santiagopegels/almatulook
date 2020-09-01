@@ -12,8 +12,15 @@ $indigo: #6574cd;
 $purple: #9561e2;
 $pink: #f66d9b;
 $red: #e3342f;
-$orange: #f6993f;
+$orange: #EA7A0B;
 $yellow: #ffed4a;
-$green: #38c172;
 $teal: #4dc0b5;
 $cyan: #6cb2eb;
+
+$green: #0F7173;
+$light-green: #79AEA3;
+$primary: #9E7B1A !default;
+$secondary: #43373F !default;
+$warning: $orange !default;
+
+$default-color: $primary !default;
