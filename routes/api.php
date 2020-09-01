@@ -20,5 +20,15 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::group(['prefix' => 'admin'], function () {
+    // resources
+    Route::resource('roles', 'Admin\RoleAPIController');
+    Route::resource('permissions', 'Admin\PermissionAPIController');
+    Route::resource('users','Admin\UserAPIController');
     Route::resource('attributes', 'Admin\AttributeAPIController');
+
+
+    // get all
+    Route::get('users_all', ['uses' => 'Admin\UserAPIController@all']);
+    Route::get('roles_all', ['uses' => 'Admin\RoleAPIController@all']);
+    Route::get('permissions_all', ['uses' => 'Admin\PermissionAPIController@all']);
 });

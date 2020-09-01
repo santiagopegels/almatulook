@@ -43,36 +43,6 @@
                 <div v-if="submitted && !$v.selected_user.password_confirmation.sameAsPassword" class="invalid-feedback">Las contraseñas no coinciden.</div>
             </div>
 
-            <div class="form-group">
-              <hr/>
-                <h5 class="text-center">Datos del Perfil</h5>
-              <hr/>
-            </div>
-
-            <div class="form-group">
-              <label for="first_name">Nombre</label>
-              <input type="text" v-model="selected_user_profile.firstName" id="first_name" name="first_name" class="form-control" placeholder="Ingrese el nombre" :class="{ 'is-invalid': submitted && $v.selected_user_profile.firstName.$error }" />
-              <div v-if="submitted && !$v.selected_user_profile.firstName.required" class="invalid-feedback">El nombre es requerido.</div>
-            </div>
-
-            <div class="form-group">
-              <label for="name">Apellido</label>
-              <input type="text" v-model="selected_user_profile.lastName" id="last_name" name="last_name" class="form-control" placeholder="Ingrese el apellido" :class="{ 'is-invalid': submitted && $v.selected_user_profile.lastName.$error }" />
-              <div v-if="submitted && !$v.selected_user_profile.lastName.required" class="invalid-feedback">El apellido es requerido.</div>
-            </div>
-
-            <div class="form-group">
-              <label for="name">Teléfono</label>
-              <input type="text" v-model="selected_user_profile.phoneNumber" id="phone_number" name="phone_number" class="form-control" placeholder="Ingrese el teléfono" :class="{ 'is-invalid': submitted && $v.selected_user_profile.phoneNumber.$error }" />
-              <div v-if="submitted && !$v.selected_user_profile.phoneNumber.required" class="invalid-feedback">El teléfono es requerido.</div>
-            </div>
-
-            <div class="form-group">
-              <label for="name">Dirección</label>
-              <input type="text" v-model="selected_user_profile.deliveryAddress" id="delivery_address" name="delivery_address" class="form-control" placeholder="Ingrese la dirección" :class="{ 'is-invalid': submitted && $v.selected_user_profile.deliveryAddress.$error }" />
-              <div v-if="submitted && !$v.selected_user_profile.deliveryAddress.required" class="invalid-feedback">El dirección es requerida.</div>
-            </div>
-
             <roles-checkbox />
 
             <div class="form-group">
@@ -128,22 +98,6 @@ export default {
                         sameAsPassword: sameAs("password"),
                     },
                 },
-                selected_user_profile: {
-                  firstName: {
-                    required,
-                    minLength: minLength(3)
-                  },
-                  lastName: {
-                    required,
-                    minLength: minLength(3)
-                  },
-                  phoneNumber: {
-                    required
-                  },
-                  deliveryAddress: {
-                    required
-                  },
-                },
             };
         } else {
             return {
@@ -165,22 +119,6 @@ export default {
                         sameAsPassword: sameAs("password"),
                     },
                 },
-                selected_user_profile: {
-                  firstName: {
-                    required,
-                    minLength: minLength(3)
-                  },
-                  lastName: {
-                    required,
-                    minLength: minLength(3)
-                  },
-                  phoneNumber: {
-                    required
-                  },
-                  deliveryAddress: {
-                    required
-                  },
-                },
             };
         }
     },
@@ -188,7 +126,7 @@ export default {
     created() {},
     mounted() {},
     computed: {
-        ...mapGetters(["isLoading", "selected_user", "selected_user_profile", "users", "page"]),
+        ...mapGetters(["isLoading", "selected_user", "users", "page"]),
         hasSelectedUser() {
             return Boolean(this.selected_user);
         },
@@ -242,16 +180,9 @@ export default {
                     password: this.selected_user.password,
                     password_confirmation: this.selected_user.password_confirmation,
                     rolesIds: this.selected_user.rolesIds,
-                    profile: {
-                      first_name: this.selected_user_profile.firstName,
-                      last_name: this.selected_user_profile.lastName,
-                      phone_number: this.selected_user_profile.phoneNumber,
-                      delivery_address: this.selected_user_profile.deliveryAddress,
-                    }
                 }
             })
             .then(async result => {
-              this.$store.commit("SET_SELECTED_USER_PROFILE");
               this.$v.$reset();
 				      this.$toasted.global.ToastedSuccess({ message: `El ${this.model_name} fue creado!` });
 				      await this.fetch();
@@ -272,21 +203,7 @@ export default {
                     rolesIds: this.selected_user.rolesIds,
                 }
             })
-            .then(async result => {
-              await this.$store.dispatch("update", {
-                model: 'profiles',
-                data: {
-                  _method: "PUT",
-                  id: this.selected_user_profile.id,
-                  first_name: this.selected_user_profile.firstName,
-                  last_name: this.selected_user_profile.lastName,
-                  phone_number: this.selected_user_profile.phoneNumber,
-                  delivery_address: this.selected_user_profile.deliveryAddress,
-                }
-              })
-			      })
              .then(async result => {
-               this.$store.commit("SET_SELECTED_USER_PROFILE");
                this.$v.$reset();
                this.$toasted.global.ToastedSuccess({ message: `El ${this.model_name} fue actualizado!` });
                await this.fetch();
@@ -296,7 +213,6 @@ export default {
 
         async cancelSelectedUser() {
             this.$store.commit("SET_SELECTED_USER");
-            this.$store.commit("SET_SELECTED_USER_PROFILE");
             this.$v.$reset();
         },
 

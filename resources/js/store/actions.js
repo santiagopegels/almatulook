@@ -9,16 +9,6 @@ const path_users = '/api/key/users';
 const path_users_all = '/api/admin/users_all';
 const path_roles = '/api/admin/roles';
 const path_roles_all = '/api/admin/roles_all';
-const path_permissions_all = '/api/admin/permissions_all';
-const path_permissions = '/api/admin/permissions';
-const path_permissions_stores = '/api/admin/permissions/stores';
-const path_type_events = '/api/admin/type_events';
-const path_type_events_all = '/api/admin/type_events_all';
-const path_host_roles = '/api/admin/host_roles';
-const path_host_roles_all = '/api/admin/host_roles_all';
-const path_hosts = '/api/admin/hosts';
-const path_hosts_all = '/api/admin/hosts_all';
-const path_events = '/api/admin/events';
 
 const path_store_event = '/api/public/events/store_event';
 

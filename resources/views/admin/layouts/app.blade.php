@@ -15,7 +15,7 @@
 			<span class="navbar-toggler-icon"></span>
 		</button>
 		<a class="navbar-brand" href="#">
-			<img src="{{ asset('img/logo/logo.svg') }}" width="120" alt="{{ env('APP_NAME') }}">
+			<img src="{{ asset('img/logo/logo.png') }}" width="65" alt="{{ env('APP_NAME') }}">
 		</a>
 		<button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
 			<span class="navbar-toggler-icon"></span>
