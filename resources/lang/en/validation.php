@@ -133,6 +133,9 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'user.name' => [
+            'required' => 'Name',
+        ],
     ],
 
     /*
@@ -146,6 +149,23 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'display_name' => 'Name',
+        'user.name' => 'Nombre',
+        'user.email' => 'Email',
+        'user.password' => 'Contraseña',
+        'profile.first_name' => 'Nombre',
+        'profile.last_name' => 'Apellido',
+        'profile.phone_number' => 'Número de teléfono',
+        'event.event_date' => 'Fecha del evento',
+        'event.place' => 'Lugar del evento',
+        'event.contact_phone_number' => 'Teléfono de contacto',
+        'event.delivery_address' => 'Dirección de entrega',
+        'event.custom_url' => 'Link personalizado',
+        'event.type_event_id' => 'Tipo de evento',
+        'hosts.*.first_name' => 'Nombre',
+        'hosts.*.last_name' => 'Apellido',
+        'hosts.*.host_role_id' => 'Tipo de rol'
+    ],
 
 ];

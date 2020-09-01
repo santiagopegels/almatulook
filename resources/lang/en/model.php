@@ -1,0 +1,25 @@
+<?php
+
+return [
+
+	/*
+    |--------------------------------------------------------------------------
+    | Model
+    |--------------------------------------------------------------------------
+    |
+    |
+	*/
+
+	'user' => 'User',
+	'users' => 'Users',
+
+	'role' => 'Role',
+	'roles' => 'Roles',
+
+	'permission' => 'Permission',
+	'permissions' => 'Permissions',
+
+    'attribute' => 'Attribute',
+    'attributes' => 'Attributes'
+
+];

@@ -2,6 +2,7 @@
 
 namespace App\Models\Admin;
 
+use App\Traits\Sluggable;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -16,9 +17,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Attribute extends Model
 {
     use SoftDeletes;
+    use Sluggable;
 
     public $table = 'attributes';
-    
+
 
     protected $dates = ['deleted_at'];
 
@@ -49,5 +51,5 @@ class Attribute extends Model
         'name' => 'required'
     ];
 
-    
+
 }
