@@ -22,5 +22,19 @@
         "sass-loader": "^8.0.0",
         "vue": "^2.5.17",
         "vue-template-compiler": "^2.6.10"
+    },
+    "dependencies": {
+        "coreui": "^0.4.2-alpha2",
+        "font-awesome": "^4.7.0",
+        "simple-line-icons": "^2.5.2",
+        "es6-promise": "^4.2.8",
+        "vue-dayjs": "^1.0.2",
+        "vue-dayjs-plugin": "^1.0.0",
+        "vue-loading-overlay": "^3.3.2",
+        "vue-toasted": "^1.1.28",
+        "vuejs-paginate": "^2.1.0",
+        "vuelidate": "^0.7.5",
+        "vuex": "^3.5.1",
+        "perfect-scrollbar": "^1.5.0"
     }
 }

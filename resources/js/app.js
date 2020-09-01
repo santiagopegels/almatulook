@@ -4,9 +4,62 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+window.$ = window.jQuery = require('jquery');
 require('./bootstrap');
+require('@coreui/coreui');
 
-window.Vue = require('vue');
+window.axios = require('axios');
+
+window.Vue = require('vue')
+
+import store from './store/index';
+import Paginate from 'vuejs-paginate';
+import 'es6-promise/auto';
+import Vuex from 'vuex';
+import Vuelidate from 'vuelidate';
+import Toasted from 'vue-toasted';
+import VueDayjs from 'vue-dayjs-plugin';
+
+Vue.config.baseurl = process.env.MIX_APP_URL;
+console.log('MIX_APP_URL', process.env.MIX_APP_URL);
+
+Vue.component('paginate', Paginate);
+Vue.use(Vuex);
+Vue.use(Toasted);
+Vue.use(VueDayjs);
+Vue.use(Vuelidate);
+
+// register the toast with the custom message
+
+Vue.toasted.register('ToastedError',
+    (payload) => {
+        return payload.message;
+    }, {
+        type: 'error',
+        theme: "bubble",
+        position: "top-right",
+        duration: 4000,
+        fullWidth: false,
+        closeOnSwipe: true,
+        singleton: true
+    }
+);
+Vue.toasted.register('ToastedSuccess',
+    (payload) => {
+        return payload.message;
+    }, {
+        type: 'success',
+        theme: "bubble",
+        position: "top-right",
+        duration: 4000,
+        fullWidth: false,
+        closeOnSwipe: true,
+        singleton: true,
+        icon: {
+            name: '✓',
+        }
+    }
+);
 
 /**
  * The following block of code may be used to automatically register your
@@ -27,6 +80,25 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+Vue.directive("capitalize", {
+    update: function (el) {
+        el.value = el.value.charAt(0).toUpperCase() + el.value.slice(1)
+    }
+});
+
+Vue.directive("lowercase", {
+    update: function (el) {
+        el.value = el.value.toLowerCase()
+    }
+});
+
+Vue.directive("hyphenate", {
+    update: function (el) {
+        el.value = el.value.replace(/[^a-zA-Z0-9]/g, "-")
+    }
+});
+
 const app = new Vue({
     el: '#app',
+    store
 });
