@@ -106,6 +106,7 @@ Vue.component('values-form', require('./components/models/values/form.vue').defa
 Vue.component('values-list', require('./components/models/values/lists.vue').default);
 Vue.component('values-index', require('./components/models/values/index.vue').default);
 Vue.component('values-filters', require('./components/models/values/filters.vue').default);
+Vue.component('values-checkbox', require('./components/models/values/checkbox.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

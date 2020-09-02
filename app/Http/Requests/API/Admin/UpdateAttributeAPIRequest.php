@@ -24,8 +24,8 @@ class UpdateAttributeAPIRequest extends APIRequest
      */
     public function rules()
     {
-        $rules = Attribute::$rules;
-        
+        $rules = Attribute::$rules; $rules['name'] = $rules['name'] . ',name,' . $this->id; return $rules;
+
         return $rules;
     }
 }

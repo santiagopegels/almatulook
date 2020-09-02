@@ -39,7 +39,7 @@ class AttributeAPIController extends AppBaseController
         $input = $request->all();
         $term = isset($input['term']) && !empty($input['term']) ? $input['term'] : null;
 
-        $attributes = Attribute::withTrashed();
+        $attributes = Attribute::withTrashed()->with('values');
 
         if (!is_null($term)) {
             $attributes = $attributes->where('name', 'LIKE', "%{$term}%");
@@ -63,6 +63,8 @@ class AttributeAPIController extends AppBaseController
         $input = $request->all();
 
         $attribute = $this->attributeRepository->create($input);
+
+        $attribute->values()->sync($input['valuesIds']);
 
         return $this->sendResponse($attribute->toArray(), 'Attribute saved successfully');
     }
@@ -108,6 +110,8 @@ class AttributeAPIController extends AppBaseController
         }
 
         $attribute = $this->attributeRepository->update($input, $id);
+
+        $attribute->values()->sync($input['valuesIds']);
 
         return $this->sendResponse($attribute->toArray(), 'Attribute updated successfully');
     }

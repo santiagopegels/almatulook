@@ -32,6 +32,7 @@ let state = {
     permissions: [],
     attributes: [],
     values: [],
+    valuesAll: [],
 
     /**
      * Selected item
@@ -64,7 +65,8 @@ let state = {
     selected_attribute: {
         id: null,
         name: "",
-        slug: ""
+        slug: "",
+        valuesIds: [],
     },
 
     selected_value: {

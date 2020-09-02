@@ -28,6 +28,8 @@
                     </div>
                 </div>
 
+                <values-checkbox />
+
                 <div class="form-group">
                     <div>
                         <button type="submit"
@@ -131,7 +133,8 @@ export default {
                 model: this.model,
                 data: {
                     name: this.selected_attribute.name,
-                    slug: this.hyphenate(this.selected_attribute.name)
+                    slug: this.hyphenate(this.selected_attribute.name),
+                    valuesIds: this.selected_attribute.valuesIds
                 }
             })
                 .then(async result => {
@@ -152,7 +155,8 @@ export default {
                     _method: "PUT",
                     id: this.selected_attribute.id,
                     name: this.selected_attribute.name,
-                    slug: this.hyphenate(this.selected_attribute.name)
+                    slug: this.hyphenate(this.selected_attribute.name),
+                    valuesIds: this.selected_attribute.valuesIds
                 }
             })
                 .then(async result => {

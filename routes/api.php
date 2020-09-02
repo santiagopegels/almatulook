@@ -26,11 +26,11 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('users','Admin\UserAPIController');
     Route::resource('attributes', 'Admin\AttributeAPIController');
 
-
     // get all
     Route::get('users_all', ['uses' => 'Admin\UserAPIController@all']);
     Route::get('roles_all', ['uses' => 'Admin\RoleAPIController@all']);
     Route::get('permissions_all', ['uses' => 'Admin\PermissionAPIController@all']);
+    Route::get('values_all', ['uses' => 'Admin\ValueAPIController@all']);
 
     // restore
     Route::post('roles/{id}/restore', ['uses' => 'Admin\RoleAPIController@restore']);

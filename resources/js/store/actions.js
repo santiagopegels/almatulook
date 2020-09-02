@@ -707,6 +707,52 @@ let actions = {
     },
 
     /**
+     * FETCH ALL DATA
+     * model: ej: users, roles, etc (required)
+     * without page
+     * @param {*} params
+     */
+    fetchAll({ commit }, params) {
+        //console.log(`fetch.${params.model}`, params);
+        return new Promise(async (resolve, reject) => {
+
+            commit('SET_LOADING', true);
+
+            params.model = params.model.concat('_all')
+            console.log(params)
+            var path = await actions.getEndpoint(params);
+
+            console.log(`path.${params.model}`, path);
+
+            window.axios.get(path).then(async response => {
+                if (response.data.success) {
+               //     await actions.removeFromData(commit, params);
+                    await actions.setData(commit, { params: params, data: response.data.data });
+                    await commit('SET_LOADING', false);
+                    resolve({
+                        status: true,
+                        message: response.data.data
+                    });
+                } else {
+                    commit('SET_LOADING', false);
+                    reject({
+                        status: false,
+                        message: response.data.message
+                    });
+                }
+
+            }).catch(error => {
+                console.error(`fetch.${params.model}`, error);
+                commit('SET_LOADING', false);
+                reject({
+                    status: false,
+                    message: error
+                });
+            });
+        });
+    },
+
+    /**
      * STORE DATA
      * model: ej: users, roles, etc
      * data: ej: object {name: 'Jhon Doe', ...}
@@ -717,7 +763,8 @@ let actions = {
         return new Promise(async(resolve, reject) => {
             commit('SET_LOADING', true);
             const path = await actions.getEndpoint(params);
-            console.log(`path.${params.model}`, path);
+           // console.log(`path.${params.model}`, path);
+            console.log(params)
             window.axios.post(path, params.data, {}).then(async response => {
                 if (response.data.success) {
                     await actions.removeFromData(commit, response.data.data);
@@ -914,6 +961,11 @@ let actions = {
 
             case 'values':
                 await commit('SET_VALUES', content.data);
+                await commit('SET_SELECTED_VALUE');
+                break;
+
+            case 'values_all':
+                await commit('SET_VALUES_ALL', content.data);
                 await commit('SET_SELECTED_VALUE');
                 break;
 

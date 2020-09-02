@@ -133,11 +133,12 @@ export default {
                 .catch(error => this.$toasted.global.ToastedError({ message: error.message.message }));
         },
 
-        selectedObject(model) {
-            this.$store.commit("SET_SELECTED_ATTRIBUTE", {
+        async selectedObject(model) {
+            await this.$store.commit("SET_SELECTED_ATTRIBUTE", {
                 id: model.id,
                 name: model.name,
                 slug: model.slug,
+                valuesIds: await this.getvaluesIds(model.values),
             });
         },
 
@@ -147,6 +148,13 @@ export default {
         async clickCallback(pageNum) {
             await this.$store.commit("SET_PAGE", pageNum);
             await this.fetch();
+        },
+
+        async getvaluesIds(values) {
+            if (!values) return [];
+            return values.map(function (value) {
+                return value.id;
+            });
         },
     },
 };

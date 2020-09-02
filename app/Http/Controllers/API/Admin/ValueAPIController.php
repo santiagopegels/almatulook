@@ -50,6 +50,13 @@ class ValueAPIController extends AppBaseController
         return $this->sendResponse($values->toArray(), 'Values retrieved successfully');
     }
 
+    public function all()
+    {
+        $values = Value::orderBy('name')->get();
+
+        return $this->sendResponse($values->toArray(), 'Values retrieved successfully');
+    }
+
     /**
      * Store a newly created Value in storage.
      * POST /values
