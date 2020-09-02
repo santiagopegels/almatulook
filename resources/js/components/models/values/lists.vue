@@ -1,6 +1,5 @@
 <template>
     <div class="table-responsive">
-        <loading :opacity="opacity" loader="spinner" transition="fade" :active.sync="isLoading" :can-cancel="false" :is-full-page="true" color="#20a8d8" background-color="rgba(0,0,0,0.8)"></loading>
         <table id="values-table" class="table table-condensed table-striped table-hover">
             <thead class="thead-dark">
             <tr>

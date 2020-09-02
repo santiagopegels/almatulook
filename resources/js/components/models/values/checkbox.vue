@@ -3,7 +3,7 @@
     <label>Asignar valores</label>
     <div class="form-group scroll-vertical" v-if="hasValues">
         <div class="form-check form-check-inline mr-4 mb-2 mb-2 pointer" v-for="model in getValues" :key="model.id">
-            <input class="form-check-input pointer" type="checkbox" v-model="algoIds" :id="model.id" :value="model.id" />
+            <input class="form-check-input pointer" type="checkbox" v-model="valuesIds" :id="model.id" :value="model.id" />
             <label class="form-check-label pointer" :for="model.id">{{model.name}}</label>
         </div>
     </div>
@@ -26,7 +26,7 @@ export default {
     },
     computed: {
         ...mapGetters(["isLoading", "valuesAll", "selected_attribute"]),
-        algoIds: {
+        valuesIds: {
             set(val) {
                 this.$store.state.selected_attribute.valuesIds = val;
             },
