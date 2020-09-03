@@ -1,9 +1,9 @@
 <template>
 <div class="form-group">
-    <label>Asignar valores</label>
-    <div class="form-group scroll-vertical" v-if="hasValues">
-        <div class="form-check form-check-inline mr-4 mb-2 mb-2 pointer" v-for="model in getValues" :key="model.id">
-            <input class="form-check-input pointer" type="checkbox" v-model="valuesIds" :id="model.id" :value="model.id" />
+    <label>Asignar a Atributos</label>
+    <div class="form-group scroll-vertical" v-if="hasAttributes">
+        <div class="form-check form-check-inline mr-4 mb-2 mb-2 pointer" v-for="model in getAttributes" :key="model.id">
+            <input class="form-check-input pointer" type="checkbox" v-model="attributesIds" :id="model.id" :value="model.id" />
             <label class="form-check-label pointer" :for="model.id">{{model.name}}</label>
         </div>
     </div>
@@ -18,7 +18,7 @@ export default {
     props: {},
     data: function () {
         return {
-            model: "values",
+            model: "attributes",
         };
     },
     created() {},
@@ -26,20 +26,20 @@ export default {
         this.fetchAll();
     },
     computed: {
-        ...mapGetters(["isLoading", "valuesAll", "selected_attribute"]),
-        valuesIds: {
+        ...mapGetters(["isLoading", "attributesAll", "selected_value"]),
+        attributesIds: {
             set(val) {
-                this.$store.state.selected_attribute.valuesIds = val;
+                this.$store.state.selected_value.attributesIds = val;
             },
             get() {
-                return this.$store.state.selected_attribute.valuesIds;
+                return this.$store.state.selected_value.attributesIds;
             },
         },
-        hasValues() {
-            return Boolean(this.valuesAll);
+        hasAttributes() {
+            return Boolean(this.attributesAll);
         },
-        getValues() {
-            return this.valuesAll;
+        getAttributes() {
+            return this.attributesAll;
         },
     },
     methods: {

@@ -969,6 +969,11 @@ let actions = {
                 await commit('SET_SELECTED_VALUE');
                 break;
 
+            case 'attributes_all':
+                await commit('SET_ATTRIBUTES_ALL', content.data);
+                await commit('SET_SELECTED_ATTRIBUTE');
+                break;
+
             default:
                 break;
         }

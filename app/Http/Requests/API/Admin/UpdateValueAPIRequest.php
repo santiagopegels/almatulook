@@ -24,8 +24,8 @@ class UpdateValueAPIRequest extends APIRequest
      */
     public function rules()
     {
-        $rules = Value::$rules;
-        
+        $rules = Value::$rules; $rules['name'] = $rules['name'] . ',name,' . $this->id; return $rules;
+
         return $rules;
     }
 }

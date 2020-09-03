@@ -33,6 +33,7 @@ let state = {
     attributes: [],
     values: [],
     valuesAll: [],
+    attributesAll: [],
 
     /**
      * Selected item
@@ -72,7 +73,8 @@ let state = {
     selected_value: {
         id: null,
         name: "",
-        slug: ""
+        slug: "",
+        attributesIds: [],
     },
 }
 

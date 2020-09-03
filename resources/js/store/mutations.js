@@ -49,6 +49,10 @@ let mutations = {
         state.valuesAll = valuesAll;
     },
 
+    SET_ATTRIBUTES_ALL(state, attributesAll) {
+        state.attributesAll = attributesAll;
+    },
+
     /**
      * SET SELECTED
      */
@@ -105,6 +109,7 @@ let mutations = {
             id: null,
             name: "",
             slug: "",
+            attributesIds: []
         }
     ) {
         state.selected_value = selected_value;

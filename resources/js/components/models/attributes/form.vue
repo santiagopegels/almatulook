@@ -141,6 +141,7 @@ export default {
                     this.$v.$reset();
                     this.$toasted.global.ToastedSuccess({message: `El ${this.model_name} fue creado!`});
                     await this.fetch();
+                    await this.fetchAll();
                 })
                 .catch(error => {
                     console.log(error.message.response.data.errors.name)
@@ -163,6 +164,7 @@ export default {
                     this.$v.$reset();
                     this.$toasted.global.ToastedSuccess({message: `El ${this.model_name} fue actualizado!`});
                     await this.fetch();
+                    await this.fetchAll();
                 })
                 .catch(error => this.$toasted.global.ToastedError({message: error.message.response.data.errors.name}));
         },
@@ -190,6 +192,13 @@ export default {
             await this.$store.dispatch("fetch", {
                 model: this.model,
                 page: this.page
+            })
+                .catch(error => this.$toasted.global.ToastedError({message: error.message.message}));
+        },
+
+        async fetchAll() {
+            await this.$store.dispatch("fetchAll", {
+                model: this.model,
             })
                 .catch(error => this.$toasted.global.ToastedError({message: error.message.message}));
         },

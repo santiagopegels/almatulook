@@ -107,6 +107,13 @@ export default {
                 .catch(error => this.$toasted.global.ToastedError({ message: error.message.message }));
         },
 
+        async fetchAll() {
+            await this.$store.dispatch("fetchAll", {
+                model: this.model,
+            })
+                .catch(error => this.$toasted.global.ToastedError({message: error.message.message}));
+        },
+
         async delete(model) {
             await this.$store.dispatch("delete", {
                 _method: 'DELETE',
@@ -116,6 +123,7 @@ export default {
                 .then(async result => {
                     this.$toasted.global.ToastedSuccess({ message: `El ${this.model_name} fue eliminado!` });
                     await this.fetch();
+                    await this.fetchAll();
                 })
                 .catch(error => this.$toasted.global.ToastedError({ message: error.message.message }));
         },
@@ -128,15 +136,24 @@ export default {
                 .then(async result => {
                     this.$toasted.global.ToastedSuccess({ message: `El ${this.model_name} fue restaurado!` });
                     await this.fetch();
+                    await this.fetchAll();
                 })
                 .catch(error => this.$toasted.global.ToastedError({ message: error.message.message }));
         },
 
-        selectedObject(model) {
-            this.$store.commit("SET_SELECTED_VALUE", {
+       async selectedObject(model) {
+           await this.$store.commit("SET_SELECTED_VALUE", {
                 id: model.id,
                 name: model.name,
                 slug: model.slug,
+                attributesIds: await this.getAttributesIds(model.attributes),
+            });
+        },
+
+        async getAttributesIds(values) {
+            if (!values) return [];
+            return values.map(function (value) {
+                return value.id;
             });
         },
 

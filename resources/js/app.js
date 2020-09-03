@@ -100,6 +100,7 @@ Vue.component('attributes-form', require('./components/models/attributes/form.vu
 Vue.component('attributes-list', require('./components/models/attributes/lists.vue').default);
 Vue.component('attributes-index', require('./components/models/attributes/index.vue').default);
 Vue.component('attributes-filters', require('./components/models/attributes/filters.vue').default);
+Vue.component('attributes-checkbox', require('./components/models/attributes/checkbox.vue').default);
 
 // values
 Vue.component('values-form', require('./components/models/values/form.vue').default);

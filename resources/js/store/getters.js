@@ -47,6 +47,10 @@ let getters = {
         return state.valuesAll;
     },
 
+    attributesAll: state => {
+        return state.attributesAll;
+    },
+
     /** SELECTED */
 
     selected_user: state => {

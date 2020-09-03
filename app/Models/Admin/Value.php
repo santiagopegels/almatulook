@@ -49,5 +49,7 @@ class Value extends Model
         'name' => 'required|unique:values'
     ];
 
-
+    public function attributes(){
+        return $this->belongsToMany(Attribute::class, 'attributes_values');
+    }
 }

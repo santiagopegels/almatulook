@@ -39,7 +39,7 @@ class ValueAPIController extends AppBaseController
         $input = $request->all();
         $term = isset($input['term']) && !empty($input['term']) ? $input['term'] : null;
 
-        $values = Value::withTrashed();
+        $values = Value::withTrashed()->with('attributes');
 
         if (!is_null($term)) {
             $values = $values->where('name', 'LIKE', "%{$term}%");
@@ -115,6 +115,8 @@ class ValueAPIController extends AppBaseController
         }
 
         $value = $this->valueRepository->update($input, $id);
+
+        $value->attributes()->sync($input['attributesIds']);
 
         return $this->sendResponse($value->toArray(), 'Value updated successfully');
     }

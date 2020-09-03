@@ -27,7 +27,7 @@
                         módulo es requerido.
                     </div>
                 </div>
-
+                <attributes-checkbox />
                 <div class="form-group">
                     <div>
                         <button type="submit"
@@ -131,13 +131,15 @@ export default {
                 model: this.model,
                 data: {
                     name: this.selected_value.name,
-                    slug: this.hyphenate(this.selected_value.name)
+                    slug: this.hyphenate(this.selected_value.name),
+                    attributesIds: this.selected_value.attributesIds
                 }
             })
                 .then(async result => {
                     this.$v.$reset();
                     this.$toasted.global.ToastedSuccess({message: `El ${this.model_name} fue creado!`});
                     await this.fetch();
+                    await this.fetchAll();
                 })
                 .catch(error => this.$toasted.global.ToastedError({message: error.message.response.data.errors.name}));
         },
@@ -149,13 +151,15 @@ export default {
                     _method: "PUT",
                     id: this.selected_value.id,
                     name: this.selected_value.name,
-                    slug: this.hyphenate(this.selected_value.name)
+                    slug: this.hyphenate(this.selected_value.name),
+                    attributesIds: this.selected_value.attributesIds
                 }
             })
                 .then(async result => {
                     this.$v.$reset();
                     this.$toasted.global.ToastedSuccess({message: `El ${this.model_name} fue actualizado!`});
                     await this.fetch();
+                    await this.fetchAll();
                 })
                 .catch(error => this.$toasted.global.ToastedError({message: error.message.message}));
         },
@@ -163,10 +167,6 @@ export default {
         cancelSelectedObject() {
             this.$v.$reset();
             return this.$store.commit("SET_SELECTED_VALUE");
-        },
-
-        capitalize(value) {
-            return value.charAt(0).toUpperCase() + value.slice(1);
         },
 
         hyphenate(string) {
@@ -183,6 +183,13 @@ export default {
             await this.$store.dispatch("fetch", {
                 model: this.model,
                 page: this.page
+            })
+                .catch(error => this.$toasted.global.ToastedError({message: error.message.message}));
+        },
+
+        async fetchAll() {
+            await this.$store.dispatch("fetchAll", {
+                model: this.model,
             })
                 .catch(error => this.$toasted.global.ToastedError({message: error.message.message}));
         },

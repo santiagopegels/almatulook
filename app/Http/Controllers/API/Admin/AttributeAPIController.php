@@ -50,6 +50,13 @@ class AttributeAPIController extends AppBaseController
         return $this->sendResponse($attributes->toArray(), 'Attributes retrieved successfully');
     }
 
+    public function all()
+    {
+        $attributes = Attribute::orderBy('name')->get();
+
+        return $this->sendResponse($attributes->toArray(), 'Attributes retrieved successfully');
+    }
+
     /**
      * Store a newly created Attribute in storage.
      * POST /attributes
