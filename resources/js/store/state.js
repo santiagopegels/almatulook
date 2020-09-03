@@ -34,6 +34,7 @@ let state = {
     values: [],
     valuesAll: [],
     attributesAll: [],
+    categories: [],
 
     /**
      * Selected item
@@ -75,6 +76,14 @@ let state = {
         name: "",
         slug: "",
         attributesIds: [],
+    },
+
+    selected_category: {
+        id: null,
+        name: "",
+        description: "",
+        slug: "",
+        category_parent_id: null
     },
 }
 

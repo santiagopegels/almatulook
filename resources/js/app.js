@@ -109,6 +109,12 @@ Vue.component('values-index', require('./components/models/values/index.vue').de
 Vue.component('values-filters', require('./components/models/values/filters.vue').default);
 Vue.component('values-checkbox', require('./components/models/values/checkbox.vue').default);
 
+// categories
+Vue.component('categories-form', require('./components/models/categories/form.vue').default);
+Vue.component('categories-list', require('./components/models/categories/lists.vue').default);
+Vue.component('categories-index', require('./components/models/categories/index.vue').default);
+Vue.component('categories-filters', require('./components/models/categories/filters.vue').default);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

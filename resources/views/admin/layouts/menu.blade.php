@@ -6,6 +6,12 @@
         <span>@lang('model.attributes')</span>
     </a>
 </li>
+<li class="nav-item {{ Request::is('categories*') ? 'active' : '' }}">
+    <a class="nav-link {{ Request::is('categories*') ? 'active' : '' }}" href=" {!! route('admin.categories.index') !!}">
+        <i class="nav-icon icon-cursor"></i>
+        <span>@lang('model.categories')</span>
+    </a>
+</li>
 <li class="nav-title">Administrador</li>
 <li class="nav-item {{ Request::is('users*') ? 'active' : '' }}">
     <a class="nav-link {{ Request::is('users*') ? 'active' : '' }}" href=" {!! route('admin.users.index') !!}">

@@ -51,3 +51,8 @@ Route::group(['prefix' => 'admin'], function () {
 Route::group(['prefix' => 'admin'], function () {
     Route::resource('values', 'Admin\ValueAPIController');
 });
+
+
+Route::group(['prefix' => 'admin'], function () {
+    Route::resource('categories', 'Admin\CategoryAPIController');
+});

@@ -20,6 +20,7 @@ Route::get('/', function () {
 
 Route::group(['prefix' => 'admin'], function () {
     Route::resource('attributes', 'Admin\AttributeController', ["as" => 'admin']);
+    Route::resource('categories', 'Admin\CategoryController', ["as" => 'admin']);
 });
 
 

@@ -959,6 +959,11 @@ let actions = {
                 await commit('SET_SELECTED_ATTRIBUTE');
                 break;
 
+            case 'attributes_all':
+                await commit('SET_ATTRIBUTES_ALL', content.data);
+                await commit('SET_SELECTED_ATTRIBUTE');
+                break;
+
             case 'values':
                 await commit('SET_VALUES', content.data);
                 await commit('SET_SELECTED_VALUE');
@@ -969,9 +974,9 @@ let actions = {
                 await commit('SET_SELECTED_VALUE');
                 break;
 
-            case 'attributes_all':
-                await commit('SET_ATTRIBUTES_ALL', content.data);
-                await commit('SET_SELECTED_ATTRIBUTE');
+            case 'categories':
+                await commit('SET_CATEGORIES', content.data);
+                await commit('SET_SELECTED_CATEGORY');
                 break;
 
             default:
@@ -1012,6 +1017,11 @@ let actions = {
                 await commit('SET_SELECTED_VALUE');
                 break;
 
+            case 'categories':
+                await commit('PUSH_CATEGORY', content.data);
+                await commit('SET_SELECTED_CATEGORY');
+                break;
+
             default:
                 break;
         }
@@ -1043,6 +1053,10 @@ let actions = {
 
             case 'values':
                 await commit('SET_SELECTED_VALUE');
+                break;
+
+            case 'categories':
+                await commit('SET_SELECTED_CATEGORY');
                 break;
 
             default:

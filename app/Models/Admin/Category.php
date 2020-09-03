@@ -7,19 +7,21 @@ use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class Value
+ * Class Category
  * @package App\Models\Admin
- * @version September 1, 2020, 10:12 pm UTC
+ * @version September 3, 2020, 12:39 pm UTC
  *
  * @property string $name
  * @property string $slug
+ * @property string $description
+ * @property integer $category_parent_id
  */
-class Value extends Model
+class Category extends Model
 {
     use SoftDeletes;
     use Sluggable;
 
-    public $table = 'values';
+    public $table = 'categories';
 
 
     protected $dates = ['deleted_at'];
@@ -28,7 +30,9 @@ class Value extends Model
 
     public $fillable = [
         'name',
-        'slug'
+        'slug',
+        'description',
+        'category_parent_id'
     ];
 
     /**
@@ -39,7 +43,9 @@ class Value extends Model
     protected $casts = [
         'id' => 'integer',
         'name' => 'string',
-        'slug' => 'string'
+        'slug' => 'string',
+        'description' => 'string',
+        'category_parent_id' => 'integer'
     ];
 
     /**
@@ -48,10 +54,8 @@ class Value extends Model
      * @var array
      */
     public static $rules = [
-        'name' => 'required|unique:values'
+        'name' => 'required'
     ];
 
-    public function attributes(){
-        return $this->belongsToMany(Attribute::class, 'attributes_values');
-    }
+
 }

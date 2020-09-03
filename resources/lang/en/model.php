@@ -2,24 +2,26 @@
 
 return [
 
-	/*
+    /*
     |--------------------------------------------------------------------------
     | Model
     |--------------------------------------------------------------------------
     |
     |
-	*/
+    */
 
-	'user' => 'User',
-	'users' => 'Users',
+    'user' => 'User',
+    'users' => 'Users',
 
-	'role' => 'Role',
-	'roles' => 'Roles',
+    'role' => 'Role',
+    'roles' => 'Roles',
 
-	'permission' => 'Permission',
-	'permissions' => 'Permissions',
+    'permission' => 'Permission',
+    'permissions' => 'Permissions',
 
     'attribute' => 'Attribute',
-    'attributes' => 'Attributes'
+    'attributes' => 'Attributes',
 
+    'category' => 'Category',
+    'categories' => 'Categories',
 ];

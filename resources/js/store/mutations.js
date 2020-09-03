@@ -53,6 +53,10 @@ let mutations = {
         state.attributesAll = attributesAll;
     },
 
+    SET_CATEGORIES(state, categories) {
+        state.categories = categories;
+    },
+
     /**
      * SET SELECTED
      */
@@ -115,6 +119,18 @@ let mutations = {
         state.selected_value = selected_value;
     },
 
+    SET_SELECTED_CATEGORY(
+        state, selected_category = {
+            id: null,
+            name: "",
+            slug: "",
+            description: "",
+            category_parent_id: null
+        }
+    ) {
+        state.selected_category = selected_category;
+    },
+
     /**
      * PUSH
      */
@@ -137,6 +153,10 @@ let mutations = {
 
     PUSH_VALUE(state, value) {
         state.values.data.push(value);
+    },
+
+    PUSH_CATEGORY(state, category) {
+        state.categories.data.push(category);
     },
 
     /**
@@ -195,6 +215,17 @@ let mutations = {
 
         } catch (error) {
             console.error('REMOVE_VALUE.error', error);
+        }
+    },
+
+    REMOVE_CATEGORY(state, category) {
+        try {
+            let index = state.categories.data.findIndex(item => item.id === category.id);
+            if (index < 0) return;
+            state.categories.data.splice(index, 1);
+
+        } catch (error) {
+            console.error('REMOVE_CATEGORY.error', error);
         }
     },
 }

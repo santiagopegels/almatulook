@@ -21,4 +21,7 @@ return [
 
 	'attribute' => 'Atributo',
 	'attributes' => 'Atributos',
+
+    'category' => 'Categoría',
+    'categories' => 'Categorías',
 ];

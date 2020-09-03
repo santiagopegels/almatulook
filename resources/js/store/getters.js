@@ -51,6 +51,10 @@ let getters = {
         return state.attributesAll;
     },
 
+    categories: state => {
+        return state.categories;
+    },
+
     /** SELECTED */
 
     selected_user: state => {
@@ -71,6 +75,10 @@ let getters = {
 
     selected_value: state => {
         return state.selected_value;
+    },
+
+    selected_category: state => {
+        return state.selected_category;
     },
 }
 
