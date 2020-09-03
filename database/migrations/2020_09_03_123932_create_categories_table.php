@@ -20,6 +20,7 @@ class CreateCategoriesTable extends Migration
             $table->string('slug');
             $table->string('description')->nullable();
             $table->integer('category_parent_id')->nullable();
+            $table->string('icon')->default('icon-tag');
             $table->timestamps();
             $table->softDeletes();
         });

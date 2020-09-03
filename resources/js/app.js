@@ -114,6 +114,7 @@ Vue.component('categories-form', require('./components/models/categories/form.vu
 Vue.component('categories-list', require('./components/models/categories/lists.vue').default);
 Vue.component('categories-index', require('./components/models/categories/index.vue').default);
 Vue.component('categories-filters', require('./components/models/categories/filters.vue').default);
+Vue.component('categories-treeview', require('./components/models/categories/treeview.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
