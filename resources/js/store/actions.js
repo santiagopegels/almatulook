@@ -725,6 +725,7 @@ let actions = {
             console.log(`path.${params.model}`, path);
 
             window.axios.get(path).then(async response => {
+                console.log(response)
                 if (response.data.success) {
                //     await actions.removeFromData(commit, params);
                     await actions.setData(commit, { params: params, data: response.data.data });
@@ -976,6 +977,11 @@ let actions = {
 
             case 'categories':
                 await commit('SET_CATEGORIES', content.data);
+                await commit('SET_SELECTED_CATEGORY');
+                break;
+
+            case 'categories_all':
+                await commit('SET_CATEGORIES_ALL', content.data);
                 await commit('SET_SELECTED_CATEGORY');
                 break;
 

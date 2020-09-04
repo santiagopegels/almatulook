@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\Admin;
 
 use App\Http\Requests\API\Admin\CreateCategoryAPIRequest;
 use App\Http\Requests\API\Admin\UpdateCategoryAPIRequest;
+use App\Http\Resources\CategoryCollection;
 use App\Models\Admin\Category;
 use App\Repositories\Admin\CategoryRepository;
 use Illuminate\Http\Request;
@@ -48,6 +49,13 @@ class CategoryAPIController extends AppBaseController
         $categories = $categories->paginate(self::$limit);
 
         return $this->sendResponse($categories->toArray(), 'Categories retrieved successfully');
+    }
+
+    public function all()
+    {
+       $categories = Category::whereNull('category_parent_id')->get();
+
+        return $this->sendResponse(new CategoryCollection($categories), 'Categories retrieved successfully');
     }
 
     /**

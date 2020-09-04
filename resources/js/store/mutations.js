@@ -57,6 +57,10 @@ let mutations = {
         state.categories = categories;
     },
 
+    SET_CATEGORIES_ALL(state, categoriesAll) {
+        state.categoriesAll = categoriesAll;
+    },
+
     /**
      * SET SELECTED
      */

@@ -32,7 +32,8 @@ class Category extends Model
         'name',
         'slug',
         'description',
-        'category_parent_id'
+        'category_parent_id',
+        'icon'
     ];
 
     /**
@@ -45,7 +46,8 @@ class Category extends Model
         'name' => 'string',
         'slug' => 'string',
         'description' => 'string',
-        'category_parent_id' => 'integer'
+        'category_parent_id' => 'integer',
+        'icon' => 'string'
     ];
 
     /**
@@ -57,5 +59,14 @@ class Category extends Model
         'name' => 'required'
     ];
 
+    public function categories()
+    {
+        return $this->hasMany(Category::class, 'category_parent_id');
+    }
+
+    public function children()
+    {
+        return $this->hasMany(Category::class, 'category_parent_id');
+    }
 
 }

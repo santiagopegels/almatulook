@@ -35,6 +35,7 @@ let state = {
     valuesAll: [],
     attributesAll: [],
     categories: [],
+    categoriesAll: [],
 
     /**
      * Selected item

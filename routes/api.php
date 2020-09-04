@@ -25,6 +25,10 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('permissions', 'Admin\PermissionAPIController');
     Route::resource('users','Admin\UserAPIController');
     Route::resource('attributes', 'Admin\AttributeAPIController');
+    Route::resource('categories', 'Admin\CategoryAPIController');
+    Route::resource('values', 'Admin\ValueAPIController');
+    Route::resource('attribute_values', 'Admin\AttributeValueAPIController');
+
 
     // get all
     Route::get('users_all', ['uses' => 'Admin\UserAPIController@all']);
@@ -32,6 +36,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('permissions_all', ['uses' => 'Admin\PermissionAPIController@all']);
     Route::get('values_all', ['uses' => 'Admin\ValueAPIController@all']);
     Route::get('attributes_all', ['uses' => 'Admin\AttributeAPIController@all']);
+    Route::get('categories_all', ['uses' => 'Admin\CategoryAPIController@all']);
 
     // restore
     Route::post('roles/{id}/restore', ['uses' => 'Admin\RoleAPIController@restore']);
@@ -40,19 +45,4 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('attributes/{id}/restore', ['uses' => 'Admin\AttributeAPIController@restore']);
     Route::post('values/{id}/restore', ['uses' => 'Admin\ValueAPIController@restore']);
 
-});
-
-
-Route::group(['prefix' => 'admin'], function () {
-    Route::resource('attribute_values', 'Admin\AttributeValueAPIController');
-});
-
-
-Route::group(['prefix' => 'admin'], function () {
-    Route::resource('values', 'Admin\ValueAPIController');
-});
-
-
-Route::group(['prefix' => 'admin'], function () {
-    Route::resource('categories', 'Admin\CategoryAPIController');
 });

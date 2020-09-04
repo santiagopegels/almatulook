@@ -55,6 +55,10 @@ let getters = {
         return state.categories;
     },
 
+    categoriesAll: state => {
+        return state.categoriesAll;
+    },
+
     /** SELECTED */
 
     selected_user: state => {
