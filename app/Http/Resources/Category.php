@@ -15,6 +15,7 @@ class Category extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'text' => $this->name,
             'icon' => $this->icon,
             'children' => Category::collection($this->children)
