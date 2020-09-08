@@ -1,6 +1,6 @@
 <template>
 <div class="row">
-    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+    <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
         <div class="card card-accent-primary">
             <div class="card-header">
                 <i class="icon-list"></i>
@@ -8,7 +8,7 @@
             </div>
             <div class="card-body">
                 <div class="row justify-content-end mb-4">
-                    <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
+                    <div class="col-lg-10 col-md-12 col-sm-12 col-xs-12">
                         <categories-filters />
                     </div>
                 </div>
@@ -16,7 +16,7 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+    <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
         <categories-treeview />
     </div>
     <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">

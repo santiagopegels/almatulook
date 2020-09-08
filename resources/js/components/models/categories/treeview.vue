@@ -7,7 +7,13 @@
         </span>
         </div>
         <div class="card-body" v-if="hasCategories">
-            <v-jstree :data="getCategories" show-checkbox multiple allow-batch whole-row @item-click="itemClick"></v-jstree>
+            <v-jstree
+                :data="getCategories"
+                size="large"
+                show-checkbox
+
+                @item-click="itemClick"
+            ></v-jstree>
     </div>
     </div>
 </template>
@@ -37,14 +43,28 @@ export default{
         },
     },
     methods: {
-        itemClick (node) {
-            console.log(node.model.text + ' clicked !')
+        async itemClick (node) {
+            console.log(node.model)
+            await this.$store.commit("SET_SELECTED_CATEGORY", {
+                id: node.model.id,
+                name: node.model.text,
+                children: node.model.children
+            });
         },
         async fetchAll() {
             await this.$store.dispatch("fetchAll", {
                 model: this.model,
             })
                 .catch(error => this.$toasted.global.ToastedError({message: error.message.message}));
+        },
+
+        async getChildrenIds(values) {
+            if (!values) return [];
+            return values.map(function (value) {
+                return {id: value.id,
+                        text: value.text
+                };
+            });
         },
     }
 }

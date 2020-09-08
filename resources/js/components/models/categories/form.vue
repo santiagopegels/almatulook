@@ -27,6 +27,7 @@
                         módulo es requerido.
                     </div>
                 </div>
+                <subcategories-input :children="this.selected_category.children"></subcategories-input>
                 <div class="form-group">
                     <div>
                         <button type="submit"
@@ -51,8 +52,10 @@ import {
     required,
     integer,
 } from "vuelidate/lib/validators";
+import SubcategoriesInput from "./subcategoriesInput";
 
 export default {
+    components: {SubcategoriesInput},
     props: {},
     data: function () {
         return {
@@ -88,6 +91,7 @@ export default {
     created() {
     },
     mounted() {
+        this.addChildrenInitData()
     },
     computed: {
         ...mapGetters(["isLoading", "selected_category", "page"]),
@@ -188,6 +192,16 @@ export default {
             })
                 .catch(error => this.$toasted.global.ToastedError({message: error.message.message}));
         },
+
+        async addChildrenInitData(){
+            const child = {
+                id: 0,
+                name:"",
+                slug:""
+            };
+            await this.selected_category.children.push(child)
+        }
+
     },
 };
 </script>
