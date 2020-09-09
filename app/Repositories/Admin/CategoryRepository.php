@@ -34,6 +34,23 @@ class CategoryRepository extends BaseRepository
     }
 
     /**
+     *
+     *
+     *
+     */
+    public function updateChildren($category, $subcategory)
+    {
+        $subcategoryObject = $this->find($subcategory['id']);
+
+        if(!isset($subcategoryObject)){
+            $subcategoryObject = $this->create($subcategory);
+            $category->children()->save($subcategoryObject);
+        } else{
+            $this->update($subcategoryObject, $subcategoryObject->id);
+        }
+    }
+
+    /**
      * Configure the Model
      **/
     public function model()

@@ -16,7 +16,7 @@ class Category extends JsonResource
     {
         return [
             'id' => $this->id,
-            'text' => $this->name,
+            'name' => $this->name,
             'icon' => $this->icon,
             'children' => Category::collection($this->children)
         ];

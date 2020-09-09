@@ -23,11 +23,11 @@
                     <input type="text" v-model="selected_category.name" v-capitalize id="name" name="name"
                            class="form-control" placeholder="Remeras, Vestidos, etc."
                            :class="{ 'is-invalid': submitted && $v.selected_category.name.$error }"/>
-                    <div v-if="submitted && !$v.selected_category.name.required" class="invalid-feedback">El nombre del
-                        módulo es requerido.
+                    <div v-if="submitted && !$v.selected_category.name.required" class="invalid-feedback">El nombre de la
+                        categoría es requerido.
                     </div>
                 </div>
-                <subcategories-input :children="this.selected_category.children"></subcategories-input>
+                <categories-subcategories ref="subcategories" :validate="submitted" :subcategories="this.selected_category.children"></categories-subcategories>
                 <div class="form-group">
                     <div>
                         <button type="submit"
@@ -52,16 +52,15 @@ import {
     required,
     integer,
 } from "vuelidate/lib/validators";
-import SubcategoriesInput from "./subcategoriesInput";
 
 export default {
-    components: {SubcategoriesInput},
     props: {},
     data: function () {
         return {
             submitted: false,
             model: "categories",
-            model_name: 'categoría'
+            model_name: 'categoría',
+            children:[]
         };
     },
     validations() {
@@ -90,8 +89,7 @@ export default {
 
     created() {
     },
-    mounted() {
-        this.addChildrenInitData()
+     mounted() {
     },
     computed: {
         ...mapGetters(["isLoading", "selected_category", "page"]),
@@ -120,6 +118,7 @@ export default {
             e.preventDefault();
             this.submitted = true;
             this.$v.$touch();
+            if (this.$refs.subcategories.$v.$invalid) return;
             if (this.$v.$invalid) {
                 return;
             }
@@ -153,18 +152,36 @@ export default {
                     id: this.selected_category.id,
                     name: this.selected_category.name,
                     slug: this.hyphenate(this.selected_category.name),
+                    children: await this.copyNameToSlug(this.selected_category.children)
                 }
             })
                 .then(async result => {
                     this.$v.$reset();
-                    this.$toasted.global.ToastedSuccess({message: `El ${this.model_name} fue actualizado!`});
+                    this.$toasted.global.ToastedSuccess({message: `La ${this.model_name} fue actualizada!`});
                     await this.fetch();
                 })
                 .catch(error => this.$toasted.global.ToastedError({message: error.message.message}));
         },
 
-        cancelSelectedObject() {
+        async copyNameToSlug(children){
+            for(let i=0; i < children.length; i++){
+                children[i].slug = this.hyphenate(children[i].name)
+            }
+            return children
+        },
+
+
+        async cancelSelectedObject() {
+            this.submitted = false;
             this.$v.$reset();
+            let children = await this.selected_category.children
+            this.selected_category.children = await children.map(function(subcategory, index) {
+                return subcategory.id === 0 ? index : -1;
+            }).filter(function(index) {
+                return index >= 0;
+            }).reverse().forEach(function(index) {
+                children.splice(index,1);
+            });
             return this.$store.commit("SET_SELECTED_CATEGORY");
         },
 
@@ -192,15 +209,6 @@ export default {
             })
                 .catch(error => this.$toasted.global.ToastedError({message: error.message.message}));
         },
-
-        async addChildrenInitData(){
-            const child = {
-                id: 0,
-                name:"",
-                slug:""
-            };
-            await this.selected_category.children.push(child)
-        }
 
     },
 };

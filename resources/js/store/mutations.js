@@ -130,7 +130,7 @@ let mutations = {
             slug: "",
             description: "",
             category_parent_id: null,
-            children:[]
+            children: []
         }
     ) {
         state.selected_category = selected_category;

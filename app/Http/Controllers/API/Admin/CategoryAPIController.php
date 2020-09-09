@@ -117,6 +117,13 @@ class CategoryAPIController extends AppBaseController
 
         $category = $this->categoryRepository->update($input, $id);
 
+        if(isset($input['children'])){
+            foreach ($input['children'] as $child){
+                $this->categoryRepository->updateChildren($category, $child);
+
+            }
+        }
+
         return $this->sendResponse($category->toArray(), 'Category updated successfully');
     }
 

@@ -8,6 +8,7 @@
         </div>
         <div class="card-body" v-if="hasCategories">
             <v-jstree
+                text-field-name="name"
                 :data="getCategories"
                 size="large"
                 show-checkbox
@@ -44,10 +45,10 @@ export default{
     },
     methods: {
         async itemClick (node) {
-            console.log(node.model)
+            node.model.opened = true
             await this.$store.commit("SET_SELECTED_CATEGORY", {
                 id: node.model.id,
-                name: node.model.text,
+                name: node.model.name,
                 children: node.model.children
             });
         },
