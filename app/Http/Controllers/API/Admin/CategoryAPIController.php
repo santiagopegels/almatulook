@@ -10,6 +10,7 @@ use App\Repositories\Admin\CategoryRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use Response;
+use App\Http\Resources\Category as CategoryResource;
 
 /**
  * Class CategoryController
@@ -120,11 +121,10 @@ class CategoryAPIController extends AppBaseController
         if(isset($input['children'])){
             foreach ($input['children'] as $child){
                 $this->categoryRepository->updateChildren($category, $child);
-
             }
         }
 
-        return $this->sendResponse($category->toArray(), 'Category updated successfully');
+        return $this->sendResponse(new CategoryResource($category), 'Category updated successfully');
     }
 
     /**

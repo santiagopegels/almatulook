@@ -46,7 +46,7 @@ class CategoryRepository extends BaseRepository
             $subcategoryObject = $this->create($subcategory);
             $category->children()->save($subcategoryObject);
         } else{
-            $this->update($subcategoryObject, $subcategoryObject->id);
+            $this->update($subcategory, $subcategoryObject->id);
         }
     }
 

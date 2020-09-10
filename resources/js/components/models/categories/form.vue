@@ -157,6 +157,19 @@ export default {
             })
                 .then(async result => {
                     this.$v.$reset();
+                    console.log(result)
+                    const childrenUpdated = result.message.children
+                    console.log(childrenUpdated)
+                    await this.selected_category.children.forEach((child) => {
+                        if(child.id === 0){
+                            childrenUpdated.forEach(childUpdated => {
+                                if(childUpdated.name === child.name){
+                                    child.id = childUpdated.id
+                                }
+                            })
+                        }
+                    })
+                    console.log(this.selected_category)
                     this.$toasted.global.ToastedSuccess({message: `La ${this.model_name} fue actualizada!`});
                     await this.fetch();
                 })

@@ -12,7 +12,6 @@
                 :data="getCategories"
                 size="large"
                 show-checkbox
-
                 @item-click="itemClick"
             ></v-jstree>
     </div>
@@ -46,11 +45,7 @@ export default{
     methods: {
         async itemClick (node) {
             node.model.opened = true
-            await this.$store.commit("SET_SELECTED_CATEGORY", {
-                id: node.model.id,
-                name: node.model.name,
-                children: node.model.children
-            });
+            await this.$store.commit("SET_SELECTED_CATEGORY", node.model);
         },
         async fetchAll() {
             await this.$store.dispatch("fetchAll", {

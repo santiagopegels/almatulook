@@ -7,6 +7,7 @@ let state = {
 
     results: [],
     term: "",
+    generalObject: null,
 
     nodels_permissions: [
         'users',

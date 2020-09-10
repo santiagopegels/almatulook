@@ -13,6 +13,10 @@ let mutations = {
         state.results = results;
     },
 
+    SET_GENERAL_OBJECT(state, generalObject = []) {
+        state.generalObject = generalObject;
+    },
+
     SET_TERM(state, term = []) {
         state.term = term;
     },

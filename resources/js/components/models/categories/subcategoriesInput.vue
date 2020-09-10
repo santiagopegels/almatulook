@@ -35,6 +35,7 @@ import {
     minLength,
 } from "vuelidate/lib/validators";
 
+
 export default {
     props: {
         subcategories: {
@@ -64,7 +65,7 @@ export default {
     mounted() {
     },
     computed: {
-        ...mapGetters(["isLoading", "page"]),
+        ...mapGetters(["isLoading","selected_category", "page"]),
     },
     watch: {
         validate() {
@@ -81,7 +82,7 @@ export default {
                 slug: "",
                 icon: "icon-tag"
             };
-            await this.subcategories.push(subcategory)
+            await this.selected_category.addChild(subcategory)
         },
 
         deleteSubcategory(_subcategory) {
