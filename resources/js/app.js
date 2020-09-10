@@ -47,7 +47,8 @@ Vue.toasted.register('ToastedError',
 Vue.toasted.register('ToastedSuccess',
     (payload) => {
         return payload.message;
-    }, {
+    },
+    {
         type: 'success',
         theme: "bubble",
         position: "top-right",
@@ -57,7 +58,7 @@ Vue.toasted.register('ToastedSuccess',
         singleton: true,
         icon: {
             name: '✓',
-        }
+        },
     }
 );
 

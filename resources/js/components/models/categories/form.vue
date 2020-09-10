@@ -4,6 +4,11 @@
             <i :class="{'icon-settings':hasId, 'icon-plus':!hasId}"></i>
             {{ getTitle }}
             <span class="float-right">
+                <button v-if="hasId && !selected_category.deleted_at" title="Eliminar" type="submit"
+                        @click="deleteCategory(selected_category)"
+                        class="btn btn-outline-danger btn-sm mr-2">
+                        <i class="fa fa-trash"></i>
+                </button>
             <span v-if="hasId" class="badge badge-warning">
                 ID
                 <strong>{{ selected_category.id }}</strong>
@@ -23,11 +28,13 @@
                     <input type="text" v-model="selected_category.name" v-capitalize id="name" name="name"
                            class="form-control" placeholder="Remeras, Vestidos, etc."
                            :class="{ 'is-invalid': submitted && $v.selected_category.name.$error }"/>
-                    <div v-if="submitted && !$v.selected_category.name.required" class="invalid-feedback">El nombre de la
+                    <div v-if="submitted && !$v.selected_category.name.required" class="invalid-feedback">El nombre de
+                        la
                         categoría es requerido.
                     </div>
                 </div>
-                <categories-subcategories ref="subcategories" :validate="submitted" :subcategories="this.selected_category.children"></categories-subcategories>
+                <categories-subcategories ref="subcategories" :validate="submitted"
+                                          :subcategories="this.selected_category.children"></categories-subcategories>
                 <div class="form-group">
                     <div>
                         <button type="submit"
@@ -60,7 +67,7 @@ export default {
             submitted: false,
             model: "categories",
             model_name: 'categoría',
-            children:[]
+            children: []
         };
     },
     validations() {
@@ -89,10 +96,10 @@ export default {
 
     created() {
     },
-     mounted() {
+    mounted() {
     },
     computed: {
-        ...mapGetters(["isLoading", "selected_category", "page"]),
+        ...mapGetters(["isLoading", "categoriesAll","selected_category", "page"]),
         hasId() {
             return Boolean(this.hasSelectedId());
         },
@@ -161,23 +168,22 @@ export default {
                     const childrenUpdated = result.message.children
                     console.log(childrenUpdated)
                     await this.selected_category.children.forEach((child) => {
-                        if(child.id === 0){
+                        if (child.id === 0) {
                             childrenUpdated.forEach(childUpdated => {
-                                if(childUpdated.name === child.name){
+                                if (childUpdated.name === child.name) {
                                     child.id = childUpdated.id
                                 }
                             })
                         }
                     })
-                    console.log(this.selected_category)
                     this.$toasted.global.ToastedSuccess({message: `La ${this.model_name} fue actualizada!`});
                     await this.fetch();
                 })
                 .catch(error => this.$toasted.global.ToastedError({message: error.message.message}));
         },
 
-        async copyNameToSlug(children){
-            for(let i=0; i < children.length; i++){
+        async copyNameToSlug(children) {
+            for (let i = 0; i < children.length; i++) {
                 children[i].slug = this.hyphenate(children[i].name)
             }
             return children
@@ -188,12 +194,12 @@ export default {
             this.submitted = false;
             this.$v.$reset();
             let children = await this.selected_category.children
-            this.selected_category.children = await children.map(function(subcategory, index) {
+            this.selected_category.children = await children.map(function (subcategory, index) {
                 return subcategory.id === 0 ? index : -1;
-            }).filter(function(index) {
+            }).filter(function (index) {
                 return index >= 0;
-            }).reverse().forEach(function(index) {
-                children.splice(index,1);
+            }).reverse().forEach(function (index) {
+                children.splice(index, 1);
             });
             return this.$store.commit("SET_SELECTED_CATEGORY");
         },
@@ -220,6 +226,19 @@ export default {
             await this.$store.dispatch("fetchAll", {
                 model: this.model,
             })
+                .catch(error => this.$toasted.global.ToastedError({message: error.message.message}));
+        },
+
+        async deleteCategory(model) {
+            await this.$store.dispatch("delete", {
+                _method: 'DELETE',
+                model: this.model,
+                data: model
+            })
+                .then(async result => {
+                    this.$toasted.global.ToastedSuccess({message: `La ${this.model_name} fue eliminada!`});
+                    this.$store.commit('REMOVE_CATEGORY_FROM_ALL', model)
+                })
                 .catch(error => this.$toasted.global.ToastedError({message: error.message.message}));
         },
 

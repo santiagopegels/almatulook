@@ -15,10 +15,6 @@ let getters = {
         return state.results;
     },
 
-    generalObject: state => {
-        return state.generalObject;
-    },
-
     term: state => {
         return state.term;
     },

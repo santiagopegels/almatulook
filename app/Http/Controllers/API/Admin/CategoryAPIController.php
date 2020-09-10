@@ -150,4 +150,28 @@ class CategoryAPIController extends AppBaseController
 
         return $this->sendSuccess('Category deleted successfully');
     }
+
+    /**
+     * Restore the specified Category from storage.
+     * POST /categories/{id}
+     *
+     * @param int $id
+     *
+     * @throws \Exception
+     *
+     * @return Response
+     */
+    public function restore($id)
+    {
+        /** @var Category $category */
+        $category = Category::withTrashed()->find($id);
+
+        if (empty($category)) {
+            return $this->sendError('Category not found');
+        }
+
+        $category->restore();
+
+        return $this->sendResponse($category, 'Category restored successfully');
+    }
 }

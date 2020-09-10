@@ -237,6 +237,29 @@ let mutations = {
             console.error('REMOVE_CATEGORY.error', error);
         }
     },
+
+    REMOVE_CATEGORY_FROM_ALL(state, category) {
+        try {
+            let removeCategory = function findIndexById(data, id) {
+                for(var i = 0; i < data.length; i++) {
+
+                    if (data[i].id === id) {
+
+                        let index = data.findIndex(item => item.id === id);
+                        data.splice(index, 1);
+                        return data[i];
+                        
+                    } else if (data[i].children && data[i].children.length && typeof data[i].children === "object") {
+                        findIndexById(data[i].children, id);
+                    }
+                }
+            }
+
+            removeCategory(state.categoriesAll, category.id)
+        } catch (error) {
+            console.error('REMOVE_CATEGORY.error', error);
+        }
+    },
 }
 
 export default mutations
