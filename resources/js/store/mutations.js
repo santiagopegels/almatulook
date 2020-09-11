@@ -134,7 +134,8 @@ let mutations = {
             slug: "",
             description: "",
             category_parent_id: null,
-            children: []
+            children: [],
+            attributes: [],
         }
     ) {
         state.selected_category = selected_category;
@@ -166,6 +167,10 @@ let mutations = {
 
     PUSH_CATEGORY(state, category) {
         state.categories.data.push(category);
+    },
+
+    PUSH_CATEGORY_ALL(state, category) {
+        state.categoriesAll.push(category);
     },
 
     /**
@@ -248,7 +253,7 @@ let mutations = {
                         let index = data.findIndex(item => item.id === id);
                         data.splice(index, 1);
                         return data[i];
-                        
+
                     } else if (data[i].children && data[i].children.length && typeof data[i].children === "object") {
                         findIndexById(data[i].children, id);
                     }

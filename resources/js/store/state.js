@@ -85,7 +85,8 @@ let state = {
         description: "",
         slug: "",
         category_parent_id: null,
-        children: []
+        children: [],
+        attributes: []
     },
 }
 

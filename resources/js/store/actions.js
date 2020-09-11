@@ -713,13 +713,12 @@ let actions = {
      * @param {*} params
      */
     fetchAll({ commit }, params) {
-        //console.log(`fetch.${params.model}`, params);
         return new Promise(async (resolve, reject) => {
 
             commit('SET_LOADING', true);
 
             params.model = params.model.concat('_all')
-            console.log(params)
+
             var path = await actions.getEndpoint(params);
 
             console.log(`path.${params.model}`, path);
@@ -760,12 +759,10 @@ let actions = {
      * @param {*} params
      */
     store({ commit }, params) {
-        console.log(`store.${params.model}`, params);
         return new Promise(async(resolve, reject) => {
             commit('SET_LOADING', true);
             const path = await actions.getEndpoint(params);
-           // console.log(`path.${params.model}`, path);
-            console.log(params)
+
             window.axios.post(path, params.data, {}).then(async response => {
                 if (response.data.success) {
                     await actions.removeFromData(commit, response.data.data);
@@ -794,6 +791,45 @@ let actions = {
         });
     },
 
+    /**
+     * STORE DATA ALL ARRAY
+     * model: ej: users, roles, etc
+     * data: ej: object {name: 'Jhon Doe', ...}
+     * @param {*} params
+     */
+    storeAll({ commit }, params) {
+        return new Promise(async(resolve, reject) => {
+            commit('SET_LOADING', true);
+            const path = await actions.getEndpoint(params);
+
+            window.axios.post(path, params.data, {}).then(async response => {
+                if (response.data.success) {
+                    params.model = await params.model.concat('_all')
+                    await actions.removeFromData(commit, response.data.data);
+                    await actions.pushData(commit, { params: params, data: response.data.data });
+                    await commit('SET_LOADING', false);
+                    resolve({
+                        status: true,
+                        message: response.data.data
+                    });
+                } else {
+                    commit('SET_LOADING', false);
+                    reject({
+                        status: false,
+                        message: response.data.message
+                    });
+                }
+
+            }).catch(error => {
+                console.error(error);
+                commit('SET_LOADING', false);
+                reject({
+                    status: false,
+                    message: error
+                });
+            });
+        });
+    },
     /**
      * UPDATE DATA
      * model: ej: users, roles, etc
@@ -1025,6 +1061,11 @@ let actions = {
 
             case 'categories':
                 await commit('PUSH_CATEGORY', content.data);
+                await commit('SET_SELECTED_CATEGORY');
+                break;
+
+            case 'categories_all':
+                await commit('PUSH_CATEGORY_ALL', content.data);
                 await commit('SET_SELECTED_CATEGORY');
                 break;
 

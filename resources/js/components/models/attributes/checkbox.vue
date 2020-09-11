@@ -1,6 +1,6 @@
 <template>
 <div class="form-group">
-    <label>Asignar a Atributos</label>
+    <label>Asignar Atributos</label>
     <div class="form-group scroll-vertical" v-if="hasAttributes">
         <div class="form-check form-check-inline mr-4 mb-2 mb-2 pointer" v-for="model in getAttributes" :key="model.id">
             <input class="form-check-input pointer" type="checkbox" v-model="attributesIds" :id="model.id" :value="model.id" />

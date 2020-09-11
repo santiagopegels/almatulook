@@ -8,6 +8,7 @@
         </div>
         <div class="card-body" v-if="hasCategories">
             <v-jstree
+                ref="tree"
                 text-field-name="name"
                 :data="getCategories"
                 size="large"
@@ -25,6 +26,11 @@ export default{
     components: {
         VJstree
     },
+    props: {
+        newRootNode: {
+            type: Object,
+        },
+    },
     data: function () {
         return {
             model: "categories",
@@ -41,6 +47,15 @@ export default{
         getCategories() {
             return this.categoriesAll;
         },
+    },
+    watch: {
+         newRootNode: async function (newCategory){
+            if(newCategory.id){
+                let newRootNodeTreeObject = await this.$refs.tree.initializeDataItem(newCategory)
+                await this.$store.commit('REMOVE_CATEGORY_FROM_ALL', newCategory)
+                await this.$store.commit('PUSH_CATEGORY_ALL', newRootNodeTreeObject)
+            }
+        }
     },
     methods: {
         async itemClick (node) {

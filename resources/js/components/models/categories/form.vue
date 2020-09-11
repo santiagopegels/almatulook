@@ -33,8 +33,12 @@
                         categoría es requerido.
                     </div>
                 </div>
-                <categories-subcategories ref="subcategories" :validate="submitted"
-                                          :subcategories="this.selected_category.children"></categories-subcategories>
+                <categories-subcategories ref="treeview"
+                                          :validate="submitted"
+                                          :subcategories="this.selected_category.children">
+
+                </categories-subcategories>
+                <attributes-checkbox></attributes-checkbox>
                 <div class="form-group">
                     <div>
                         <button type="submit"
@@ -125,7 +129,7 @@ export default {
             e.preventDefault();
             this.submitted = true;
             this.$v.$touch();
-            if (this.$refs.subcategories.$v.$invalid) return;
+            if (this.$refs.treeview.$v.$invalid) return;
             if (this.$v.$invalid) {
                 return;
             }
@@ -136,16 +140,20 @@ export default {
             }
         },
         async store() {
-            await this.$store.dispatch("store", {
+            await this.$store.dispatch("storeAll", {
                 model: this.model,
                 data: {
+                    id: this.selected_category.id,
                     name: this.selected_category.name,
                     slug: this.hyphenate(this.selected_category.name),
+                    icon: 'icon-tag',
+                    children: await this.copyNameToSlug(this.selected_category.children)
                 }
             })
                 .then(async result => {
                     this.$v.$reset();
-                    this.$toasted.global.ToastedSuccess({message: `El ${this.model_name} fue creado!`});
+                    this.$emit('newRootNode', result.message)
+                    this.$toasted.global.ToastedSuccess({message: `La ${this.model_name} fue creada!`});
                     await this.fetch();
                 })
                 .catch(error => this.$toasted.global.ToastedError({message: error.message.response.data.errors.name}));
@@ -164,18 +172,8 @@ export default {
             })
                 .then(async result => {
                     this.$v.$reset();
-                    console.log(result)
                     const childrenUpdated = result.message.children
-                    console.log(childrenUpdated)
-                    await this.selected_category.children.forEach((child) => {
-                        if (child.id === 0) {
-                            childrenUpdated.forEach(childUpdated => {
-                                if (childUpdated.name === child.name) {
-                                    child.id = childUpdated.id
-                                }
-                            })
-                        }
-                    })
+                    await this.setIdToCategoryAfterCreateOrUpdate(childrenUpdated)
                     this.$toasted.global.ToastedSuccess({message: `La ${this.model_name} fue actualizada!`});
                     await this.fetch();
                 })
@@ -240,6 +238,18 @@ export default {
                     this.$store.commit('REMOVE_CATEGORY_FROM_ALL', model)
                 })
                 .catch(error => this.$toasted.global.ToastedError({message: error.message.message}));
+        },
+
+       async setIdToCategoryAfterCreateOrUpdate(childrenUpdated){
+           await this.selected_category.children.forEach((child) => {
+               if (child.id === 0) {
+                   childrenUpdated.forEach(childUpdated => {
+                       if (childUpdated.name === child.name) {
+                           child.id = childUpdated.id
+                       }
+                   })
+               }
+           })
         },
 
     },
