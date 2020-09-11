@@ -135,7 +135,7 @@ let mutations = {
             description: "",
             category_parent_id: null,
             children: [],
-            attributes: [],
+            attributesIds: [],
         }
     ) {
         state.selected_category = selected_category;

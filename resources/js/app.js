@@ -117,7 +117,7 @@ Vue.component('categories-index', require('./components/models/categories/index.
 Vue.component('categories-filters', require('./components/models/categories/filters.vue').default);
 Vue.component('categories-treeview', require('./components/models/categories/treeview.vue').default);
 Vue.component('categories-subcategories', require('./components/models/categories/subcategoriesInput.vue').default);
-
+Vue.component('categories-checkbox-attributes', require('./components/models/categories/checkboxAttributes.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

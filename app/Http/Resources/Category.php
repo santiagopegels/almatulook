@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Admin\Attribute;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class Category extends JsonResource
@@ -18,7 +19,8 @@ class Category extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'icon' => $this->icon,
-            'children' => Category::collection($this->children)
+            'children' => Category::collection($this->children),
+            'attributesIds' => $this->attributes
         ];
     }
 }

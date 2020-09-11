@@ -82,7 +82,11 @@ export default {
                 slug: "",
                 icon: "icon-tag"
             };
-            await this.selected_category.addChild(subcategory)
+            this.selected_category.id > 0
+                ?
+                await this.selected_category.addChild(subcategory)
+                :
+                await this.selected_category.children.push(subcategory)
         },
 
         deleteSubcategory(_subcategory) {

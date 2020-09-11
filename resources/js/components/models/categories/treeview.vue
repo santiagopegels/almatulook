@@ -60,6 +60,8 @@ export default{
     methods: {
         async itemClick (node) {
             node.model.opened = true
+            node.model.attributesIds = await this.getChildrenIds(node.model.attributesIds)
+            console.log(node.model)
             await this.$store.commit("SET_SELECTED_CATEGORY", node.model);
         },
         async fetchAll() {
@@ -72,9 +74,7 @@ export default{
         async getChildrenIds(values) {
             if (!values) return [];
             return values.map(function (value) {
-                return {id: value.id,
-                        text: value.text
-                };
+                return value.id
             });
         },
     }

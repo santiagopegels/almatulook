@@ -73,7 +73,13 @@ class CategoryAPIController extends AppBaseController
 
         $category = $this->categoryRepository->create($input);
 
-        return $this->sendResponse($category->toArray(), 'Category saved successfully');
+        if(isset($input['children'])){
+            foreach ($input['children'] as $child){
+                $this->categoryRepository->updateChildren($category, $child);
+            }
+        }
+
+        return $this->sendResponse(new CategoryResource($category), 'Category saved successfully');
     }
 
     /**

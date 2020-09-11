@@ -38,7 +38,7 @@
                                           :subcategories="this.selected_category.children">
 
                 </categories-subcategories>
-                <attributes-checkbox></attributes-checkbox>
+                <categories-checkbox-attributes />
                 <div class="form-group">
                     <div>
                         <button type="submit"
@@ -147,7 +147,8 @@ export default {
                     name: this.selected_category.name,
                     slug: this.hyphenate(this.selected_category.name),
                     icon: 'icon-tag',
-                    children: await this.copyNameToSlug(this.selected_category.children)
+                    children: await this.copyNameToSlug(this.selected_category.children),
+                    attributesIds: this.selected_category.attributesIds
                 }
             })
                 .then(async result => {
@@ -167,7 +168,8 @@ export default {
                     id: this.selected_category.id,
                     name: this.selected_category.name,
                     slug: this.hyphenate(this.selected_category.name),
-                    children: await this.copyNameToSlug(this.selected_category.children)
+                    children: await this.copyNameToSlug(this.selected_category.children),
+                    attributesIds: this.selected_category.attributesIds
                 }
             })
                 .then(async result => {
@@ -186,7 +188,6 @@ export default {
             }
             return children
         },
-
 
         async cancelSelectedObject() {
             this.submitted = false;
@@ -236,6 +237,7 @@ export default {
                 .then(async result => {
                     this.$toasted.global.ToastedSuccess({message: `La ${this.model_name} fue eliminada!`});
                     this.$store.commit('REMOVE_CATEGORY_FROM_ALL', model)
+                    this.$store.commit('SET_SELECTED_CATEGORY')
                 })
                 .catch(error => this.$toasted.global.ToastedError({message: error.message.message}));
         },

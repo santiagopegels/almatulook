@@ -69,4 +69,9 @@ class Category extends Model
         return $this->hasMany(Category::class, 'category_parent_id');
     }
 
+    public function attributes()
+    {
+        return $this->belongsToMany(Attribute::class, 'categories_attributes');
+    }
+
 }
