@@ -79,6 +79,10 @@ class CategoryAPIController extends AppBaseController
             }
         }
 
+        if(isset($input['attributesIds'])){
+            $this->categoryRepository->updateAttributes($category, $input['attributesIds']);
+        }
+
         return $this->sendResponse(new CategoryResource($category), 'Category saved successfully');
     }
 
@@ -114,7 +118,6 @@ class CategoryAPIController extends AppBaseController
     public function update($id, UpdateCategoryAPIRequest $request)
     {
         $input = $request->all();
-
         /** @var Category $category */
         $category = $this->categoryRepository->find($id);
 
@@ -128,6 +131,10 @@ class CategoryAPIController extends AppBaseController
             foreach ($input['children'] as $child){
                 $this->categoryRepository->updateChildren($category, $child);
             }
+        }
+
+        if(isset($input['attributesIds'])){
+                $this->categoryRepository->updateAttributes($category, $input['attributesIds']);
         }
 
         return $this->sendResponse(new CategoryResource($category), 'Category updated successfully');

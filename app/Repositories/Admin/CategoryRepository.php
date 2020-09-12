@@ -35,7 +35,7 @@ class CategoryRepository extends BaseRepository
 
     /**
      *
-     *
+     * Update Parent Category Id Into Categories Table
      *
      */
     public function updateChildren($category, $subcategory)
@@ -48,6 +48,16 @@ class CategoryRepository extends BaseRepository
         } else{
             $this->update($subcategory, $subcategoryObject->id);
         }
+    }
+
+    /**
+     *
+     * Update Parent Category Id Into Categories Table
+     *
+     */
+    public function updateAttributes($category, $attributesIds)
+    {
+        $category->attributes()->sync($attributesIds);
     }
 
     /**
