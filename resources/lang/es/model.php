@@ -24,4 +24,7 @@ return [
 
     'category' => 'Categoría',
     'categories' => 'Categorías',
+
+    'parameter' => 'Parámetro',
+    'parameters' => 'Parámetros'
 ];

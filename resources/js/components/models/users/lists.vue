@@ -142,14 +142,6 @@ export default {
                 password_confirmation: "",
                 rolesIds: await this.getRolesIds(user.roles),
             });
-              await this.$store.commit("SET_SELECTED_USER_PROFILE", {
-                method: "PUT",
-                id: user.profile.id,
-                firstName: user.profile.first_name,
-                lastName: user.profile.last_name,
-                phoneNumber: user.profile.phone_number,
-                deliveryAddress: user.profile.delivery_address,
-              });
         },
 
         orderedUsers: function () {

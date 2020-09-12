@@ -65,6 +65,10 @@ let mutations = {
         state.categoriesAll = categoriesAll;
     },
 
+    SET_PARAMETERS(state, parameters) {
+        state.parameters = parameters;
+    },
+
     /**
      * SET SELECTED
      */
@@ -141,6 +145,16 @@ let mutations = {
         state.selected_category = selected_category;
     },
 
+    SET_SELECTED_PARAMETER(
+        state, selected_parameter = {
+            id: null,
+            parameter: "",
+            value: ""
+        }
+    ) {
+        state.selected_parameter = selected_parameter;
+    },
+
     /**
      * PUSH
      */
@@ -171,6 +185,10 @@ let mutations = {
 
     PUSH_CATEGORY_ALL(state, category) {
         state.categoriesAll.push(category);
+    },
+
+    PUSH_PARAMETER(state, parameter) {
+        state.parameters.push(parameter);
     },
 
     /**
@@ -263,6 +281,17 @@ let mutations = {
             removeCategory(state.categoriesAll, category.id)
         } catch (error) {
             console.error('REMOVE_CATEGORY.error', error);
+        }
+    },
+
+    REMOVE_PARAMETER(state, parameter) {
+        try {
+            let index = state.parameters.data.findIndex(item => item.id === parameter.id);
+            if (index < 0) return;
+            state.parameters.data.splice(index, 1);
+
+        } catch (error) {
+            console.error('REMOVE_PARAMETER.error', error);
         }
     },
 }

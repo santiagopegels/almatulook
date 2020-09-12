@@ -119,6 +119,13 @@ Vue.component('categories-treeview', require('./components/models/categories/tre
 Vue.component('categories-subcategories', require('./components/models/categories/subcategoriesInput.vue').default);
 Vue.component('categories-checkbox-attributes', require('./components/models/categories/checkboxAttributes.vue').default);
 
+// parameters
+Vue.component('parameters-list', require('./components/models/parameters/lists.vue').default);
+Vue.component('parameters-index', require('./components/models/parameters/index.vue').default);
+Vue.component('parameters-filters', require('./components/models/parameters/filters.vue').default);
+Vue.component('parameters-form', require('./components/models/parameters/form.vue').default);
+
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

@@ -1,15 +1,21 @@
 @role(['super-administrador',' administrador'])
 <li class="nav-title">Configuración</li>
+<li class="nav-item {{ Request::is('categories*') ? 'active' : '' }}">
+    <a class="nav-link {{ Request::is('categories*') ? 'active' : '' }}" href=" {!! route('admin.categories.index') !!}">
+        <i class="nav-icon icon-cursor"></i>
+        <span>@lang('model.categories')</span>
+    </a>
+</li>
 <li class="nav-item {{ Request::is('attributes*') ? 'active' : '' }}">
     <a class="nav-link {{ Request::is('attributes*') ? 'active' : '' }}" href=" {!! route('admin.attributes.index') !!}">
         <i class="nav-icon icon-cursor"></i>
         <span>@lang('model.attributes')</span>
     </a>
 </li>
-<li class="nav-item {{ Request::is('categories*') ? 'active' : '' }}">
-    <a class="nav-link {{ Request::is('categories*') ? 'active' : '' }}" href=" {!! route('admin.categories.index') !!}">
+<li class="nav-item {{ Request::is('parameters*') ? 'active' : '' }}">
+    <a class="nav-link {{ Request::is('parameters*') ? 'active' : '' }}" href=" {!! route('admin.parameters.index') !!}">
         <i class="nav-icon icon-cursor"></i>
-        <span>@lang('model.categories')</span>
+        <span>@lang('model.parameters')</span>
     </a>
 </li>
 <li class="nav-title">Administrador</li>

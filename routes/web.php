@@ -35,3 +35,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['prefix' => 'admin'], function () {
     Route::resource('attributeValues', 'Admin\AttributeValueController', ["as" => 'admin']);
 });
+
+
+Route::group(['prefix' => 'admin'], function () {
+    Route::resource('parameters', 'Admin\ParameterController', ["as" => 'admin']);
+});
