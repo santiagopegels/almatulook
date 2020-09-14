@@ -8,9 +8,11 @@
                 {{title}}
                 </div>
                 <div class="align-item-center">
-                    <button type="button" class="btn btn-brand btn-success">
+                    <form method="GET" :action="this.newProductRoute">
+                    <button type="submit" class="btn btn-brand btn-success">
                         <i class="fa fa-plus"></i><span>Nuevo Producto</span>
                     </button>
+                    </form>
                 </div>
             </div>
             <div class="card-body">
@@ -30,9 +32,15 @@
 import {
     mapGetters
 } from "vuex";
+import Form from "./form";
 export default {
+    components: {Form},
     props: {
         title: {
+            type: String,
+            required: true,
+        },
+        newProductRoute: {
             type: String,
             required: true,
         },
@@ -46,7 +54,6 @@ export default {
         ...mapGetters(["isLoading"]),
     },
     methods: {
-
 	},
 };
 </script>

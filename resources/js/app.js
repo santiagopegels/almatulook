@@ -129,7 +129,10 @@ Vue.component('parameters-form', require('./components/models/parameters/form.vu
 Vue.component('products-list', require('./components/models/products/lists.vue').default);
 Vue.component('products-index', require('./components/models/products/index.vue').default);
 Vue.component('products-filters', require('./components/models/products/filters.vue').default);
-Vue.component('products-form', require('./components/models/products/form.vue').default);
+
+// new products
+Vue.component('new-product-index', require('./components/models/products/newProduct/index.vue').default);
+Vue.component('new-product-form', require('./components/models/products/newProduct/form.vue').default);
 
 
 /**
