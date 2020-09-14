@@ -43,8 +43,7 @@ class ParameterAPIController extends AppBaseController
         $parameters = Parameter::withTrashed();
 
         if (!is_null($term)) {
-            $parameters = $parameters->where('name', 'LIKE', "%{$term}%")
-                ->orWhere('email', 'LIKE', "%{$term}%");
+            $parameters = $parameters->where('parameter', 'LIKE', "%{$term}%");
         }
 
         $parameters = $parameters->paginate(self::$limit);

@@ -116,7 +116,6 @@ export default {
                 data: {
                     _method: "PUT",
                     id: this.selected_parameter.id,
-                    parameter: this.selected_parameter.parameter,
                     value: this.selected_parameter.value,
                 }
             })
