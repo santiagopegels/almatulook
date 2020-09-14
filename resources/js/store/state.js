@@ -37,6 +37,7 @@ let state = {
     categories: [],
     categoriesAll: [],
     parameters: [],
+    products: [],
 
     /**
      * Selected item
@@ -94,6 +95,13 @@ let state = {
         id: null,
         parameter: "",
         value: "",
+    },
+
+    selected_product: {
+        id: null,
+        name: "",
+        price: "",
+        cost_price: ""
     },
 }
 

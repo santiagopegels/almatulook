@@ -69,6 +69,10 @@ let mutations = {
         state.parameters = parameters;
     },
 
+    SET_PRODUCTS(state, products) {
+        state.products = products;
+    },
+
     /**
      * SET SELECTED
      */
@@ -155,6 +159,17 @@ let mutations = {
         state.selected_parameter = selected_parameter;
     },
 
+    SET_SELECTED_PRODUCT(
+        state, selected_product = {
+            id: null,
+            name: "",
+            price: "",
+            cost_price: ""
+        }
+    ) {
+        state.selected_product = selected_product;
+    },
+
     /**
      * PUSH
      */
@@ -189,6 +204,10 @@ let mutations = {
 
     PUSH_PARAMETER(state, parameter) {
         state.parameters.push(parameter);
+    },
+
+    PUSH_PRODUCT(state, product) {
+        state.products.push(product);
     },
 
     /**
@@ -292,6 +311,17 @@ let mutations = {
 
         } catch (error) {
             console.error('REMOVE_PARAMETER.error', error);
+        }
+    },
+
+    REMOVE_PRODUCT(state, product) {
+        try {
+            let index = state.products.data.findIndex(item => item.id === product.id);
+            if (index < 0) return;
+            state.products.data.splice(index, 1);
+
+        } catch (error) {
+            console.error('REMOVE_PRODUCT.error', error);
         }
     },
 }

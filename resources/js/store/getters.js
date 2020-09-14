@@ -63,6 +63,10 @@ let getters = {
         return state.parameters;
     },
 
+    products: state => {
+        return state.products;
+    },
+
     /** SELECTED */
 
     selected_user: state => {
@@ -91,6 +95,10 @@ let getters = {
 
     selected_parameter: state => {
         return state.selected_parameter;
+    },
+
+    selected_product: state => {
+        return state.selected_product;
     },
 }
 

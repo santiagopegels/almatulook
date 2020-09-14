@@ -47,3 +47,8 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('categories/{id}/restore', ['uses' => 'Admin\CategoryAPIController@restore']);
 
 });
+
+
+Route::group(['prefix' => 'admin'], function () {
+    Route::resource('products', 'Admin\ProductAPIController');
+});

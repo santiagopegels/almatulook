@@ -454,6 +454,11 @@ let actions = {
                 await commit('SET_SELECTED_PARAMETER');
                 break;
 
+            case 'products':
+                await commit('SET_PRODUCTS', content.data);
+                await commit('SET_SELECTED_PRODUCT');
+                break;
+
             default:
                 break;
         }
@@ -507,6 +512,11 @@ let actions = {
                 await commit('SET_SELECTED_PARAMETER');
                 break;
 
+            case 'products':
+                await commit('PUSH_PRODUCT', content.data);
+                await commit('SET_SELECTED_PRODUCT');
+                break;
+
             default:
                 break;
         }
@@ -546,6 +556,10 @@ let actions = {
 
             case 'parameters':
                 await commit('SET_SELECTED_PARAMETER');
+                break;
+
+            case 'products':
+                await commit('SET_SELECTED_PRODUCT');
                 break;
 
             default:

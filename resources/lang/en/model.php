@@ -26,5 +26,8 @@ return [
     'categories' => 'Categories',
 
     'parameter' => 'Parameter',
-    'parameters' => 'Parameters'
+    'parameters' => 'Parameters',
+
+    'product' => 'Product',
+    'products' => 'Products'
 ];

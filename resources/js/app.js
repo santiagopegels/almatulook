@@ -125,6 +125,12 @@ Vue.component('parameters-index', require('./components/models/parameters/index.
 Vue.component('parameters-filters', require('./components/models/parameters/filters.vue').default);
 Vue.component('parameters-form', require('./components/models/parameters/form.vue').default);
 
+// products
+Vue.component('products-list', require('./components/models/products/lists.vue').default);
+Vue.component('products-index', require('./components/models/products/index.vue').default);
+Vue.component('products-filters', require('./components/models/products/filters.vue').default);
+Vue.component('products-form', require('./components/models/products/form.vue').default);
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
