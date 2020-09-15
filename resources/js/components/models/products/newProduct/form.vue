@@ -28,7 +28,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="name">Precio</label>
+                    <label for="name">Precio de Venta</label>
                     <currency-input
                                     :value="selected_product.price"
                                     v-model="selected_product.price"
@@ -38,10 +38,33 @@
                                     :class="{ 'is-invalid': submitted && $v.selected_product.price.$error }"/>
                     <div v-if="submitted && !$v.selected_product.price.required" class="invalid-feedback">El precio es requerido.
                     </div>
-                    <div v-if="submitted && !$v.selected_product.decimal" class="invalid-feedback">El precio debe ser númerico.
+                    <div v-if="submitted && !$v.selected_product.price.decimal" class="invalid-feedback">El precio debe ser númerico.
                     </div>
                 </div>
 
+                <div class="form-group">
+                    <label for="name">Precio de Costo</label>
+                    <currency-input
+                        :value="selected_product.cost_price"
+                        v-model="selected_product.cost_price"
+                        id="price"
+                        name="price"
+                        class="form-control"
+                        :class="{ 'is-invalid': submitted && $v.selected_product.cost_price.$error }"/>
+                    <div v-if="submitted && !$v.selected_product.cost_price.required" class="invalid-feedback">El precio es requerido.
+                    </div>
+                    <div v-if="submitted && !$v.selected_product.cost_price.decimal" class="invalid-feedback">El precio debe ser númerico.
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="category">Categoría</label>
+                    <v-select
+                        id="category"
+                        v-model="selected_product.categoryId"
+                        :options="['Canada', 'United States']"
+                    ></v-select>
+                </div>
                 <div class="form-group">
                     <div>
                         <button type="submit"
@@ -66,7 +89,6 @@ import {
     required,
     integer,
     decimal,
-    numeric
 } from "vuelidate/lib/validators";
 
 export default {
@@ -85,6 +107,10 @@ export default {
                         required
                     },
                     price: {
+                        required,
+                        decimal
+                    },
+                    cost_price: {
                         required,
                         decimal
                     },

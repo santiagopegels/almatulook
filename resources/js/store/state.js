@@ -101,7 +101,8 @@ let state = {
         id: null,
         name: "",
         price: 0,
-        cost_price: 0
+        cost_price: 0,
+        categoryId: null,
     },
 }
 

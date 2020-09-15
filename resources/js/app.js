@@ -20,11 +20,13 @@ import Vuelidate from 'vuelidate';
 import Toasted from 'vue-toasted';
 import VueDayjs from 'vue-dayjs-plugin';
 import VueCurrencyInput from 'vue-currency-input'
+import vSelect from 'vue-select'
 
 Vue.config.baseurl = process.env.MIX_APP_URL;
 console.log('MIX_APP_URL', process.env.MIX_APP_URL);
 
 Vue.component('paginate', Paginate);
+Vue.component('v-select', vSelect)
 Vue.use(Vuex);
 Vue.use(Toasted);
 Vue.use(VueDayjs);
