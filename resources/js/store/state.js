@@ -100,8 +100,8 @@ let state = {
     selected_product: {
         id: null,
         name: "",
-        price: "",
-        cost_price: ""
+        price: 0,
+        cost_price: 0
     },
 }
 

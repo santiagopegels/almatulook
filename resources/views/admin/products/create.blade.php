@@ -7,7 +7,7 @@
 
     <div class="container-fluid">
         <div class="animated fadeIn">
-            <new-product-index title="{!! __('model.products') !!}" new-product-route="{!! route('admin.products.create') !!}" />
+            <new-product-index />
         </div>
     </div>
 @endsection

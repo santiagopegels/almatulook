@@ -6,7 +6,7 @@
             <span class="float-right">
             <span v-if="hasId" class="badge badge-warning">
                 ID
-                <strong>{{ selected_value.id }}</strong>
+                <strong>{{ selected_product.id }}</strong>
             </span>
             <span v-if="hasId" class="ml-1">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"
@@ -20,14 +20,28 @@
             <form method="POST" @submit="handleSubmit" accept-charset="UTF-8">
                 <div class="form-group">
                     <label for="name">Nombre</label>
-                    <input type="text" v-model="selected_value.name" v-capitalize id="name" name="name"
-                           class="form-control" placeholder="M, L, Azul, Rojo etc."
-                           :class="{ 'is-invalid': submitted && $v.selected_value.name.$error }"/>
-                    <div v-if="submitted && !$v.selected_value.name.required" class="invalid-feedback">El nombre del
-                        módulo es requerido.
+                    <input type="text" v-model="selected_product.name" v-capitalize id="name" name="name"
+                           class="form-control"
+                           :class="{ 'is-invalid': submitted && $v.selected_product.name.$error }"/>
+                    <div v-if="submitted && !$v.selected_product.name.required" class="invalid-feedback">El nombre es requerido.
                     </div>
                 </div>
-                <attributes-checkbox />
+
+                <div class="form-group">
+                    <label for="name">Precio</label>
+                    <currency-input
+                                    :value="selected_product.price"
+                                    v-model="selected_product.price"
+                                    id="price"
+                                    name="price"
+                                    class="form-control"
+                                    :class="{ 'is-invalid': submitted && $v.selected_product.price.$error }"/>
+                    <div v-if="submitted && !$v.selected_product.price.required" class="invalid-feedback">El precio es requerido.
+                    </div>
+                    <div v-if="submitted && !$v.selected_product.decimal" class="invalid-feedback">El precio debe ser númerico.
+                    </div>
+                </div>
+
                 <div class="form-group">
                     <div>
                         <button type="submit"
@@ -51,6 +65,8 @@ import {
 import {
     required,
     integer,
+    decimal,
+    numeric
 } from "vuelidate/lib/validators";
 
 export default {
@@ -63,27 +79,17 @@ export default {
         };
     },
     validations() {
-        if (this.hasSelectedId()) {
             return {
-                selected_value: {
-                    id: {
+                selected_product: {
+                    name: {
+                        required
+                    },
+                    price: {
                         required,
-                        integer
-                    },
-                    name: {
-                        required
+                        decimal
                     },
                 },
             };
-        } else {
-            return {
-                selected_value: {
-                    name: {
-                        required
-                    },
-                },
-            };
-        }
     },
 
     created() {
@@ -91,32 +97,33 @@ export default {
     mounted() {
     },
     computed: {
-        ...mapGetters(["isLoading", "selected_value", "page"]),
+        ...mapGetters(["isLoading", "selected_product", "page"]),
         hasId() {
             return Boolean(this.hasSelectedId());
         },
         getTitle() {
             return this.hasSelectedId() ?
-                "Editar Valor" :
-                "Crear Valor";
+                "Editar Producto" :
+                "Crear Producto";
         },
 
         buttonText() {
             return this.hasSelectedId() ?
-                "Actualizar Valor" :
-                "Crear Valor";
+                "Actualizar Producto" :
+                "Crear Producto";
         },
     },
     methods: {
         hasSelectedId() {
-            if (!Boolean(this.selected_value)) return false;
-            return Boolean(this.selected_value.id > 0);
+            if (!Boolean(this.selected_product)) return false;
+            return Boolean(this.selected_product.id > 0);
         },
 
         async handleSubmit(e) {
             e.preventDefault();
             this.submitted = true;
             this.$v.$touch();
+            console.log(this.selected_product.price)
             if (this.$v.$invalid) {
                 return;
             }
@@ -130,9 +137,9 @@ export default {
             await this.$store.dispatch("store", {
                 model: this.model,
                 data: {
-                    name: this.selected_value.name,
-                    slug: this.hyphenate(this.selected_value.name),
-                    attributesIds: this.selected_value.attributesIds
+                    name: this.selected_product.name,
+                    slug: this.hyphenate(this.selected_product.name),
+                    attributesIds: this.selected_product.attributesIds
                 }
             })
                 .then(async result => {
@@ -149,10 +156,10 @@ export default {
                 model: this.model,
                 data: {
                     _method: "PUT",
-                    id: this.selected_value.id,
-                    name: this.selected_value.name,
-                    slug: this.hyphenate(this.selected_value.name),
-                    attributesIds: this.selected_value.attributesIds
+                    id: this.selected_product.id,
+                    name: this.selected_product.name,
+                    slug: this.hyphenate(this.selected_product.name),
+                    attributesIds: this.selected_product.attributesIds
                 }
             })
                 .then(async result => {
@@ -175,8 +182,8 @@ export default {
         },
 
         clearFields() {
-            this.selected_value.name = null,
-                this.selected_value.slug = null
+            this.selected_product.name = null,
+                this.selected_product.slug = null
         },
 
         async fetch() {

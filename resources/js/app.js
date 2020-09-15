@@ -19,6 +19,7 @@ import Vuex from 'vuex';
 import Vuelidate from 'vuelidate';
 import Toasted from 'vue-toasted';
 import VueDayjs from 'vue-dayjs-plugin';
+import VueCurrencyInput from 'vue-currency-input'
 
 Vue.config.baseurl = process.env.MIX_APP_URL;
 console.log('MIX_APP_URL', process.env.MIX_APP_URL);
@@ -28,6 +29,12 @@ Vue.use(Vuex);
 Vue.use(Toasted);
 Vue.use(VueDayjs);
 Vue.use(Vuelidate);
+
+
+const pluginCurrencyInputOptions = {
+    globalOptions: {currency: {prefix: '$'}, locale: 'nl'}
+}
+Vue.use(VueCurrencyInput, pluginCurrencyInputOptions);
 
 // register the toast with the custom message
 
