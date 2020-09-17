@@ -58,12 +58,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="category">Categoría</label>
-                    <v-select
-                        id="category"
-                        v-model="selected_product.categoryId"
-                        :options="['Canada', 'United States']"
-                    ></v-select>
+                    <label>Categoría</label>
+                    <categories-select />
                 </div>
                 <div class="form-group">
                     <div>
@@ -96,8 +92,8 @@ export default {
     data: function () {
         return {
             submitted: false,
-            model: "values",
-            model_name: 'valor'
+            model: "products",
+            model_name: 'producto'
         };
     },
     validations() {
@@ -123,7 +119,7 @@ export default {
     mounted() {
     },
     computed: {
-        ...mapGetters(["isLoading", "selected_product", "page"]),
+        ...mapGetters(["isLoading", "selected_product", "page", "categoriesAll"]),
         hasId() {
             return Boolean(this.hasSelectedId());
         },
@@ -223,6 +219,10 @@ export default {
         async fetchAll() {
             await this.$store.dispatch("fetchAll", {
                 model: this.model,
+            })
+                .catch(error => this.$toasted.global.ToastedError({message: error.message.message}));
+            await this.$store.dispatch("fetchAll", {
+                model: "categories",
             })
                 .catch(error => this.$toasted.global.ToastedError({message: error.message.message}));
         },

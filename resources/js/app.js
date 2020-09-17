@@ -127,6 +127,7 @@ Vue.component('categories-filters', require('./components/models/categories/filt
 Vue.component('categories-treeview', require('./components/models/categories/treeview.vue').default);
 Vue.component('categories-subcategories', require('./components/models/categories/subcategoriesInput.vue').default);
 Vue.component('categories-checkbox-attributes', require('./components/models/categories/checkboxAttributes.vue').default);
+Vue.component('categories-select', require('./components/models/categories/select.vue').default);
 
 // parameters
 Vue.component('parameters-list', require('./components/models/parameters/lists.vue').default);
