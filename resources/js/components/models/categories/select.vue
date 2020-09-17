@@ -52,11 +52,21 @@ export default {
                 model: this.model,
             })
                 .catch(error => this.$toasted.global.ToastedError({message: error.message.message}));
-            
-            //Generar funcion recursiva para obtener los labels
-            await this.categoriesAll.map(item => item.label = item.name)
+            await this.nameToLabel()
             this.showSelect = true
         },
+
+        async nameToLabel() {
+            let removeCategory = function findIndexById(data) {
+                for (var i = 0; i < data.length; i++) {
+                    data[i].label = data[i].name
+                    if (data[i].children && data[i].children.length > 0) {
+                        findIndexById(data[i].children);
+                    }
+                }
+            }
+            removeCategory(this.categoriesAll)
+        }
     }
 }
 </script>
