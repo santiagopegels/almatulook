@@ -143,7 +143,7 @@ Vue.component('products-filters', require('./components/models/products/filters.
 // new products
 Vue.component('new-product-index', require('./components/models/products/newProduct/index.vue').default);
 Vue.component('new-product-form', require('./components/models/products/newProduct/form.vue').default);
-
+Vue.component('new-product-attributes', require('./components/models/products/newProduct/attributesProduct.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

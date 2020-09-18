@@ -61,6 +61,11 @@
                     <label>Categoría</label>
                     <categories-select />
                 </div>
+
+                <div class="form-group">
+                    <new-product-attributes />
+                </div>
+
                 <div class="form-group">
                     <div>
                         <button type="submit"
@@ -83,7 +88,6 @@ import {
 } from "vuex";
 import {
     required,
-    integer,
     decimal,
 } from "vuelidate/lib/validators";
 
