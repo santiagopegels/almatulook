@@ -211,6 +211,10 @@ let mutations = {
         state.products.push(product);
     },
 
+    PUSH_STOCK_DATA_PRODUCT(state, stockData) {
+        state.selected_product.stocks.push(stockData);
+    },
+
     /**
      * REMOVE
      */

@@ -47,8 +47,8 @@
                     <currency-input
                         :value="selected_product.cost_price"
                         v-model="selected_product.cost_price"
-                        id="price"
-                        name="price"
+                        id="cost_price"
+                        name="cost_price"
                         class="form-control"
                         :class="{ 'is-invalid': submitted && $v.selected_product.cost_price.$error }"/>
                     <div v-if="submitted && !$v.selected_product.cost_price.required" class="invalid-feedback">El precio es requerido.

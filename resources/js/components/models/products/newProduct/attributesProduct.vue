@@ -1,21 +1,27 @@
 <template>
     <div class="content-dashed" v-show="hasCategories">
-        <div v-for="{n} in stockRows"  class="form-row justify-content-center">
-            <div v-for="attribute in selected_category.attributesIds" class="form-group col-lg-2 col-xs-12">
+        <div v-for="(stockData, stockDataIndex) in selected_product.stocks"  :key="stockDataIndex" class="form-row justify-content-center">
+            <div v-for="(attribute, index) in selected_category.attributesIds" :key="index" class="form-group col-lg-3 col-xs-12">
                 <label class="text-justify text-dark">{{ attribute.name }}</label>
                 <treeselect
                     multiple
                     :normalizer="normalizer"
                     :options="attribute.values"
+                    v-model="selected_product.stocks[stockDataIndex][attribute.name]"
                 />
             </div>
-            <div class="form-group col-lg-1">
+            <div class="form-group col-lg-2">
             <label for="stock">Stock</label>
             <input type="number" id="stock" name="stock"
                    class="form-control"
+                   v-model="selected_product.stocks[stockDataIndex].stock"
             />
             </div>
-            <button class="close align-items-center pt-2" type="button" title="Eliminar">
+            <button class="close align-items-center pt-2"
+                    type="button"
+                    title="Eliminar"
+                    @click="removeElement(stockDataIndex)"
+            >
                 <i class="fa fa-times"></i>
             </button>
         </div>
@@ -23,7 +29,7 @@
         <div class="text-center mt-2">
             <button type="button"
                     class="btn btn-success"
-                    @click="() => this.stockRows++"
+                    @click="() => this.addStockData()"
             >
                 Agregar Stock
             </button>
@@ -36,6 +42,7 @@ import {
     mapGetters
 } from "vuex";
 import Treeselect from '@riophae/vue-treeselect'
+import select from "../../categories/select";
 
 export default {
     components: {
@@ -43,14 +50,23 @@ export default {
     },
     data(){
         return {
-            stockRows: 1,
+            stockData: [],
+            attributesStockData: []
         }
     },
     computed: {
-        ...mapGetters(["selected_category", "isLoading", "page"]),
+        ...mapGetters(["selected_category", "isLoading", "page", "selected_product"]),
         hasCategories() {
             return Boolean(this.selected_category.id > 0);
         },
+    },
+    watch:{
+      async selected_category() {
+          if(this.selected_category.id){
+              this.selected_product.stocks = []
+              this.addStockData()
+          }
+      }
     },
     methods: {
         normalizer(node) {
@@ -59,6 +75,19 @@ export default {
                 label: node.name,
             }
         },
+        async addStockData(){
+            let stockData = {}
+            if(!this.attributesStockData.length > 0 ){
+               await this.selected_category.attributesIds.forEach(item =>  this.attributesStockData[item.name] = [])
+            }
+            stockData = {...this.attributesStockData}
+            stockData.stock = 1
+            this.$store.commit('PUSH_STOCK_DATA_PRODUCT', stockData)
+        },
+
+        removeElement(index){
+            this.selected_product.stocks.splice(index, 1);
+        }
     }
 }
 </script>
