@@ -71,7 +71,7 @@ class Category extends Model
 
     public function attributes()
     {
-        return $this->belongsToMany(Attribute::class, 'categories_attributes');
+        return $this->belongsToMany(Attribute::class, 'categories_attributes')->with('values');
     }
 
 }

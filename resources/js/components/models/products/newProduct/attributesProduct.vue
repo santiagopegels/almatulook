@@ -1,22 +1,30 @@
 <template>
-    <div class="content-dashed">
-        <div class="form-row justify-content-center">
-            <div class="form-group col-lg-3 col-xs-12">
-                <label class="text-justify text-dark" for="first_name">Nombre</label>
-                <input name="first_name" class="form-control" type="text" placeholder="Nombre"/>
+    <div class="content-dashed" v-show="hasCategories">
+        <div v-for="{n} in stockRows"  class="form-row justify-content-center">
+            <div v-for="attribute in selected_category.attributesIds" class="form-group col-lg-2 col-xs-12">
+                <label class="text-justify text-dark">{{ attribute.name }}</label>
+                <treeselect
+                    multiple
+                    :normalizer="normalizer"
+                    :options="attribute.values"
+                />
             </div>
-            <div class="form-group col-lg-3 col-xs-12">
-                <label class="text-justify text-dark" for="last_name">Apellido</label>
-                <input name="last_name" class="form-control" type="text" placeholder="Apellido"/>
+            <div class="form-group col-lg-1">
+            <label for="stock">Stock</label>
+            <input type="number" id="stock" name="stock"
+                   class="form-control"
+            />
             </div>
-            <div class="form-group col-lg-1 col-xs-12">
-                <label class="text-justify text-dark" for="last_name">Stock</label>
-                <input name="last_name" class="form-control" type="text" placeholder="Stock"/>
-            </div>
+            <button class="close align-items-center pt-2" type="button" title="Eliminar">
+                <i class="fa fa-times"></i>
+            </button>
         </div>
-        <div class="text-center">
-            <button type="submit"
-                    class="btn btn-success">
+        <span class="border-bottom"></span>
+        <div class="text-center mt-2">
+            <button type="button"
+                    class="btn btn-success"
+                    @click="() => this.stockRows++"
+            >
                 Agregar Stock
             </button>
         </div>
@@ -27,21 +35,30 @@
 import {
     mapGetters
 } from "vuex";
+import Treeselect from '@riophae/vue-treeselect'
 
 export default {
+    components: {
+        Treeselect
+    },
+    data(){
+        return {
+            stockRows: 1,
+        }
+    },
     computed: {
         ...mapGetters(["selected_category", "isLoading", "page"]),
         hasCategories() {
             return Boolean(this.selected_category.id > 0);
         },
     },
-    watch: {
-        selected_category: function (newVal, oldVal) {
-            if (newVal.id !== oldVal.id) {
-                console.log('cargar atributos')
+    methods: {
+        normalizer(node) {
+            return {
+                id: node.id,
+                label: node.name,
             }
-        }
-    },
-    methods: {}
+        },
+    }
 }
 </script>
