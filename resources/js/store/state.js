@@ -104,6 +104,7 @@ let state = {
         cost_price: 0,
         categoryId: null,
         stocks: [],
+        images: []
     },
 }
 

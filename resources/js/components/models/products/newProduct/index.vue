@@ -3,6 +3,9 @@
         <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
             <new-product-form></new-product-form>
         </div>
+        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+            <products-card></products-card>
+        </div>
     </div>
 </template>
 

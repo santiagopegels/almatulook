@@ -8,6 +8,8 @@
                     :normalizer="normalizer"
                     :options="attribute.values"
                     v-model="selected_product.stocks[stockDataIndex][attribute.name]"
+                    :name="`attribute['${stockDataIndex}']${attribute.name}`"
+                    :id="`attribute['${stockDataIndex}']${attribute.name}`"
                 />
             </div>
             <div class="form-group col-lg-2">
@@ -15,6 +17,8 @@
             <input type="number" id="stock" name="stock"
                    class="form-control"
                    v-model="selected_product.stocks[stockDataIndex].stock"
+                   :name="`attribute['${stockDataIndex}']stock`"
+                   :id="`attribute['${stockDataIndex}']stock`"
             />
             </div>
             <button class="close align-items-center pt-2"
@@ -29,9 +33,8 @@
         <div class="text-center mt-2">
             <button type="button"
                     class="btn btn-success"
-                    @click="() => this.addStockData()"
-            >
-                Agregar Stock
+                    @click="() => this.addStockData()">
+                    Agregar Stock
             </button>
         </div>
     </div>
@@ -42,7 +45,6 @@ import {
     mapGetters
 } from "vuex";
 import Treeselect from '@riophae/vue-treeselect'
-import select from "../../categories/select";
 
 export default {
     components: {

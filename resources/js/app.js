@@ -139,6 +139,8 @@ Vue.component('parameters-form', require('./components/models/parameters/form.vu
 Vue.component('products-list', require('./components/models/products/lists.vue').default);
 Vue.component('products-index', require('./components/models/products/index.vue').default);
 Vue.component('products-filters', require('./components/models/products/filters.vue').default);
+Vue.component('products-card', require('./components/models/products/card.vue').default);
+
 
 // new products
 Vue.component('new-product-index', require('./components/models/products/newProduct/index.vue').default);
@@ -167,6 +169,18 @@ Vue.directive("hyphenate", {
     update: function (el) {
         el.value = el.value.replace(/[^a-zA-Z0-9]/g, "-")
     }
+});
+
+Vue.filter('currency', function (value) {
+    if (typeof value !== "number") {
+        return value;
+    }
+    var formatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 0
+    });
+    return formatter.format(value);
 });
 
 const app = new Vue({
