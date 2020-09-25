@@ -38,11 +38,12 @@
 
 <script>
 import {mapGetters} from 'vuex'
+import defaultImage from '../../../../../public/img/default-image.jpg'
 export default {
     data: function () {
         return {
-            image:
-                "https://d35uzl96cmnmq2.cloudfront.net/processed/Round_Trip_Airfare_A_1600.jpg",
+            image: defaultImage
+                ,
             model: "products",
             model_name: "producto",
         };

@@ -83,6 +83,12 @@ Vue.toasted.register('ToastedSuccess',
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 /**
+ * forms
+ */
+
+Vue.component('upload-images', require('./components/forms/upload-images.vue').default);
+
+/**
  * models
  */
 

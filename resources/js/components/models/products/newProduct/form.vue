@@ -23,22 +23,25 @@
                     <input type="text" v-model="selected_product.name" v-capitalize id="name" name="name"
                            class="form-control"
                            :class="{ 'is-invalid': submitted && $v.selected_product.name.$error }"/>
-                    <div v-if="submitted && !$v.selected_product.name.required" class="invalid-feedback">El nombre es requerido.
+                    <div v-if="submitted && !$v.selected_product.name.required" class="invalid-feedback">El nombre es
+                        requerido.
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="name">Precio de Venta</label>
                     <currency-input
-                                    :value="selected_product.price"
-                                    v-model="selected_product.price"
-                                    id="price"
-                                    name="price"
-                                    class="form-control"
-                                    :class="{ 'is-invalid': submitted && $v.selected_product.price.$error }"/>
-                    <div v-if="submitted && !$v.selected_product.price.required" class="invalid-feedback">El precio es requerido.
+                        :value="selected_product.price"
+                        v-model="selected_product.price"
+                        id="price"
+                        name="price"
+                        class="form-control"
+                        :class="{ 'is-invalid': submitted && $v.selected_product.price.$error }"/>
+                    <div v-if="submitted && !$v.selected_product.price.required" class="invalid-feedback">El precio es
+                        requerido.
                     </div>
-                    <div v-if="submitted && !$v.selected_product.price.decimal" class="invalid-feedback">El precio debe ser númerico.
+                    <div v-if="submitted && !$v.selected_product.price.decimal" class="invalid-feedback">El precio debe
+                        ser númerico.
                     </div>
                 </div>
 
@@ -51,20 +54,24 @@
                         name="cost_price"
                         class="form-control"
                         :class="{ 'is-invalid': submitted && $v.selected_product.cost_price.$error }"/>
-                    <div v-if="submitted && !$v.selected_product.cost_price.required" class="invalid-feedback">El precio es requerido.
+                    <div v-if="submitted && !$v.selected_product.cost_price.required" class="invalid-feedback">El precio
+                        es requerido.
                     </div>
-                    <div v-if="submitted && !$v.selected_product.cost_price.decimal" class="invalid-feedback">El precio debe ser númerico.
+                    <div v-if="submitted && !$v.selected_product.cost_price.decimal" class="invalid-feedback">El precio
+                        debe ser númerico.
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label>Categoría</label>
-                    <categories-select />
+                    <categories-select/>
                 </div>
 
                 <div class="form-group">
-                    <new-product-attributes />
+                    <new-product-attributes/>
                 </div>
+
+                <upload-images @on-upload-images="onUploadImages" />
 
                 <div class="form-group">
                     <div>
@@ -95,27 +102,28 @@ export default {
     props: {},
     data: function () {
         return {
+            images: [],
             submitted: false,
             model: "products",
             model_name: 'producto'
         };
     },
     validations() {
-            return {
-                selected_product: {
-                    name: {
-                        required
-                    },
-                    price: {
-                        required,
-                        decimal
-                    },
-                    cost_price: {
-                        required,
-                        decimal
-                    },
+        return {
+            selected_product: {
+                name: {
+                    required
                 },
-            };
+                price: {
+                    required,
+                    decimal
+                },
+                cost_price: {
+                    required,
+                    decimal
+                },
+            },
+        };
     },
 
     created() {
@@ -229,6 +237,10 @@ export default {
                 model: "categories",
             })
                 .catch(error => this.$toasted.global.ToastedError({message: error.message.message}));
+        },
+
+        onUploadImages(data) {
+            this.selected_product.images = data ? data : [];
         },
     },
 };

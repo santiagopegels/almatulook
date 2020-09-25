@@ -20,7 +20,7 @@
                     </button>
                 </div>
                 <div v-if="validate && !$v.subcategories.$each[index].name.required" id="error" class="d-block invalid-feedback">El nombre de la
-                    subcategoría es requerido..</div>
+                    subcategoría es requerido.</div>
             </div>
         </div>
     </div>
