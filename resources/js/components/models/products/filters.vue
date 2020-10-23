@@ -7,7 +7,7 @@
                 class="form-control"
                 size="16"
                 type="text"
-                placeholder="Buscar valores por nombre"
+                placeholder="Buscar producto por nombre"
             />
             <span class="input-group-append">
 				<button type="submit" :disabled="$v.$invalid" class="btn btn-outline-primary">
@@ -37,7 +37,7 @@ export default {
         return {
             submitted: false,
             term: "",
-            model: "values",
+            model: "products",
         };
     },
     validations() {

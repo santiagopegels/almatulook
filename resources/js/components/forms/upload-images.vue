@@ -17,6 +17,7 @@
             :multiple="limit > 1"
             :showPrimary="true"
             :maxImage="limit"
+            :data-images="miniatureImages"
         ></vue-upload-multiple-image>
     </div>
 </template>
@@ -34,6 +35,7 @@ export default {
     data: function () {
         return {
             images: [],
+            miniatureImages: []
         };
     },
 
@@ -64,6 +66,7 @@ export default {
             return this.images;
         },
         async uploadImageSuccess(formData, index, fileList) {
+            this.miniatureImages.push(fileList[index])
             await this.updateFileList(fileList);
         },
         async beforeRemove(index, done, fileList) {
@@ -75,9 +78,11 @@ export default {
                 await this.updateFileList(fileList);
             }
         },
+
         async editImage(formData, index, fileList) {
             await this.updateFileList(fileList);
         },
+
         dataChange(data) {},
         limitExceeded(amount) {},
     },

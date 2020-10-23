@@ -64,14 +64,14 @@
 
                 <div class="form-group">
                     <label>Categoría</label>
-                    <categories-select/>
+                    <categories-select ref="categorySelect"/>
                 </div>
 
                 <div class="form-group">
                     <new-product-attributes/>
                 </div>
 
-                <upload-images @on-upload-images="onUploadImages" />
+                <upload-images ref="uploadImages" @on-upload-images="onUploadImages" />
 
                 <div class="form-group">
                     <div>
@@ -131,7 +131,7 @@ export default {
     mounted() {
     },
     computed: {
-        ...mapGetters(["isLoading", "selected_product", "page", "categoriesAll"]),
+        ...mapGetters(["isLoading", "selected_product", "page", "categoriesAll", "selected_category"]),
         hasId() {
             return Boolean(this.hasSelectedId());
         },
@@ -157,7 +157,6 @@ export default {
             e.preventDefault();
             this.submitted = true;
             this.$v.$touch();
-            console.log(this.selected_product.price)
             if (this.$v.$invalid) {
                 return;
             }
@@ -172,15 +171,19 @@ export default {
                 model: this.model,
                 data: {
                     name: this.selected_product.name,
-                    slug: this.hyphenate(this.selected_product.name),
-                    attributesIds: this.selected_product.attributesIds
+                    price: this.selected_product.price,
+                    cost_price: this.selected_product.cost_price,
+                    categoryId: this.selected_category.id,
+                    stocks: this.selected_product.stocks,
+                    images: this.selected_product.images,
                 }
             })
                 .then(async result => {
                     this.$v.$reset();
                     this.$toasted.global.ToastedSuccess({message: `El ${this.model_name} fue creado!`});
-                    await this.fetch();
-                    await this.fetchAll();
+                    this.$store.commit('SET_SELECTED_PRODUCT')
+                    this.$refs.uploadImages.miniatureImages = []
+                    this.$refs.categorySelect.value = null
                 })
                 .catch(error => this.$toasted.global.ToastedError({message: error.message.response.data.errors.name}));
         },
@@ -207,7 +210,6 @@ export default {
 
         cancelSelectedObject() {
             this.$v.$reset();
-            return this.$store.commit("SET_SELECTED_VALUE");
         },
 
         hyphenate(string) {

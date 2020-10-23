@@ -25,6 +25,9 @@
             </div>
         </div>
     </div>
+    <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+        <products-card></products-card>
+    </div>
 </div>
 </template>
 

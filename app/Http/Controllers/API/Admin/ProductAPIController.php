@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\Admin;
 
 use App\Http\Requests\API\Admin\CreateProductAPIRequest;
 use App\Http\Requests\API\Admin\UpdateProductAPIRequest;
+use App\Http\Resources\ProductCollection;
 use App\Models\Admin\Product;
 use App\Repositories\Admin\ProductRepository;
 use Illuminate\Http\Request;
@@ -37,17 +38,17 @@ class ProductAPIController extends AppBaseController
     public function index(Request $request)
     {
         $input = $request->all();
+
         $term = isset($input['term']) && !empty($input['term']) ? $input['term'] : null;
 
         $products = Product::withTrashed();
-
         if (!is_null($term)) {
             $products = $products->where('name', 'LIKE', "%{$term}%");
         }
 
         $products = $products->paginate(self::$limit);
 
-        return $this->sendResponse($products->toArray(), 'Products retrieved successfully');
+        return $this->sendResponse(new ProductCollection($products), 'Products retrieved successfully');
     }
 
     /**
@@ -61,8 +62,17 @@ class ProductAPIController extends AppBaseController
     public function store(CreateProductAPIRequest $request)
     {
         $input = $request->all();
-
         $product = $this->productRepository->create($input);
+
+        if(isset($input['stocks'])){
+            $this->productRepository->storeStock($product, $input['stocks'][0]);
+        }
+
+        if(isset($input['images'])){
+            foreach ($input['images'] as $image){
+                $product->addMediaFromBase64($image['binary'])->toMediaCollection('products');
+            }
+        }
 
         return $this->sendResponse($product->toArray(), 'Product saved successfully');
     }

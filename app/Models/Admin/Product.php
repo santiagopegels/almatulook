@@ -2,8 +2,11 @@
 
 namespace App\Models\Admin;
 
+use App\ProductAttributeValue;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 /**
  * Class Product
@@ -14,12 +17,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property number $price
  * @property number $cost_price
  */
-class Product extends Model
+class Product extends Model implements HasMedia
 {
     use SoftDeletes;
+    use InteractsWithMedia;
 
     public $table = 'products';
-    
+
 
     protected $dates = ['deleted_at'];
 
@@ -54,5 +58,13 @@ class Product extends Model
         'cost_price' => 'required'
     ];
 
-    
+    public function registerMediaCollections() : void
+    {
+        $this->addMediaCollection('products');
+    }
+
+    public function getTotalStock(){
+        return ProductAttributeValue::where('product_id', $this->id)->sum('stock');
+    }
+
 }

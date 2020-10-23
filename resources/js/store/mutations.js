@@ -165,7 +165,9 @@ let mutations = {
             name: "",
             price: "",
             cost_price: "",
-            categoryId: ""
+            categoryId: "",
+            stocks: [],
+            images: []
         }
     ) {
         state.selected_product = selected_product;

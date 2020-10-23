@@ -21,6 +21,7 @@ import Toasted from 'vue-toasted';
 import VueDayjs from 'vue-dayjs-plugin';
 import VueCurrencyInput from 'vue-currency-input'
 import vSelect from 'vue-select'
+import {router} from './router'
 
 Vue.config.baseurl = process.env.MIX_APP_URL;
 console.log('MIX_APP_URL', process.env.MIX_APP_URL);
@@ -191,5 +192,6 @@ Vue.filter('currency', function (value) {
 
 const app = new Vue({
     el: '#app',
+    router,
     store
 });

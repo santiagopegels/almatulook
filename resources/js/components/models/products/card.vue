@@ -22,13 +22,19 @@
             <hr />
             <div class="w-100">
                 <p class="mb-0">Categoría:</p>
-                <h5 class="text-truncate" v-if="selected_category.id">{{selected_category.name}}</h5>
+                <h5 class="text-truncate" v-if="selected_category.id">{{ selected_category.name}}</h5>
                 <h5 class="text-truncate" v-else>-</h5>
             </div>
 
             <div class="w-100">
-                <p class="mb-0">Precio:</p>
+                <p class="mb-0">Precio de Venta:</p>
                 <h3 class="text-truncate" v-if="selected_product.price">{{selected_product.price | currency}}</h3>
+                <h3 class="text-truncate" v-else>-</h3>
+            </div>
+
+            <div class="w-100">
+                <p class="mb-0">Precio de Costo:</p>
+                <h3 class="text-truncate" v-if="selected_product.cost_price">{{selected_product.cost_price | currency}}</h3>
                 <h3 class="text-truncate" v-else>-</h3>
             </div>
         </div>
@@ -42,8 +48,7 @@ import defaultImage from '../../../../../public/img/default-image.jpg'
 export default {
     data: function () {
         return {
-            image: defaultImage
-                ,
+            image: defaultImage,
             model: "products",
             model_name: "producto",
         };

@@ -37,6 +37,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('values_all', ['uses' => 'Admin\ValueAPIController@all']);
     Route::get('attributes_all', ['uses' => 'Admin\AttributeAPIController@all']);
     Route::get('categories_all', ['uses' => 'Admin\CategoryAPIController@all']);
+    Route::get('products_all', ['uses' => 'Admin\ProductAPIController@all']);
 
     // restore
     Route::post('roles/{id}/restore', ['uses' => 'Admin\RoleAPIController@restore']);

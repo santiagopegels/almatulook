@@ -15,10 +15,10 @@
             </tr>
             </thead>
             <tbody v-if="hasProducts">
-            <tr :class="{'table-danger':model.deleted_at}" v-for="model in getProducts" :key="model.id">
+            <tr :class="{'table-danger':model.deleted_at}" v-for="model in getProducts" :key="model.id" @click="showProduct(model)">
                 <td scope="row">{{model.id}}</td>
                 <td scope="row">{{model.name}}</td>
-                <td scope="row">Stock</td>
+                <td scope="row">{{model.stock}}</td>
                 <td scope="row">{{model.cost_price}}</td>
                 <td scope="row">{{model.price}}</td>
                 <td class="text-center">
@@ -88,9 +88,6 @@ export default {
         getTotal: function () {
             return this.products.total;
         },
-    },
-    components: {
-        Loading,
     },
     methods: {
         orderedObjects: function () {
@@ -172,6 +169,10 @@ export default {
             await this.$store.commit("SET_PAGE", pageNum);
             await this.fetch();
         },
+
+        async showProduct(model){
+            console.log(model)
+        }
     },
 };
 </script>
