@@ -1,21 +1,22 @@
 <template>
     <div class="card mb-3">
-        <img v-if="selected_product.images[0]" class="card-img-top" :src="selected_product.images[0].binary" alt="Imagen" />
-        <img v-else class="card-img-top" :src="image" alt="Imagen" />
-
+        <div class="item-img-container">
+        <img v-if="selected_product.images[index]" class="card-img-top card-img-top-custom" :src="selected_product.id ? selected_product.images[index] : selected_product.images[index].binary" alt="Imagen" />
+        <img v-else class="card-img-top card-img-top-custom" :src="image" alt="Imagen" />
+        </div>
         <div
             class="container-fluid scrolling-wrapper my-2 justify-content-center"
             v-if="selected_product.images && selected_product.images.length > 0"
         >
-
             <div class="row flex-row flex-nowrap">
                 <div class="col-3" v-for="(image, index) in selected_product.images" :key="index">
                     <figure class="figure d-inline-flex">
-                        <img :src="image.binary" class="figure-img img-fluid img-thumbnail" alt="..." />
+                        <img :src="selected_product.id ? image : image.binary" class="images-thumb-card"  alt="..." @click="showImageByIndex(index)"/>
                     </figure>
                 </div>
             </div>
         </div>
+
         <div class="card-body">
             <h5 class="card-title text-truncate">{{selected_product.name ? selected_product.name : '-'}}</h5>
 
@@ -28,14 +29,14 @@
 
             <div class="w-100">
                 <p class="mb-0">Precio de Venta:</p>
-                <h3 class="text-truncate" v-if="selected_product.price">{{selected_product.price | currency}}</h3>
-                <h3 class="text-truncate" v-else>-</h3>
+                <h5 class="text-truncate" v-if="selected_product.price">{{selected_product.price | currency}}</h5>
+                <h5 class="text-truncate" v-else>-</h5>
             </div>
 
             <div class="w-100">
                 <p class="mb-0">Precio de Costo:</p>
-                <h3 class="text-truncate" v-if="selected_product.cost_price">{{selected_product.cost_price | currency}}</h3>
-                <h3 class="text-truncate" v-else>-</h3>
+                <h5 class="text-truncate" v-if="selected_product.cost_price">{{selected_product.cost_price | currency}}</h5>
+                <h5 class="text-truncate" v-else>-</h5>
             </div>
         </div>
 
@@ -51,6 +52,7 @@ export default {
             image: defaultImage,
             model: "products",
             model_name: "producto",
+            index: 0
         };
     },
     created() {},
@@ -59,6 +61,9 @@ export default {
         ...mapGetters(['selected_product', 'selected_category']),
     },
     methods: {
+        showImageByIndex(index){
+            this.index = index
+        }
     },
 };
 </script>

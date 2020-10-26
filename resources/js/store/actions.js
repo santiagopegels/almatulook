@@ -108,6 +108,7 @@ let actions = {
 
             window.axios.get(path).then(async response => {
                 if (response.data.success) {
+                    console.log(response.data)
                     await actions.removeFromData(commit, params);
                     await actions.setData(commit, { params: params, data: response.data.data });
                     await commit('SET_LOADING', false);

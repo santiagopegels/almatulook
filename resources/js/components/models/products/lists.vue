@@ -171,7 +171,17 @@ export default {
         },
 
         async showProduct(model){
-            console.log(model)
+            await this.$store.commit("SET_SELECTED_PRODUCT", {
+                id: model.id,
+                name: model.name,
+                price: model.price,
+                cost_price: model.cost_price,
+                images: model.images
+            });
+            await this.$store.commit("SET_SELECTED_CATEGORY", {
+                id: model.category.id,
+                name: model.category.name,
+            });
         }
     },
 };

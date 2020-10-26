@@ -32,7 +32,8 @@ class Product extends Model implements HasMedia
     public $fillable = [
         'name',
         'price',
-        'cost_price'
+        'cost_price',
+        'category_id'
     ];
 
     /**
@@ -44,7 +45,8 @@ class Product extends Model implements HasMedia
         'id' => 'integer',
         'name' => 'string',
         'price' => 'decimal:2',
-        'cost_price' => 'decimal:2'
+        'cost_price' => 'decimal:2',
+        'category_id' => 'integer',
     ];
 
     /**
@@ -55,7 +57,8 @@ class Product extends Model implements HasMedia
     public static $rules = [
         'name' => 'required',
         'price' => 'required',
-        'cost_price' => 'required'
+        'cost_price' => 'required',
+        'category_id' => 'required',
     ];
 
     public function registerMediaCollections() : void
@@ -65,6 +68,23 @@ class Product extends Model implements HasMedia
 
     public function getTotalStock(){
         return ProductAttributeValue::where('product_id', $this->id)->sum('stock');
+    }
+
+    public function getImages(){
+        $images = $this->getMedia('products');
+        if ($images) {
+            $imagesURL = [];
+            foreach ($images as $image) {
+                array_push($imagesURL, $image->getUrl());
+            }
+        }
+
+        return $imagesURL;
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class)->with('children');
     }
 
 }

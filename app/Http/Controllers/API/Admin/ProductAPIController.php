@@ -38,7 +38,6 @@ class ProductAPIController extends AppBaseController
     public function index(Request $request)
     {
         $input = $request->all();
-
         $term = isset($input['term']) && !empty($input['term']) ? $input['term'] : null;
 
         $products = Product::withTrashed();

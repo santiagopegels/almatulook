@@ -173,7 +173,7 @@ export default {
                     name: this.selected_product.name,
                     price: this.selected_product.price,
                     cost_price: this.selected_product.cost_price,
-                    categoryId: this.selected_category.id,
+                    category_id: this.selected_category.id,
                     stocks: this.selected_product.stocks,
                     images: this.selected_product.images,
                 }
