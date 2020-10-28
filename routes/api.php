@@ -27,7 +27,6 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('attributes', 'Admin\AttributeAPIController');
     Route::resource('categories', 'Admin\CategoryAPIController');
     Route::resource('values', 'Admin\ValueAPIController');
-    Route::resource('attribute_values', 'Admin\AttributeValueAPIController');
     Route::resource('parameters', 'Admin\ParameterAPIController');
 
     // get all

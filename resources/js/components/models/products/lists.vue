@@ -15,12 +15,18 @@
             </tr>
             </thead>
             <tbody v-if="hasProducts">
-            <tr :class="{'table-danger':model.deleted_at}" v-for="model in getProducts" :key="model.id" @click="showProduct(model)">
+            <tr @mouseover="isHovering = true"
+                @mouseout="isHovering = false"
+                :class="{'table-danger':model.deleted_at, 'hovering': isHovering}"
+                v-for="model in getProducts"
+                :key="model.id"
+                @click="showProduct(model)"
+            >
                 <td scope="row">{{model.id}}</td>
                 <td scope="row">{{model.name}}</td>
                 <td scope="row">{{model.stock}}</td>
-                <td scope="row">{{model.cost_price}}</td>
-                <td scope="row">{{model.price}}</td>
+                <td scope="row">{{model.cost_price | currency}}</td>
+                <td scope="row">{{model.price | currency }}</td>
                 <td class="text-center">
                     <form method="POST" @submit="handleSubmitDelete($event, model)" accept-charset="UTF-8">
                         <button type="button" title="Editar" :disabled="model.deleted_at" @click="selectedObject(model)" class="btn btn-outline-warning btn-sm">
@@ -28,9 +34,6 @@
                         </button>
                         <button v-if="!model.deleted_at" title="Eliminar" type="submit" onclick="return confirm('¿Estás seguro de que quieres eliminar este elemento?')" class="btn btn-outline-danger btn-sm">
                             <i class="fa fa-trash"></i>
-                        </button>
-                        <button v-else title="Restaurar" type="button" class="btn btn-success btn-sm" @click="restore(model)">
-                            <i class="fa fa-refresh"></i>
                         </button>
                     </form>
                 </td>
@@ -59,7 +62,8 @@ export default {
         return {
             opacity: 0.3,
             model: "products",
-            model_name: 'producto'
+            model_name: 'producto',
+            isHovering: false
         };
     },
     created() {},
@@ -128,7 +132,6 @@ export default {
                 .then(async result => {
                     this.$toasted.global.ToastedSuccess({ message: `El ${this.model_name} fue eliminado!` });
                     await this.fetch();
-                    await this.fetchAll();
                 })
                 .catch(error => this.$toasted.global.ToastedError({ message: error.message.message }));
         },

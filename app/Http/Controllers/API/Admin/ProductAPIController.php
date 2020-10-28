@@ -40,9 +40,10 @@ class ProductAPIController extends AppBaseController
         $input = $request->all();
         $term = isset($input['term']) && !empty($input['term']) ? $input['term'] : null;
 
-        $products = Product::withTrashed();
+        $products = Product::query();
         if (!is_null($term)) {
-            $products = $products->where('name', 'LIKE', "%{$term}%");
+            $products = $products->where('id', 'like', "%{$term}%")
+                ->orWhere('name', 'like', "%{$term}%");
         }
 
         $products = $products->paginate(self::$limit);
@@ -135,7 +136,6 @@ class ProductAPIController extends AppBaseController
     {
         /** @var Product $product */
         $product = $this->productRepository->find($id);
-
         if (empty($product)) {
             return $this->sendError('Product not found');
         }

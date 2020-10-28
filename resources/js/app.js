@@ -179,12 +179,9 @@ Vue.directive("hyphenate", {
 });
 
 Vue.filter('currency', function (value) {
-    if (typeof value !== "number") {
-        return value;
-    }
-    var formatter = new Intl.NumberFormat('en-US', {
+    var formatter = new Intl.NumberFormat('es-AR', {
         style: 'currency',
-        currency: 'USD',
+        currency: 'ARS',
         minimumFractionDigits: 0
     });
     return formatter.format(value);

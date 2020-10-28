@@ -163,9 +163,9 @@ let mutations = {
         state, selected_product = {
             id: null,
             name: "",
-            price: "",
-            cost_price: "",
-            categoryId: "",
+            price: 0,
+            cost_price: 0,
+            categoryId: null,
             stocks: [],
             images: []
         }
