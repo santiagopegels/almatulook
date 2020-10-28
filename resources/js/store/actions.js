@@ -195,7 +195,6 @@ let actions = {
             window.axios.post(path, params.data, {}).then(async response => {
                 if (response.data.success) {
                     await actions.removeFromData(commit, response.data.data);
-                    await actions.pushData(commit, { params: params, data: response.data.data });
                     await commit('SET_LOADING', false);
                     resolve({
                         status: true,

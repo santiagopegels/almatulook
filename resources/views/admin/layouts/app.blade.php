@@ -63,7 +63,7 @@
 
 	<div class="app-body">
 		@include('admin.layouts.sidebar')
-		<main class="main" id="app">
+		<main class="main">
 			@include('coreui-templates::common.errors')
 			<div class="clearfix"></div>
 			@include('flash::message')

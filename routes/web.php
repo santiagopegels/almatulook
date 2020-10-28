@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/admin/{vue_capture?}', function () {
+    return view('vue.index');
+})->where('vue_capture', '[\/\w\.-]*');
+
 
 Route::group(['prefix' => 'admin'], function () {
     Route::resource('attributes', 'Admin\AttributeController', ["as" => 'admin']);

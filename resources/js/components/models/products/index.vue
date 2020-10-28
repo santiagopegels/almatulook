@@ -5,14 +5,16 @@
             <div class="card-header d-flex justify-content-between align-items-center">
                 <div class="align-item-center">
                 <i class="icon-list"></i>
-                {{title}}
+                Productos
                 </div>
                 <div class="align-item-center">
-                    <form method="GET" :action="this.newProductRoute">
+                    <router-link
+                        :to="{ name: 'productForm'}"
+                    >
                     <button type="submit" class="btn btn-brand btn-success">
                         <i class="fa fa-plus"></i><span>Nuevo Producto</span>
                     </button>
-                    </form>
+                    </router-link>
                 </div>
             </div>
             <div class="card-body">
@@ -39,14 +41,6 @@ import Form from "./form";
 export default {
     components: {Form},
     props: {
-        title: {
-            type: String,
-            required: true,
-        },
-        newProductRoute: {
-            type: String,
-            required: true,
-        },
     },
     data: function () {
         return {};
