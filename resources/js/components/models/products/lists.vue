@@ -29,7 +29,7 @@
                 <td scope="row">{{model.price | currency }}</td>
                 <td class="text-center">
                     <form method="POST" @submit="handleSubmitDelete($event, model)" accept-charset="UTF-8">
-                        <button type="button" title="Editar" :disabled="model.deleted_at" @click="selectedObject(model)" class="btn btn-outline-warning btn-sm">
+                        <button type="button" title="Editar" @click="editProduct(model)" class="btn btn-outline-warning btn-sm">
                             <i class="fa fa-edit"></i>
                         </button>
                         <button v-if="!model.deleted_at" title="Eliminar" type="submit" onclick="return confirm('¿Estás seguro de que quieres eliminar este elemento?')" class="btn btn-outline-danger btn-sm">
@@ -116,39 +116,6 @@ export default {
                 .catch(error => this.$toasted.global.ToastedError({ message: error.message.message }));
         },
 
-        async fetchAll() {
-            await this.$store.dispatch("fetchAll", {
-                model: this.model,
-            })
-                .catch(error => this.$toasted.global.ToastedError({message: error.message.message}));
-        },
-
-        async delete(model) {
-            await this.$store.dispatch("delete", {
-                _method: 'DELETE',
-                model: this.model,
-                data: model
-            })
-                .then(async result => {
-                    this.$toasted.global.ToastedSuccess({ message: `El ${this.model_name} fue eliminado!` });
-                    await this.fetch();
-                })
-                .catch(error => this.$toasted.global.ToastedError({ message: error.message.message }));
-        },
-
-        async restore(data) {
-            await this.$store.dispatch("restore", {
-                model: this.model,
-                data: data
-            })
-                .then(async result => {
-                    this.$toasted.global.ToastedSuccess({ message: `El ${this.model_name} fue restaurado!` });
-                    await this.fetch();
-                    await this.fetchAll();
-                })
-                .catch(error => this.$toasted.global.ToastedError({ message: error.message.message }));
-        },
-
        async selectedObject(model) {
            await this.$store.commit("SET_SELECTED_PRODUCT", {
                 id: model.id,
@@ -174,11 +141,21 @@ export default {
         },
 
         async showProduct(model){
+            await this.selectProductAndCategory(model)
+        },
+
+        async editProduct(model){
+            await this.selectProductAndCategory(model)
+            this.$router.push({name: "productForm"})
+        },
+
+        async selectProductAndCategory(model){
+            console.log(model)
             await this.$store.commit("SET_SELECTED_PRODUCT", {
                 id: model.id,
                 name: model.name,
-                price: model.price,
-                cost_price: model.cost_price,
+                price: Number(model.price),
+                cost_price: Number(model.cost_price),
                 images: model.images
             });
             await this.$store.commit("SET_SELECTED_CATEGORY", {

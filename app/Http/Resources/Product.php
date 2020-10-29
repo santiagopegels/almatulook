@@ -21,7 +21,8 @@ class Product extends JsonResource
             'cost_price' => $this->cost_price,
             'stock' => $this->getTotalStock(),
             'images' => $this->getImages(),
-            'category' => $this->category
+            'category' => $this->category,
+            'attributes' => $this->stockAttributes()
         ];
     }
 }

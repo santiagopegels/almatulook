@@ -2,7 +2,7 @@
 
 namespace App\Models\Admin;
 
-use App\ProductAttributeValue;
+use App\ProductAttributeValueGroup;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
@@ -26,7 +26,6 @@ class Product extends Model implements HasMedia
 
 
     protected $dates = ['deleted_at'];
-
 
 
     public $fillable = [
@@ -61,16 +60,18 @@ class Product extends Model implements HasMedia
         'category_id' => 'required',
     ];
 
-    public function registerMediaCollections() : void
+    public function registerMediaCollections(): void
     {
         $this->addMediaCollection('products');
     }
 
-    public function getTotalStock(){
-        return ProductAttributeValue::where('product_id', $this->id)->sum('stock');
+    public function getTotalStock()
+    {
+        return ProductAttributeValueGroup::where('product_id', $this->id)->sum('stock');
     }
 
-    public function getImages(){
+    public function getImages()
+    {
         $images = $this->getMedia('products');
         if ($images) {
             $imagesURL = [];
@@ -85,6 +86,29 @@ class Product extends Model implements HasMedia
     public function category()
     {
         return $this->belongsTo(Category::class)->with('children');
+    }
+
+    public function productAttributeValueGroup(){
+        return $this->hasMany(ProductAttributeValueGroup::class);
+    }
+
+    public function stockAttributes()
+    {
+        $attributes = array();
+        foreach ($this->productAttributeValueGroup as $productAttributesGroup){
+            $attributeArray = array();
+            $attributeArray['stock'] = $productAttributesGroup->stock;
+            $attributeObject = array();
+            foreach ($productAttributesGroup->attributeValueGroup as $attributeValueGroup){
+                $attributeObject[] = [
+                    'id_value' => $attributeValueGroup->attributeValue->value->id,
+                    $attributeValueGroup->attributeValue->attribute->name => $attributeValueGroup->attributeValue->value->name
+                ];
+            }
+            $attributeArray['attributes'] = $attributeObject;
+            array_push($attributes,$attributeArray);
+        }
+        return $attributes;
     }
 
 }

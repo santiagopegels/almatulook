@@ -4,8 +4,8 @@ namespace App\Repositories\Admin;
 
 use App\Models\Admin\Attribute;
 use App\Models\Admin\Product;
-use App\Models\Admin\ProductAttributeValueGroup;
-use App\ProductAttributeValue;
+use App\Models\Admin\AttributeValueGroup;
+use App\ProductAttributeValueGroup;
 use App\Repositories\BaseRepository;
 use Illuminate\Support\Facades\DB;
 use function Symfony\Component\String\s;
@@ -65,7 +65,7 @@ class ProductRepository extends BaseRepository
 
             $attributeValueGroupId = $this->checkAttributeValueGroup($attributeValueIds);
 
-            ProductAttributeValue::create([
+            ProductAttributeValueGroup::create([
                 'product_id' => $product->id,
                 'attribute_group_id' => $attributeValueGroupId,
                 'stock' => $stockQuantity
@@ -103,7 +103,7 @@ class ProductRepository extends BaseRepository
     }
 
     public function checkAttributeValueGroup($attributesValuesIds){
-        $attributeValueGroup = ProductAttributeValueGroup::select('group_id');
+        $attributeValueGroup = AttributeValueGroup::select('group_id');
         foreach ($attributesValuesIds as $index => $attributeValueId){
             if($index === 0){
                 $attributeValueGroup->where('attribute_value_id', $attributeValueId);
@@ -119,9 +119,9 @@ class ProductRepository extends BaseRepository
         if(count($attributeValueGroup) === 1){
             return $attributeValueGroup[0]->group_id;
         } else {
-            $maxNumberGroupId = ProductAttributeValueGroup::max('group_id') + 1;
+            $maxNumberGroupId = AttributeValueGroup::max('group_id') + 1;
             foreach ($attributesValuesIds as $attributeValueId){
-                ProductAttributeValueGroup::create([
+                AttributeValueGroup::create([
                    'attribute_value_id' => $attributeValueId,
                    'group_id' => $maxNumberGroupId
                 ]);
