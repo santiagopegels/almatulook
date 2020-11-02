@@ -11,6 +11,7 @@ use App\ProductAttributeValueGroup;
 use App\Repositories\Admin\ProductRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
+use Illuminate\Support\Facades\Validator;
 use Response;
 
 /**
@@ -108,10 +109,9 @@ class ProductAPIController extends AppBaseController
      *
      * @return Response
      */
-    public function update($id, UpdateProductAPIRequest $request)
+    public function update($id, Request $request)
     {
         $input = $request->all();
-
         /** @var Product $product */
         $product = $this->productRepository->find($id);
 
@@ -120,6 +120,9 @@ class ProductAPIController extends AppBaseController
         }
 
         $product = $this->productRepository->update($input, $id);
+        if(isset($input['stocks'])){
+            $this->productRepository->updateStock($product, $input['stocks']);
+        }
 
         return $this->sendResponse($product->toArray(), 'Product updated successfully');
     }
@@ -145,5 +148,27 @@ class ProductAPIController extends AppBaseController
         $product->delete();
 
         return $this->sendSuccess('Product deleted successfully');
+    }
+
+    public function deleteStock(Request $request){
+        $input = $request->all();
+
+        $validator = Validator::make($input, [
+            'product_id' => 'required',
+            'attributes' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()]);
+        }
+        unset($input['attributes']['stock']);
+        $groupId = $this->productRepository->getAttributeValueGroupId($input['attributes']);
+        $productAttributeValueGroup = ProductAttributeValueGroup::where('product_id', $input['product_id'])->where('attribute_group_id', $groupId)->first();
+
+        if(!is_null($productAttributeValueGroup)){
+            $productAttributeValueGroup->delete();
+        }
+
+        return $this->sendSuccess('Stock deleted successfully');
     }
 }

@@ -28,6 +28,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('categories', 'Admin\CategoryAPIController');
     Route::resource('values', 'Admin\ValueAPIController');
     Route::resource('parameters', 'Admin\ParameterAPIController');
+    Route::resource('products', 'Admin\ProductAPIController');
 
     // get all
     Route::get('users_all', ['uses' => 'Admin\UserAPIController@all']);
@@ -46,9 +47,6 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('values/{id}/restore', ['uses' => 'Admin\ValueAPIController@restore']);
     Route::post('categories/{id}/restore', ['uses' => 'Admin\CategoryAPIController@restore']);
 
-});
-
-
-Route::group(['prefix' => 'admin'], function () {
-    Route::resource('products', 'Admin\ProductAPIController');
+    //extra
+    Route::post('product/{product_id}/deleteStock', ['uses' => 'Admin\ProductAPIController@deleteStock']);
 });

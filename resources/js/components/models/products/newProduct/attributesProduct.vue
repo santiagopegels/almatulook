@@ -1,5 +1,5 @@
 <template>
-    <div class="content-dashed" v-show="showAttributes">
+    <div class="content-dashed" v-show="hasCategories">
         <div v-for="(stockData, stockDataIndex) in selected_product.stocks" :key="stockDataIndex"
              class="form-row justify-content-center">
             <div v-for="(attribute, index) in selected_category.attributesIds" :key="index"
@@ -56,8 +56,6 @@ export default {
         return {
             stockData: [],
             attributesStockData: [],
-            showAttributes: false,
-            syncStockAttribute:false
         }
     },
     computed: {
@@ -69,7 +67,6 @@ export default {
     watch: {
         async selected_category() {
             if (this.selected_category.id) {
-                this.selected_product.stocks = []
                 await this.addStockData()
             }
         }
@@ -82,31 +79,26 @@ export default {
             }
         },
         async addStockData() {
-            if (!this.attributesStockData.length > 0) {
-                if (this.selected_product.id && !this.syncStockAttribute) {
-                    await this.selected_product.attributes.forEach(attributesArray => {
-                        let selectElement = {}
-                        attributesArray['attributes'].forEach(attribute => {
-                            selectElement[attribute.attribute] = []
-                            selectElement[attribute.attribute][0] = attribute.value_id
-                        })
-                        selectElement.stock = Number(attributesArray.stock)
-                        this.$store.commit('PUSH_STOCK_DATA_PRODUCT', selectElement)
-                    })
-                    this.syncStockAttribute = true
-                } else {
-                    let stockData = {}
-                    await this.selected_category.attributesIds.forEach(item => this.attributesStockData[item.name] = [])
-                    stockData = {...this.attributesStockData}
-                    stockData.stock = 1
-                    await this.$store.commit('PUSH_STOCK_DATA_PRODUCT', stockData)
-                }
-            }
-            this.showAttributes = true
+            let stockData = {}
+            await this.selected_category.attributesIds.forEach(item => this.attributesStockData[item.name] = [])
+            stockData = {...this.attributesStockData}
+            stockData.stock = 1
+            await this.$store.commit('PUSH_STOCK_DATA_PRODUCT', stockData)
         },
 
-        removeElement(index) {
-            this.selected_product.stocks.splice(index, 1);
+        async removeElement(index) {
+            if(this.selected_product.id){
+                if(confirm('¿Estás seguro de que quieres eliminar este elemento?')){
+                    await this.$store.dispatch("deleteStock", {
+                            product_id: this.selected_product.id,
+                            attributes: this.selected_product.stocks[index]
+                    }).then(response => {
+                        this.selected_product.stocks.splice(index, 1);
+                    })
+                }
+            }else {
+                this.selected_product.stocks.splice(index, 1);
+            }
         }
     }
 }

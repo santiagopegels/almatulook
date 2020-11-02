@@ -46,7 +46,7 @@ class ProductRepository extends BaseRepository
 
     public function storeStock(Product $product, $stocks = null)
     {
-        foreach ($stocks as $stock){
+        foreach ($stocks as $stock) {
             $stockQuantity = $stock['stock'];
             if (isset($stock['stock'])) {
                 unset($stock['stock']);
@@ -54,18 +54,16 @@ class ProductRepository extends BaseRepository
             $attributesCombinated = $this->getCombinationAttributes($stock);
             $keysWithAttributesId = $this->getAttributesKeysWithId($stock);
 
-            foreach ($attributesCombinated as $attributes){
+            foreach ($attributesCombinated as $attributes) {
                 $attributeValueIds = array();
-                foreach ($attributes as $attributeKey => $attributeValue){
+                foreach ($attributes as $attributeKey => $attributeValue) {
                     $attributeValueIds[] = DB::table('attributes_values')
                         ->where('attribute_id', $keysWithAttributesId[$attributeKey]['id'])
                         ->where('value_id', $attributeValue)
                         ->first()->id;
 
                 }
-
-                $attributeValueGroupId = $this->checkAttributeValueGroup($attributeValueIds);
-
+                $attributeValueGroupId = $this->getAttributeValueGroupId($attributeValueIds);
                 ProductAttributeValueGroup::create([
                     'product_id' => $product->id,
                     'attribute_group_id' => $attributeValueGroupId,
@@ -73,7 +71,38 @@ class ProductRepository extends BaseRepository
                 ]);
             }
         }
+    }
 
+    public function updateStock(Product $product, $stocks = null)
+    {
+        foreach ($stocks as $stock) {
+            $stockQuantity = $stock['stock'];
+            if (isset($stock['stock'])) {
+                unset($stock['stock']);
+            }
+            $attributesCombinated = $this->getCombinationAttributes($stock);
+            $keysWithAttributesId = $this->getAttributesKeysWithId($stock);
+
+            foreach ($attributesCombinated as $attributes) {
+                $groupId = $this->getGroupIdByAttributesIds($attributes);
+
+                $productAttributeGroup = ProductAttributeValueGroup::where('product_id', $product->id)
+                    ->where('attribute_group_id', $groupId)->first();
+
+                if (!is_null($productAttributeGroup)) {
+                    $productAttributeGroup->stock = $stockQuantity;
+                    $productAttributeGroup->save();
+                } else {
+                    $groupId = $this->getAttributeValueGroupId($attributes);
+
+                    ProductAttributeValueGroup::create([
+                        'product_id' => $product->id,
+                        'attribute_group_id' => $groupId,
+                        'stock' => $stockQuantity
+                    ]);
+                }
+            }
+        }
     }
 
     public function getCombinationAttributes($attributesArrays)
@@ -93,7 +122,8 @@ class ProductRepository extends BaseRepository
         return $combinations;
     }
 
-    public function getAttributesKeysWithId($attributesArray){
+    public function getAttributesKeysWithId($attributesArray)
+    {
         $keysAttributes = array_keys($attributesArray);
         foreach ($keysAttributes as $index => $value) {
             $keysAttributes[$index] =
@@ -105,12 +135,33 @@ class ProductRepository extends BaseRepository
         return $keysAttributes;
     }
 
-    public function checkAttributeValueGroup($attributesValuesIds){
+    //Verify if exist group id for attributes ids
+    public function getAttributeValueGroupId($attributesValuesIds)
+    {
+
+        $groupId = $this->getGroupIdByAttributesIds($attributesValuesIds);
+
+        if (!is_null($groupId)) {
+            return $groupId;
+        } else {
+            $maxNumberGroupId = AttributeValueGroup::max('group_id') + 1;
+            foreach ($attributesValuesIds as $attributeValueId) {
+                AttributeValueGroup::create([
+                    'attribute_value_id' => $attributeValueId,
+                    'group_id' => $maxNumberGroupId
+                ]);
+            }
+            return $maxNumberGroupId;
+        }
+    }
+
+    public function getGroupIdByAttributesIds($attributesValuesIds)
+    {
         $attributeValueGroup = AttributeValueGroup::select('group_id');
-        foreach ($attributesValuesIds as $index => $attributeValueId){
-            if($index === 0){
+        foreach ($attributesValuesIds as $index => $attributeValueId) {
+            if ($index === 0) {
                 $attributeValueGroup->where('attribute_value_id', $attributeValueId);
-            }else{
+            } else {
                 $attributeValueGroup->orWhere('attribute_value_id', $attributeValueId);
             }
         }
@@ -118,18 +169,10 @@ class ProductRepository extends BaseRepository
         $attributeValueGroup = $attributeValueGroup->groupBy('group_id')
             ->havingRaw('COUNT(group_id) = ?', [count($attributesValuesIds)])
             ->get();
-
-        if(count($attributeValueGroup) === 1){
+        if (count($attributeValueGroup) === 1) {
             return $attributeValueGroup[0]->group_id;
-        } else {
-            $maxNumberGroupId = AttributeValueGroup::max('group_id') + 1;
-            foreach ($attributesValuesIds as $attributeValueId){
-                AttributeValueGroup::create([
-                   'attribute_value_id' => $attributeValueId,
-                   'group_id' => $maxNumberGroupId
-                ]);
-            }
-            return $maxNumberGroupId;
         }
+
+        return null;
     }
 }

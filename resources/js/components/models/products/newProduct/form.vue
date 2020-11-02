@@ -195,31 +195,23 @@ export default {
                     _method: "PUT",
                     id: this.selected_product.id,
                     name: this.selected_product.name,
-                    slug: this.hyphenate(this.selected_product.name),
-                    attributesIds: this.selected_product.attributesIds
+                    price: this.selected_product.price,
+                    cost_price: this.selected_product.cost_price,
+                    category_id: this.selected_category.id,
+                    stocks: this.selected_product.stocks,
+                    images: this.selected_product.images,
                 }
             })
                 .then(async result => {
                     this.$v.$reset();
                     this.$toasted.global.ToastedSuccess({message: `El ${this.model_name} fue actualizado!`});
-                    await this.fetch();
-                    await this.fetchAll();
+                    this.$router.push({name: 'productIndex'})
                 })
                 .catch(error => this.$toasted.global.ToastedError({message: error.message.message}));
         },
 
         cancelSelectedObject() {
             this.$v.$reset();
-        },
-
-        hyphenate(string) {
-            if (!string) return;
-            return string.replace(/[^a-zA-Z0-9]/g, "_").toLowerCase();
-        },
-
-        clearFields() {
-            this.selected_product.name = null,
-                this.selected_product.slug = null
         },
 
         async fetch() {

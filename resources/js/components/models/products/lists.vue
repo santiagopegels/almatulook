@@ -156,7 +156,8 @@ export default {
                 price: Number(model.price),
                 cost_price: Number(model.cost_price),
                 images: model.images,
-                attributes: model.attributes
+                attributes: model.attributes,
+                stocks: await this.getStockProduct(model)
             });
             await this.$store.commit("SET_SELECTED_CATEGORY", {
                 id: model.category.id,
@@ -164,6 +165,19 @@ export default {
                 children: model.category.children,
                 attributesIds: model.category.attributesIds,
             });
+        },
+        async getStockProduct(product){
+            let stockArray = []
+            await product.attributes.forEach(attributesArray => {
+                let selectElement = {}
+                attributesArray['attributes'].forEach(attribute => {
+                    selectElement[attribute.attribute] = []
+                    selectElement[attribute.attribute][0] = attribute.value_id
+                })
+                selectElement.stock = Number(attributesArray.stock)
+                stockArray.push(selectElement)
+            })
+            return stockArray
         }
     },
 };
