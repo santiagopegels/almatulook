@@ -46,31 +46,34 @@ class ProductRepository extends BaseRepository
 
     public function storeStock(Product $product, $stocks = null)
     {
-        $stockQuantity = $stocks['stock'];
-        if (isset($stocks['stock'])) {
-            unset($stocks['stock']);
-        }
-        $attributesCombinated = $this->getCombinationAttributes($stocks);
-        $keysWithAttributesId = $this->getAttributesKeysWithId($stocks);
-
-        foreach ($attributesCombinated as $attributes){
-            $attributeValueIds = array();
-            foreach ($attributes as $attributeKey => $attributeValue){
-                $attributeValueIds[] = DB::table('attributes_values')
-                    ->where('attribute_id', $keysWithAttributesId[$attributeKey]['id'])
-                    ->where('value_id', $attributeValue)
-                    ->first()->id;
-
+        foreach ($stocks as $stock){
+            $stockQuantity = $stock['stock'];
+            if (isset($stock['stock'])) {
+                unset($stock['stock']);
             }
+            $attributesCombinated = $this->getCombinationAttributes($stock);
+            $keysWithAttributesId = $this->getAttributesKeysWithId($stock);
 
-            $attributeValueGroupId = $this->checkAttributeValueGroup($attributeValueIds);
+            foreach ($attributesCombinated as $attributes){
+                $attributeValueIds = array();
+                foreach ($attributes as $attributeKey => $attributeValue){
+                    $attributeValueIds[] = DB::table('attributes_values')
+                        ->where('attribute_id', $keysWithAttributesId[$attributeKey]['id'])
+                        ->where('value_id', $attributeValue)
+                        ->first()->id;
 
-            ProductAttributeValueGroup::create([
-                'product_id' => $product->id,
-                'attribute_group_id' => $attributeValueGroupId,
-                'stock' => $stockQuantity
-            ]);
+                }
+
+                $attributeValueGroupId = $this->checkAttributeValueGroup($attributeValueIds);
+
+                ProductAttributeValueGroup::create([
+                    'product_id' => $product->id,
+                    'attribute_group_id' => $attributeValueGroupId,
+                    'stock' => $stockQuantity
+                ]);
+            }
         }
+
     }
 
     public function getCombinationAttributes($attributesArrays)

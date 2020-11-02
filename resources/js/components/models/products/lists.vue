@@ -146,21 +146,23 @@ export default {
 
         async editProduct(model){
             await this.selectProductAndCategory(model)
-            this.$router.push({name: "productForm"})
+            await this.$router.push({name: "productForm"})
         },
 
         async selectProductAndCategory(model){
-            console.log(model)
             await this.$store.commit("SET_SELECTED_PRODUCT", {
                 id: model.id,
                 name: model.name,
                 price: Number(model.price),
                 cost_price: Number(model.cost_price),
-                images: model.images
+                images: model.images,
+                attributes: model.attributes
             });
             await this.$store.commit("SET_SELECTED_CATEGORY", {
                 id: model.category.id,
                 name: model.category.name,
+                children: model.category.children,
+                attributesIds: model.category.attributesIds,
             });
         }
     },

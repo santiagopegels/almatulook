@@ -446,7 +446,6 @@ let actions = {
 
             case 'categories_all':
                 await commit('SET_CATEGORIES_ALL', content.data);
-                await commit('SET_SELECTED_CATEGORY');
                 break;
 
             case 'parameters':

@@ -101,12 +101,14 @@ class Product extends Model implements HasMedia
             $attributeObject = array();
             foreach ($productAttributesGroup->attributeValueGroup as $attributeValueGroup){
                 $attributeObject[] = [
-                    'id_value' => $attributeValueGroup->attributeValue->value->id,
-                    $attributeValueGroup->attributeValue->attribute->name => $attributeValueGroup->attributeValue->value->name
+                    'value_id' => $attributeValueGroup->attributeValue->value->id,
+                    'attribute_id' => $attributeValueGroup->attributeValue->attribute->id,
+                    'value' => $attributeValueGroup->attributeValue->value->name,
+                    'attribute' => $attributeValueGroup->attributeValue->attribute->name
                 ];
             }
             $attributeArray['attributes'] = $attributeObject;
-            array_push($attributes,$attributeArray);
+            array_push($attributes, $attributeArray);
         }
         return $attributes;
     }

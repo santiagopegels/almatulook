@@ -67,7 +67,7 @@ class ProductAPIController extends AppBaseController
         $product = $this->productRepository->create($input);
 
         if(isset($input['stocks'])){
-            $this->productRepository->storeStock($product, $input['stocks'][0]);
+            $this->productRepository->storeStock($product, $input['stocks']);
         }
 
         if(isset($input['images'])){

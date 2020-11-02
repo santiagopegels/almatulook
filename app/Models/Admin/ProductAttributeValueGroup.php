@@ -16,7 +16,7 @@ class ProductAttributeValueGroup extends Model
     ];
 
     public function attributeValueGroup(){
-        return $this->hasMany(AttributeValueGroup::class, 'group_id');
+        return $this->hasMany(AttributeValueGroup::class, 'group_id', 'attribute_group_id');
     }
 
 }

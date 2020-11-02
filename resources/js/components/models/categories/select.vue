@@ -34,6 +34,9 @@ export default {
     },
     mounted() {
         this.fetchAll()
+        if(this.selected_category.id){
+            this.value = this.selected_category
+        }
     },
     computed: {
         ...mapGetters(["isLoading", "categoriesAll", "selected_category", "selected_category"]),
