@@ -3,6 +3,11 @@ import Router from 'vue-router'
 import productIndex from './components/models/products/index.vue'
 import productForm from './components/models/products/newProduct/index.vue'
 import categoriesIndex from './components/models/categories/index.vue'
+import attributesIndex from './components/models/attributes/index.vue'
+import parametersIndex from './components/models/parameters/index.vue'
+import permissionsIndex from './components/models/permissions/index.vue'
+import rolesIndex from './components/models/roles/index.vue'
+import usersIndex from './components/models/users/index.vue'
 
 Vue.use(Router)
 export const router = new Router({
@@ -22,6 +27,31 @@ export const router = new Router({
             path: '/admin/categories',
             name: 'categoriesIndex',
             component: categoriesIndex,
+        },
+        {
+            path: '/admin/attributes',
+            name: 'attributesIndex',
+            component: attributesIndex,
+        },
+        {
+            path: '/admin/parameters',
+            name: 'parametersIndex',
+            component: parametersIndex,
+        },
+        {
+            path: '/admin/users',
+            name: 'usersIndex',
+            component: usersIndex,
+        },
+        {
+            path: '/admin/roles',
+            name: 'rolesIndex',
+            component: rolesIndex,
+        },
+        {
+            path: '/admin/permissions',
+            name: 'permissionsIndex',
+            component: permissionsIndex,
         },
     ]
 })

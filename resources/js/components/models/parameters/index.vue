@@ -4,7 +4,7 @@
             <div class="card card-accent-primary">
                 <div class="card-header">
                     <i class="icon-list"></i>
-                    {{ title }}
+                    Parámetros
                 </div>
                 <div class="card-body">
                     <div class="row justify-content-end mb-4">
@@ -29,10 +29,6 @@ import {mapGetters} from "vuex";
 
 export default {
     props: {
-        title: {
-            type: String,
-            required: true,
-        },
     },
     data: function () {
         return {};

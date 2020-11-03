@@ -8,13 +8,9 @@
                 Productos
                 </div>
                 <div class="align-item-center">
-                    <router-link
-                        :to="{ name: 'productForm'}"
-                    >
-                    <button type="submit" class="btn btn-brand btn-success">
+                    <button @click="createNewProduct()" class="btn btn-brand btn-success">
                         <i class="fa fa-plus"></i><span>Nuevo Producto</span>
                     </button>
-                    </router-link>
                 </div>
             </div>
             <div class="card-body">
@@ -52,6 +48,11 @@ export default {
         ...mapGetters(["isLoading", 'selected_product']),
     },
     methods: {
+        async createNewProduct(){
+            await this.$store.commit('SET_SELECTED_PRODUCT')
+            await this.$store.commit('SET_SELECTED_CATEGORY')
+            this.$router.push({name: 'productForm'})
+        }
 	},
 };
 </script>

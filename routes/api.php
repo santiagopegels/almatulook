@@ -50,3 +50,8 @@ Route::group(['prefix' => 'admin'], function () {
     //extra
     Route::post('product/{product_id}/deleteStock', ['uses' => 'Admin\ProductAPIController@deleteStock']);
 });
+
+
+Route::group(['prefix' => 'admin'], function () {
+    Route::resource('purchases', 'Admin\PurchaseAPIController');
+});

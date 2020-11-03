@@ -16,10 +16,6 @@ import {
 
 export default {
     props: {
-        title: {
-            type: String,
-            required: true,
-        },
     },
     data: function () {
         return {
