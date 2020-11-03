@@ -71,7 +71,7 @@
                     <new-product-attributes/>
                 </div>
 
-                <upload-images ref="uploadImages" @on-upload-images="onUploadImages" />
+                <upload-images ref="uploadImages" @on-upload-images="onUploadImages"/>
 
                 <div class="form-group">
                     <div>
@@ -210,25 +210,17 @@ export default {
                 .catch(error => this.$toasted.global.ToastedError({message: error.message.message}));
         },
 
-        cancelSelectedObject() {
+        async cancelSelectedObject() {
             this.$v.$reset();
+            await this.$store.commit('SET_SELECTED_PRODUCT')
+            await this.$store.commit('SET_SELECTED_CATEGORY')
+            this.$router.push({name: 'productIndex'})
         },
 
         async fetch() {
             await this.$store.dispatch("fetch", {
                 model: this.model,
                 page: this.page
-            })
-                .catch(error => this.$toasted.global.ToastedError({message: error.message.message}));
-        },
-
-        async fetchAll() {
-            await this.$store.dispatch("fetchAll", {
-                model: this.model,
-            })
-                .catch(error => this.$toasted.global.ToastedError({message: error.message.message}));
-            await this.$store.dispatch("fetchAll", {
-                model: "categories",
             })
                 .catch(error => this.$toasted.global.ToastedError({message: error.message.message}));
         },

@@ -56,6 +56,7 @@ export default {
         return {
             stockData: [],
             attributesStockData: [],
+            firstTimeEditProduct: true
         }
     },
     computed: {
@@ -87,18 +88,7 @@ export default {
         },
 
         async removeElement(index) {
-            if(this.selected_product.id){
-                if(confirm('¿Estás seguro de que quieres eliminar este elemento?')){
-                    await this.$store.dispatch("deleteStock", {
-                            product_id: this.selected_product.id,
-                            attributes: this.selected_product.stocks[index]
-                    }).then(response => {
-                        this.selected_product.stocks.splice(index, 1);
-                    })
-                }
-            }else {
-                this.selected_product.stocks.splice(index, 1);
-            }
+            this.selected_product.stocks.splice(index, 1);
         }
     }
 }

@@ -75,34 +75,8 @@ class ProductRepository extends BaseRepository
 
     public function updateStock(Product $product, $stocks = null)
     {
-        foreach ($stocks as $stock) {
-            $stockQuantity = $stock['stock'];
-            if (isset($stock['stock'])) {
-                unset($stock['stock']);
-            }
-            $attributesCombinated = $this->getCombinationAttributes($stock);
-            $keysWithAttributesId = $this->getAttributesKeysWithId($stock);
-
-            foreach ($attributesCombinated as $attributes) {
-                $groupId = $this->getGroupIdByAttributesIds($attributes);
-
-                $productAttributeGroup = ProductAttributeValueGroup::where('product_id', $product->id)
-                    ->where('attribute_group_id', $groupId)->first();
-
-                if (!is_null($productAttributeGroup)) {
-                    $productAttributeGroup->stock = $stockQuantity;
-                    $productAttributeGroup->save();
-                } else {
-                    $groupId = $this->getAttributeValueGroupId($attributes);
-
-                    ProductAttributeValueGroup::create([
-                        'product_id' => $product->id,
-                        'attribute_group_id' => $groupId,
-                        'stock' => $stockQuantity
-                    ]);
-                }
-            }
-        }
+        ProductAttributeValueGroup::where('product_id', $product->id)->delete();
+        $this->storeStock($product, $stocks);
     }
 
     public function getCombinationAttributes($attributesArrays)
