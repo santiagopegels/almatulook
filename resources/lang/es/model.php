@@ -29,5 +29,8 @@ return [
     'parameters' => 'Parámetros',
 
     'product' => 'Producto',
-    'products' => 'Productos'
+    'products' => 'Productos',
+
+        'purchase' => 'Venta',
+    'purchases' => 'Ventas'
 ];

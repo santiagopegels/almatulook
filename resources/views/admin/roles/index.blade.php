@@ -7,7 +7,9 @@
 
 <div class="container-fluid">
 	<div class="animated fadeIn">
-		<roles-index title="{!! __('model.roles') !!}" />
+        <div id="app">
+            <router-view></router-view>
+        </div>
 	</div>
 </div>
 @endsection

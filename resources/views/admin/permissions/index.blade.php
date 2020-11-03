@@ -7,7 +7,9 @@
 
 <div class="container-fluid">
 	<div class="animated fadeIn">
-		<permissions-index title="{!! __('model.permissions') !!}" />
+        <div id="app">
+            <router-view></router-view>
+        </div>
 	</div>
 </div>
 @endsection

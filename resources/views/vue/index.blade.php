@@ -15,7 +15,3 @@
     </div>
 
 @endsection
-
-@push('scripts')
-    @include('admin.layouts.partials.validators', ['empty_options'=>true])
-@endpush

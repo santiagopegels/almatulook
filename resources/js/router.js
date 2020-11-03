@@ -8,6 +8,7 @@ import parametersIndex from './components/models/parameters/index.vue'
 import permissionsIndex from './components/models/permissions/index.vue'
 import rolesIndex from './components/models/roles/index.vue'
 import usersIndex from './components/models/users/index.vue'
+import purchasesIndex from './components/models/purchases/index.vue'
 
 Vue.use(Router)
 export const router = new Router({
@@ -52,6 +53,11 @@ export const router = new Router({
             path: '/admin/permissions',
             name: 'permissionsIndex',
             component: permissionsIndex,
+        },
+        {
+            path: '/admin/purchases',
+            name: 'purchasesIndex',
+            component: purchasesIndex,
         },
     ]
 })

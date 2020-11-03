@@ -9,9 +9,9 @@
 	<div class="animated fadeIn">
 
 		@role(['super-administrador',' administrador'])
-		<div class="clearfix">
-			<users-index title="{!! __('model.users') !!}" />
-		</div>
+        <div id="app">
+            <router-view></router-view>
+        </div>
 		@endrole
 
 	</div>
