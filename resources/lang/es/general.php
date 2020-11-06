@@ -11,10 +11,11 @@ return [
 	*/
 
     'register' => 'Regístrate',
-    'login' => 'Inicia sesión',
+    'login' => 'Iniciar sesión',
     'logout' => 'Cerrar sesión',
     'account' => 'Cuenta',
     'profile' => 'Perfil',
+    'in_app' => 'en AlmaTuLook',
 
     'has_account' => '¿Ya tienes una cuenta?',
     'not_has_account' => '¿No tienes cuenta?',
