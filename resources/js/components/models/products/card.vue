@@ -51,7 +51,7 @@
                             {{ attribute.attribute }}: {{ attribute.value }}
                         </div>
                     </div>
-                    Cantidad:{{ stockData.stock }}
+                    Stock: {{ stockData.stock }}
                     <hr/>
                 </div>
             </div>

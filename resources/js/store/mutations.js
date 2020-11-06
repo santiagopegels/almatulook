@@ -210,7 +210,7 @@ let mutations = {
     },
 
     PUSH_PRODUCT(state, product) {
-        state.products.push(product);
+        state.products.data.push(product);
     },
 
     PUSH_STOCK_DATA_PRODUCT(state, stockData) {

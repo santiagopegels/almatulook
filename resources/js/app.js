@@ -22,6 +22,8 @@ import VueDayjs from 'vue-dayjs-plugin';
 import VueCurrencyInput from 'vue-currency-input'
 import vSelect from 'vue-select'
 import {router} from './router'
+import VueSweetalert2 from 'vue-sweetalert2';
+
 
 Vue.config.baseurl = process.env.MIX_APP_URL;
 console.log('MIX_APP_URL', process.env.MIX_APP_URL);
@@ -32,6 +34,7 @@ Vue.use(Vuex);
 Vue.use(Toasted);
 Vue.use(VueDayjs);
 Vue.use(Vuelidate);
+Vue.use(VueSweetalert2);
 
 
 const pluginCurrencyInputOptions = {

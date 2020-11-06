@@ -39,6 +39,7 @@
         "vue-masked-input": "^0.5.2",
         "vue-router": "^3.4.6",
         "vue-select": "^3.10.8",
+        "vue-sweetalert2": "^4.1.1",
         "vue-toasted": "^1.1.28",
         "vue-upload-multiple-image": "^1.1.6",
         "vuejs-paginate": "^2.1.0",

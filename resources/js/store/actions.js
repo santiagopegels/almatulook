@@ -277,6 +277,7 @@ let actions = {
 
             window.axios.post(path, params.data, {}).then(async response => {
                 if (response.data.success) {
+                    await actions.pushData(commit, { params: params, data: response.data.data });
                     await actions.removeFromData(commit, response.data.data);
                     await commit('SET_LOADING', false);
                     resolve({
@@ -596,7 +597,6 @@ let actions = {
 
             case 'products':
                 await commit('PUSH_PRODUCT', content.data);
-                await commit('SET_SELECTED_PRODUCT');
                 break;
 
             default:

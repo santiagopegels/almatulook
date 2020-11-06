@@ -18,24 +18,31 @@
             <tbody v-if="hasProducts">
             <template v-for="product in getProducts">
                 <template v-for="attributes in product.attributes">
-                    <tr v-if="attributes.stock > 0">
-                        <td scope="row">{{ product.id }}</td>
-                        <td scope="row">{{ product.name }}</td>
-                        <td scope="row"><h6 class="mb-0" v-for="attribute in attributes.attributes">{{attribute.attribute}}: <b>{{attribute.value}}</b></h6></td>
+                    <tr v-if="attributes.stock > 0"
+                    >
+                        <td scope="row"
+                            @click="showProduct(product)"
+                            @mouseover="isHovering = true"
+                            @mouseout="isHovering = false"
+                            :class="{'table-danger':model.deleted_at, 'hovering': isHovering}"
+                        >{{ product.id }}
+                        </td>
+                        <td scope="row"
+                            @click="showProduct(product)"
+                            @mouseover="isHovering = true"
+                            @mouseout="isHovering = false"
+                            :class="{'table-danger':model.deleted_at, 'hovering': isHovering}"
+                        >{{ product.name }}
+                        </td>
+                        <td scope="row"><h6 class="mb-0" v-for="attribute in attributes.attributes">
+                            {{ attribute.attribute }}: <b>{{ attribute.value }}</b></h6></td>
                         <td scope="row">{{ attributes.stock }}</td>
                         <td scope="row">{{ product.price | currency }}</td>
                         <td class="text-center">
-                            <form method="POST" @submit="handleSubmitDelete($event, model)" accept-charset="UTF-8">
-                                <button type="button" title="Editar" @click="editProduct(model)"
-                                        class="btn btn-outline-warning btn-sm">
-                                    <i class="fa fa-edit"></i>
-                                </button>
-                                <button v-if="!model.deleted_at" title="Eliminar" type="submit"
-                                        onclick="return confirm('¿Estás seguro de que quieres eliminar este elemento?')"
-                                        class="btn btn-outline-danger btn-sm">
-                                    <i class="fa fa-trash"></i>
-                                </button>
-                            </form>
+                            <button type="button" title="sell" @click="sellProduct(product, attributes)"
+                                    class="btn btn-primary btn-sm">
+                                VENDER
+                            </button>
                         </td>
                     </tr>
                 </template>
@@ -68,7 +75,7 @@ export default {
     data: function () {
         return {
             opacity: 0.3,
-            model: "products",
+            model: "purchases",
             model_name: 'producto',
             isHovering: false
         };
@@ -118,19 +125,10 @@ export default {
 
         async fetch() {
             await this.$store.dispatch("fetchProductsWithStock", {
-                model: this.model,
+                model: 'products',
                 page: this.page
             })
                 .catch(error => this.$toasted.global.ToastedError({message: error.message.message}));
-        },
-
-        async selectedObject(model) {
-            await this.$store.commit("SET_SELECTED_PRODUCT", {
-                id: model.id,
-                name: model.name,
-                slug: model.slug,
-                attributesIds: await this.getAttributesIds(model.attributes),
-            });
         },
 
         async getAttributesIds(products) {
@@ -186,6 +184,33 @@ export default {
                 stockArray.push(selectElement)
             })
             return stockArray
+        },
+        async sellProduct(product, attributes) {
+            let msg = ''
+            await attributes.attributes.forEach(attribute => msg += `${attribute.attribute}: <b>${attribute.value}</b>\n`)
+
+            //msg without last enter \n
+            msg = msg.substring(0, msg.length - 2);
+
+            await this.$swal({
+                title: "Venta De Producto",
+                text: "Algo",
+                html: `¿Está seguro que desea vender <b> ${product.name}</b> con las siguientes características?<pre class="mt-3"> ${msg} </pre>`,
+                type: "question",
+                showCancelButton: true
+            }).then(result => {
+                this.$store.dispatch('store', {
+                    model: this.model,
+                    data: {
+                        products: [{
+                            product_id: product.id,
+                            attributes: attributes,
+                            quantity: 1
+                        }]
+                    }
+                })
+            })
+            this.fetch()
         }
     },
 };

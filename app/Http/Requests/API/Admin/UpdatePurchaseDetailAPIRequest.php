@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests\API\Admin;
 
-use App\Models\Admin\Purchase;
+use App\Models\Admin\PurchaseDetail;
 use InfyOm\Generator\Request\APIRequest;
 
-class CreatePurchaseAPIRequest extends APIRequest
+class UpdatePurchaseDetailAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,8 @@ class CreatePurchaseAPIRequest extends APIRequest
      */
     public function rules()
     {
-        return [
-            'products' => 'required'
-        ];
+        $rules = PurchaseDetail::$rules;
+        
+        return $rules;
     }
 }

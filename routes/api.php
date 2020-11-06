@@ -55,3 +55,8 @@ Route::group(['prefix' => 'admin'], function () {
 Route::group(['prefix' => 'admin'], function () {
     Route::resource('purchases', 'Admin\PurchaseAPIController');
 });
+
+
+Route::group(['prefix' => 'admin'], function () {
+    Route::resource('purchase_details', 'Admin\PurchaseDetailAPIController');
+});

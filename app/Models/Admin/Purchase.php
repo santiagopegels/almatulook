@@ -18,14 +18,13 @@ class Purchase extends Model
     use SoftDeletes;
 
     public $table = 'purchases';
-    
+
 
     protected $dates = ['deleted_at'];
 
 
 
     public $fillable = [
-        'purchase_date',
         'total'
     ];
 
@@ -36,7 +35,6 @@ class Purchase extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'purchase_date' => 'date',
         'total' => 'float'
     ];
 
@@ -46,8 +44,8 @@ class Purchase extends Model
      * @var array
      */
     public static $rules = [
-        
+
     ];
 
-    
+
 }
