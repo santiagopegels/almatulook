@@ -197,20 +197,29 @@ export default {
                 text: "Algo",
                 html: `¿Está seguro que desea vender <b> ${product.name}</b> con las siguientes características?<pre class="mt-3"> ${msg} </pre>`,
                 type: "question",
-                showCancelButton: true
+                showCancelButton: true,
+                confirmButtonText:
+                    'Si, vender! <i class="fa fa-thumbs-up"></i>',
+                cancelButtonText:
+                    'Cancelar',
             }).then(result => {
-                this.$store.dispatch('store', {
-                    model: this.model,
-                    data: {
-                        products: [{
-                            product_id: product.id,
-                            attributes: attributes,
-                            quantity: 1
-                        }]
-                    }
-                })
+                if(result.isConfirmed){
+                    this.$store.dispatch('store', {
+                        model: this.model,
+                        data: {
+                            products: [{
+                                product_id: product.id,
+                                attributes: attributes,
+                                quantity: 1
+                            }]
+                        }
+                    }).then(result => {
+                        if(result){
+                            this.fetch()
+                        }
+                    })
+                }
             })
-            this.fetch()
         }
     },
 };

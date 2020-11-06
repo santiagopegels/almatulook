@@ -1,6 +1,7 @@
 <template>
     <div class="table-responsive">
-        <loading :opacity="opacity" loader="spinner" transition="fade" :active.sync="isLoading" :can-cancel="false" :is-full-page="true" color="#20a8d8" background-color="rgba(0,0,0,0.8)"></loading>
+        <loading :opacity="opacity" loader="spinner" transition="fade" :active.sync="isLoading" :can-cancel="false"
+                 :is-full-page="true" color="#20a8d8" background-color="rgba(0,0,0,0.8)"></loading>
         <table id="products-table" class="table table-condensed table-striped table-hover">
             <thead class="thead-dark">
             <tr>
@@ -22,17 +23,20 @@
                 :key="model.id"
                 @click="showProduct(model)"
             >
-                <td scope="row">{{model.id}}</td>
-                <td scope="row">{{model.name}}</td>
-                <td scope="row">{{model.stock}}</td>
-                <td scope="row">{{model.cost_price | currency}}</td>
-                <td scope="row">{{model.price | currency }}</td>
+                <td scope="row">{{ model.id }}</td>
+                <td scope="row">{{ model.name }}</td>
+                <td scope="row">{{ model.stock }}</td>
+                <td scope="row">{{ model.cost_price | currency }}</td>
+                <td scope="row">{{ model.price | currency }}</td>
                 <td class="text-center">
                     <form method="POST" @submit="handleSubmitDelete($event, model)" accept-charset="UTF-8">
-                        <button type="button" title="Editar" @click="editProduct(model)" class="btn btn-outline-warning btn-sm">
+                        <button type="button" title="Editar" @click="editProduct(model)"
+                                class="btn btn-outline-warning btn-sm">
                             <i class="fa fa-edit"></i>
                         </button>
-                        <button v-if="!model.deleted_at" title="Eliminar" type="submit" onclick="return confirm('¿Estás seguro de que quieres eliminar este elemento?')" class="btn btn-outline-danger btn-sm">
+                        <button v-if="!model.deleted_at" title="Eliminar" type="submit"
+                                onclick="return confirm('¿Estás seguro de que quieres eliminar este elemento?')"
+                                class="btn btn-outline-danger btn-sm">
                             <i class="fa fa-trash"></i>
                         </button>
                     </form>
@@ -40,8 +44,13 @@
             </tr>
             </tbody>
         </table>
-        <section v-if="hasProducts" class="col-lg-12 col-sm-12 col-md-12 col-xs-12 center-block text-center d-flex justify-content-center">
-            <paginate v-model="page" :page-count="getLastPage" :page-range="5" :margin-pages="2" :click-handler="clickCallback" :prev-text="'&laquo;'" :next-text="'&raquo;'" :container-class="'pagination'" :page-class="'page-item'" :page-link-class="'page-link'" :prev-class="'page-item'" :next-class="'page-item'" :prev-link-class="'page-link'" :next-link-class="'page-link'" :active-class="'active'"></paginate>
+        <section v-if="hasProducts"
+                 class="col-lg-12 col-sm-12 col-md-12 col-xs-12 center-block text-center d-flex justify-content-center">
+            <paginate v-model="page" :page-count="getLastPage" :page-range="5" :margin-pages="2"
+                      :click-handler="clickCallback" :prev-text="'&laquo;'" :next-text="'&raquo;'"
+                      :container-class="'pagination'" :page-class="'page-item'" :page-link-class="'page-link'"
+                      :prev-class="'page-item'" :next-class="'page-item'" :prev-link-class="'page-link'"
+                      :next-link-class="'page-link'" :active-class="'active'"></paginate>
         </section>
     </div>
 </template>
@@ -54,9 +63,9 @@ import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
 
 export default {
-  components: {
-      Loading,
-  },
+    components: {
+        Loading,
+    },
     props: {},
     data: function () {
         return {
@@ -66,9 +75,12 @@ export default {
             isHovering: false
         };
     },
-    created() {},
+    created() {
+    },
     mounted() {
-        this.fetch();
+        if (!this.products.data) {
+            this.fetch();
+        }
     },
     computed: {
         ...mapGetters(["products", "isLoading", "page"]),
@@ -109,15 +121,15 @@ export default {
         },
 
         async fetch() {
-            await this.$store.dispatch("fetch", {
-                model: this.model,
-                page: this.page
-            })
-                .catch(error => this.$toasted.global.ToastedError({ message: error.message.message }));
+                await this.$store.dispatch("fetch", {
+                    model: this.model,
+                    page: this.page
+                })
+                    .catch(error => this.$toasted.global.ToastedError({message: error.message.message}));
         },
 
-       async selectedObject(model) {
-           await this.$store.commit("SET_SELECTED_PRODUCT", {
+        async selectedObject(model) {
+            await this.$store.commit("SET_SELECTED_PRODUCT", {
                 id: model.id,
                 name: model.name,
                 slug: model.slug,
@@ -140,16 +152,16 @@ export default {
             await this.fetch();
         },
 
-        async showProduct(model){
+        async showProduct(model) {
             await this.selectProductAndCategory(model)
         },
 
-        async editProduct(model){
+        async editProduct(model) {
             await this.selectProductAndCategory(model)
             await this.$router.push({name: "productForm"})
         },
 
-        async selectProductAndCategory(model){
+        async selectProductAndCategory(model) {
             await this.$store.commit("SET_SELECTED_PRODUCT", {
                 id: model.id,
                 name: model.name,
@@ -166,7 +178,7 @@ export default {
                 attributesIds: model.category.attributesIds,
             });
         },
-        async getStockProduct(product){
+        async getStockProduct(product) {
             let stockArray = []
             await product.attributes.forEach(attributesArray => {
                 let selectElement = {}

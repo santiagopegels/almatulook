@@ -2,25 +2,25 @@
 
 return [
 
-	/*
+    /*
     |--------------------------------------------------------------------------
     | Model
     |--------------------------------------------------------------------------
     |
     |
-	*/
+    */
 
-	'user' => 'Usuario',
-	'users' => 'Usuarios',
+    'user' => 'Usuario',
+    'users' => 'Usuarios',
 
-	'role' => 'Role',
-	'roles' => 'Roles',
+    'role' => 'Role',
+    'roles' => 'Roles',
 
-	'permission' => 'Permiso',
-	'permissions' => 'Permisos',
+    'permission' => 'Permiso',
+    'permissions' => 'Permisos',
 
-	'attribute' => 'Atributo',
-	'attributes' => 'Atributos',
+    'attribute' => 'Atributo',
+    'attributes' => 'Atributos',
 
     'category' => 'Categoría',
     'categories' => 'Categorías',
@@ -31,6 +31,9 @@ return [
     'product' => 'Producto',
     'products' => 'Productos',
 
-        'purchase' => 'Venta',
-    'purchases' => 'Ventas'
+    'purchase' => 'Venta',
+    'purchases' => 'Ventas',
+
+    'store' => 'Tienda',
+    'stores' => 'Tiendas'
 ];

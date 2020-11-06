@@ -214,7 +214,7 @@ export default {
             this.$v.$reset();
             await this.$store.commit('SET_SELECTED_PRODUCT')
             await this.$store.commit('SET_SELECTED_CATEGORY')
-            this.$router.push({name: 'productIndex'})
+            this.$router.go(-1)
         },
 
         async fetch() {

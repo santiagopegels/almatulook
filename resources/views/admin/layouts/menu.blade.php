@@ -1,9 +1,9 @@
 @role(['super-administrador',' administrador'])
 <li class="nav-title">AlmaTuLook</li>
-<li class="nav-item {{ Request::is('purchases*') ? 'active' : '' }}">
-    <a class="nav-link {{ Request::is('purchases*') ? 'active' : '' }}" href=" {!! route('admin.purchases.index') !!}">
+<li class="nav-item {{ Request::is('store*') ? 'active' : '' }}">
+    <a class="nav-link {{ Request::is('store*') ? 'active' : '' }}" href=" {!! route('admin.purchases.index') !!}">
         <i class="nav-icon icon-cursor"></i>
-        <span>@lang('model.purchases')</span>
+        <span>@lang('model.store')</span>
     </a>
 </li>
 <li class="nav-item {{ Request::is('products*') ? 'active' : '' }}">

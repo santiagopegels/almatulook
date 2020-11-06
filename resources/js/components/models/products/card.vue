@@ -1,5 +1,10 @@
 <template>
     <div class="card mb-3">
+                    <span v-if="selected_product.id" class="mr-1">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close" @click="cancelSelectedObject()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </span>
         <div class="item-img-container">
             <img v-if="selected_product.images[index]" class="card-img-top card-img-top-custom"
                  :src="selected_product.id ? selected_product.images[index] : selected_product.images[index].binary"
@@ -84,7 +89,11 @@ export default {
     methods: {
         showImageByIndex(index) {
             this.index = index
-        }
+        },
+
+        async cancelSelectedObject() {
+            await this.$store.commit('SET_SELECTED_PRODUCT')
+        },
     },
 };
 </script>
