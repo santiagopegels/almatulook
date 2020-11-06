@@ -24,6 +24,55 @@ let actions = {
     },
 
     /**
+     * SPECIFIC FETCH
+     */
+    fetchProductsWithStock({ commit }, params) {
+        //console.log(`fetch.${params.model}`, params);
+        return new Promise(async (resolve, reject) => {
+
+            commit('SET_LOADING', true);
+
+            var path = await actions.getEndpoint(params);
+
+            path = path.concat('?page=' + (Number(params.page) > 0 ? Number(params.page) : 1));
+            path = path.concat('&withAvailableStock=true');
+
+            if (typeof params.term !== typeof undefined && String(params.term).length > 0) {
+                path = path.concat('&term=' + params.term);
+            }
+
+            console.log(`path.${params.model}`, path);
+
+            window.axios.get(path).then(async response => {
+                if (response.data.success) {
+                    console.log(response.data)
+                    await actions.removeFromData(commit, params);
+                    await actions.setData(commit, { params: params, data: response.data.data });
+                    await commit('SET_LOADING', false);
+                    resolve({
+                        status: true,
+                        message: response.data.data
+                    });
+                } else {
+                    commit('SET_LOADING', false);
+                    reject({
+                        status: false,
+                        message: response.data.message
+                    });
+                }
+
+            }).catch(error => {
+                console.error(`fetch.${params.model}`, error);
+                commit('SET_LOADING', false);
+                reject({
+                    status: false,
+                    message: error
+                });
+            });
+        });
+    },
+
+    /**
      * DELETE
      */
 

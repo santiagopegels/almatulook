@@ -41,9 +41,22 @@ class ProductAPIController extends AppBaseController
     public function index(Request $request)
     {
         $input = $request->all();
+
         $term = isset($input['term']) && !empty($input['term']) ? $input['term'] : null;
+        $onlyWithAvailableStock = isset($input['withAvailableStock']) && !empty($input['withAvailableStock']) ? $input['withAvailableStock'] : null;
 
         $products = Product::query();
+
+        if ($onlyWithAvailableStock) {
+            $products = $products
+                ->whereExists(function ($query) {
+                    $query->select('pavg.id')
+                        ->from('products_attribute_values_group as pavg')
+                        ->whereRaw('pavg.product_id = products.id')
+                        ->whereRaw('pavg.stock > 0');
+                });
+        }
+
         if (!is_null($term)) {
             $products = $products->where('id', 'like', "%{$term}%")
                 ->orWhere('name', 'like', "%{$term}%");
