@@ -37,4 +37,13 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    public function redirectPath()
+    {
+        if (auth()->user()->hasRole('super-administrador')) {
+            return '/admin';
+        }
+
+        return '/';
+    }
 }

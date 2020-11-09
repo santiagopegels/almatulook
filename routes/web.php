@@ -17,34 +17,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/admin/{vue_capture?}', function () {
+Route::middleware(['role:super-administrador'])->get('/admin/{vue_capture?}', function () {
     return view('vue.index');
 })->where('vue_capture', '[\/\w\.-]*');
 
-
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['role:super-administrador']], function () {
     Route::resource('attributes', 'Admin\AttributeController', ["as" => 'admin']);
     Route::resource('categories', 'Admin\CategoryController', ["as" => 'admin']);
-});
-
-
-Auth::routes(['verify' => true]);
-
-Route::get('/home', 'HomeController@index')->middleware('verified');
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Route::group(['prefix' => 'admin'], function () {
     Route::resource('parameters', 'Admin\ParameterController', ["as" => 'admin']);
-});
-
-
-Route::group(['prefix' => 'admin'], function () {
     Route::resource('products', 'Admin\ProductController', ["as" => 'admin']);
-});
-
-
-Route::group(['prefix' => 'admin'], function () {
     Route::resource('purchases', 'Admin\PurchaseController', ["as" => 'admin']);
 });
+

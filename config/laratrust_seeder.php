@@ -12,7 +12,7 @@ return [
     'truncate_tables' => true,
 
     'roles_structure' => [
-        'super-administrador' => [
+        'admin' => [
             'roles' => 'c,r,u,d',
             'permisos' => 'c,r,u,d',
             'usuarios' => 'c,r,u,d'
