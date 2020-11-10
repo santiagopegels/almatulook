@@ -40,7 +40,7 @@ class LoginController extends Controller
 
     public function redirectPath()
     {
-        if (auth()->user()->hasRole('super-administrador')) {
+        if (auth()->user()->hasRole('admin')) {
             return '/admin';
         }
 

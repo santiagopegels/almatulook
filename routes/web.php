@@ -17,11 +17,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware(['role:super-administrador'])->get('/admin/{vue_capture?}', function () {
+
+Route::middleware(['role:admin'])->get('/admin/{vue_capture?}', function () {
     return view('vue.index');
 })->where('vue_capture', '[\/\w\.-]*');
 
-Route::group(['prefix' => 'admin', 'middleware' => ['role:super-administrador']], function () {
+
+Route::group(['prefix' => 'admin', 'middleware' => ['role:admin']], function () {
     Route::resource('attributes', 'Admin\AttributeController', ["as" => 'admin']);
     Route::resource('categories', 'Admin\CategoryController', ["as" => 'admin']);
     Route::resource('parameters', 'Admin\ParameterController', ["as" => 'admin']);

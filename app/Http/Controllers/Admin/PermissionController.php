@@ -10,7 +10,7 @@ class PermissionController extends AppBaseController
 {
 	public function __construct()
 	{
-		$this->middleware(['role:super-administrador|administrador']);
+		$this->middleware(['role:admin|administrador']);
 	}
 
 	/**

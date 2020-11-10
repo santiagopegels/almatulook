@@ -9,11 +9,17 @@ import permissionsIndex from './components/models/permissions/index.vue'
 import rolesIndex from './components/models/roles/index.vue'
 import usersIndex from './components/models/users/index.vue'
 import purchasesIndex from './components/models/purchases/index.vue'
+import home from "./components/public/home";
 
 Vue.use(Router)
 export const router = new Router({
     mode: 'history',
     routes: [
+        {
+            path: '/',
+            name: 'home',
+            component: home,
+        },
         {
             path: '/admin/products',
             name: 'productIndex',

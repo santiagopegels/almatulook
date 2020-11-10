@@ -11,6 +11,7 @@
 @import "admin-card";
 @import "login";
 @import "~@coreui/coreui/scss/variables";
+@import "~@storefront-ui/vue/styles.scss";
 
 // Bootstrap
 @import "~bootstrap/scss/bootstrap";
@@ -18,7 +19,6 @@
 // Icons
 @import "~simple-line-icons/dist/styles/simple-line-icons.scss";
 @import "~font-awesome/scss/font-awesome.scss";
-@import "https://rawgit.com/lykmapipo/themify-icons/master/css/themify-icons.css";
 
 // Coreui
 //@import "~@coreui/coreui/dist/css/coreui.min.css";

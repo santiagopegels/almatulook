@@ -1,4 +1,4 @@
-@role(['super-administrador',' administrador'])
+@role(['admin',' administrador'])
 <li class="nav-title">AlmaTuLook</li>
 <li class="nav-item {{ Request::is('store*') ? 'active' : '' }}">
     <a class="nav-link {{ Request::is('store*') ? 'active' : '' }}" href=" {!! route('admin.purchases.index') !!}">

@@ -8,7 +8,7 @@
 <div class="container-fluid">
 	<div class="animated fadeIn">
 
-		@role(['super-administrador',' administrador'])
+		@role(['admin',' administrador'])
         <div id="app">
             <router-view></router-view>
         </div>

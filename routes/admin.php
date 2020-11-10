@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes(['verify' => true]);
 
-Route::group(['middleware' => ['role:super-administrador|administrador']], function () {
+Route::group(['middleware' => ['role:admin|administrador']], function () {
     Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => 'auth'], function () {
         Route::get('users', ['uses' => 'UserController@index'])->name('admin.users.index');
         Route::get('roles', ['uses' => 'RoleController@index'])->name('admin.roles.index');
