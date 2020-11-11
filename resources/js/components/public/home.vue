@@ -1,6 +1,6 @@
 <template>
     <div>
-        <a :href="login">login</a>
+        <header-layout />
     </div>
 </template>
 <script>

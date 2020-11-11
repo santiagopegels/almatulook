@@ -23,6 +23,7 @@ import VueCurrencyInput from 'vue-currency-input'
 import vSelect from 'vue-select'
 import {router} from './router'
 import VueSweetalert2 from 'vue-sweetalert2';
+import Antd from 'ant-design-vue';
 
 
 Vue.config.baseurl = process.env.MIX_APP_URL;
@@ -35,6 +36,7 @@ Vue.use(Toasted);
 Vue.use(VueDayjs);
 Vue.use(Vuelidate);
 Vue.use(VueSweetalert2);
+Vue.use(Antd);
 
 
 const pluginCurrencyInputOptions = {
@@ -164,6 +166,7 @@ Vue.component('purchases-index', require('./components/models/purchases/index.vu
 
 //PUBLIC
 Vue.component('home', require('./components/public/home.vue').default);
+Vue.component('header-layout', require('./components/public/layouts/header.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
