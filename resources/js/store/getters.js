@@ -4,8 +4,9 @@ let getters = {
         return state.isLoading;
     },
 
-
-    /** MODELS */
+    showCartSideBar: state => {
+        return state.showCartSideBar;
+    },
 
     status: state => {
         return state.status;
@@ -22,6 +23,8 @@ let getters = {
     page: state => {
         return state.page;
     },
+
+    /** MODELS */
 
     users: state => {
         return state.users;

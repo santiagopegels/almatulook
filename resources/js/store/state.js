@@ -4,6 +4,7 @@ let state = {
      * Variables
      */
     status: false,
+    showCartSideBar: false,
 
     results: [],
     term: "",

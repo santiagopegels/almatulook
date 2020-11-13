@@ -1,6 +1,7 @@
 <template>
     <div>
         <header-layout />
+        <cart-drawer />
     </div>
 </template>
 <script>

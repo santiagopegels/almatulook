@@ -166,7 +166,9 @@ Vue.component('purchases-index', require('./components/models/purchases/index.vu
 
 //PUBLIC
 Vue.component('home', require('./components/public/home.vue').default);
+// layout
 Vue.component('header-layout', require('./components/public/layouts/header.vue').default);
+Vue.component('cart-drawer', require('./components/public/layouts/cartDrawer.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

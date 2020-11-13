@@ -9,6 +9,10 @@ let mutations = {
         state.status = !state.status;
     },
 
+    TOGGLE_SHOW_CART_SIDEBAR(state) {
+        state.showCartSideBar = !state.showCartSideBar;
+    },
+
     SET_RESULTS(state, results = []) {
         state.results = results;
     },
