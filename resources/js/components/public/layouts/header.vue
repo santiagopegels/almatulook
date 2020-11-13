@@ -6,7 +6,9 @@
                    :md="{span: 1, order:1}"
                    :lg="{span: 1, order:1}"
                    :xxl="{span: 1, order:1}">
+                <router-link :to="{ name: 'home'}">
                 <img style="margin-left: 15px;" :src="logo" height="60px"/>
+                </router-link>
             </a-col>
             <a-col :xs="{span: 16, order:3, offset: 4}"
                    :sm="{span: 16, order:3}"

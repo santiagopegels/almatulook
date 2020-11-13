@@ -24,6 +24,7 @@ import vSelect from 'vue-select'
 import {router} from './router'
 import VueSweetalert2 from 'vue-sweetalert2';
 import Antd from 'ant-design-vue';
+import Transitions from 'vue2-transitions'
 
 
 Vue.config.baseurl = process.env.MIX_APP_URL;
@@ -37,6 +38,7 @@ Vue.use(VueDayjs);
 Vue.use(Vuelidate);
 Vue.use(VueSweetalert2);
 Vue.use(Antd);
+Vue.use(Transitions)
 
 
 const pluginCurrencyInputOptions = {
@@ -169,6 +171,7 @@ Vue.component('home', require('./components/public/home.vue').default);
 // layout
 Vue.component('header-layout', require('./components/public/layouts/header.vue').default);
 Vue.component('cart-drawer', require('./components/public/layouts/cartDrawer.vue').default);
+Vue.component('home-product-card', require('./components/public/productCard.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
