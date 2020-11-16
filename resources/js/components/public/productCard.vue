@@ -1,10 +1,10 @@
 <template>
-    <a-card hoverable style="width: 240px" @mouseover="changeImage()">
+    <a-card hoverable style="width: 240px">
         <img
             style="padding: 10px"
             slot="cover"
-            alt="example"
-            :src="image"
+            :src="images[imageIndex]"
+            @click="changeImage"
         />
         <a-card-meta title="Remera Ricky Sarkani">
             <template slot="description">
@@ -15,15 +15,19 @@
 </template>
 <script>
 export default {
-    data(){
+    data() {
         return {
-          image: 'https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png'
+            images: ['https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png',
+                'https://d35uzl96cmnmq2.cloudfront.net/processed/Round_Trip_Airfare_A_1600.jpg'
+            ],
+            imageIndex: 0,
+            show: true
         }
     },
     methods: {
-        changeImage() {
-            this.image = 'https://d35uzl96cmnmq2.cloudfront.net/processed/Round_Trip_Airfare_A_1600.jpg'
+        async changeImage() {
+            this.imageIndex < this.images.length -1 ? this.imageIndex++ : this.imageIndex = 0
         }
-    }
+    },
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-    <section style="margin-top: 12px;">
+    <section style="margin-top: 10px">
         <a-row type="flex" justify="space-between" align="middle">
             <a-col :xs="{span: 12, order:1}"
                    :sm="{span: 12, order:1}"
@@ -29,7 +29,7 @@
                 </a-row>
             </a-col>
         </a-row>
-        <a-divider type="horizontal"/>
+        <a-divider  style="margin-top: 10px;" type="horizontal"/>
     </section>
 </template>
 <script>
