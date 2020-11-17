@@ -29,7 +29,7 @@
                 </a-row>
             </a-col>
         </a-row>
-        <a-divider  style="margin-top: 10px;" type="horizontal"/>
+        <a-divider  style="margin-top: 10px; margin-bottom: 0px;" type="horizontal"/>
     </section>
 </template>
 <script>

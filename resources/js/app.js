@@ -172,6 +172,8 @@ Vue.component('home', require('./components/public/home.vue').default);
 Vue.component('header-layout', require('./components/public/layouts/header.vue').default);
 Vue.component('cart-drawer', require('./components/public/layouts/cartDrawer.vue').default);
 Vue.component('home-product-card', require('./components/public/productCard.vue').default);
+Vue.component('header-menu', require('./components/public/layouts/headerMenu.vue').default);
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
