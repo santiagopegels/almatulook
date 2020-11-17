@@ -1,5 +1,6 @@
 <template>
-    <a-card hoverable style="width: 240px">
+    <div style="padding: 10px;">
+    <a-card hoverable class="product-card-container">
         <img
             style="padding: 10px"
             slot="cover"
@@ -12,6 +13,7 @@
             </template>
         </a-card-meta>
     </a-card>
+    </div>
 </template>
 <script>
 export default {
