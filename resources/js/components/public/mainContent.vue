@@ -24,7 +24,7 @@
                     </a-select-option>
                 </a-select>
             </a-row>
-            <a-row style="margin-left: 15px;">
+            <a-row style="padding: 5px; margin-left: 15px;">
                 <a-form-item>
                     <h3>Talles</h3>
                     <a-checkbox-group
@@ -60,7 +60,7 @@
                     </a-checkbox-group>
                 </a-form-item>
             </a-row>
-            <a-row style="margin-left: 15px;">
+            <a-row style="padding: 5px; margin-left: 15px;">
                 <a-form-item>
                     <h3>Colores</h3>
                     <a-checkbox-group

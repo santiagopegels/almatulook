@@ -11,6 +11,7 @@
                 <cart-drawer-header/>
             </template>
             <cart-drawer-content />
+            <cart-drawer-footer />
         </a-drawer>
     </div>
 </template>

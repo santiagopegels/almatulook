@@ -2,6 +2,10 @@
     font-size: xx-large;
 }
 
+.bold {
+    font-weight: bold;
+}
+
 .cart-drawer-header-icon {
     font-size: xx-large;
 }
@@ -17,6 +21,11 @@
 .products-content {
     max-width: 1414px;
     margin: auto;
+}
+
+.product-card-title-container:hover {
+    text-decoration: underline;
+    color: @secondary-color;
 }
 
 .cart-drawer-content-item-list-img {
@@ -41,21 +50,25 @@
     word-wrap: break-word;
 
     /* width */
+
     &::-webkit-scrollbar {
         width: 10px;
     }
 
     /* Track */
+
     &::-webkit-scrollbar-track {
         background: #f1f1f1;
     }
 
     /* Handle */
+
     &::-webkit-scrollbar-thumb {
         background: #888;
     }
 
     /* Handle on hover */
+
     &::-webkit-scrollbar-thumb:hover {
         background: #555;
     }

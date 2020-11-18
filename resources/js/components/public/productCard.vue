@@ -1,5 +1,5 @@
 <template>
-    <div style="padding: 10px;">
+    <div style="padding: 10px; text-align: center">
     <a-card hoverable class="product-card-container">
         <img
             style="padding: 10px"
@@ -7,9 +7,9 @@
             :src="images[imageIndex]"
             @click="changeImage"
         />
-        <a-card-meta title="Remera Ricky Sarkani">
+        <a-card-meta class="product-card-title-container" title="Remera Ricky Sarkani">
             <template slot="description">
-                <h2 style="font-weight: bold;">$10.99</h2>
+                <h2 class="bold">$10.99</h2>
             </template>
         </a-card-meta>
     </a-card>

@@ -173,6 +173,7 @@ Vue.component('main-content', require('./components/public/mainContent.vue').def
 //Cart Drawer
 Vue.component('cart-drawer-header', require('./components/public/cartDrawer/header.vue').default);
 Vue.component('cart-drawer-content', require('./components/public/cartDrawer/content.vue').default);
+Vue.component('cart-drawer-footer', require('./components/public/cartDrawer/footer.vue').default);
 
 // layout
 Vue.component('header-layout', require('./components/public/layouts/header.vue').default);
