@@ -2,7 +2,7 @@
     font-size: xx-large;
 }
 
-.cart-drawer-icon {
+.cart-drawer-header-icon {
     font-size: xx-large;
 }
 
@@ -17,4 +17,46 @@
 .products-content {
     max-width: 1414px;
     margin: auto;
+}
+
+.cart-drawer-content-item-list-img {
+    width: 60px;
+    height: 60px;
+    object-fit: fill;
+}
+
+.cart-drawer-content-delete-icon {
+    font-size: x-large;
+}
+
+.scroll-vertical {
+    margin: 1rem 0 1rem 1rem;
+    padding: 0;
+    width: 100%;
+    max-height: 40vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    vertical-align: middle;
+    box-sizing: content-box;
+    word-wrap: break-word;
+
+    /* width */
+    &::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    /* Track */
+    &::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+        background: #888;
+    }
+
+    /* Handle on hover */
+    &::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
 }

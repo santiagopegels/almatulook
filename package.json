@@ -31,7 +31,6 @@
         "font-awesome": "^4.7.0",
         "less": "^3.12.2",
         "less-loader": "^7.0.2",
-        "perfect-scrollbar": "^1.5.0",
         "simple-line-icons": "^2.5.2",
         "vue-currency-filter": "^5.1.1",
         "vue-currency-input": "^1.22.3",

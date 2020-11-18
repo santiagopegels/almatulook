@@ -168,6 +168,12 @@ Vue.component('purchases-index', require('./components/models/purchases/index.vu
 
 //PUBLIC
 Vue.component('home', require('./components/public/home.vue').default);
+Vue.component('main-content', require('./components/public/mainContent.vue').default);
+
+//Cart Drawer
+Vue.component('cart-drawer-header', require('./components/public/cartDrawer/header.vue').default);
+Vue.component('cart-drawer-content', require('./components/public/cartDrawer/content.vue').default);
+
 // layout
 Vue.component('header-layout', require('./components/public/layouts/header.vue').default);
 Vue.component('cart-drawer', require('./components/public/layouts/cartDrawer.vue').default);

@@ -8,25 +8,9 @@
             @close="onClose"
         >
             <template slot="title">
-                <a-row type="flex" justify="space-between">
-                    <a-row>
-                        <a-icon type="close-square" class="cart-drawer-icon" @click="onClose"/>
-                    </a-row>
-                    <a-row type="flex">
-                        <a-space :size="20">
-                            <a-icon type="crown" class="cart-drawer-icon"/>
-                            <a-avatar style="backgroundColor:#9E7B1A" icon="user"/>
-                        </a-space>
-                    </a-row>
-                </a-row>
-                <br>
-                <a-row>
-                    <h2 class="cart-drawer-title">Mi Carrito</h2>
-                </a-row>
+                <cart-drawer-header/>
             </template>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
+            <cart-drawer-content />
         </a-drawer>
     </div>
 </template>

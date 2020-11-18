@@ -17,7 +17,9 @@
         @include('flash::message')
         <div class="clearfix"></div>
         <div class="d-flex justify-content-center mt-4">
+            <a href="/">
             <img src="{{ asset('img/logo/logo.png') }}" alt="{{ env('APP_NAME') }}">
+            </a>
         </div>
         @yield('content')
     </main>

@@ -25,7 +25,9 @@
                 <a-row type="flex" justify="space-around" align="middle" style="margin-right: 15px;">
                     <a-icon type="shopping-cart" class="header-icon" @click="toggleCartSidebar"/>
                     <a-icon type="crown" class="header-icon"/>
-                    <a-avatar style="backgroundColor:#9E7B1A" icon="user"/>
+                    <a href="/login">
+                    <a-avatar style="backgroundColor:#9E7B1A" icon="user"></a-avatar>
+                    </a>
                 </a-row>
             </a-col>
         </a-row>
