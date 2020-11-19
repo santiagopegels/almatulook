@@ -15,7 +15,7 @@
                    :md="{span: 8, order:2}"
                    :lg="{span: 8, order:2}"
                    :xxl="{span: 8, order:2, pull:1}">
-                <a-input-search placeholder="Buscar Producto" size="large" enter-button @search="onSearch"/>
+                <a-input-search placeholder="Buscar Producto" size="large" enter-button/>
             </a-col>
             <a-col :xs="{span: 12, order:2}"
                    :sm="{span: 7, order:2}"

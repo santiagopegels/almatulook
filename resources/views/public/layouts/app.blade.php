@@ -10,7 +10,7 @@
 
 <body>
 <div id="app">
-<home login="{{route('login')}}"/>
+    <router-view></router-view>
 </div>
 </body>
 

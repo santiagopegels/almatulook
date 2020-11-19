@@ -6,7 +6,7 @@
             style="height: 100%"
         >
             <a-row style="padding: 5px;margin-left: 15px; margin-top: 10px;">
-                <a-select size="large" default-value="relevantes" style="width: 80%" @change="handleChange">
+                <a-select size="large" default-value="relevantes" style="width: 80%">
                     <a-select-option value="relevantes">
                         Más relevantes
                     </a-select-option>
@@ -94,8 +94,10 @@
         </a-menu>
     </a-layout-sider>
     <a-layout-content :style="{ padding: '0 24px', maxWidth:'1400px', margin: 'auto'}">
-        <a-row type="flex" justify="flex-end">
+        <a-row type="flex" justify="center">
+            <router-link :to="{name: 'publicProductIndex'}">
             <home-product-card/>
+            </router-link>
             <home-product-card></home-product-card>
             <home-product-card></home-product-card>
             <home-product-card></home-product-card>

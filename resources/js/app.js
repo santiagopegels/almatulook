@@ -21,7 +21,7 @@ import Toasted from 'vue-toasted';
 import VueDayjs from 'vue-dayjs-plugin';
 import VueCurrencyInput from 'vue-currency-input'
 import vSelect from 'vue-select'
-import {router} from './router'
+import {router} from './router/router'
 import VueSweetalert2 from 'vue-sweetalert2';
 import Antd from 'ant-design-vue';
 import Transitions from 'vue2-transitions'
@@ -170,11 +170,6 @@ Vue.component('purchases-index', require('./components/models/purchases/index.vu
 Vue.component('home', require('./components/public/home.vue').default);
 Vue.component('main-content', require('./components/public/mainContent.vue').default);
 
-//Cart Drawer
-Vue.component('cart-drawer-header', require('./components/public/cartDrawer/header.vue').default);
-Vue.component('cart-drawer-content', require('./components/public/cartDrawer/content.vue').default);
-Vue.component('cart-drawer-footer', require('./components/public/cartDrawer/footer.vue').default);
-
 // layout
 Vue.component('header-layout', require('./components/public/layouts/header.vue').default);
 Vue.component('cart-drawer', require('./components/public/layouts/cartDrawer.vue').default);
@@ -182,6 +177,13 @@ Vue.component('home-product-card', require('./components/public/productCard.vue'
 Vue.component('header-menu', require('./components/public/layouts/headerMenu.vue').default);
 Vue.component('filter-products-menu', require('./components/public/layouts/filterProductMenu.vue').default);
 
+//Cart Drawer
+Vue.component('cart-drawer-header', require('./components/public/cartDrawer/header.vue').default);
+Vue.component('cart-drawer-content', require('./components/public/cartDrawer/content.vue').default);
+Vue.component('cart-drawer-footer', require('./components/public/cartDrawer/footer.vue').default);
+
+//Product
+Vue.component('product-index', require('./components/public/products/index.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

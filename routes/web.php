@@ -22,6 +22,10 @@ Route::middleware(['role:admin'])->get('/admin/{vue_capture?}', function () {
     return view('vue.index');
 })->where('vue_capture', '[\/\w\.-]*');
 
+Route::get('/{vue_capture?}', function () {
+    return view('public.layouts.app');
+})->where('vue_capture', '[\/\w\.-]*');
+
 
 Route::group(['prefix' => 'admin', 'middleware' => ['role:admin']], function () {
     Route::resource('attributes', 'Admin\AttributeController', ["as" => 'admin']);
