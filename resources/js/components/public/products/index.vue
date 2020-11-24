@@ -3,9 +3,40 @@
         <header-layout/>
         <header-menu/>
         <cart-drawer/>
-        <h4>Otra Cosa</h4>
+        <a-row>
+            <a-col :xs="{span: 24}"
+                   :sm="{span: 12}"
+                   :md="{span: 11}"
+                   :lg="{span: 10}"
+                   :xxl="{span: 10}">
+        <product-images-carousel />
+            </a-col>
+            <a-col style="margin-top: 30px"
+                    :xs="{span: 23, offset:1}"
+                   :sm="{span: 11, offset:1}"
+                   :md="{span: 11, offset:1}"
+                   :lg="{span: 11, offset:1}"
+                   :xxl="{span: 11, offset:1}">
+                <p style="font-size: 3rem; margin-bottom: 0">Remera Sarkani</p>
+                <p style="font-size: 1.2rem">Item N° 1244</p>
+                <p style="font-size: 2.5rem" class="bold">$1.999,99</p>
+                <a-divider></a-divider>
+                <product-attribute-select />
+                <product-attribute-select />
+                <a-divider></a-divider>
+                <a-button style="margin-top:10px; height: 60px;" size="large" type="primary" block @click="addToCart()">
+                    Agregar al Carrito
+                </a-button>
+            </a-col>
+        </a-row>
     </div>
 </template>
 <script>
-export default {}
+export default {
+    methods: {
+        addToCart(){
+            this.$store.commit('TOGGLE_SHOW_CART_SIDEBAR')
+        }
+    }
+}
 </script>

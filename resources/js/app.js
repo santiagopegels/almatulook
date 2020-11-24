@@ -184,6 +184,9 @@ Vue.component('cart-drawer-footer', require('./components/public/cartDrawer/foot
 
 //Product
 Vue.component('product-index', require('./components/public/products/index.vue').default);
+Vue.component('product-images-carousel', require('./components/public/products/imagesProduct.vue').default);
+Vue.component('product-attribute-select', require('./components/public/products/attributeSelect.vue').default);
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

@@ -23,7 +23,13 @@
                    :lg="{span: 4, order:3}"
                    :xxl="{span: 3, order:3}">
                 <a-row type="flex" justify="space-around" align="middle" style="margin-right: 15px;">
+                    <a-badge count="3"
+                             :number-style="{
+                                backgroundColor: '#554B52',
+                                color: 'white',
+                              }">
                     <a-icon type="shopping-cart" class="header-icon" @click="toggleCartSidebar"/>
+                    </a-badge>
                     <a-icon type="crown" class="header-icon"/>
                     <a href="/login">
                     <a-avatar style="backgroundColor:#9E7B1A" icon="user"></a-avatar>
