@@ -135,13 +135,11 @@ export default {
     data() {
         return {
             opacity: 0.3,
-            isLoading: true,
             show: false
         }
     },
     mounted() {
         setTimeout(() => {
-            this.isLoading = false
             this.show = true
         }, 2000)
     }
