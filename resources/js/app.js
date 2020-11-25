@@ -172,6 +172,7 @@ Vue.component('main-content', require('./components/public/mainContent.vue').def
 
 // layout
 Vue.component('header-layout', require('./components/public/layouts/header.vue').default);
+Vue.component('footer-layout', require('./components/public/layouts/footer.vue').default);
 Vue.component('cart-drawer', require('./components/public/layouts/cartDrawer.vue').default);
 Vue.component('home-product-card', require('./components/public/productCard.vue').default);
 Vue.component('header-menu', require('./components/public/layouts/headerMenu.vue').default);

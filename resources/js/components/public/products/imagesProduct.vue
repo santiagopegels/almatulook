@@ -43,9 +43,9 @@ export default {};
 }
 
 .ant-carousel >>> .custom-slick-arrow {
-    width: 25px;
-    height: 25px;
-    font-size: 25px;
+    width: 50px;
+    height: 50px;
+    font-size: 50px;
     color: #fff;
     background-color: rgba(31, 45, 61, 0.11);
     opacity: 0.3;

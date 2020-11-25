@@ -3,7 +3,7 @@
         <header-layout/>
         <header-menu/>
         <cart-drawer/>
-        <a-row>
+        <a-row style="padding: 10px;">
             <a-col :xs="{span: 24}"
                    :sm="{span: 12}"
                    :md="{span: 11}"
@@ -17,18 +17,19 @@
                    :md="{span: 11, offset:1}"
                    :lg="{span: 11, offset:1}"
                    :xxl="{span: 11, offset:1}">
-                <p style="font-size: 3rem; margin-bottom: 0">Remera Sarkani</p>
+                <p style="font-size: 3rem; margin-bottom: 0">Remera Riki Sarkani</p>
                 <p style="font-size: 1.2rem">Item N° 1244</p>
                 <p style="font-size: 2.5rem" class="bold">$1.999,99</p>
                 <a-divider></a-divider>
                 <product-attribute-select />
                 <product-attribute-select />
                 <a-divider></a-divider>
-                <a-button style="margin-top:10px; height: 60px;" size="large" type="primary" block @click="addToCart()">
+                <a-button style="margin-top:10px; width:97%; height: 50px;" size="large" block type="primary" @click="addToCart()">
                     Agregar al Carrito
                 </a-button>
             </a-col>
         </a-row>
+        <footer-layout />
     </div>
 </template>
 <script>

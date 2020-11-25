@@ -1,6 +1,6 @@
 <template>
     <a-layout>
-    <a-layout-sider width="300" style="text-align: left; margin-left: 10px; margin-top: 10px;">
+    <a-layout-sider width="300" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1); text-align: left; margin-left: 10px; margin-top: 10px;">
         <a-menu
             mode="inline"
             style="height: 100%"

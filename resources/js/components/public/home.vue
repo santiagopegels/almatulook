@@ -4,6 +4,7 @@
         <header-menu/>
         <cart-drawer/>
         <main-content/>
+        <footer-layout />
     </div>
 </template>
 <script>
