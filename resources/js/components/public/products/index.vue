@@ -19,7 +19,7 @@
                    :xxl="{span: 11, offset:1}">
                 <p style="font-size: 3rem; margin-bottom: 0">Remera Riki Sarkani</p>
                 <p style="font-size: 1.2rem">Item N° 1244</p>
-                <p style="font-size: 2.5rem" class="bold">$1.999,99</p>
+                <p style="font-size: 2.5rem; margin-bottom: 0" class="bold">$1.999,99</p>
                 <a-divider></a-divider>
                 <product-attribute-select />
                 <product-attribute-select />
