@@ -182,6 +182,7 @@ Vue.component('sider-layout', require('./components/public/layouts/sider.vue').d
 Vue.component('cart-drawer-header', require('./components/public/cartDrawer/header.vue').default);
 Vue.component('cart-drawer-content', require('./components/public/cartDrawer/content.vue').default);
 Vue.component('cart-drawer-footer', require('./components/public/cartDrawer/footer.vue').default);
+Vue.component('cart-drawer-product', require('./components/public/cartDrawer/productRow.vue').default);
 
 //Product
 Vue.component('product-index', require('./components/public/products/index.vue').default);
@@ -194,6 +195,7 @@ Vue.component('first-step', require('./components/public/purchases/firstStep.vue
 Vue.component('second-step', require('./components/public/purchases/secondStep.vue').default);
 Vue.component('third-step', require('./components/public/purchases/thirdStep.vue').default);
 Vue.component('summary-purchase', require('./components/public/purchases/summary.vue').default);
+Vue.component('summary-purchase-product', require('./components/public/purchases/productSummaryRow.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
