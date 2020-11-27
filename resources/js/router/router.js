@@ -11,6 +11,8 @@ import usersIndex from '../components/models/users/index.vue'
 import purchasesIndex from '../components/models/purchases/index.vue'
 import home from "../components/public/home";
 import publicProductIndex from '../components/public/products/index.vue'
+import publicPurchaseIndex from '../components/public/purchases/index.vue'
+
 
 Vue.use(Router)
 export const router = new Router({
@@ -70,6 +72,11 @@ export const router = new Router({
             path: '/product',
             name: 'publicProductIndex',
             component: publicProductIndex,
+        },
+        {
+            path: '/purchase',
+            name: 'publicPurchaseIndex',
+            component: publicPurchaseIndex,
         },
     ]
 })

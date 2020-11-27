@@ -28,7 +28,7 @@
                                 backgroundColor: '#554B52',
                                 color: 'white',
                               }">
-                    <a-icon type="shopping-cart" class="header-icon" @click="toggleCartSidebar"/>
+                    <a-icon type="shopping" class="header-icon" @click="toggleCartSidebar"/>
                     </a-badge>
                     <a-icon type="crown" class="header-icon"/>
                     <a href="/login">

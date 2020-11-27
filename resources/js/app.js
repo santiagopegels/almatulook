@@ -174,9 +174,9 @@ Vue.component('main-content', require('./components/public/mainContent.vue').def
 Vue.component('header-layout', require('./components/public/layouts/header.vue').default);
 Vue.component('footer-layout', require('./components/public/layouts/footer.vue').default);
 Vue.component('cart-drawer', require('./components/public/layouts/cartDrawer.vue').default);
-Vue.component('home-product-card', require('./components/public/productCard.vue').default);
+Vue.component('home-product-card', require('./components/public/products/productCard.vue').default);
 Vue.component('header-menu', require('./components/public/layouts/headerMenu.vue').default);
-Vue.component('filter-products-menu', require('./components/public/layouts/filterProductMenu.vue').default);
+Vue.component('sider-layout', require('./components/public/layouts/sider.vue').default);
 
 //Cart Drawer
 Vue.component('cart-drawer-header', require('./components/public/cartDrawer/header.vue').default);
@@ -188,6 +188,12 @@ Vue.component('product-index', require('./components/public/products/index.vue')
 Vue.component('product-images-carousel', require('./components/public/products/imagesProduct.vue').default);
 Vue.component('product-attribute-select', require('./components/public/products/attributeSelect.vue').default);
 
+//Purchase
+Vue.component('purchase-index', require('./components/public/purchases/index.vue').default);
+Vue.component('first-step', require('./components/public/purchases/firstStep.vue').default);
+Vue.component('second-step', require('./components/public/purchases/secondStep.vue').default);
+Vue.component('third-step', require('./components/public/purchases/thirdStep.vue').default);
+Vue.component('summary-purchase', require('./components/public/purchases/summary.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

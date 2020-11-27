@@ -1,5 +1,5 @@
 <template>
-    <a-carousel style="width: 100%; height:550px" arrows>
+    <a-carousel style="width: 100%;" arrows>
         <div
             slot="prevArrow"
             slot-scope="props"
