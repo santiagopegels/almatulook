@@ -14,7 +14,7 @@
                     </li>
                 </ul>
             </div>
-            <p>$1050.99</p>
+            <p class="purchase-summary-product-price">$1050.99</p>
         </a-row>
     </div>
 </template>

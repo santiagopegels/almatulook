@@ -36,12 +36,12 @@
             <a-form-item>
                 <a-checkbox
                     v-decorator="[
-          'remember',
-          {
-            valuePropName: 'checked',
-            initialValue: true,
-          },
-        ]"
+                              'remember',
+                              {
+                                valuePropName: 'checked',
+                                initialValue: true,
+                              },
+                            ]"
                 >
                     Recordarme
                 </a-checkbox>
@@ -81,9 +81,6 @@ export default {
     max-width: 300px;
 }
 
-#components-form-demo-normal-login .login-form-forgot {
-    float: right;
-}
 
 #components-form-demo-normal-login .login-form-button {
     width: 100%;

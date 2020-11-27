@@ -1,5 +1,5 @@
 <template>
-    <section style="margin-top: 10px">
+    <section style="margin-top: 10px;">
         <a-row type="flex" justify="space-between" align="middle">
             <a-col :xs="{span: 12, order:1}"
                    :sm="{span: 12, order:1}"

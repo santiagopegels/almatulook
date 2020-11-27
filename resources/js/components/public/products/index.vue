@@ -25,7 +25,7 @@
                 <product-attribute-select />
                 <a-divider></a-divider>
                 <a-button style="margin-top:10px; width:97%; height: 50px;" size="large" block type="primary" @click="addToCart()">
-                    Agregar al Carrito
+                    Agregar a la Bolsa
                 </a-button>
             </a-col>
         </a-row>

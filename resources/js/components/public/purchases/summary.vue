@@ -1,11 +1,16 @@
 <template>
     <div>
-        <a-card title="Resumen de Compra" style="width:360px">
-            <a slot="extra" href="#">Editar</a>
+        <a-card title="Resumen de la Compra" style="background-color: #fafafa; width:100%; box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1);">
+            <a-button slot="extra" type="default" @click="handleMoreProducts()">
+                Editar
+            </a-button>
             <p>6 Items</p>
             <summary-purchase-product />
             <summary-purchase-product />
             <summary-purchase-product />
+            <a-button type="default" size="small" @click="handleMoreProducts()">
+               <a-icon :type="moreProductsButton.icon"/>{{moreProductsButton.text}}
+            </a-button>
             <a-divider></a-divider>
             <a-row type="flex" justify="space-between" class="bold">
                 <a-col>
@@ -35,3 +40,29 @@
         </a-card>
     </div>
 </template>
+<script>
+export default {
+    data(){
+        return {
+            moreProductsButton:{
+                text: 'Ver más...',
+                showMore: false,
+                icon: 'right-circle'
+            }
+        }
+    },
+    methods: {
+        handleMoreProducts(){
+            if(this.moreProductsButton.showMore){
+                this.moreProductsButton.showMore = !this.moreProductsButton.showMore
+                this.moreProductsButton.text = 'Ver más...'
+                this.moreProductsButton.icon = 'right-circle'
+            } else {
+                this.moreProductsButton.showMore = !this.moreProductsButton.showMore
+                this.moreProductsButton.text = 'Ver menos...'
+                this.moreProductsButton.icon = 'down-circle'
+            }
+        }
+    }
+}
+</script>

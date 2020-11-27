@@ -1,11 +1,11 @@
 <template>
     <div>
-        <a-icon type="environment" class="header-icon"/>
+        <a-icon type="environment" class="header-icon" />
         <h1>Dirección de Envío</h1>
         <a-form layout="vertical" @submit="handleSubmit">
             <a-row>
                 <a-col :span="11">
-                    <a-form-item label="Nombre">
+                    <a-form-item label="Nombre" class="purchase-address-form-item">
                         <a-input
                             size="large"
                             v-decorator="[
@@ -23,7 +23,7 @@
                     </a-form-item>
                 </a-col>
                 <a-col :span="12" :offset="1">
-                    <a-form-item label="Apellido" has-feedback>
+                    <a-form-item label="Apellido" class="purchase-address-form-item">
                         <a-input
                             size="large"
                             v-decorator="[
@@ -41,16 +41,17 @@
                     </a-form-item>
                 </a-col>
             </a-row>
-            <a-form-item v-bind="formItemLayout" label="Teléfono">
+            <a-form-item label="Teléfono" class="purchase-address-form-item">
                 <a-input
                     size="large"
                     v-decorator="[
-          'phone',
-          {
-            rules: [{ required: true, message: 'Debe ingresar un número de teléfono' }],
-          },
-        ]"
+                                  'phone',
+                                  {
+                                    rules: [{ required: true, message: 'Debe ingresar un número de teléfono' }],
+                                  },
+                                ]"
                     style="width: 100%"
+                    class="purchase-address-form-item"
                 >
                     <a-select
                         slot="addonBefore"
@@ -66,7 +67,7 @@
                     </a-select>
                 </a-input>
             </a-form-item>
-            <a-form-item label="Dirección">
+            <a-form-item label="Dirección" class="purchase-address-form-item">
                 <a-input
                     size="large"
                     v-decorator="[
@@ -82,19 +83,20 @@
                                     ]"
                 />
             </a-form-item>
-            <a-form-item label="Piso / Departamento / Edificio (Opcional)">
+            <a-form-item label="Piso / Departamento / Edificio (Opcional)" class="purchase-address-form-item">
                 <a-input
                     size="large"
                 />
             </a-form-item>
-            <a-form-item label="Ciudad">
+            <a-form-item label="Ciudad" class="purchase-address-form-item">
                 <a-input
+                    class="purchase-address-form-item"
                     size="large"
                 />
             </a-form-item>
             <a-row>
                 <a-col :span="14">
-                    <a-form-item label="Provincia" has-feedback>
+                    <a-form-item label="Provincia" class="purchase-address-form-item">
                         <a-select
                             size="large"
                             v-decorator="[
