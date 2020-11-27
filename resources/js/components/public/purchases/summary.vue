@@ -1,7 +1,7 @@
 <template>
     <div>
         <a-card title="Resumen de la Compra" style="background-color: #fafafa; width:100%; box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1);">
-            <a-button slot="extra" type="default" @click="handleMoreProducts()">
+            <a-button slot="extra" type="default">
                 Editar
             </a-button>
             <p>6 Items</p>

@@ -2,6 +2,7 @@
     <div>
         <a-icon type="user" class="header-icon"/>
         <h1>Iniciar Sesión</h1>
+
         <a-form
             id="components-form-demo-normal-login"
             :form="form"
@@ -45,15 +46,19 @@
                 >
                     Recordarme
                 </a-checkbox>
-                <a class="login-form-forgot" href="">
+                <a-button type="link">
                     ¿Olvidó su contraseña?
-                </a>
+                </a-button>
                 <a-button type="primary" html-type="submit" class="login-form-button">
                     Iniciar Sesión
                 </a-button>
-                <a href="">
+                <a-button type="link" href="/register">
                     Registrarse
-                </a>
+                </a-button>
+                <br>
+                <a-button @click="purchaseAsGuest()" type="link">
+                    Deseo comprar como invitado
+                </a-button>
             </a-form-item>
         </a-form>
     </div>
@@ -73,6 +78,9 @@ export default {
                 }
             });
         },
+        purchaseAsGuest(){
+            this.$emit('as-guest', true);
+        }
     },
 };
 </script>
