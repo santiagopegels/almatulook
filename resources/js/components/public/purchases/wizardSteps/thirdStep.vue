@@ -2,30 +2,10 @@
     <div>
         <a-icon type="credit-card" class="header-icon"/>
         <h1>Realizar Pago</h1>
-        <a-form layout="vertical" @submit="handleSubmit">
-            <a-row>
-                <a-col :span="12">
-                    <a-form-item label="Mostrar codigo QR">
-                        <a-input
-                            size="large"
-                            v-decorator="[
-                                      'nombre',
-                                      {
-                                        rules: [
-                                          {
-                                            required: true,
-                                            message: 'Debe ingresar el nombre',
-                                          },
-                                        ],
-                                      },
-                                    ]"
-                        />
-                    </a-form-item>
-                </a-col>
-            </a-row>
-        </a-form>
+        <img style="background: grey;width: 200px; height: 200px">
+        <p>Escaneá el QR y pagá tu compra con MercadoPago</p>
         <a-button type="primary" block size="large">
-            Pagar con Tarjeta de Crédito
+            Pagar con Tarjeta
         </a-button>
     </div>
 </template>

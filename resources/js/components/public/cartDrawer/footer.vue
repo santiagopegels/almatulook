@@ -4,14 +4,19 @@
             <h2 class="bold">SUBTOTAL</h2>
             <h2 class="bold"> $12455.53 </h2>
         </a-row>
-        <router-link :to="{name: 'publicPurchaseIndex'}">
-            <a-button type="primary" block size="large">
+            <a-button type="primary" block size="large" @click="goToPurchaseIndex()">
                 Comprar
             </a-button>
-        </router-link>
     </div>
 </template>
 
 <script>
-export default {}
+export default {
+    methods: {
+        goToPurchaseIndex(){
+            this.$store.commit('TOGGLE_SHOW_CART_SIDEBAR')
+            this.$router.push({name: 'publicPurchaseIndex'})
+        }
+    }
+}
 </script>

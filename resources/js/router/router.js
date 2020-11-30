@@ -12,6 +12,7 @@ import purchasesIndex from '../components/models/purchases/index.vue'
 import home from "../components/public/home";
 import publicProductIndex from '../components/public/products/index.vue'
 import publicPurchaseIndex from '../components/public/purchases/index.vue'
+import cartResumeIndex from '../components/public/cartResume/index.vue'
 
 
 Vue.use(Router)
@@ -77,6 +78,11 @@ export const router = new Router({
             path: '/purchase',
             name: 'publicPurchaseIndex',
             component: publicPurchaseIndex,
+        },
+        {
+            path: '/cart',
+            name: 'cartResumeIndex',
+            component: cartResumeIndex,
         },
     ]
 })

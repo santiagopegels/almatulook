@@ -13,12 +13,12 @@
                 <a-input
                     size="large"
                     v-decorator="[
-                              'userName',
-                              { rules: [{ required: true, message: 'Debe ingresar el usuario!' }] },
+                              'mail',
+                              { rules: [{ required: true, message: 'Debe ingresar el correo' }] },
                             ]"
-                    placeholder="Usuario"
+                    placeholder="Correo"
                 >
-                    <a-icon slot="prefix" type="user" style="color: rgba(0,0,0,.25)"/>
+                    <a-icon slot="prefix" type="mail" style="color: rgba(0,0,0,.25)"/>
                 </a-input>
             </a-form-item>
             <a-form-item>
@@ -26,7 +26,7 @@
                     size="large"
                     v-decorator="[
                               'password',
-                              { rules: [{ required: true, message: 'Debe ingresar la contraseña!' }] },
+                              { rules: [{ required: true, message: 'Debe ingresar la contraseña' }] },
                             ]"
                     type="password"
                     placeholder="Contraseña"

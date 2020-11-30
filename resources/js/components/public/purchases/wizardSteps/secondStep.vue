@@ -1,6 +1,6 @@
 <template>
     <div>
-        <a-icon type="environment" class="header-icon" />
+        <a-icon type="environment" class="header-icon"/>
         <h1>Dirección de Envío</h1>
         <a-form layout="vertical" @submit="handleSubmit">
             <a-row>
@@ -123,15 +123,14 @@
                 </a-col>
             </a-row>
         </a-form>
+        <a-button type="primary" block @click="nextStep()">Siguiente</a-button>
     </div>
 </template>
 
 <script>
 export default {
     data() {
-        return {
-
-        };
+        return {};
     },
     methods: {
         handleSubmit(e) {
@@ -142,6 +141,9 @@ export default {
                 }
             });
         },
+        nextStep(){
+            this.$emit('next-step')
+        }
     },
 };
 </script>

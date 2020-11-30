@@ -199,6 +199,12 @@ Vue.component('summary-purchase-product', require('./components/public/purchases
 Vue.component('summary-purchase-step-guest-form', require('./components/public/purchases/wizardSteps/guestForm.vue').default);
 Vue.component('summary-purchase-step-login-form', require('./components/public/purchases/wizardSteps/loginForm.vue').default);
 
+//Cart Resume
+Vue.component('cart-resume-index', require('./components/public/cartResume/index.vue').default);
+Vue.component('cart-resume-content', require('./components/public/cartResume/content.vue').default);
+Vue.component('cart-resume-product-row', require('./components/public/cartResume/productRow.vue').default);
+
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

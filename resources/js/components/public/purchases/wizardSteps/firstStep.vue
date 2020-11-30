@@ -1,7 +1,11 @@
 <template>
     <div>
         <summary-purchase-step-login-form v-if="showLoginForm" @as-guest="handleGuestForm()"/>
-        <summary-purchase-step-guest-form v-if="showGuestForm" @as-user="handleLoginForm()"/>
+        <summary-purchase-step-guest-form
+            v-if="showGuestForm"
+            @as-user="handleLoginForm()"
+            @next-step="nextStep"
+        />
     </div>
 </template>
 <script>
@@ -20,6 +24,9 @@ export default {
         handleGuestForm() {
             this.showLoginForm = false
             this.showGuestForm = true
+        },
+        nextStep(){
+            this.$emit('next-step')
         }
     }
 }

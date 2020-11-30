@@ -13,24 +13,9 @@
             </a-steps>
 
             <div class="steps-content" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1);">
-                <first-step v-if="current == 0"/>
-                <second-step v-if="current == 1"/>
+                <first-step v-if="current == 0" @next-step="next()"/>
+                <second-step v-if="current == 1" @next-step="next()"/>
                 <third-step v-if="current == 2"/>
-            </div>
-            <div class="steps-action">
-                <a-button v-if="current < steps.length - 1" type="primary" @click="next">
-                    Next
-                </a-button>
-                <a-button
-                    v-if="current == steps.length - 1"
-                    type="primary"
-                    @click="$message.success('Processing complete!')"
-                >
-                    Done
-                </a-button>
-                <a-button v-if="current > 0" style="margin-left: 8px" @click="prev">
-                    Previous
-                </a-button>
             </div>
         </a-col>
         <a-col class="summary-content"
@@ -47,7 +32,7 @@
 export default {
     data() {
         return {
-            current: 0,
+            current: 2,
             steps: [
                 {
                     title: 'Login',
