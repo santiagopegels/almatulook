@@ -66,7 +66,7 @@ export default {
     }
 }
 
-@media only screen and (max-width: 540px) {
+@media only screen and (max-width: 540px) and (min-width: 382px){
     .ant-carousel >>> .slick-slide {
         text-align: center;
         height: 160px;

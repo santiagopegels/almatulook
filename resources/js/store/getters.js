@@ -8,8 +8,8 @@ let getters = {
         return state.showCartSideBar;
     },
 
-    showSiderLayout: state => {
-        return state.showSiderLayout;
+    showSiderDrawerLayout: state => {
+        return state.showSiderDrawerLayout;
     },
 
     status: state => {

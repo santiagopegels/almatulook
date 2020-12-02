@@ -5,7 +5,7 @@ let state = {
      */
     status: false,
     showCartSideBar: false,
-    showSiderLayout: false,
+    showSiderDrawerLayout: false,
 
     results: [],
     term: "",
