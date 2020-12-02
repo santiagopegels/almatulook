@@ -83,46 +83,6 @@
     padding: 0;
 }
 
-.whatsApp {
-    background-color: #21c45d;
-}
-
-.instagram {
-    background: #f09433;
-    background: -moz-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-    background: -webkit-linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
-    background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f09433', endColorstr='#bc1888',GradientType=1 );
-}
-
-.social-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 50px;
-    width: 50px;
-    font-size: 30px;
-    border-radius: 50%;
-    box-shadow: 2px 2px 3px #999;
-    margin-bottom: 5px;
-    text-decoration: none;
-    color: #dcf8c6;
-}
-
-.social-button:hover {
-    opacity: 0.8;
-}
-
-.social-media {
-    position: fixed;
-    bottom: 2px;
-    right: 10px;
-    height: 110px;
-    width: 55px;
-    display: block;
-    justify-content: center;
-}
-
 .purchase-summary-img {
     width: 55px;
     height: 55px;
@@ -165,9 +125,78 @@
     height: 90px;
     object-fit: fill;
 }
-
 .cart-resume-product-title{
     font-size: large;
     font-weight: bold;
     margin-bottom: 0px;
+}
+
+.cart-resume-product-row-info-quantity-price {
+    margin-right: 4rem;
+}
+
+.cart-resume-product-content-delete-icon {
+    font-size: x-large;
+}
+
+.cart-resume-product-row-content-img {
+    display: flex;
+    width: 100px;
+}
+
+.cart-resume-product-row-info-content-list-attribute {
+    font-size: 0.8rem;
+    color: grey;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.resume-cart-summary-content {
+    margin-top: 65px;
+}
+
+@media only screen and (max-width: 767px) {
+    .resume-cart-summary-content {
+        margin-top: 5px;
+    }
+}
+
+@media only screen and (max-width: 455px) {
+    .cart-resume-product-row-img {
+        width: 50px;
+        height: 50px;
+        object-fit: fill;
+    }
+
+    .cart-resume-product-row-info-content{
+        font-size: 0.7rem;
+    }
+
+    .cart-resume-product-title{
+        font-size: 0.8rem;
+        font-weight: bold;
+        margin-bottom: 0px;
+    }
+
+    .cart-resume-product-row-info-quantity-price {
+        margin-right: 0px;
+    }
+
+    .cart-resume-product-content-delete-icon {
+        font-size: large;
+    }
+
+    .cart-resume-product-row-content-img {
+        display: flex;
+        width: 55px;
+    }
+
+    .cart-resume-product-row-info-content-list-attribute {
+        font-size: 0.6rem;
+        color: grey;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
 }

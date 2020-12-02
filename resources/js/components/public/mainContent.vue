@@ -39,7 +39,7 @@ export default {
     data() {
         return {
             opacity: 0.3,
-            show: false
+            show: true
         }
     },
     mounted() {

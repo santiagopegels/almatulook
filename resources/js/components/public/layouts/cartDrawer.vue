@@ -17,31 +17,28 @@
 </template>
 <script>
 import {mapGetters} from 'vuex'
+import innerWidth from "../../generals/innerWidth";
 
 export default {
+    mixins: [innerWidth],
     data() {
         return {
             visible: false,
             width: 450,
-            windowWidth: window.innerWidth,
         };
     },
     mounted() {
         this.$nextTick(() => {
             if (this.windowWidth < 450) {
-                this.width = 320
+                this.width = 330
             }
-            window.addEventListener('resize', this.onResize);
         })
-    },
-    beforeDestroy() {
-        window.removeEventListener('resize', this.onResize);
     },
     watch: {
         windowWidth(newWidth) {
             if (this.showCartSideBar) {
                 if (newWidth < 450) {
-                    this.width = 320
+                    this.width = 330
                 } else {
                     this.width = 450
                 }
@@ -52,9 +49,6 @@ export default {
         ...mapGetters(["showCartSideBar"]),
     },
     methods: {
-        onResize() {
-            this.windowWidth = window.innerWidth
-        },
         showDrawer() {
             this.visible = true;
         },
