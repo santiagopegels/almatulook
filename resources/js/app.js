@@ -202,7 +202,8 @@ Vue.component('summary-purchase-step-login-form', require('./components/public/p
 //Cart Resume
 Vue.component('cart-resume-index', require('./components/public/cartResume/index.vue').default);
 Vue.component('cart-resume-content', require('./components/public/cartResume/content.vue').default);
-Vue.component('cart-resume-product-row', require('./components/public/cartResume/productRow.vue').default);
+Vue.component('cart-resume-product-row', require('./components/public/cartResume/productRow.vue').default)
+Vue.component('cart-resume-summary', require('./components/public/cartResume/summary.vue').default);
 
 
 /**

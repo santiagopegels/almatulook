@@ -18,8 +18,10 @@
                :md="{span: 7, offset: 1}"
                :lg="{span: 7, offset: 1}"
                :xxl="{span: 8, offset: 3}">
+            <router-link :to="{name:'publicPurchaseIndex'}">
             <a-button style="margin-bottom: 10px" type="primary" size="large" block>Comprar</a-button>
-            <summary-purchase/>
+            </router-link>
+            <cart-resume-summary/>
         </a-col>
     </a-row>
 </template>
