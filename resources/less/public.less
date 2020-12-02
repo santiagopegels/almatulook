@@ -22,6 +22,33 @@
     }
 }
 
+.layout-sider{
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+@media only screen and (max-width: 768px) {
+    .product-card-container {
+        width: 200px;
+        &:hover {
+            box-shadow: 2px 2px 2px 1px rgba(67, 55, 63, 0.5);
+            transform: scale(1.02)
+        }
+    }
+}
+
+@media only screen and (max-width: 540px) {
+    .product-card-container {
+        width: 147px;
+        &:hover {
+            box-shadow: 2px 2px 2px 1px rgba(67, 55, 63, 0.5);
+            transform: scale(1.02)
+        }
+    }
+}
+
 .products-content {
     max-width: 1414px;
     margin: auto;
@@ -118,85 +145,4 @@
 
 .purchase-address-form-item {
     margin: 0;
-}
-
-.cart-resume-product-row-img {
-    width: 90px;
-    height: 90px;
-    object-fit: fill;
-}
-.cart-resume-product-title{
-    font-size: large;
-    font-weight: bold;
-    margin-bottom: 0px;
-}
-
-.cart-resume-product-row-info-quantity-price {
-    margin-right: 4rem;
-}
-
-.cart-resume-product-content-delete-icon {
-    font-size: x-large;
-}
-
-.cart-resume-product-row-content-img {
-    display: flex;
-    width: 100px;
-}
-
-.cart-resume-product-row-info-content-list-attribute {
-    font-size: 0.8rem;
-    color: grey;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-.resume-cart-summary-content {
-    margin-top: 65px;
-}
-
-@media only screen and (max-width: 767px) {
-    .resume-cart-summary-content {
-        margin-top: 5px;
-    }
-}
-
-@media only screen and (max-width: 455px) {
-    .cart-resume-product-row-img {
-        width: 50px;
-        height: 50px;
-        object-fit: fill;
-    }
-
-    .cart-resume-product-row-info-content{
-        font-size: 0.7rem;
-    }
-
-    .cart-resume-product-title{
-        font-size: 0.8rem;
-        font-weight: bold;
-        margin-bottom: 0px;
-    }
-
-    .cart-resume-product-row-info-quantity-price {
-        margin-right: 0px;
-    }
-
-    .cart-resume-product-content-delete-icon {
-        font-size: large;
-    }
-
-    .cart-resume-product-row-content-img {
-        display: flex;
-        width: 55px;
-    }
-
-    .cart-resume-product-row-info-content-list-attribute {
-        font-size: 0.6rem;
-        color: grey;
-        margin: 0;
-        padding: 0;
-        list-style: none;
-    }
 }

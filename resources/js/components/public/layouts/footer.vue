@@ -1,6 +1,6 @@
 <template>
     <a-layout>
-        <a-layout-footer style="margin-top: 10px; background: white; box-shadow: inset 1px 4px 7px -6px;">
+        <a-layout-footer style="z-index:20; margin-top: 10px; background: white; box-shadow: inset 1px 4px 7px -6px;">
             <a-row type="flex" justify="space-between" align="middle">
                 <a-col class="footer-findus-content">
                     <h3>ENCONTRANOS</h3>

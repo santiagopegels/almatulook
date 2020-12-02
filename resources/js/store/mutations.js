@@ -13,6 +13,10 @@ let mutations = {
         state.showCartSideBar = !state.showCartSideBar;
     },
 
+    TOGGLE_SHOW_SIDEBAR_LAYOUT(state) {
+        state.showSiderLayout = !state.showSiderLayout;
+    },
+
     SET_RESULTS(state, results = []) {
         state.results = results;
     },

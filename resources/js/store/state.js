@@ -5,6 +5,7 @@ let state = {
      */
     status: false,
     showCartSideBar: false,
+    showSiderLayout: false,
 
     results: [],
     term: "",

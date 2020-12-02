@@ -56,6 +56,26 @@ export default {
     overflow: hidden;
 }
 
+@media only screen and (max-width: 768px) {
+    .ant-carousel >>> .slick-slide {
+        text-align: center;
+        height: 220px;
+        line-height: 220px;
+        background: lightgray;
+        overflow: hidden;
+    }
+}
+
+@media only screen and (max-width: 540px) {
+    .ant-carousel >>> .slick-slide {
+        text-align: center;
+        height: 160px;
+        line-height: 160px;
+        background: lightgray;
+        overflow: hidden;
+    }
+}
+
 .ant-carousel >>> .custom-slick-arrow {
     width: 25px;
     height: 25px;

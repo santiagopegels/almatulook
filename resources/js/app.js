@@ -177,6 +177,8 @@ Vue.component('cart-drawer', require('./components/public/layouts/cartDrawer.vue
 Vue.component('home-product-card', require('./components/public/products/productCard.vue').default);
 Vue.component('header-menu', require('./components/public/layouts/headerMenu.vue').default);
 Vue.component('sider-layout', require('./components/public/layouts/sider.vue').default);
+Vue.component('sider-menu-layout', require('./components/public/layouts/siderMenu.vue').default);
+
 
 //Cart Drawer
 Vue.component('cart-drawer-header', require('./components/public/cartDrawer/header.vue').default);

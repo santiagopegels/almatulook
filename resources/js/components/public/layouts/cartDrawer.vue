@@ -4,7 +4,7 @@
             :width="width"
             placement="right"
             :closable="false"
-            :visible="showCartSideBar"
+            :visible="this.showCartSideBar"
             @close="onClose"
         >
             <template slot="title">
