@@ -17,7 +17,7 @@ export default {
     mounted() {
         this.$nextTick(() => {
             if (this.windowWidth <= 768) {
-                this.siderWidth = 210
+                this.siderWidth = 200
             }
             if (this.windowWidth <= 540) {
                 this.siderWidth = 145

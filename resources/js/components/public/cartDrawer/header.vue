@@ -6,8 +6,9 @@
             </a-row>
             <a-row type="flex">
                 <a-space :size="20">
-                    <a-icon type="crown" class="cart-drawer-header-icon"/>
-                    <a-avatar style="backgroundColor:#9E7B1A" icon="user"/>
+                    <a href="/login">
+                        <a-avatar style="backgroundColor:#9E7B1A" icon="login"/>
+                    </a>
                 </a-space>
             </a-row>
         </a-row>

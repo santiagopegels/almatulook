@@ -31,6 +31,8 @@ export default {
         this.$nextTick(() => {
             if (this.windowWidth < 450) {
                 this.width = 330
+            } else {
+                this.width = 450
             }
         })
     },

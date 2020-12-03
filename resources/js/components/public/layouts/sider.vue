@@ -16,7 +16,7 @@ export default {
     },
     mounted() {
         this.$nextTick(() => {
-            if (this.windowWidth <= 400) {
+            if (this.windowWidth <= 415) {
                 this.showSiderFixed = false
                 this.showSiderDrawer = true
             }
@@ -24,7 +24,7 @@ export default {
     },
     watch: {
         windowWidth(newWidth) {
-            if (newWidth <= 400) {
+            if (newWidth <= 415) {
                 this.showSiderFixed = false
                 this.showSiderDrawer = true
             } else {

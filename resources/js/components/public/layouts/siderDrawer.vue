@@ -2,7 +2,6 @@
     <div>
         <a-menu mode="horizontal" style="text-align: center">
             <a-menu-item key="order">
-                <a-icon type="swap"/>
                 <a-select size="large" default-value="relevantes" style="width: 100%">
                     <a-select-option value="relevantes">
                         Más relevantes
@@ -28,9 +27,9 @@
             </a-menu-item>
         </a-menu>
         <a-drawer
+            title="Filtros"
             width="320"
             placement="left"
-            :closable="false"
             :visible="this.showSiderDrawerLayout"
             @close="onClose"
         >

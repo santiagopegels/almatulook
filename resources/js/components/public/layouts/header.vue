@@ -17,11 +17,11 @@
                    :xxl="{span: 8, order:2, pull:1}">
                 <a-input-search placeholder="Buscar Producto" size="large" enter-button/>
             </a-col>
-            <a-col :xs="{span: 12, order:2}"
-                   :sm="{span: 7, order:2}"
+            <a-col :xs="{span: 9, order:2}"
+                   :sm="{span: 5, order:2}"
                    :md="{span: 4, order:3}"
-                   :lg="{span: 4, order:3}"
-                   :xxl="{span: 3, order:3}">
+                   :lg="{span: 3, order:3}"
+                   :xxl="{span: 2, order:3}">
                 <a-row type="flex" justify="space-around" align="middle" style="margin-right: 15px;">
                     <a-badge count="3"
                              :number-style="{
@@ -30,8 +30,7 @@
                               }">
                     <a-icon type="shopping" class="header-icon" @click="toggleCartSidebar"/>
                     </a-badge>
-                    <a-icon type="crown" class="header-icon"/>
-                    <a href="/login">
+                    <a href="/login" title="Iniciar Sesión">
                     <a-avatar style="backgroundColor:#9E7B1A" icon="user"></a-avatar>
                     </a>
                 </a-row>

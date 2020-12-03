@@ -1,6 +1,6 @@
 <template>
     <div style="padding: 10px; text-align: center">
-    <a-card hoverable class="product-card-container">
+    <a-card hoverable class="product-card-container" :bodyStyle="{'padding-left': '2'}">
         <a-carousel style="width: 100%; padding: 8px" arrows  slot="cover">
             <div
                 slot="prevArrow"
@@ -20,9 +20,12 @@
                 <img class="carousel-img" src="https://d35uzl96cmnmq2.cloudfront.net/processed/Round_Trip_Airfare_A_1600.jpg"/>
             </div>
         </a-carousel>
-        <a-card-meta class="product-card-title-container" title="Remera Ricky Sarkani">
+        <a-card-meta class="product-card-title-container">
+            <template slot="title">
+                <p style="white-space: normal; margin-bottom: 0px">Remera Ricky Sarkani</p>
+            </template>
             <template slot="description">
-                <h2 class="bold">$10.99</h2>
+                <h2 class="bold">$10000.99</h2>
             </template>
         </a-card-meta>
     </a-card>
@@ -66,11 +69,11 @@ export default {
     }
 }
 
-@media only screen and (max-width: 540px) and (min-width: 382px){
+@media only screen and (max-width: 540px) and (min-width: 415px){
     .ant-carousel >>> .slick-slide {
         text-align: center;
-        height: 160px;
-        line-height: 160px;
+        height: 140px;
+        line-height: 140px;
         background: lightgray;
         overflow: hidden;
     }
