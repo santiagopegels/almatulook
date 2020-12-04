@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Admin;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -18,6 +18,7 @@ class Product extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'price' => $this->price,
+            'cost_price' => $this->cost_price,
             'stock' => $this->getTotalStock(),
             'images' => $this->getImages(),
             'category' => new Category($this->category),

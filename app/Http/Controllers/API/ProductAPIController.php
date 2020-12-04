@@ -1,10 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\API\Admin;
+namespace App\Http\Controllers\API;
 
-use App\Http\Requests\API\Admin\CreateProductAPIRequest;
-use App\Http\Requests\API\Admin\UpdateProductAPIRequest;
-use App\Http\Resources\Admin\ProductCollection;
+use App\Http\Resources\ProductCollection;
 use App\Models\Admin\AttributeValueGroup;
 use App\Models\Admin\Product;
 use App\ProductAttributeValueGroup;
@@ -43,19 +41,13 @@ class ProductAPIController extends AppBaseController
         $input = $request->all();
 
         $term = isset($input['term']) && !empty($input['term']) ? $input['term'] : null;
-        $onlyWithAvailableStock = isset($input['withAvailableStock']) && !empty($input['withAvailableStock']) ? $input['withAvailableStock'] : null;
 
-        $products = Product::query();
-
-        if ($onlyWithAvailableStock) {
-            $products = $products
-                ->whereExists(function ($query) {
-                    $query->select('pavg.id')
-                        ->from('products_attribute_values_group as pavg')
-                        ->whereRaw('pavg.product_id = products.id')
-                        ->whereRaw('pavg.stock > 0');
-                });
-        }
+        $products = Product::query()->whereExists(function ($query) {
+            $query->select('pavg.id')
+                ->from('products_attribute_values_group as pavg')
+                ->whereRaw('pavg.product_id = products.id')
+                ->whereRaw('pavg.stock > 0');
+        });
 
         if (!is_null($term)) {
             $products = $products->where('id', 'like', "%{$term}%")

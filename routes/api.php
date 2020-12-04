@@ -19,7 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => 'role:admin|administrador'], function () {
     // resources
     Route::resource('roles', 'Admin\RoleAPIController');
     Route::resource('permissions', 'Admin\PermissionAPIController');
@@ -29,6 +29,9 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('values', 'Admin\ValueAPIController');
     Route::resource('parameters', 'Admin\ParameterAPIController');
     Route::resource('products', 'Admin\ProductAPIController');
+    Route::resource('purchases', 'Admin\PurchaseAPIController');
+    Route::resource('purchase_details', 'Admin\PurchaseDetailAPIController');
+
 
     // get all
     Route::get('users_all', ['uses' => 'Admin\UserAPIController@all']);
@@ -49,14 +52,4 @@ Route::group(['prefix' => 'admin'], function () {
 
     //extra
     Route::post('product/{product_id}/deleteStock', ['uses' => 'Admin\ProductAPIController@deleteStock']);
-});
-
-
-Route::group(['prefix' => 'admin'], function () {
-    Route::resource('purchases', 'Admin\PurchaseAPIController');
-});
-
-
-Route::group(['prefix' => 'admin'], function () {
-    Route::resource('purchase_details', 'Admin\PurchaseDetailAPIController');
 });
