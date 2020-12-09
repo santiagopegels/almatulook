@@ -14,7 +14,7 @@
                                            @click.native="pushShowProductRoute(product)"
                         />
                 </a-row>
-                <a-pagination key="pagination" style="text-align: center; margin-top:15px;" v-model="page" :total="50" show-less-items/>
+                <a-pagination key="pagination" style="text-align: center; margin-top:15px;" v-model="page" :total="getTotal" show-less-items @change="fetch"/>
             </fade-transition>
         </a-layout-content>
     </a-layout>
@@ -44,6 +44,17 @@ export default {
     },
     computed: {
         ...mapGetters(["products", "isLoading", "page"]),
+        page: {
+            set(val) {
+                this.$store.state.page = val;
+            },
+            get() {
+                return this.$store.state.page;
+            },
+        },
+        getTotal: function () {
+            return this.products.total;
+        },
     },
     methods: {
         async fetch() {
