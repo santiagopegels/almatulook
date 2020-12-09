@@ -11,16 +11,23 @@
         <div slot="nextArrow" slot-scope="props" class="custom-slick-arrow" style="right: 10px">
             <a-icon type="right-circle"/>
         </div>
-        <div>
-            <img  class="carousel-img" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"/>
-        </div>
-        <div>
-            <img class="carousel-img" src="https://d35uzl96cmnmq2.cloudfront.net/processed/Round_Trip_Airfare_A_1600.jpg"/>
-        </div>
+        <img v-if="selected_product.images.length > 0" v-for="image in selected_product.images" class="carousel-img" :src="image"/>
+        <img v-if="selected_product.images.length == 0" :src="logo"/>
     </a-carousel>
 </template>
 <script>
-export default {};
+import logo from "../../../../../public/img/logo/logo.png";
+import {mapGetters} from 'vuex'
+export default {
+    computed: {
+      ...mapGetters(['selected_product'])
+    },
+    data() {
+        return {
+            logo: logo,
+        }
+    },
+};
 </script>
 <style scoped>
 

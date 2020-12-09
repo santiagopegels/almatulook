@@ -191,6 +191,7 @@ Vue.component('cart-drawer-product', require('./components/public/cartDrawer/pro
 //Product
 Vue.component('product-index', require('./components/public/products/index.vue').default);
 Vue.component('product-images-carousel', require('./components/public/products/imagesProduct.vue').default);
+Vue.component('product-attribute-select-content', require('./components/public/products/attributeSelectContent.vue').default);
 Vue.component('product-attribute-select', require('./components/public/products/attributeSelect.vue').default);
 
 //Purchase

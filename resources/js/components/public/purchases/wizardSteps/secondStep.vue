@@ -41,7 +41,7 @@
                     </a-form-item>
                 </a-col>
             </a-row>
-            <a-form-item label="Teléfono" class="purchase-address-form-item">
+            <a-form-item label="Celular" class="purchase-address-form-item">
                 <a-input
                     size="large"
                     v-decorator="[
@@ -55,14 +55,11 @@
                 >
                     <a-select
                         slot="addonBefore"
-                        v-decorator="['prefix', { initialValue: '86' }]"
+                        default-value="54"
                         style="width: 70px"
                     >
-                        <a-select-option value="86">
-                            +86
-                        </a-select-option>
-                        <a-select-option value="87">
-                            +87
+                        <a-select-option value="54">
+                            +54
                         </a-select-option>
                     </a-select>
                 </a-input>

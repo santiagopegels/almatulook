@@ -1,5 +1,14 @@
 <template>
-    <a-row style="padding-top: 20px;" type="flex" justify="center" >
+    <a-row style="padding-top: 20px;" type="flex" justify="center">
+        <a-col
+               :xs="{span: 18, offset: 6}"
+               :sm="{span: 15, offset: 9}"
+               :md="{span: 24, offset: 5}"
+               :lg="{span: 21, offset: 3}"
+               :xxl="{span: 21, offset: 3}">
+            <p style="font-size: 2rem; margin: 0; padding: 5px">AlmaTuLook</p>
+        </a-col>
+        <a-divider></a-divider>
         <a-col :xs="{span: 22}"
                :sm="{span: 22}"
                :md="{span: 11, offset: 1}"

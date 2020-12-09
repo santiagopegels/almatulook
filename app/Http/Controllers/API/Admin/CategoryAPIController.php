@@ -4,7 +4,7 @@ namespace App\Http\Controllers\API\Admin;
 
 use App\Http\Requests\API\Admin\CreateCategoryAPIRequest;
 use App\Http\Requests\API\Admin\UpdateCategoryAPIRequest;
-use App\Http\Resources\CategoryCollection;
+use App\Http\Resources\Admin\CategoryCollection;
 use App\Models\Admin\Category;
 use App\Repositories\Admin\CategoryRepository;
 use Illuminate\Http\Request;

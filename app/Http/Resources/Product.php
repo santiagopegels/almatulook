@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Resources\Admin\Category;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class Product extends JsonResource

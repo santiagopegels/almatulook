@@ -17,12 +17,11 @@
                    :md="{span: 11, offset:1}"
                    :lg="{span: 11, offset:1}"
                    :xxl="{span: 11, offset:1}">
-                <p style="font-size: 3rem; margin-bottom: 0">Remera Riki Sarkani</p>
-                <p style="font-size: 1.2rem">Item N° 1244</p>
-                <p style="font-size: 2.5rem; margin-bottom: 0" class="bold">$1.999,99</p>
+                <p style="font-size: 3rem; margin-bottom: 0">{{selected_product.name}}</p>
+                <p style="font-size: 1.2rem">Item N° {{ selected_product.id }}</p>
+                <p style="font-size: 2.5rem; margin-bottom: 0" class="bold">{{ selected_product.price | currency}}</p>
                 <a-divider></a-divider>
-                <product-attribute-select />
-                <product-attribute-select />
+                <product-attribute-select-content />
                 <a-divider></a-divider>
                 <a-button style="margin-top:10px; width:97%; height: 50px;" size="large" block type="primary" @click="addToCart()">
                     Agregar a la Bolsa
@@ -33,7 +32,11 @@
     </div>
 </template>
 <script>
+import {mapGetters} from 'vuex'
 export default {
+    computed: {
+        ...mapGetters(['selected_product'])
+    },
     methods: {
         addToCart(){
             this.$store.commit('TOGGLE_SHOW_CART_SIDEBAR')

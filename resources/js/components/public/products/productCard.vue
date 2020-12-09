@@ -13,38 +13,28 @@
             <div slot="nextArrow" slot-scope="props" class="custom-slick-arrow" style="right: 10px">
                 <a-icon type="right-circle"/>
             </div>
-            <div>
-                <img  class="carousel-img" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"/>
-            </div>
-            <div>
-                <img class="carousel-img" src="https://d35uzl96cmnmq2.cloudfront.net/processed/Round_Trip_Airfare_A_1600.jpg"/>
-            </div>
+            <img v-if="images.length > 0" v-for="image in images" class="carousel-img" :src="image"/>
+            <img v-if="images.length == 0" :src="logo"/>
         </a-carousel>
         <a-card-meta class="product-card-title-container">
             <template slot="title">
-                <p style="white-space: normal; margin-bottom: 0px">Remera Ricky Sarkani</p>
+                <p style="white-space: normal; margin-bottom: 0px">{{ name }}</p>
             </template>
             <template slot="description">
-                <h2 class="bold">$10000.99</h2>
+                <h2 class="bold">{{ price | currency}}</h2>
             </template>
         </a-card-meta>
     </a-card>
     </div>
 </template>
 <script>
+import logo from '../../../../../public/img/logo/logo.png'
 export default {
+    props: ['price','name', 'images'],
     data() {
         return {
-            images: ['https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png',
-                'https://d35uzl96cmnmq2.cloudfront.net/processed/Round_Trip_Airfare_A_1600.jpg'
-            ],
-            imageIndex: 0,
+            logo: logo,
             show: true
-        }
-    },
-    methods: {
-        async changeImage() {
-            this.imageIndex < this.images.length -1 ? this.imageIndex++ : this.imageIndex = 0
         }
     },
 }

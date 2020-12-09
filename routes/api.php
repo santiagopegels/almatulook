@@ -19,7 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::group(['prefix' => 'admin', 'middleware' => 'role:admin|administrador'], function () {
+Route::group(['prefix' => 'admin'], function () {
     // resources
     Route::resource('roles', 'Admin\RoleAPIController');
     Route::resource('permissions', 'Admin\PermissionAPIController');
@@ -53,3 +53,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'role:admin|administrador'], 
     //extra
     Route::post('product/{product_id}/deleteStock', ['uses' => 'Admin\ProductAPIController@deleteStock']);
 });
+
+Route::get('products', 'ProductAPIController@index');
+
+

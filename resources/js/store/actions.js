@@ -4,11 +4,9 @@ const apiKey = 'x-api-key';
 
 // general path
 const api_admin = '/api/admin';
+const api_public= '/api';
 
 const path_users = '/api/key/users';
-const path_users_all = '/api/admin/users_all';
-const path_roles = '/api/admin/roles';
-const path_roles_all = '/api/admin/roles_all';
 
 const config = {
     headers: {
@@ -463,6 +461,55 @@ let actions = {
     },
 
     /**
+     * PUBLIC ACTIONS
+     */
+
+    fetchProductsPublic({ commit }, params) {
+        //console.log(`fetch.${params.model}`, params);
+        return new Promise(async (resolve, reject) => {
+
+            commit('SET_LOADING', true);
+
+            var path = await actions.getPublicEndpoint(params);
+
+            path = path.concat('?page=' + (Number(params.page) > 0 ? Number(params.page) : 1));
+
+            if (typeof params.term !== typeof undefined && String(params.term).length > 0) {
+                path = path.concat('&term=' + params.term);
+            }
+
+            console.log(`path.${params.model}`, path);
+
+            window.axios.get(path).then(async response => {
+                if (response.data.success) {
+                    console.log(response.data)
+                    await actions.removeFromData(commit, params);
+                    await actions.setData(commit, { params: params, data: response.data.data });
+                    await commit('SET_LOADING', false);
+                    resolve({
+                        status: true,
+                        message: response.data.data
+                    });
+                } else {
+                    commit('SET_LOADING', false);
+                    reject({
+                        status: false,
+                        message: response.data.message
+                    });
+                }
+
+            }).catch(error => {
+                console.error(`fetch.${params.model}`, error);
+                commit('SET_LOADING', false);
+                reject({
+                    status: false,
+                    message: error
+                });
+            });
+        });
+    },
+
+    /**
      * GET ENDPOINT
      * @param {*} params
      */
@@ -480,6 +527,23 @@ let actions = {
         return path;
     },
 
+    /**
+     * GET PUBLIC ENDPOINT
+     * @param {*} params
+     */
+    async getPublicEndpoint(params) {
+        let path = `${api_public}/${params.model}`;
+
+        if (params.data && params.data.id) {
+            path = path.concat(`/${params.data.id}`);
+        }
+
+        if (params.additional_path) {
+            path = path.concat(`/${params.additional_path}`);
+        }
+
+        return path;
+    },
     /**
      * SET DATA
      * @param {*} commit

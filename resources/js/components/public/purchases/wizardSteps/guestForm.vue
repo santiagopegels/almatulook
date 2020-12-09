@@ -15,7 +15,7 @@
                 <a-icon slot="prefix" type="mail" style="color: rgba(0,0,0,.25)"/>
             </a-input>
         </a-form-item>
-        <a-button type="primary" block @click="nextStep()">Siguiente</a-button>
+        <a-button type="primary" block @click="nextStep()">Continuar como invitado</a-button>
     </div>
 </template>
 
