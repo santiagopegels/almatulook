@@ -1,40 +1,39 @@
 <template>
     <div>
         <a-menu mode="horizontal" :style="{'background' : '#554B52', 'color':'white'}">
-            <a-sub-menu key="mail">
+            <a-sub-menu key="categories" style="margin-left: 5px">
                 <span slot="title"><a-icon type="tags"/><span>CATEGORIAS</span></span>
-                <a-menu-item key="3">
-                    Option 3
-                </a-menu-item>
-                <a-menu-item key="4">
-                    Option 4
-                </a-menu-item>
-                <a-sub-menu key="sub1-2" title="Submenu">
-                    <a-menu-item key="5">
-                        Option 5
-                    </a-menu-item>
-                    <a-menu-item key="6">
-                        Option 6
-                    </a-menu-item>
-                    <a-sub-menu key="sub2-2" title="submenu">
-                        <a-menu-item key="5">
-                            Option 5
-                        </a-menu-item>
-                        <a-menu-item key="6">
-                            Option 6
-                        </a-menu-item>
-                    </a-sub-menu>
-                </a-sub-menu>
+                <header-menu-item v-for="category in categoriesAll" :item="category" :key="category.id" :clickEvent="handleSelectCategory" />
             </a-sub-menu>
         </a-menu>
     </div>
 </template>
 <script>
+import {mapGetters} from 'vuex'
 export default {
     data() {
         return {
-            current: ['mail'],
-        };
+            model: "categories",
+        }
     },
+    mounted() {
+        if (!this.categoriesAll.data) {
+            this.fetch();
+        }
+    },
+    computed: {
+        ...mapGetters(['categoriesAll'])
+    },
+    methods: {
+        async fetch() {
+            await this.$store.dispatch("fetchAll", {
+                model: this.model,
+            })
+                .catch(error => this.$toasted.global.ToastedError({message: error.message.message}));
+        },
+        handleSelectCategory() {
+            console.log('algo')
+        }
+    }
 };
 </script>

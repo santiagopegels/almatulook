@@ -10,7 +10,7 @@ use App\Repositories\Admin\CategoryRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use Response;
-use App\Http\Resources\Category as CategoryResource;
+use App\Http\Resources\Admin\Category as CategoryResource;
 
 /**
  * Class CategoryController
