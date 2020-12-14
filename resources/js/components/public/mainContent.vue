@@ -44,6 +44,7 @@ export default {
         ...mapGetters(["products", "isLoading", "page", 'selected_category', 'term', 'orderProducts']),
         page: {
             set(val) {
+                window.scrollTo(0,0);
                 this.$store.state.page = val;
             },
             get() {

@@ -63,6 +63,7 @@ export default {
             this.$store.commit('TOGGLE_SHOW_CART_SIDEBAR')
         },
         async filterProducts(term){
+            this.$store.commit('SET_PAGE', 1)
             this.$store.commit('SET_TERM', term)
         }
     }

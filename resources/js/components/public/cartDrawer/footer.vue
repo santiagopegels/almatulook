@@ -2,7 +2,7 @@
     <div>
         <a-row type="flex" justify="space-between">
             <h2 class="bold">SUBTOTAL</h2>
-            <h2 class="bold"> $12455.53 </h2>
+            <h2 class="bold"> {{  getSubtotal | currency }}</h2>
         </a-row>
             <a-button type="primary" block size="large" @click="goToPurchaseIndex()">
                 Comprar
@@ -11,7 +11,17 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
 export default {
+    computed: {
+      ...mapGetters(['bagProducts']),
+        getSubtotal(){
+          const subtotalReducer = (subtotal, product) => subtotal + Number(product.price);
+          return this.bagProducts.reduce(subtotalReducer, 0)
+        }
+    },
+    watch: {
+    },
     methods: {
         goToPurchaseIndex(){
             this.$store.commit('TOGGLE_SHOW_CART_SIDEBAR')
