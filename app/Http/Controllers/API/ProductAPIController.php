@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Resources\ProductCollection;
 use App\Models\Admin\AttributeValueGroup;
+use App\Models\Admin\Category;
 use App\Models\Admin\Product;
 use App\ProductAttributeValueGroup;
 use App\Repositories\Admin\ProductRepository;
@@ -41,8 +42,11 @@ class ProductAPIController extends AppBaseController
         $input = $request->all();
 
         $term = isset($input['term']) && !empty($input['term']) ? $input['term'] : null;
+        $category = isset($input['category']) && !empty($input['category']) ? Category::find($input['category']) : null;
 
-        $products = Product::query()->whereExists(function ($query) {
+        $products = Product::query()->category($category);
+
+        $products->whereExists(function ($query) {
             $query->select('pavg.id')
                 ->from('products_attribute_values_group as pavg')
                 ->whereRaw('pavg.product_id = products.id')

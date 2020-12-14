@@ -27,7 +27,6 @@ class Category extends Model
     protected $dates = ['deleted_at'];
 
 
-
     public $fillable = [
         'name',
         'slug',
@@ -72,6 +71,37 @@ class Category extends Model
     public function attributes()
     {
         return $this->belongsToMany(Attribute::class, 'categories_attributes')->with('values');
+    }
+
+    public function childrenRecursive()
+    {
+        return $this->children()->with('childrenRecursive');
+    }
+
+    static function getParentAndChildrenIdArray(Category $category)
+    {
+        $category = Category::with('childrenRecursive')->where('id', $category->id)->first();
+        return Category::getCategoriesIds($category);
+    }
+
+    static function getCategoriesIds($category)
+    {
+        if (!empty($category)) {
+            $array = array($category->id);
+            if (count($category->childrenRecursive) == 0) return $array;
+            else return array_merge($array, Category::getChildrenIds($category->childrenRecursive));
+        } else return null;
+    }
+
+    static function getChildrenIds($subcategories)
+    {
+        $array = array();
+        foreach ($subcategories as $subcategory) {
+            array_push($array, $subcategory->id);
+            if (count($subcategory->childrenRecursive))
+                $array = array_merge($array, Category::getChildrenIds($subcategory->childrenRecursive));
+        }
+        return $array;
     }
 
 }

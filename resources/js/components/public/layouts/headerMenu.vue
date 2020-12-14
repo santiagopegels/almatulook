@@ -1,15 +1,20 @@
 <template>
     <div>
         <a-menu mode="horizontal" :style="{'background' : '#554B52', 'color':'white'}">
-            <a-sub-menu key="categories" style="margin-left: 5px">
-                <span slot="title"><a-icon type="tags"/><span>CATEGORIAS</span></span>
-                <header-menu-item v-for="category in categoriesAll" :item="category" :key="category.id" :clickEvent="handleSelectCategory" />
-            </a-sub-menu>
+            <a-cascader :options="categoriesAll"
+                        change-on-select
+                        @change="onChange"
+                        :field-names="{ label: 'name', value: 'id', children: 'children'}"
+                        style="margin-left: 0.8rem;"
+            >
+                <a-button type="ghost" style="border: 0px" ><a-icon type="tags"/><span>CATEGORIAS</span></a-button>
+            </a-cascader>
         </a-menu>
     </div>
 </template>
 <script>
 import {mapGetters} from 'vuex'
+
 export default {
     data() {
         return {
@@ -31,9 +36,10 @@ export default {
             })
                 .catch(error => this.$toasted.global.ToastedError({message: error.message.message}));
         },
-        handleSelectCategory() {
-            console.log('algo')
-        }
+        onChange(value, selectedOptions) {
+            let categorySelected = selectedOptions[selectedOptions.length -1]
+            this.$store.commit('SET_SELECTED_CATEGORY', categorySelected)
+        },
     }
 };
 </script>

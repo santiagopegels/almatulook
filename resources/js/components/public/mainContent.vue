@@ -43,7 +43,7 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(["products", "isLoading", "page"]),
+        ...mapGetters(["products", "isLoading", "page", 'selected_category']),
         page: {
             set(val) {
                 this.$store.state.page = val;
@@ -56,14 +56,18 @@ export default {
             return this.products.total;
         },
     },
+    watch: {
+      selected_category(){
+         this.fetch()
+      }
+    },
     methods: {
         async fetch() {
             await this.$store.dispatch("fetchProductsPublic", {
                 model: this.model,
-                page: this.page
-            }).then(response => {
-                if(response.status){
-                }
+                page: this.page,
+                category: this.selected_category.id
+
             })
                 .catch(error => this.$toasted.global.ToastedError({message: error.message.message}));
         },

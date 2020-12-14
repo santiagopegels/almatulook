@@ -113,4 +113,12 @@ class Product extends Model implements HasMedia
         return $attributes;
     }
 
+    public function scopeCategory($query, $category)
+    {
+        if (is_null($category)) {
+            return $query;
+        }
+        return $query->whereIn('category_id', Category::getParentAndChildrenIdArray($category));
+    }
+
 }

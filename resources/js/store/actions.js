@@ -478,6 +478,10 @@ let actions = {
                 path = path.concat('&term=' + params.term);
             }
 
+            if (typeof params.category !== typeof undefined && params.category) {
+                path = path.concat('&category=' + params.category);
+            }
+
             console.log(`path.${params.model}`, path);
 
             window.axios.get(path).then(async response => {
