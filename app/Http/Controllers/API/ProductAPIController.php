@@ -43,6 +43,7 @@ class ProductAPIController extends AppBaseController
 
         $term = isset($input['term']) && !empty($input['term']) ? $input['term'] : null;
         $category = isset($input['category']) && !empty($input['category']) ? Category::find($input['category']) : null;
+        $order = isset($input['order']) && !empty($input['order']) ? $input['order'] : null;
 
         $products = Product::query()->category($category);
 
@@ -56,6 +57,20 @@ class ProductAPIController extends AppBaseController
         if (!is_null($term)) {
             $products = $products->where('id', 'like', "%{$term}%")
                 ->orWhere('name', 'like', "%{$term}%");
+        }
+
+        if(!is_null($order)){
+            if($order === 'lower'){
+                $products->orderBy('price', 'asc');
+            }
+            if($order === 'higher'){
+                $products->orderBy('price', 'desc');
+            }
+            if($order === 'launching'){
+                $products->orderBy('created_at', 'desc');
+            }
+        } else {
+            $products->orderBy('created_at', 'desc');
         }
 
         $products = $products->paginate(self::$limit);

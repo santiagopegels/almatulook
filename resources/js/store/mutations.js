@@ -25,8 +25,12 @@ let mutations = {
         state.generalObject = generalObject;
     },
 
-    SET_TERM(state, term = []) {
+    SET_TERM(state, term = '') {
         state.term = term;
+    },
+
+    SET_ORDER_PRODUCTS(state, orderProducts) {
+        state.orderProducts = orderProducts;
     },
 
     SET_PAGE(state, page) {

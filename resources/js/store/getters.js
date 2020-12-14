@@ -28,6 +28,10 @@ let getters = {
         return state.page;
     },
 
+    orderProducts: state => {
+        return state.orderProducts;
+    },
+
     /** MODELS */
 
     users: state => {

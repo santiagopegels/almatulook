@@ -5,20 +5,14 @@
     >
         <a-row style="padding: 5px;margin-left: 15px; margin-top: 10px;">
             <a-form-item>
-                <a-select size="large" default-value="relevantes" style="width: 80%">
-                    <a-select-option value="relevantes">
-                        Más relevantes
-                    </a-select-option>
-                    <a-select-option value="vendidos">
-                        Más vendidos
-                    </a-select-option>
-                    <a-select-option value="lanzamientos">
+                <a-select size="large" style="width: 80%" v-model="orderBy">
+                    <a-select-option value="launching">
                         Lanzamientos
                     </a-select-option>
-                    <a-select-option value="bajos">
+                    <a-select-option value="lower">
                         Precio más bajos
                     </a-select-option>
-                    <a-select-option value="altos">
+                    <a-select-option value="higher">
                         Precio más altos
                     </a-select-option>
                 </a-select>
@@ -93,3 +87,21 @@
         </a-row>
     </a-menu>
 </template>
+<script>
+import {mapGetters} from 'vuex'
+export default {
+    data(){
+        return {
+            orderBy: 'launching'
+        }
+    },
+    computed:{
+      ...mapGetters(['orderProducts'])
+    },
+    watch: {
+      orderBy: function (value){
+          this.$store.commit('SET_ORDER_PRODUCTS', value)
+      }
+    },
+}
+</script>

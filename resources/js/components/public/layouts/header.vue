@@ -15,7 +15,13 @@
                    :md="{span: 8, order:2}"
                    :lg="{span: 8, order:2}"
                    :xxl="{span: 8, order:2, pull:1}">
-                <a-input-search placeholder="Buscar Producto" size="large" enter-button/>
+                <a-input-search placeholder="Buscar Producto"
+                                size="large"
+                                enter-button
+                                allow-clear
+                                @search="filterProducts(productSearchTerm)"
+                                v-model="productSearchTerm"
+                />
             </a-col>
             <a-col :xs="{span: 9, order:2}"
                    :sm="{span: 5, order:2}"
@@ -46,6 +52,7 @@ export default {
     data: function () {
         return {
             logo: logo,
+            productSearchTerm: ''
         };
     },
     computed:{
@@ -54,6 +61,9 @@ export default {
     methods: {
         async toggleCartSidebar(){
             this.$store.commit('TOGGLE_SHOW_CART_SIDEBAR')
+        },
+        async filterProducts(term){
+            this.$store.commit('SET_TERM', term)
         }
     }
 }

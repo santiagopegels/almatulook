@@ -9,6 +9,7 @@ let state = {
 
     results: [],
     term: "",
+    orderProducts: null,
 
     nodels_permissions: [
         'users',

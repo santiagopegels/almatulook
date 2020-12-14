@@ -36,9 +36,9 @@ export default {
             })
                 .catch(error => this.$toasted.global.ToastedError({message: error.message.message}));
         },
-        onChange(value, selectedOptions) {
+        async onChange(value, selectedOptions) {
             let categorySelected = selectedOptions[selectedOptions.length -1]
-            this.$store.commit('SET_SELECTED_CATEGORY', categorySelected)
+            await this.$store.commit('SET_SELECTED_CATEGORY', categorySelected)
         },
     }
 };

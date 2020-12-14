@@ -6,15 +6,13 @@
                 <a-spin style="padding:5px;" size="large"/>
             </a-row>
             <fade-transition :duration="800" group v-if="!isLoading">
-                <a-row key="productList" type="flex" justify="center" >
-                        <home-product-card v-for="product in this.products.data" :key="product.id"
-                                           :price="product.price"
-                                           :name="product.name"
-                                           :images="product.images"
-                                           @click.native="pushShowProductRoute(product)"
-                        />
+                <a-row key="productList" type="flex" justify="center">
+                    <home-product-card v-for="product in this.products.data" :key="product.id"
+                                       :product="product"
+                    />
                 </a-row>
-                <a-pagination key="pagination" style="text-align: center; margin-top:15px;" v-model="page" :total="getTotal" show-less-items @change="fetch"/>
+                <a-pagination key="pagination" style="text-align: center; margin-top:15px;" v-model="page"
+                              :total="getTotal" show-less-items @change="fetch"/>
             </fade-transition>
         </a-layout-content>
     </a-layout>
@@ -43,7 +41,7 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(["products", "isLoading", "page", 'selected_category']),
+        ...mapGetters(["products", "isLoading", "page", 'selected_category', 'term', 'orderProducts']),
         page: {
             set(val) {
                 this.$store.state.page = val;
@@ -57,30 +55,28 @@ export default {
         },
     },
     watch: {
-      selected_category(){
-         this.fetch()
-      }
+        selected_category() {
+            this.fetch()
+        },
+        term() {
+            this.fetch()
+        },
+        orderProducts(){
+            this.fetch()
+        }
     },
     methods: {
         async fetch() {
             await this.$store.dispatch("fetchProductsPublic", {
                 model: this.model,
                 page: this.page,
-                category: this.selected_category.id
-
+                category: this.selected_category.id,
+                term: this.term,
+                order: this.orderProducts
             })
                 .catch(error => this.$toasted.global.ToastedError({message: error.message.message}));
         },
-        async pushShowProductRoute(model){
-            await this.$store.commit("SET_SELECTED_PRODUCT", {
-                id: model.id,
-                name: model.name,
-                price: Number(model.price),
-                images: model.images,
-                attributes: model.attributes,
-            });
-            await this.$router.push({name: 'publicProductIndex'})
-        },
+
     }
 }
 </script>

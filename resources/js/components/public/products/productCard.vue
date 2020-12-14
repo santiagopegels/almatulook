@@ -13,15 +13,16 @@
             <div slot="nextArrow" slot-scope="props" class="custom-slick-arrow" style="right: 10px">
                 <a-icon type="right-circle"/>
             </div>
-            <img v-if="images.length > 0" v-for="image in images" class="carousel-img" :src="image"/>
-            <img v-if="images.length == 0" :src="logo"/>
+            <img @click="pushShowProductRoute(product)" v-if="product.images.length > 0" v-for="image in product.images" class="carousel-img" :src="image"/>
+            <img @click="pushShowProductRoute(product)" v-if="product.images.length == 0" :src="logo"/>
         </a-carousel>
-        <a-card-meta class="product-card-title-container">
+        <a-card-meta class="product-card-title-container" @click="pushShowProductRoute(product)"
+        >
             <template slot="title">
-                <p style="white-space: normal; margin-bottom: 0px">{{ name }}</p>
+                <p style="white-space: normal; margin-bottom: 0px">{{ product.name }}</p>
             </template>
             <template slot="description">
-                <h2 class="bold">{{ price | currency}}</h2>
+                <h2 class="bold">{{ product.price | currency}}</h2>
             </template>
         </a-card-meta>
     </a-card>
@@ -30,13 +31,25 @@
 <script>
 import logo from '../../../../../public/img/logo/logo.png'
 export default {
-    props: ['price','name', 'images'],
+    props: ['product'],
     data() {
         return {
             logo: logo,
             show: true
         }
     },
+    methods: {
+        async pushShowProductRoute(model) {
+            await this.$store.commit("SET_SELECTED_PRODUCT", {
+                id: model.id,
+                name: model.name,
+                price: Number(model.price),
+                images: model.images,
+                attributes: model.attributes,
+            });
+            await this.$router.push({name: 'publicProductIndex'})
+        },
+    }
 }
 </script>
 <style scoped>
