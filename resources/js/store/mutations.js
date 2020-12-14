@@ -229,6 +229,10 @@ let mutations = {
         state.selected_product.stocks.push(stockData);
     },
 
+    PUSH_BAG_PRODUCT(state, product) {
+        state.bagProducts.push(product);
+    },
+
     /**
      * REMOVE
      */
@@ -341,6 +345,16 @@ let mutations = {
 
         } catch (error) {
             console.error('REMOVE_PRODUCT.error', error);
+        }
+    },
+
+    REMOVE_BAG_PRODUCT(state, product) {
+        try {
+            let index = state.bagProducts.findIndex(item => item.id === product.id);
+            if (index < 0) return;
+            state.bagProducts.splice(index, 1);
+        } catch (error) {
+            console.error('REMOVE_BAG_PRODUCT.error', error);
         }
     },
 }

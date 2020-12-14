@@ -2,29 +2,31 @@
     <div>
         <a-row type="flex" justify="space-between">
             <img class="cart-drawer-content-item-list-img"
-                 src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"/>
+                 :src="product.images[0]"/>
 
-            <h3>Remera Riki Sarkani</h3>
+            <h3>{{product.name}}</h3>
 
-            <h3 style="font-weight: bold">$1050.99</h3>
+            <h3 style="font-weight: bold">{{product.price | currency }}</h3>
         </a-row>
         <a-row type="flex" justify="end">
-            <a-icon type="delete" class="cart-drawer-content-delete-icon" @click="showConfirm"/>
+            <a-icon type="delete" class="cart-drawer-content-delete-icon" @click="showConfirm(product)"/>
         </a-row>
         <a-divider></a-divider>
     </div>
 </template>
 <script>
+import store from '../../../store/index'
 export default {
+    props: ['product'],
     methods: {
-        showConfirm() {
+        showConfirm(product) {
+            let self = this
             this.$confirm({
-                title: 'Do you want to delete these items?',
-                content: 'When clicked the OK button, this dialog will be closed after 1 second',
+                title: '¿Desea quitar el producto de su carrito?',
+                content: `El producto ${this.product.name} será removido de su carrito de compras.`,
+                cancelText: 'Cancelar',
                 onOk() {
-                    return new Promise((resolve, reject) => {
-                        setTimeout(Math.random() > 0.5 ? resolve : reject, 1000);
-                    }).catch(() => console.log('Oops errors!'));
+                    self.$store.commit('REMOVE_BAG_PRODUCT', product)
                 },
                 onCancel() {},
             });

@@ -1,18 +1,14 @@
 <template>
     <div>
-        <cart-drawer-product/>
-        <cart-drawer-product/>
-        <cart-drawer-product/>
-        <cart-drawer-product/>
-        <cart-drawer-product/>
+        <cart-drawer-product v-for="product in bagProducts" :key="product.id" :product="product"/>
     </div>
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
 export default {
-    data() {
-        return {
-        };
+    computed: {
+        ...mapGetters(['bagProducts'])
     },
 };
 </script>

@@ -29,7 +29,7 @@
                    :lg="{span: 3, order:3}"
                    :xxl="{span: 2, order:3}">
                 <a-row type="flex" justify="space-around" align="middle" style="margin-right: 15px;">
-                    <a-badge count="3"
+                    <a-badge :count="bagProducts.length"
                              :number-style="{
                                 backgroundColor: '#554B52',
                                 color: 'white',
@@ -56,7 +56,7 @@ export default {
         };
     },
     computed:{
-        ...mapGetters(['showCartSideBar']),
+        ...mapGetters(['showCartSideBar', 'bagProducts']),
     },
     methods: {
         async toggleCartSidebar(){

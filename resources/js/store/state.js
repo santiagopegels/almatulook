@@ -10,6 +10,7 @@ let state = {
     results: [],
     term: "",
     orderProducts: null,
+    bagProducts: [],
 
     nodels_permissions: [
         'users',

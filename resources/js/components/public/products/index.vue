@@ -38,8 +38,10 @@ export default {
         ...mapGetters(['selected_product'])
     },
     methods: {
-        addToCart(){
-            this.$store.commit('TOGGLE_SHOW_CART_SIDEBAR')
+        async addToCart(){
+
+            await this.$store.commit('PUSH_BAG_PRODUCT', this.selected_product)
+            await this.$store.commit('TOGGLE_SHOW_CART_SIDEBAR')
         }
     }
 }

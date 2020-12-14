@@ -32,6 +32,10 @@ let getters = {
         return state.orderProducts;
     },
 
+    bagProducts: state => {
+        return state.bagProducts;
+    },
+
     /** MODELS */
 
     users: state => {
