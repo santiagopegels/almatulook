@@ -33,6 +33,10 @@ let mutations = {
         state.orderProducts = orderProducts;
     },
 
+    SET_SELECTED_VALUES_FILTER(state, selectedValuesToFilter) {
+        state.selectedValuesToFilter = state.selectedValuesToFilter.concat(selectedValuesToFilter.filter((item) => state.selectedValuesToFilter.indexOf(item) < 0))
+    },
+
     SET_PAGE(state, page) {
         state.page = page;
     },
@@ -203,6 +207,10 @@ let mutations = {
 
     PUSH_ATTRIBUTE(state, attribute) {
         state.attributes.data.push(attribute);
+    },
+
+    PUSH_ATTRIBUTE_ALL(state, attribute) {
+        state.attributesAll.push(attribute);
     },
 
     PUSH_VALUE(state, value) {

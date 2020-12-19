@@ -10,6 +10,7 @@ let state = {
     results: [],
     term: "",
     orderProducts: null,
+    selectedValuesToFilter: [],
     bagProducts: [],
 
     nodels_permissions: [

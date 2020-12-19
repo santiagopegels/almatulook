@@ -41,7 +41,7 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(["products", "isLoading", "page", 'selected_category', 'term', 'orderProducts']),
+        ...mapGetters(["products", "isLoading", "page", 'selected_category', 'term', 'orderProducts', 'selectedValuesToFilter']),
         page: {
             set(val) {
                 window.scrollTo(0,0);
@@ -64,6 +64,9 @@ export default {
         },
         orderProducts(){
             this.fetch()
+        },
+        selectedValuesToFilter(){
+            this.fetch()
         }
     },
     methods: {
@@ -73,7 +76,8 @@ export default {
                 page: this.page,
                 category: this.selected_category.id,
                 term: this.term,
-                order: this.orderProducts
+                order: this.orderProducts,
+                valuesFilter: this.selectedValuesToFilter,
             })
                 .catch(error => this.$toasted.global.ToastedError({message: error.message.message}));
         },

@@ -464,6 +464,52 @@ let actions = {
      * PUBLIC ACTIONS
      */
 
+    /**
+     * FETCH ALL DATA
+     * model: ej: users, roles, etc (required)
+     * without page
+     * @param {*} params
+     */
+    fetchAllPublic({ commit }, params) {
+        return new Promise(async (resolve, reject) => {
+
+            commit('SET_LOADING', true);
+
+            params.model = params.model.concat('_all')
+
+            var path = await actions.getPublicEndpoint(params);
+
+            console.log(`path.${params.model}`, path);
+
+            window.axios.get(path).then(async response => {
+                console.log(response)
+                if (response.data.success) {
+                    //     await actions.removeFromData(commit, params);
+                    await actions.setData(commit, { params: params, data: response.data.data });
+                    await commit('SET_LOADING', false);
+                    resolve({
+                        status: true,
+                        message: response.data.data
+                    });
+                } else {
+                    commit('SET_LOADING', false);
+                    reject({
+                        status: false,
+                        message: response.data.message
+                    });
+                }
+
+            }).catch(error => {
+                console.error(`fetch.${params.model}`, error);
+                commit('SET_LOADING', false);
+                reject({
+                    status: false,
+                    message: error
+                });
+            });
+        });
+    },
+
     fetchProductsPublic({ commit }, params) {
         //console.log(`fetch.${params.model}`, params);
         return new Promise(async (resolve, reject) => {
@@ -484,6 +530,10 @@ let actions = {
 
             if (typeof params.order !== typeof undefined && params.order) {
                 path = path.concat('&order=' + params.order);
+            }
+
+            if (typeof params.valuesFilter !== typeof undefined && params.valuesFilter && params.valuesFilter.length) {
+                path = path.concat('&attributesFilter=' + params.valuesFilter);
             }
 
             console.log(`path.${params.model}`, path);
@@ -582,7 +632,6 @@ let actions = {
 
             case 'attributes_all':
                 await commit('SET_ATTRIBUTES_ALL', content.data);
-                await commit('SET_SELECTED_ATTRIBUTE');
                 break;
 
             case 'values':
@@ -644,6 +693,11 @@ let actions = {
 
             case 'attributes':
                 await commit('PUSH_ATTRIBUTE', content.data);
+                await commit('SET_SELECTED_ATTRIBUTE');
+                break;
+
+            case 'attributes_all':
+                await commit('PUSH_ATTRIBUTES_ALL', content.data);
                 await commit('SET_SELECTED_ATTRIBUTE');
                 break;
 

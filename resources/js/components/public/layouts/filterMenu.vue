@@ -18,67 +18,20 @@
                 </a-select>
             </a-form-item>
         </a-row>
-        <a-row style="padding: 5px; margin-left: 15px;">
+        <a-row style="padding: 5px; margin-left: 15px;" v-for="attribute in attributesAll" :key="attribute.id">
             <a-form-item>
-                <h3>Talles</h3>
+                <h3>{{attribute.name}}</h3>
                 <a-checkbox-group
                     style="width: 100%;"
+                    :default-value="selectedValuesToFilter"
+                    :name="attribute.name"
+                    @change="onChange"
                 >
                     <a-row>
-                        <a-col :span="24">
-                            <a-checkbox value="A">
-                                XS
-                            </a-checkbox>
-                        </a-col>
-                        <a-col :span="24">
-                            <a-checkbox value="B">
-                                S
-                            </a-checkbox>
-                        </a-col>
-                        <a-col :span="24">
-                            <a-checkbox value="C">
-                                M
-                            </a-checkbox>
-                        </a-col>
-                        <a-col :span="24">
-                            <a-checkbox value="D">
-                                L
-                            </a-checkbox>
-                        </a-col>
-                        <a-col :span="24">
-                            <a-checkbox value="E">
-                                XL
-                            </a-checkbox>
-                        </a-col>
-                    </a-row>
-                </a-checkbox-group>
-            </a-form-item>
-        </a-row>
-        <a-row style="padding: 5px; margin-left: 15px;">
-            <a-form-item>
-                <h3>Colores</h3>
-                <a-checkbox-group
-                    style="width: 100%;"
-                >
-                    <a-row>
-                        <a-col :span="24">
-                            <a-checkbox value="A">
-                                Rojo
-                            </a-checkbox>
-                        </a-col>
-                        <a-col :span="24">
-                            <a-checkbox value="B">
-                                Azul
-                            </a-checkbox>
-                        </a-col>
-                        <a-col :span="24">
-                            <a-checkbox value="C">
-                                Verde
-                            </a-checkbox>
-                        </a-col>
-                        <a-col :span="24">
-                            <a-checkbox value="D">
-                                Amarillo
+                        <a-col :span="24" v-for="value in attribute.values" :key="value.id">
+                            <a-checkbox :value="value.pivot.id"
+                            >
+                                {{value.name}}
                             </a-checkbox>
                         </a-col>
                     </a-row>
@@ -92,16 +45,33 @@ import {mapGetters} from 'vuex'
 export default {
     data(){
         return {
-            orderBy: 'launching'
+            orderBy: 'launching',
         }
     },
+    async mounted(){
+        if(!this.attributesAll.length > 0){
+          await this.fetchAttributesAll()
+      }
+    },
     computed:{
-      ...mapGetters(['orderProducts'])
+      ...mapGetters(['orderProducts', 'attributesAll', 'selectedValuesToFilter'])
     },
     watch: {
       orderBy: function (value){
           this.$store.commit('SET_ORDER_PRODUCTS', value)
       }
     },
+    methods:{
+        async fetchAttributesAll() {
+            await this.$store.dispatch("fetchAllPublic", {
+                model: 'attributes',
+            })
+                .catch(error => this.$toasted.global.ToastedError({message: error.message.message}));
+        },
+        async onChange(checkedValues) {
+            await this.$store.commit('SET_SELECTED_VALUES_FILTER', checkedValues)
+            console.log(this.selectedValuesToFilter)
+        },
+    }
 }
 </script>

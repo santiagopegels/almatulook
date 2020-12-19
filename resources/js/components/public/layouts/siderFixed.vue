@@ -1,9 +1,7 @@
 <template>
-    <a-affix :offset-top="5">
         <a-layout-sider class="layout-sider" :width="siderWidth">
             <filter-menu />
         </a-layout-sider>
-    </a-affix>
 </template>
 <script>
 import innerWidth from "../../generals/innerWidth";

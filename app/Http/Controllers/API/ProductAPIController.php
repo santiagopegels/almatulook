@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Resources\ProductCollection;
+use App\Models\Admin\AttributeValue;
 use App\Models\Admin\AttributeValueGroup;
 use App\Models\Admin\Category;
 use App\Models\Admin\Product;
@@ -17,10 +18,9 @@ use Response;
  * Class ProductController
  * @package App\Http\Controllers\API\Admin
  */
-
 class ProductAPIController extends AppBaseController
 {
-    private static $limit = 10;
+    private static $limit = 9;
 
     /** @var  ProductRepository */
     private $productRepository;
@@ -44,64 +44,64 @@ class ProductAPIController extends AppBaseController
         $term = isset($input['term']) && !empty($input['term']) ? $input['term'] : null;
         $category = isset($input['category']) && !empty($input['category']) ? Category::find($input['category']) : null;
         $order = isset($input['order']) && !empty($input['order']) ? $input['order'] : null;
+        $attributeValueIdsFilter = isset($input['attributesFilter']) && !empty($input['attributesFilter']) ? explode(',', $input['attributesFilter']) : null;
 
-        $products = Product::query()->category($category);
+        $products = Product::select(
+            'products.id',
+            'products.name',
+            'products.price',
+            'products.created_at'
+        )->category($category);
 
-        $products->whereExists(function ($query) {
-            $query->select('pavg.id')
-                ->from('products_attribute_values_group as pavg')
-                ->whereRaw('pavg.product_id = products.id')
-                ->whereRaw('pavg.stock > 0');
-        });
+        $products->join('products_attribute_values_group as pavg', 'pavg.product_id', '=', 'products.id')
+                ->where('pavg.stock', '>', 0);
+
 
         if (!is_null($term)) {
             $products = $products->where('id', 'like', "%{$term}%")
                 ->orWhere('name', 'like', "%{$term}%");
         }
 
-        if(!is_null($order)){
-            if($order === 'lower'){
-                $products->orderBy('price', 'asc');
+        if (!is_null($attributeValueIdsFilter)) {
+            $attributesFound = array();
+            foreach ($attributeValueIdsFilter as $index => $attributeValueId){
+                $attributeValueObject = AttributeValue::find($attributeValueId);
+                $attributeId = $attributeValueObject->attribute_id;
+                $attributesFound[$attributeId][] = $attributeValueId;
             }
-            if($order === 'higher'){
-                $products->orderBy('price', 'desc');
+            foreach ($attributesFound as $attributeIndex => $attributesValues){
+                $products->join('attributes_values_group as avg'.$attributeIndex, 'avg'.$attributeIndex.'.group_id', '=', 'pavg.attribute_group_id')
+                ->where(function($query) use ($attributesValues, $attributeIndex) {
+                    foreach ($attributesValues as $attributeValue){
+                        $query->orWhere('avg'.$attributeIndex.'.attribute_value_id', $attributeValue);
+                    }
+                });
             }
-            if($order === 'launching'){
-                $products->orderBy('created_at', 'desc');
+        }
+
+        $products->groupBy(
+            'products.id',
+            'products.name',
+            'products.price',
+            'products.created_at');
+
+        if (!is_null($order)) {
+            if ($order === 'lower') {
+                $products->orderBy('products.price', 'asc');
+            }
+            if ($order === 'higher') {
+                $products->orderBy('products.price', 'desc');
+            }
+            if ($order === 'launching') {
+                $products->orderBy('products.created_at', 'desc');
             }
         } else {
-            $products->orderBy('created_at', 'desc');
+            $products->orderBy('products.created_at', 'desc');
         }
 
         $products = $products->paginate(self::$limit);
 
         return $this->sendResponse(new ProductCollection($products), 'Products retrieved successfully');
-    }
-
-    /**
-     * Store a newly created Product in storage.
-     * POST /products
-     *
-     * @param CreateProductAPIRequest $request
-     *
-     * @return Response
-     */
-    public function store(CreateProductAPIRequest $request)
-    {
-        $input = $request->all();
-        $product = $this->productRepository->create($input);
-
-        if(isset($input['stocks'])){
-            $this->productRepository->storeStock($product, $input['stocks']);
-        }
-
-        if(isset($input['images'])){
-            foreach ($input['images'] as $image){
-                $product->addMediaFromBase64($image['binary'])->toMediaCollection('products');
-            }
-        }
-
-        return $this->sendResponse($product->toArray(), 'Product saved successfully');
     }
 
     /**
@@ -144,55 +144,10 @@ class ProductAPIController extends AppBaseController
         }
 
         $product = $this->productRepository->update($input, $id);
-        if(isset($input['stocks'])){
+        if (isset($input['stocks'])) {
             $this->productRepository->updateStock($product, $input['stocks']);
         }
 
         return $this->sendResponse($product->toArray(), 'Product updated successfully');
-    }
-
-    /**
-     * Remove the specified Product from storage.
-     * DELETE /products/{id}
-     *
-     * @param int $id
-     *
-     * @throws \Exception
-     *
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        /** @var Product $product */
-        $product = $this->productRepository->find($id);
-        if (empty($product)) {
-            return $this->sendError('Product not found');
-        }
-
-        $product->delete();
-
-        return $this->sendSuccess('Product deleted successfully');
-    }
-
-    public function deleteStock(Request $request){
-        $input = $request->all();
-
-        $validator = Validator::make($input, [
-            'product_id' => 'required',
-            'attributes' => 'required'
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()]);
-        }
-        unset($input['attributes']['stock']);
-        $groupId = $this->productRepository->getAttributeValueGroupId($input['attributes']);
-        $productAttributeValueGroup = ProductAttributeValueGroup::where('product_id', $input['product_id'])->where('attribute_group_id', $groupId)->first();
-
-        if(!is_null($productAttributeValueGroup)){
-            $productAttributeValueGroup->delete();
-        }
-
-        return $this->sendSuccess('Stock deleted successfully');
     }
 }

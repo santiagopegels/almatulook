@@ -32,6 +32,10 @@ let getters = {
         return state.orderProducts;
     },
 
+    selectedValuesToFilter: state => {
+        return state.selectedValuesToFilter;
+    },
+
     bagProducts: state => {
         return state.bagProducts;
     },

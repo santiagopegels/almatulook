@@ -55,5 +55,6 @@ Route::group(['prefix' => 'admin'], function () {
 });
 
 Route::get('products', 'ProductAPIController@index');
+Route::get('attributes_all', 'AttributeAPIController@all');
 
 
