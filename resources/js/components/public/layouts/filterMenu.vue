@@ -10,10 +10,10 @@
                         Lanzamientos
                     </a-select-option>
                     <a-select-option value="lower">
-                        Precio más bajos
+                        Precio más bajo
                     </a-select-option>
                     <a-select-option value="higher">
-                        Precio más altos
+                        Precio más alto
                     </a-select-option>
                 </a-select>
             </a-form-item>
@@ -23,13 +23,12 @@
                 <h3>{{attribute.name}}</h3>
                 <a-checkbox-group
                     style="width: 100%;"
-                    :default-value="selectedValuesToFilter"
                     :name="attribute.name"
-                    @change="onChange"
                 >
                     <a-row>
                         <a-col :span="24" v-for="value in attribute.values" :key="value.id">
-                            <a-checkbox :value="value.pivot.id"
+                            <a-checkbox :value="value.pivot.id" @change="onChange(value.pivot.id)"
+
                             >
                                 {{value.name}}
                             </a-checkbox>
@@ -68,9 +67,12 @@ export default {
             })
                 .catch(error => this.$toasted.global.ToastedError({message: error.message.message}));
         },
-        async onChange(checkedValues) {
-            await this.$store.commit('SET_SELECTED_VALUES_FILTER', checkedValues)
-            console.log(this.selectedValuesToFilter)
+        async onChange(checkedValue) {
+            if(this.selectedValuesToFilter.includes(checkedValue)){
+                await this.$store.commit('REMOVE_SELECTED_VALUES_FILTER', checkedValue)
+            } else {
+                await this.$store.commit('PUSH_SELECTED_VALUES_FILTER', checkedValue)
+            }
         },
     }
 }

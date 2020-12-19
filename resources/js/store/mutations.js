@@ -33,10 +33,6 @@ let mutations = {
         state.orderProducts = orderProducts;
     },
 
-    SET_SELECTED_VALUES_FILTER(state, selectedValuesToFilter) {
-        state.selectedValuesToFilter = state.selectedValuesToFilter.concat(selectedValuesToFilter.filter((item) => state.selectedValuesToFilter.indexOf(item) < 0))
-    },
-
     SET_PAGE(state, page) {
         state.page = page;
     },
@@ -241,6 +237,10 @@ let mutations = {
         state.bagProducts.push(product);
     },
 
+    PUSH_SELECTED_VALUES_FILTER(state, selectedValueToFilter) {
+        state.selectedValuesToFilter.push(selectedValueToFilter)
+    },
+
     /**
      * REMOVE
      */
@@ -363,6 +363,16 @@ let mutations = {
             state.bagProducts.splice(index, 1);
         } catch (error) {
             console.error('REMOVE_BAG_PRODUCT.error', error);
+        }
+    },
+
+    REMOVE_SELECTED_VALUES_FILTER(state, selectedValueToFilter) {
+        try {
+            let index = state.selectedValuesToFilter.findIndex(item => item === selectedValueToFilter);
+            if (index < 0) return;
+            state.selectedValuesToFilter.splice(index, 1);
+        } catch (error) {
+            console.error('REMOVE_SELECTED_VALUES_FILTER.error', error);
         }
     },
 }

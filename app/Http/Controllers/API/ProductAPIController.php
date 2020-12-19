@@ -58,8 +58,8 @@ class ProductAPIController extends AppBaseController
 
 
         if (!is_null($term)) {
-            $products = $products->where('id', 'like', "%{$term}%")
-                ->orWhere('name', 'like', "%{$term}%");
+            $products = $products->where('products.id', 'like', "%{$term}%")
+                ->orWhere('products.name', 'like', "%{$term}%");
         }
 
         if (!is_null($attributeValueIdsFilter)) {

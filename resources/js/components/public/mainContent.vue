@@ -1,7 +1,7 @@
 <template>
     <a-layout>
         <sider-layout/>
-        <a-layout-content :style="{ padding: '0 24px', maxWidth:'1400px', margin: 'auto'}">
+        <a-layout-content v-if="this.products.data.length > 0" :style="{ padding: '0 24px', maxWidth:'1400px', margin: 'auto'}">
             <a-row type="flex" justify="center" v-if="isLoading">
                 <a-spin style="padding:5px;" size="large"/>
             </a-row>
@@ -11,10 +11,16 @@
                                        :product="product"
                     />
                 </a-row>
+
                 <a-pagination key="pagination" style="text-align: center; margin-top:15px;" v-model="page"
                               :total="getTotal" show-less-items @change="fetch"/>
             </fade-transition>
         </a-layout-content>
+        <a-empty v-if="!this.products.data.length > 0" style="margin: auto"
+        :image="emptyBag"
+        >
+            <span slot="description"> NO HAY COINCIDENCIAS PARA TU BÚSQUEDA </span>
+        </a-empty>
     </a-layout>
 </template>
 <script>
@@ -22,7 +28,7 @@ import {FadeTransition} from 'vue2-transitions'
 import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
 import {mapGetters} from "vuex";
-
+import emptyBag from '../../../../public/img/emptyBag.png'
 export default {
     components: {
         FadeTransition,
@@ -33,6 +39,7 @@ export default {
             opacity: 0.3,
             show: false,
             model: 'products',
+            emptyBag: emptyBag
         }
     },
     mounted() {
