@@ -1,6 +1,6 @@
 <template>
     <div >
-    <product-attribute-select v-for="n in 2" :key="n"/>
+    <product-attribute-select v-for="attribute in attributesOtro" :key="attribute.value" :attribute="attribute"/>
     </div>
 </template>
 <script>
@@ -13,7 +13,7 @@ export default {
     data() {
         return {
             totalOfAttributes: 0,
-            attributesWithStock: []
+            attributesOtro: []
         }
     },
     async mounted() {
@@ -24,13 +24,16 @@ export default {
             this.totalOfAttributes = this.selected_product.attributes[0].attributes.length
             this.attributesWithStock = await this.selected_product.attributes.filter(attribute => attribute.stock > 0)
 
-            let result = this.attributesWithStock.reduce((unique, attribute) => {
+            let result = await this.attributesWithStock.reduce((unique, attribute) => {
                 if(!unique.some(obj => obj.attributes[0].value === attribute.attributes[0].value )) {
                     unique.push(attribute);
                 }
                 return unique;
             },[]).map(attribute => attribute.attributes[0]);
+
             console.log(result)
+           this.attributesOtro.push(result)
+            console.log(this.attributesOtro)
         }
     }
 }
