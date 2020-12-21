@@ -1,26 +1,26 @@
 <template>
     <a-layout>
         <sider-layout/>
-        <a-layout-content v-if="this.products.data.length > 0" :style="{ padding: '0 24px', maxWidth:'1400px', margin: 'auto'}">
+        <a-layout-content :style="{ padding: '0 24px', maxWidth:'1400px', margin: 'auto'}">
             <a-row type="flex" justify="center" v-if="isLoading">
                 <a-spin style="padding:5px;" size="large"/>
             </a-row>
             <fade-transition :duration="800" group v-if="!isLoading">
-                <a-row key="productList" type="flex" justify="center">
+                <a-row v-if="this.products.data" key="productList" type="flex" justify="center">
                     <home-product-card v-for="product in this.products.data" :key="product.id"
                                        :product="product"
                     />
                 </a-row>
 
-                <a-pagination key="pagination" style="text-align: center; margin-top:15px;" v-model="page"
+                <a-empty key="emptySearch" v-if="this.products.data == 0" style="margin: auto" :image="emptyBag" >
+                    <span slot="description"> NO HAY COINCIDENCIAS PARA TU BÚSQUEDA </span>
+                </a-empty>
+
+                <a-pagination key="pagination" v-if="this.products.data != 0" style="text-align: center; margin-top:15px;" v-model="page"
                               :total="getTotal" show-less-items @change="fetch"/>
             </fade-transition>
         </a-layout-content>
-        <a-empty v-if="!this.products.data.length > 0" style="margin: auto"
-        :image="emptyBag"
-        >
-            <span slot="description"> NO HAY COINCIDENCIAS PARA TU BÚSQUEDA </span>
-        </a-empty>
+
     </a-layout>
 </template>
 <script>
