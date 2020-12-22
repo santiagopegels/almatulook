@@ -1,6 +1,7 @@
 <template>
-    <div >
-    <product-attribute-select v-for="attribute in attributesOtro" :key="attribute.value" :attribute="attribute"/>
+    <div>
+        <product-attribute-select v-for="attribute in availableAttributes" :key="attribute.value" :attribute="attribute"
+                                  @change="getAvailableAttributes"/>
     </div>
 </template>
 <script>
@@ -13,27 +14,31 @@ export default {
     data() {
         return {
             totalOfAttributes: 0,
-            attributesOtro: []
+            attributesSelected: 0,
+            attributesWithStock: [],
+            availableAttributes: []
         }
     },
     async mounted() {
-        await this.initialized();
+        this.totalOfAttributes = this.selected_product.attributes[0].attributes.length
+        await this.getAvailableAttributes();
     },
     methods: {
-        async initialized() {
-            this.totalOfAttributes = this.selected_product.attributes[0].attributes.length
+        async getAvailableAttributes() {
+            if (this.attributesSelected < this.totalOfAttributes) {
+                await this.availableAttributes.push(await this.getNextListAttribute())
+                this.attributesSelected += 1
+            }
+        },
+        async getNextListAttribute(){
             this.attributesWithStock = await this.selected_product.attributes.filter(attribute => attribute.stock > 0)
-
             let result = await this.attributesWithStock.reduce((unique, attribute) => {
-                if(!unique.some(obj => obj.attributes[0].value === attribute.attributes[0].value )) {
+                if (!unique.some(obj => obj.attributes[this.attributesSelected].value === attribute.attributes[this.attributesSelected].value)) {
                     unique.push(attribute);
                 }
                 return unique;
-            },[]).map(attribute => attribute.attributes[0]);
-
-            console.log(result)
-           this.attributesOtro.push(result)
-            console.log(this.attributesOtro)
+            }, []).map(attribute => attribute.attributes[this.attributesSelected]);
+            return result
         }
     }
 }

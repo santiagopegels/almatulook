@@ -46,6 +46,7 @@ export default {
                 price: Number(model.price),
                 images: model.images,
                 attributes: model.attributes,
+                attributeValueSelected: []
             });
             await this.$router.push({name: 'publicProductIndex'})
         },
