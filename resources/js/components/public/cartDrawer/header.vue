@@ -9,6 +9,9 @@
                     <a href="/login">
                         <a-avatar style="backgroundColor:#9E7B1A" icon="login"/>
                     </a>
+                    <a href="/">
+                        <a-avatar style="backgroundColor:#9E7B1A" icon="home"/>
+                    </a>
                 </a-space>
             </a-row>
         </a-row>

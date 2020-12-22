@@ -7,10 +7,9 @@
                :xxl="{span: 10, offset: 1}">
             <a-row type="flex" align="middle">
                 <h1 style="padding: 4px;">Mi Carrito</h1>
-                <h3 style="padding: 6px">6 Productos</h3>
+                <h3 style="padding: 6px">{{ getTotalBagProducts }} Productos</h3>
             </a-row>
-            <cart-resume-product-row/>
-            <cart-resume-product-row/>
+            <cart-resume-product-row v-for="product in bagProducts" :key="product.id" :product="product"/>
         </a-col>
         <a-col class="resume-cart-summary-content"
                :xs="{span: 22}"
@@ -25,3 +24,14 @@
         </a-col>
     </a-row>
 </template>
+<script>
+import {mapGetters} from 'vuex'
+export default {
+    computed: {
+        ...mapGetters(['bagProducts']),
+        getTotalBagProducts() {
+            return this.bagProducts.length
+        },
+    },
+}
+</script>

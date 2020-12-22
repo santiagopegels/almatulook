@@ -3,12 +3,16 @@
         <a-card title="Resumen de la Compra"
                 style="background-color: #fafafa; width:100%; box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1);">
             <a-button slot="extra" type="default" @click="goToCartResume()">
-                    Editar
-                </a-button>
-            <p>6 Items</p>
-            <summary-purchase-product/>
-            <summary-purchase-product/>
-            <summary-purchase-product/>
+                Editar
+            </a-button>
+            <p>{{ bagProducts.length }} Items</p>
+            <div v-if="!moreProductsButton.showMore">
+                <summary-purchase-product v-for="product in bagProducts.slice(0,3)" :key="product.id"
+                                          :product="product"/>
+            </div>
+            <div v-else>
+                <summary-purchase-product v-for="product in bagProducts" :key="product.id" :product="product"/>
+            </div>
             <a-button type="default" size="small" @click="handleMoreProducts()">
                 <a-icon :type="moreProductsButton.icon"/>
                 {{ moreProductsButton.text }}
@@ -19,7 +23,7 @@
                     Subtotal
                 </a-col>
                 <a-col>
-                    $2080,90
+                    {{ getSubtotal | currency }}
                 </a-col>
             </a-row>
             <a-row type="flex" justify="space-between" class="bold">
@@ -27,7 +31,7 @@
                     Costo de envío
                 </a-col>
                 <a-col>
-                    $249,00
+                    {{ shipCost | currency }}
                 </a-col>
             </a-row>
             <a-divider></a-divider>
@@ -36,21 +40,30 @@
                     <h1>Total</h1>
                 </a-col>
                 <a-col>
-                    <h1>$4249,00</h1>
+                    <h1>{{ getSubtotal + shipCost | currency }}</h1>
                 </a-col>
             </a-row>
         </a-card>
     </div>
 </template>
 <script>
+import {mapGetters} from 'vuex'
+
 export default {
+    computed: {
+        ...mapGetters(['bagProducts', 'shipCost']),
+        getSubtotal() {
+            const subtotalReducer = (subtotal, product) => subtotal + Number(product.price);
+            return this.bagProducts.reduce(subtotalReducer, 0)
+        }
+    },
     data() {
         return {
             moreProductsButton: {
                 text: 'Ver más...',
                 showMore: false,
-                icon: 'right-circle'
-            }
+                icon: 'right-circle',
+            },
         }
     },
     methods: {
@@ -65,7 +78,7 @@ export default {
                 this.moreProductsButton.icon = 'down-circle'
             }
         },
-        goToCartResume(){
+        goToCartResume() {
             this.$router.push({name: 'cartResumeIndex'})
         }
     }

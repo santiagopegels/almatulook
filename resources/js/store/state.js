@@ -12,6 +12,7 @@ let state = {
     orderProducts: null,
     selectedValuesToFilter: [],
     bagProducts: [],
+    shipCost: 249,
 
     nodels_permissions: [
         'users',

@@ -6,7 +6,9 @@
                :md="{span: 24, offset: 5}"
                :lg="{span: 21, offset: 3}"
                :xxl="{span: 21, offset: 3}">
+            <router-link to="/">
             <p style="font-size: 2rem; margin: 0; padding: 5px">AlmaTuLook</p>
+            </router-link>
         </a-col>
         <a-divider></a-divider>
         <a-col :xs="{span: 22}"

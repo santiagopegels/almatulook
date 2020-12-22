@@ -28,6 +28,10 @@ let getters = {
         return state.page;
     },
 
+    shipCost: state => {
+        return state.shipCost;
+    },
+
     orderProducts: state => {
         return state.orderProducts;
     },
