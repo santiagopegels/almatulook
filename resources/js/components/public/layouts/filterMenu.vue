@@ -24,11 +24,11 @@
                 <a-checkbox-group
                     style="width: 100%;"
                     :name="attribute.name"
+                    :value="selectedValuesToFilter"
                 >
                     <a-row>
                         <a-col :span="24" v-for="value in attribute.values" :key="value.id">
-                            <a-checkbox :value="value.pivot.id" @change="onChange(value.pivot.id)"
-
+                            <a-checkbox :checked="checked" :value="value.pivot.id" @change="onChange(value.pivot.id)"
                             >
                                 {{value.name}}
                             </a-checkbox>
@@ -45,6 +45,7 @@ export default {
     data(){
         return {
             orderBy: 'launching',
+            checked: true
         }
     },
     async mounted(){
