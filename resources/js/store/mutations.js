@@ -379,6 +379,16 @@ let mutations = {
             console.error('REMOVE_SELECTED_VALUES_FILTER.error', error);
         }
     },
+
+    REMOVE_ATTRIBUTE_SELECTED_PRODUCT(state, attributeId) {
+        try {
+            let index = state.selected_product.attributeValueSelected.findIndex(item => item.attribute_id === attributeId);
+            if (index < 0) return;
+            state.selected_product.attributeValueSelected.splice(index, 1);
+        } catch (error) {
+            console.error('REMOVE_ATTRIBUTE_SELECTED_PRODUCT.error', error);
+        }
+    },
 }
 
 export default mutations

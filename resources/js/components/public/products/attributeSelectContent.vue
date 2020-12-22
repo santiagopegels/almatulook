@@ -1,7 +1,7 @@
 <template>
     <div>
         <product-attribute-select v-for="attribute in availableAttributes" :key="attribute.value" :attribute="attribute"
-                                  @change="getAvailableAttributes"/>
+                                  @change="getAvailableAttributes" :attributeNumber="attributesSelected"/>
     </div>
 </template>
 <script>
