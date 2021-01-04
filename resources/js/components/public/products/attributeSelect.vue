@@ -24,15 +24,17 @@ export default {
     },
     methods: {
         async setAttributeSelected(value) {
+            console.log(value)
             await this.attribute.forEach(item => item.type = 'default')
             value.type = 'primary'
-            if (this.selected_product.attributeValueSelected.filter(attribute => attribute.attribute_id === value.attribute_id)) {
-                this.$store.commit('REMOVE_ATTRIBUTE_SELECTED_PRODUCT', value.attribute_id)
-                this.$store.commit('PUSH_ATTRIBUTE_SELECTED_PRODUCT', value)
-            } else {
-                this.$store.commit('PUSH_ATTRIBUTE_SELECTED_PRODUCT', value)
-            }
-            this.$emit('change')
+            await this.$store.commit('PUSH_ATTRIBUTE_SELECTED_PRODUCT', {
+                value: value,
+                attributeIndex: this.attributeNumber
+            })
+            this.$emit('change', {
+                attributeSelectedIndex: this.attributeNumber,
+                children: value.children ? value.children : null
+            })
         }
     }
 }

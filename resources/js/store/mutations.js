@@ -241,8 +241,8 @@ let mutations = {
         state.selectedValuesToFilter.push(selectedValueToFilter)
     },
 
-    PUSH_ATTRIBUTE_SELECTED_PRODUCT(state, attributeValue) {
-        state.selected_product.attributeValueSelected.push(attributeValue)
+    PUSH_ATTRIBUTE_SELECTED_PRODUCT(state, payload) {
+        state.selected_product.attributeValueSelected[payload.attributeIndex] = payload.value
     },
 
     /**
