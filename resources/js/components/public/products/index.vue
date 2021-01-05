@@ -23,7 +23,7 @@
                 <a-divider></a-divider>
                 <product-attribute-select-content />
                 <a-divider></a-divider>
-                <a-button style="margin-top:10px; width:97%; height: 50px;" size="large" block type="primary" @click="addToCart()">
+                <a-button style="margin-top:10px; width:97%; height: 50px;" size="large" block type="primary" @click="addToCart()" :disabled="!canAddProductToBag">
                     Agregar a la Bolsa
                 </a-button>
             </a-col>
@@ -35,11 +35,10 @@
 import {mapGetters} from 'vuex'
 export default {
     computed: {
-        ...mapGetters(['selected_product'])
+        ...mapGetters(['selected_product', 'canAddProductToBag'])
     },
     methods: {
         async addToCart(){
-
             await this.$store.commit('PUSH_BAG_PRODUCT', this.selected_product)
             await this.$store.commit('TOGGLE_SHOW_CART_SIDEBAR')
         }

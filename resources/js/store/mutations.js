@@ -21,6 +21,10 @@ let mutations = {
         state.results = results;
     },
 
+    SET_CAN_ADD_PRODUCT_TO_BAG(state, canAddProductToBag) {
+        state.canAddProductToBag = canAddProductToBag;
+    },
+
     SET_GENERAL_OBJECT(state, generalObject = []) {
         state.generalObject = generalObject;
     },

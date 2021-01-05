@@ -12,6 +12,10 @@ let getters = {
         return state.showSiderDrawerLayout;
     },
 
+    canAddProductToBag: state => {
+        return state.canAddProductToBag;
+    },
+
     status: state => {
         return state.status;
     },

@@ -3,8 +3,8 @@
         <p style="font-size: 1.4rem; margin-bottom: 0px">{{ attribute[0].attribute }}</p>
         <a-space size="middle">
             <a-row>
-                <a-button v-for="(value, index) in attribute" :key="value.value_id" :type="value.type" shape="circle"
-                          size="large" style="margin: 5px; padding: 3px" @click="setAttributeSelected(value)">
+                <a-button v-for="(value, index) in attribute" :key="value.value_id" :type="value.type"
+                          size="large" style="margin: 5px;" @click="setAttributeSelected(value)">
                     {{ value.value }}
                 </a-button>
             </a-row>
@@ -24,7 +24,6 @@ export default {
     },
     methods: {
         async setAttributeSelected(value) {
-            console.log(value)
             await this.attribute.forEach(item => item.type = 'default')
             value.type = 'primary'
             await this.$store.commit('PUSH_ATTRIBUTE_SELECTED_PRODUCT', {

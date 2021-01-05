@@ -27,6 +27,16 @@ export default {
     async mounted() {
         this.totalOfAttributes = this.selected_product.attributes[0].attributes.length
         await this.initialized();
+        this.$store.commit('SET_CAN_ADD_PRODUCT_TO_BAG', false)
+    },
+    watch: {
+        attributesSelected() {
+            if(this.attributesSelected == this.totalOfAttributes){
+                this.$store.commit('SET_CAN_ADD_PRODUCT_TO_BAG', true)
+            } else {
+                this.$store.commit('SET_CAN_ADD_PRODUCT_TO_BAG', false)
+            }
+        }
     },
     methods: {
         //Convert from List of attributes to tree of attributes

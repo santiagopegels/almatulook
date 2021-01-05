@@ -6,6 +6,7 @@ let state = {
     status: false,
     showCartSideBar: false,
     showSiderDrawerLayout: false,
+    canAddProductToBag: false,
 
     results: [],
     term: "",
