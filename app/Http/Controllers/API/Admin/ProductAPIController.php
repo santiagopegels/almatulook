@@ -5,7 +5,6 @@ namespace App\Http\Controllers\API\Admin;
 use App\Http\Requests\API\Admin\CreateProductAPIRequest;
 use App\Http\Requests\API\Admin\UpdateProductAPIRequest;
 use App\Http\Resources\Admin\ProductCollection;
-use App\Models\Admin\AttributeValueGroup;
 use App\Models\Admin\Product;
 use App\ProductAttributeValueGroup;
 use App\Repositories\Admin\ProductRepository;

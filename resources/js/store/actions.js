@@ -567,6 +567,24 @@ let actions = {
         });
     },
 
+    fetchUserLogged({ commit }, params) {
+        //console.log(`fetch.${params.model}`, params);
+        return new Promise(async (resolve, reject) => {
+
+            commit('SET_LOADING', true);
+
+            var path = await actions.getPublicEndpoint({model: 'user_logged'});
+
+            console.log(`path.user_logged`, path);
+
+            window.axios.get(path).then(response => {
+                if (response.data.data) {
+                    commit('SET_USER_LOGGED', {id: response.data.data});
+                }
+            })
+        });
+    },
+
     /**
      * GET ENDPOINT
      * @param {*} params

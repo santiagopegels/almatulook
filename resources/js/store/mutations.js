@@ -101,6 +101,11 @@ let mutations = {
         state.purchaseInfo.data.profile.personalInfo.lastName = lastName;
     },
 
+    SET_USER_LOGGED(state, payload) {
+        state.userLogged.isAuthenticated = true
+        state.userLogged.id = payload.id
+    },
+
     /**
      * SET SELECTED
      */

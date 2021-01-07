@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 
 Route::middleware(['role:admin'])->get('/admin/{vue_capture?}', function () {

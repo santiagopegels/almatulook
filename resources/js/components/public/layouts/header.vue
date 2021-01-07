@@ -7,7 +7,7 @@
                    :lg="{span: 1, order:1}"
                    :xxl="{span: 1, order:1}">
                 <router-link :to="{ name: 'home'}">
-                <img style="margin-left: 15px;" :src="logo" height="60px"/>
+                    <img style="margin-left: 15px;" :src="logo" height="60px"/>
                 </router-link>
             </a-col>
             <a-col :xs="{span: 16, order:3, offset: 4}"
@@ -34,20 +34,37 @@
                                 backgroundColor: '#554B52',
                                 color: 'white',
                               }">
-                    <a-icon type="shopping" class="header-icon" @click="toggleCartSidebar"/>
+                        <a-icon type="shopping" class="header-icon" @click="toggleCartSidebar"/>
                     </a-badge>
-                    <a href="/login" title="Iniciar Sesión">
-                    <a-avatar style="backgroundColor:#9E7B1A" icon="user"></a-avatar>
-                    </a>
+                    <div v-if="!userLogged.isAuthenticated">
+                        <a href="/login" title="Iniciar Sesión">
+                            <a-avatar style="backgroundColor:grey" icon="user"></a-avatar>
+                        </a>
+                    </div>
+                    <div v-else>
+                        <a-dropdown>
+                            <a-menu slot="overlay">
+                                <a-menu-item key="1"> <a-icon type="form" />Mis Datos</a-menu-item>
+                                <a-menu-item key="2"> <a-icon type="tags" />Compras</a-menu-item>
+                                <a-menu-item key="3">
+                                    <a href="/logout" title="Cerrar Sesión">
+                                    <a-icon type="logout" /> Cerrar Sesión
+                                    </a>
+                                </a-menu-item>
+                            </a-menu>
+                            <a-avatar style="backgroundColor:#9E7B1A" icon="user"></a-avatar>
+                        </a-dropdown>
+                    </div>
                 </a-row>
             </a-col>
         </a-row>
-        <a-divider  style="margin-top: 10px; margin-bottom: 0px;" type="horizontal"/>
+        <a-divider style="margin-top: 10px; margin-bottom: 0px;" type="horizontal"/>
     </section>
 </template>
 <script>
 import logo from '../../../../../public/img/logo/logo.png'
 import {mapGetters} from 'vuex'
+
 export default {
     data: function () {
         return {
@@ -55,14 +72,14 @@ export default {
             productSearchTerm: ''
         };
     },
-    computed:{
-        ...mapGetters(['showCartSideBar', 'bagProducts']),
+    computed: {
+        ...mapGetters(['showCartSideBar', 'bagProducts', 'userLogged']),
     },
     methods: {
-        async toggleCartSidebar(){
+        async toggleCartSidebar() {
             this.$store.commit('TOGGLE_SHOW_CART_SIDEBAR')
         },
-        async filterProducts(term){
+        async filterProducts(term) {
             this.$store.commit('SET_PAGE', 1)
             this.$store.commit('SET_TERM', term)
         }

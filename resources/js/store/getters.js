@@ -52,6 +52,10 @@ let getters = {
         return state.bagProducts;
     },
 
+    userLogged: state => {
+        return state.userLogged;
+    },
+
     /** MODELS */
 
     users: state => {

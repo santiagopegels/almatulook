@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+Route::middleware('auth')->get('/user', function (Request $request) {
     return $request->user();
 });
 
@@ -57,5 +57,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['role:admin']], function () 
 Route::get('products', 'ProductAPIController@index');
 Route::get('attributes_all', 'AttributeAPIController@all');
 Route::get('categories_all', 'CategoryAPIController@all');
+Route::get('user_logged', 'UserAPIController@getUserLogged');
+
 
 

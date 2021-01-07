@@ -13,6 +13,7 @@ import home from "../components/public/home";
 import publicProductIndex from '../components/public/products/index.vue'
 import publicPurchaseIndex from '../components/public/purchases/index.vue'
 import cartResumeIndex from '../components/public/cartResume/index.vue'
+import store from '../store/index'
 
 
 Vue.use(Router)
@@ -85,4 +86,13 @@ export const router = new Router({
             component: cartResumeIndex,
         },
     ]
+})
+
+router.beforeEach((to, from, next) => {
+    const isAuthenticated = store.state.userLogged.isAuthenticated
+    if (to.name == 'home' && !isAuthenticated){
+        store.dispatch('fetchUserLogged')
+        next()
+    }
+    else next()
 })

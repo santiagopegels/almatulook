@@ -7,6 +7,10 @@ let state = {
     showCartSideBar: false,
     showSiderDrawerLayout: false,
     canAddProductToBag: false,
+    userLogged: {
+        isAuthenticated: false,
+        id: null
+    },
 
     results: [],
     term: "",
