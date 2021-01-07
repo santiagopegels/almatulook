@@ -19,7 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['role:admin']], function () {
     // resources
     Route::resource('roles', 'Admin\RoleAPIController');
     Route::resource('permissions', 'Admin\PermissionAPIController');
@@ -56,5 +56,6 @@ Route::group(['prefix' => 'admin'], function () {
 
 Route::get('products', 'ProductAPIController@index');
 Route::get('attributes_all', 'AttributeAPIController@all');
+Route::get('categories_all', 'CategoryAPIController@all');
 
 

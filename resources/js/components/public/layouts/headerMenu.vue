@@ -31,7 +31,7 @@ export default {
     },
     methods: {
         async fetch() {
-            await this.$store.dispatch("fetchAll", {
+            await this.$store.dispatch("fetchAllPublic", {
                 model: this.model,
             })
                 .catch(error => this.$toasted.global.ToastedError({message: error.message.message}));
