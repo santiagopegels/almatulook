@@ -17,16 +17,15 @@
                :lg="{span: 11, offset: 1}"
                :xxl="{span: 11, offset: 1}">
 
-            <a-steps :current="current" v-show="isShowSteps">
+            <a-steps :current="current" v-show="isShowSteps" @change="changeStep">
                 <a-step v-for="item in steps" :key="item.title" :title="item.title">
                     <a-icon slot="icon" :type="item.icon" />
                 </a-step>
             </a-steps>
-
             <div class="steps-content" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1);">
-                <first-step v-if="current == 0" @next-step="next()"/>
-                <second-step v-if="current == 1" @next-step="next()"/>
-                <third-step v-if="current == 2"/>
+                <first-step v-if="current == 0" @next-step="next()" />
+                <second-step v-if="current == 1" @next-step="next()" @prev-step="prev()"/>
+                <third-step v-if="current == 2" @prev-step="prev()"/>
             </div>
         </a-col>
         <a-col class="summary-content"
@@ -75,6 +74,11 @@ export default {
         },
         showSteps() {
             window.innerWidth <= 480 ? this.isShowSteps = false : this.isShowSteps = true
+        },
+        changeStep(current){
+            if(current < this.current){
+                this.current = current;
+            }
         }
     },
 };

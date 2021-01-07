@@ -16,6 +16,10 @@ let getters = {
         return state.canAddProductToBag;
     },
 
+    purchaseInfo: state => {
+        return state.purchaseInfo;
+    },
+
     status: state => {
         return state.status;
     },

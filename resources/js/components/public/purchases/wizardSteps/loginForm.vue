@@ -14,7 +14,13 @@
                     size="large"
                     v-decorator="[
                               'mail',
-                              { rules: [{ required: true, message: 'Debe ingresar el correo' }] },
+                              { rules: [
+                                  { required: true, message: 'Debe ingresar el correo' },
+                                  {
+                                     type: 'email',
+                                     message: 'Ingrese un correo válido.',
+                                   }
+                                  ] },
                             ]"
                     placeholder="Correo"
                 >

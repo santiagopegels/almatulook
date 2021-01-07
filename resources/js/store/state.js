@@ -15,6 +15,32 @@ let state = {
     bagProducts: [],
     shipCost: 249,
 
+    purchaseInfo: {
+        isGuest: true,
+        data: {
+            user: {
+                email: null,
+                password: null,
+            },
+            profile: {
+                personalInfo: {
+                    name: null,
+                    lastName: null
+                },
+                contact: {
+                    cellphone: null,
+                    address: {
+                        deliveryAddress: null,
+                        flat: null,
+                        city: null,
+                        province: null,
+                        cp: null
+                    }
+                }
+            },
+        },
+    },
+
     nodels_permissions: [
         'users',
         'roles',

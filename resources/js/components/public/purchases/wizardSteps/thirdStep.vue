@@ -1,5 +1,10 @@
 <template>
     <div>
+        <div style="display: flex; justify-content: left">
+            <a-button type="default" @click="prevStep()">
+                <a-icon type="left"/>
+            </a-button>
+        </div>
         <a-icon type="credit-card" class="header-icon"/>
         <h1>Realizar Pago</h1>
         <img style="background: grey;width: 200px; height: 200px">
@@ -21,6 +26,9 @@ export default {
                 }
             });
         },
+        prevStep(){
+            this.$emit('prev-step')
+        }
     },
 };
 </script>

@@ -89,6 +89,18 @@ let mutations = {
         state.products = products;
     },
 
+    SET_PURCHASE_USER_EMAIL(state, email) {
+        state.purchaseInfo.data.user.email = email;
+    },
+
+    SET_PURCHASE_USER_NAME(state, name) {
+        state.purchaseInfo.data.profile.personalInfo.name = name;
+    },
+
+    SET_PURCHASE_USER_LASTNAME(state, lastName) {
+        state.purchaseInfo.data.profile.personalInfo.lastName = lastName;
+    },
+
     /**
      * SET SELECTED
      */
