@@ -182,7 +182,6 @@ Vue.component('sider-drawer', require('./components/public/layouts/siderDrawer.v
 Vue.component('sider-fixed', require('./components/public/layouts/siderFixed.vue').default);
 Vue.component('filter-menu', require('./components/public/layouts/filterMenu.vue').default);
 
-
 //Cart Drawer
 Vue.component('cart-drawer-header', require('./components/public/cartDrawer/header.vue').default);
 Vue.component('cart-drawer-content', require('./components/public/cartDrawer/content.vue').default);
@@ -204,6 +203,7 @@ Vue.component('summary-purchase', require('./components/public/purchases/summary
 Vue.component('summary-purchase-product', require('./components/public/purchases/productSummaryRow.vue').default);
 Vue.component('summary-purchase-step-guest-form', require('./components/public/purchases/wizardSteps/guestForm.vue').default);
 Vue.component('summary-purchase-step-login-form', require('./components/public/purchases/wizardSteps/loginForm.vue').default);
+Vue.component('summary-purchase-step-profile-form', require('./components/public/purchases/wizardSteps/profileForm.vue').default);
 
 //Cart Resume
 Vue.component('cart-resume-index', require('./components/public/cartResume/index.vue').default);
@@ -211,6 +211,8 @@ Vue.component('cart-resume-content', require('./components/public/cartResume/con
 Vue.component('cart-resume-product-row', require('./components/public/cartResume/productRow.vue').default)
 Vue.component('cart-resume-summary', require('./components/public/cartResume/summary.vue').default);
 
+//Profile
+Vue.component('profile-index', require('./components/public/profile/index.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

@@ -44,11 +44,17 @@
                     <div v-else>
                         <a-dropdown>
                             <a-menu slot="overlay">
-                                <a-menu-item key="1"> <a-icon type="form" />Mis Datos</a-menu-item>
-                                <a-menu-item key="2"> <a-icon type="tags" />Compras</a-menu-item>
-                                <a-menu-item key="3">
+
+                                <a-menu-item key="1">
+                                    <router-link to="/profile">
+                                        <a-icon type="form"/>
+                                        Mis Datos
+                                    </router-link>
+                                </a-menu-item>
+                                <a-menu-item key="2">
                                     <a href="/logout" title="Cerrar Sesión">
-                                    <a-icon type="logout" /> Cerrar Sesión
+                                        <a-icon type="logout"/>
+                                        Cerrar Sesión
                                     </a>
                                 </a-menu-item>
                             </a-menu>

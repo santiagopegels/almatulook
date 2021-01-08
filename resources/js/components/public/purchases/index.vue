@@ -1,16 +1,20 @@
 <template>
-    <a-row style="padding-top: 20px;" type="flex" justify="center">
-        <a-col
-               :xs="{span: 18, offset: 6}"
-               :sm="{span: 15, offset: 9}"
-               :md="{span: 24, offset: 5}"
-               :lg="{span: 21, offset: 3}"
-               :xxl="{span: 21, offset: 3}">
-            <router-link to="/">
-            <p style="font-size: 2rem; margin: 0; padding: 5px">AlmaTuLook</p>
-            </router-link>
-        </a-col>
-        <a-divider></a-divider>
+    <div>
+        <a-row style="padding-top: 20px; background: #e0e0db" type="flex" justify="center">
+            <a-col
+                :xs="{span: 18, offset: 6}"
+                :sm="{span: 15, offset: 9}"
+                :md="{span: 24, offset: 5}"
+                :lg="{span: 21, offset: 3}"
+                :xxl="{span: 21, offset: 3}">
+                <router-link to="/">
+                    <p style="font-size: 2rem; margin: 0; padding: 5px">AlmaTuLook</p>
+                </router-link>
+            </a-col>
+        </a-row>
+        <a-divider style="margin-top: 1px"></a-divider>
+
+        <a-row style="padding-top: 20px;" type="flex" justify="center">
         <a-col :xs="{span: 22}"
                :sm="{span: 22}"
                :md="{span: 11, offset: 1}"
@@ -22,7 +26,7 @@
                     <a-icon slot="icon" :type="item.icon" />
                 </a-step>
             </a-steps>
-            <div class="steps-content" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1);">
+            <div class="form-dashed">
                 <first-step v-if="current == 0" @next-step="next()" />
                 <second-step v-if="current == 1" @next-step="next()" @prev-step="prev()"/>
                 <third-step v-if="current == 2" @prev-step="prev()"/>
@@ -37,6 +41,7 @@
             <summary-purchase />
         </a-col>
     </a-row>
+    </div>
 </template>
 <script>
 export default {
@@ -84,15 +89,6 @@ export default {
 };
 </script>
 <style scoped>
-.steps-content {
-    margin-top: 16px;
-    border: 1px dashed #e9e9e9;
-    border-radius: 6px;
-    background-color: #fafafa;
-    min-height: 200px;
-    text-align: center;
-    padding: 40px;
-}
 
 .steps-action {
     margin-top: 24px;
@@ -107,18 +103,6 @@ export default {
     .summary-content {
         margin-top: 10px;
         width: 90%;
-    }
-}
-
-@media only screen and (max-width: 480px) {
-    .steps-content {
-        margin-top: 0px;
-        border: 1px dashed #e9e9e9;
-        border-radius: 6px;
-        background-color: #fafafa;
-        min-height: 200px;
-        text-align: center;
-        padding: 40px;
     }
 }
 
