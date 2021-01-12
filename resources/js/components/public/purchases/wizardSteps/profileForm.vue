@@ -207,6 +207,8 @@ export default {
     methods: {
         nextStep(e) {
             e.preventDefault();
+            this.$emit('next-step')
+
             this.form.validateFieldsAndScroll((err, values) => {
                 if (!err) {
                     this.$emit('next-step')

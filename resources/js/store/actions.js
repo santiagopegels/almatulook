@@ -4,7 +4,7 @@ const apiKey = 'x-api-key';
 
 // general path
 const api_admin = '/api/admin';
-const api_public= '/api';
+const api_public = '/api';
 
 const path_users = '/api/key/users';
 
@@ -17,14 +17,14 @@ const config = {
 let actions = {
 
     // STATUS
-    toggleStatus({ commit }) {
+    toggleStatus({commit}) {
         commit('SET_STATUS');
     },
 
     /**
      * SPECIFIC FETCH
      */
-    fetchProductsWithStock({ commit }, params) {
+    fetchProductsWithStock({commit}, params) {
         //console.log(`fetch.${params.model}`, params);
         return new Promise(async (resolve, reject) => {
 
@@ -45,7 +45,7 @@ let actions = {
                 if (response.data.success) {
                     console.log(response.data)
                     await actions.removeFromData(commit, params);
-                    await actions.setData(commit, { params: params, data: response.data.data });
+                    await actions.setData(commit, {params: params, data: response.data.data});
                     await commit('SET_LOADING', false);
                     resolve({
                         status: true,
@@ -74,12 +74,12 @@ let actions = {
      * DELETE
      */
 
-    deleteUser({ commit }, params) {
+    deleteUser({commit}, params) {
         //console.log('deleteUser.params', params);
         return new Promise((resolve, reject) => {
             commit('SET_LOADING', true);
             const path = `${path_users}/${params.user.id}`;
-           // console.log('path', path);
+            // console.log('path', path);
             window.axios.post(path, params, {}).then(async response => {
                 if (response.data.success) {
                     await commit('REMOVE_USER', params.user);
@@ -108,16 +108,16 @@ let actions = {
         });
     },
 
-    deleteStock({ commit }, params) {
+    deleteStock({commit}, params) {
         console.log(`delete.product.stock`, params);
-        return new Promise(async(resolve, reject) => {
+        return new Promise(async (resolve, reject) => {
             commit('SET_LOADING', true);
             const path = `${api_admin}/product/${params.product_id}/deleteStock`
 
             window.axios.post(path, params, {}).then(async response => {
                 console.log(`response.${params.model}`, response);
                 if (response.data.success) {
-                    await actions.removeFromData(commit, { model: params.model });
+                    await actions.removeFromData(commit, {model: params.model});
                     await commit('SET_LOADING', false);
                     resolve({
                         status: true,
@@ -142,7 +142,7 @@ let actions = {
         });
     },
 
-    pushUserData({ commit }, user) {
+    pushUserData({commit}, user) {
         console.log('pushUserData', user);
         return new Promise(async (resolve, reject) => {
             commit('SET_LOADING', true);
@@ -171,7 +171,7 @@ let actions = {
      * term: ej: any string for search (optional)
      * @param {*} params
      */
-    fetch({ commit }, params) {
+    fetch({commit}, params) {
         //console.log(`fetch.${params.model}`, params);
         return new Promise(async (resolve, reject) => {
 
@@ -191,7 +191,7 @@ let actions = {
                 if (response.data.success) {
                     console.log(response.data)
                     await actions.removeFromData(commit, params);
-                    await actions.setData(commit, { params: params, data: response.data.data });
+                    await actions.setData(commit, {params: params, data: response.data.data});
                     await commit('SET_LOADING', false);
                     resolve({
                         status: true,
@@ -222,7 +222,7 @@ let actions = {
      * without page
      * @param {*} params
      */
-    fetchAll({ commit }, params) {
+    fetchAll({commit}, params) {
         return new Promise(async (resolve, reject) => {
 
             commit('SET_LOADING', true);
@@ -236,8 +236,8 @@ let actions = {
             window.axios.get(path).then(async response => {
                 console.log(response)
                 if (response.data.success) {
-               //     await actions.removeFromData(commit, params);
-                    await actions.setData(commit, { params: params, data: response.data.data });
+                    //     await actions.removeFromData(commit, params);
+                    await actions.setData(commit, {params: params, data: response.data.data});
                     await commit('SET_LOADING', false);
                     resolve({
                         status: true,
@@ -268,14 +268,14 @@ let actions = {
      * data: ej: object {name: 'Jhon Doe', ...}
      * @param {*} params
      */
-    store({ commit }, params) {
-        return new Promise(async(resolve, reject) => {
+    store({commit}, params) {
+        return new Promise(async (resolve, reject) => {
             commit('SET_LOADING', true);
             const path = await actions.getEndpoint(params);
 
             window.axios.post(path, params.data, {}).then(async response => {
                 if (response.data.success) {
-                    await actions.pushData(commit, { params: params, data: response.data.data });
+                    await actions.pushData(commit, {params: params, data: response.data.data});
                     await actions.removeFromData(commit, response.data.data);
                     await commit('SET_LOADING', false);
                     resolve({
@@ -307,8 +307,8 @@ let actions = {
      * data: ej: object {name: 'Jhon Doe', ...}
      * @param {*} params
      */
-    storeAll({ commit }, params) {
-        return new Promise(async(resolve, reject) => {
+    storeAll({commit}, params) {
+        return new Promise(async (resolve, reject) => {
             commit('SET_LOADING', true);
             const path = await actions.getEndpoint(params);
 
@@ -316,7 +316,7 @@ let actions = {
                 if (response.data.success) {
                     params.model = await params.model.concat('_all')
                     await actions.removeFromData(commit, response.data.data);
-                    await actions.pushData(commit, { params: params, data: response.data.data });
+                    await actions.pushData(commit, {params: params, data: response.data.data});
                     await commit('SET_LOADING', false);
                     resolve({
                         status: true,
@@ -346,7 +346,7 @@ let actions = {
      * data: ej: object {ID: 1, name: 'Jhon Doe', ...}
      * @param {*} params
      */
-    update({ commit }, params) {
+    update({commit}, params) {
         console.log(`update.${params.model}`, params);
         return new Promise(async (resolve, reject) => {
             commit('SET_LOADING', true);
@@ -355,7 +355,7 @@ let actions = {
             window.axios.post(path, params.data, {}).then(async response => {
                 console.log(`response.${params.model}`, response);
                 if (response.data.success) {
-                    await actions.removeFromData(commit, { model: params.model });
+                    await actions.removeFromData(commit, {model: params.model});
                     await commit('SET_LOADING', false);
                     resolve({
                         status: true,
@@ -386,16 +386,16 @@ let actions = {
      * data: ej: object { id: 1, name: 'Jhon Doe', ...}
      * @param {*} params
      */
-    delete({ commit }, params) {
+    delete({commit}, params) {
         console.log(`delete.${params.model}`, params);
-        return new Promise(async(resolve, reject) => {
+        return new Promise(async (resolve, reject) => {
             commit('SET_LOADING', true);
             const path = await actions.getEndpoint(params);
             console.log(`path.${params.model}`, path);
             window.axios.post(path, params, {}).then(async response => {
                 console.log(`response.${params.model}`, response);
                 if (response.data.success) {
-                    await actions.removeFromData(commit, { model: params.model });
+                    await actions.removeFromData(commit, {model: params.model});
                     await commit('SET_LOADING', false);
                     resolve({
                         status: true,
@@ -426,7 +426,7 @@ let actions = {
      * id: ej: 1
      * @param {*} params
      */
-    restore({ commit }, params) {
+    restore({commit}, params) {
         //console.log(`restore.${params.model}`, params);
         return new Promise(async (resolve, reject) => {
             commit('SET_LOADING', true);
@@ -435,7 +435,7 @@ let actions = {
             console.log(`path.${params.model}`, path);
             window.axios.post(path, params.data, {}).then(async response => {
                 if (response.data.success) {
-                    await actions.removeFromData(commit, { model: params.model });
+                    await actions.removeFromData(commit, {model: params.model});
                     await commit('SET_LOADING', false);
                     resolve({
                         status: false,
@@ -464,13 +464,48 @@ let actions = {
      * PUBLIC ACTIONS
      */
 
+    updateProfileUser({commit}, params) {
+        return new Promise(async (resolve, reject) => {
+
+            commit('SET_LOADING', true);
+
+            var path = await actions.getPublicEndpoint(params);
+
+            console.log(`path.${params.model}`, path);
+
+            window.axios.post(path, params.data).then(async response => {
+                if (response.data.success) {
+                    await commit('SET_LOADING', false);
+                    resolve({
+                        status: true,
+                        message: response.data.data
+                    });
+                } else {
+                    commit('SET_LOADING', false);
+                    reject({
+                        status: false,
+                        message: response.data.message
+                    });
+                }
+
+            }).catch(error => {
+                let errorMsg = error.response.data.errors[Object.keys(error.response.data.errors)[0]][0]
+                commit('SET_LOADING', false);
+                reject({
+                    status: false,
+                    message: errorMsg
+                });
+            });
+        })
+    },
+
     /**
      * FETCH ALL DATA
      * model: ej: users, roles, etc (required)
      * without page
      * @param {*} params
      */
-    fetchAllPublic({ commit }, params) {
+    fetchAllPublic({commit}, params) {
         return new Promise(async (resolve, reject) => {
 
             commit('SET_LOADING', true);
@@ -485,7 +520,7 @@ let actions = {
                 console.log(response)
                 if (response.data.success) {
                     //     await actions.removeFromData(commit, params);
-                    await actions.setData(commit, { params: params, data: response.data.data });
+                    await actions.setData(commit, {params: params, data: response.data.data});
                     await commit('SET_LOADING', false);
                     resolve({
                         status: true,
@@ -510,7 +545,7 @@ let actions = {
         });
     },
 
-    fetchProductsPublic({ commit }, params) {
+    fetchProductsPublic({commit}, params) {
         //console.log(`fetch.${params.model}`, params);
         return new Promise(async (resolve, reject) => {
 
@@ -542,7 +577,7 @@ let actions = {
                 if (response.data.success) {
                     console.log(response.data)
                     await actions.removeFromData(commit, params);
-                    await actions.setData(commit, { params: params, data: response.data.data });
+                    await actions.setData(commit, {params: params, data: response.data.data});
                     await commit('SET_LOADING', false);
                     resolve({
                         status: true,
@@ -567,7 +602,7 @@ let actions = {
         });
     },
 
-    fetchUserLogged({ commit }, params) {
+    fetchUserLogged({commit}, params) {
         //console.log(`fetch.${params.model}`, params);
         return new Promise(async (resolve, reject) => {
 
@@ -625,7 +660,7 @@ let actions = {
      * @param {*} commit
      * @param {*} params
      */
-    async setData(commit, content = { params, data }) {
+    async setData(commit, content = {params, data}) {
         switch (content.params.model) {
 
             case 'users':
@@ -691,7 +726,7 @@ let actions = {
      * @param {*} commit
      * @param {*} params
      */
-    async pushData(commit, content = { params, data }) {
+    async pushData(commit, content = {params, data}) {
         switch (content.params.model) {
 
             case 'users':

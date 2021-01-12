@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Admin\Profile;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -20,7 +21,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'email', 'password',
     ];
 
     /**
@@ -51,13 +52,16 @@ class User extends Authenticatable
         }
     }
 
+    public function profile(){
+        return $this->hasOne(Profile::class);
+    }
+
     /**
      * Validation rules
      *
      * @var array
      */
     public static $rules = [
-        'name'  => 'required',
         'email' => 'required|email|unique:users,email',
         'password'  => 'required|confirmed'
     ];
@@ -68,7 +72,6 @@ class User extends Authenticatable
      * @var array
      */
     public static $rules_update = [
-        'name'  => 'required',
         'email' => 'required|email|unique:users,email',
     ];
 

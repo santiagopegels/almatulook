@@ -58,6 +58,5 @@ Route::get('products', 'ProductAPIController@index');
 Route::get('attributes_all', 'AttributeAPIController@all');
 Route::get('categories_all', 'CategoryAPIController@all');
 Route::get('user_logged', 'UserAPIController@getUserLogged');
-
-
+Route::post('profiles', 'ProfileAPIController@updateProfile');
 
