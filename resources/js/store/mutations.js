@@ -89,21 +89,20 @@ let mutations = {
         state.products = products;
     },
 
-    SET_PURCHASE_USER_EMAIL(state, email) {
-        state.purchaseInfo.data.user.email = email;
-    },
-
-    SET_PURCHASE_USER_NAME(state, name) {
-        state.purchaseInfo.data.profile.personalInfo.name = name;
-    },
-
-    SET_PURCHASE_USER_LASTNAME(state, lastName) {
-        state.purchaseInfo.data.profile.personalInfo.lastName = lastName;
-    },
-
     SET_USER_LOGGED(state, payload) {
         state.userLogged.isAuthenticated = true
         state.userLogged.id = payload.id
+    },
+
+    SET_USER_PROFILE(state, payload) {
+        state.purchaseInfo.data.profile.personalInfo.name = payload.name
+        state.purchaseInfo.data.profile.personalInfo.lastName = payload.lastname
+        state.purchaseInfo.data.profile.contact.cellphone = Number(payload.cellphone)
+        state.purchaseInfo.data.profile.contact.address.deliveryAddress = payload.deliveryAddress
+        state.purchaseInfo.data.profile.contact.address.flat = payload.flat
+        state.purchaseInfo.data.profile.contact.address.city = payload.city
+        state.purchaseInfo.data.profile.contact.address.province = payload.province
+        state.purchaseInfo.data.profile.contact.address.cp = payload.cp
     },
 
     /**
@@ -339,7 +338,7 @@ let mutations = {
     REMOVE_CATEGORY_FROM_ALL(state, category) {
         try {
             let removeCategory = function findIndexById(data, id) {
-                for(var i = 0; i < data.length; i++) {
+                for (var i = 0; i < data.length; i++) {
 
                     if (data[i].id === id) {
 

@@ -14,7 +14,7 @@
                    :lg="{span: 15}"
                    :xxl="{span: 13}">
                 <div class="form-dashed" style="padding: 10px;">
-                    <summary-purchase-step-profile-form buttonText="Actualizar" @next-step="update"/>
+                    <summary-purchase-step-profile-form buttonText="Actualizar" @next-step="update" v-if="showForm"/>
                 </div>
             </a-col>
         </a-row>
@@ -25,13 +25,28 @@
 import {mapGetters} from 'vuex'
 
 export default {
+    data(){
+        return {
+            model: 'profiles',
+            showForm: false
+        }
+    },
     computed: {
         ...mapGetters(['purchaseInfo'])
     },
+    async mounted() {
+        await this.fetchProfile()
+    },
     methods: {
+        async fetchProfile(){
+            await this.$store.dispatch('fetchUserProfile',{
+                model: this.model
+            })
+            this.showForm = true
+        },
         async update() {
             await this.$store.dispatch('updateProfileUser', {
-                model: 'profiles',
+                model: this.model,
                 data: {
                     name: this.purchaseInfo.data.profile.personalInfo.name,
                     lastname: this.purchaseInfo.data.profile.personalInfo.lastName,
@@ -42,7 +57,11 @@ export default {
                     province: this.purchaseInfo.data.profile.contact.address.province,
                     cp: this.purchaseInfo.data.profile.contact.address.cp
                 }
-            }).catch(error => this.$toasted.global.ToastedError({ message: error.message}))
+            })
+                .then(result => {
+                this.$toasted.global.ToastedSuccess({message: result.message});
+            })
+                .catch(error => this.$toasted.global.ToastedError({ message: error.message}))
         }
     }
 }

@@ -26,4 +26,5 @@ return [
 	'update_at' => "Actualizado en",
 	'deleted_at' => "Borrado en",
 
+    'cellphone' => 'Celular'
 ];

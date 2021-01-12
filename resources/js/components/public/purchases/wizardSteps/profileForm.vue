@@ -170,7 +170,6 @@ export default {
                 };
             },
             onValuesChange: (_, values) => {
-                console.log(values)
                 let key = Object.keys(values)[0];
                 switch(key){
                     case 'name':
@@ -207,7 +206,6 @@ export default {
     methods: {
         nextStep(e) {
             e.preventDefault();
-            this.$emit('next-step')
 
             this.form.validateFieldsAndScroll((err, values) => {
                 if (!err) {

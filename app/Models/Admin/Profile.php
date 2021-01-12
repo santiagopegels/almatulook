@@ -68,7 +68,7 @@ class Profile extends Model
     public static $rules = [
         'name' => 'required',
         'lastname' => 'required',
-        'cellphone' => 'required | numeric',
+        'cellphone' => 'required | numeric | min: 9',
         'deliveryAddress' => 'required',
         'city' => 'required',
         'province' => 'required'

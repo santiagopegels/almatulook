@@ -20,10 +20,10 @@ class CreateProfilesTable extends Migration
             $table->string('lastname');
             $table->string('cellphone');
             $table->string('deliveryAddress');
-            $table->string('flat');
+            $table->string('flat')->nullable();
             $table->string('city');
             $table->string('province');
-            $table->integer('cp');
+            $table->integer('cp')->nullable();
 
             $table->unsignedBigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')

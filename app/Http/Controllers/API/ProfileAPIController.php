@@ -36,13 +36,13 @@ class ProfileAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $profiles = $this->profileRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
-        );
+        $profile = [];
+        if(Auth::check()){
+            $user = User::find(Auth::id());
+            $profile = !is_null($user->profile) ? $user->profile->toArray() : null;
+        }
 
-        return $this->sendResponse($profiles->toArray(), 'Profiles retrieved successfully');
+        return $this->sendResponse($profile, 'Profiles retrieved successfully');
     }
 
     /**
@@ -55,91 +55,22 @@ class ProfileAPIController extends AppBaseController
      */
     public function updateProfile(CreateProfileAPIRequest $request)
     {
-        dd($request->all());
+        $profile = null;
         if(Auth::check()){
             $user = User::find(Auth::id());
             if(is_null($user->profile)){
                 $input = $request->all();
 
+                $input['user_id'] = $user->id;
                 $profile = $this->profileRepository->create($input);
 
-                $user->save($profile);
-
             }else {
-
+                $profile = $user->profile;
+                $profile->update($request->all());
             }
         }
 
 
-        return $this->sendResponse($profile->toArray(), 'Profile saved successfully');
-    }
-
-    /**
-     * Display the specified Profile.
-     * GET|HEAD /profiles/{id}
-     *
-     * @param int $id
-     *
-     * @return Response
-     */
-    public function show($id)
-    {
-        /** @var Profile $profile */
-        $profile = $this->profileRepository->find($id);
-
-        if (empty($profile)) {
-            return $this->sendError('Profile not found');
-        }
-
-        return $this->sendResponse($profile->toArray(), 'Profile retrieved successfully');
-    }
-
-    /**
-     * Update the specified Profile in storage.
-     * PUT/PATCH /profiles/{id}
-     *
-     * @param int $id
-     * @param UpdateProfileAPIRequest $request
-     *
-     * @return Response
-     */
-    public function update($id, UpdateProfileAPIRequest $request)
-    {
-        $input = $request->all();
-
-        /** @var Profile $profile */
-        $profile = $this->profileRepository->find($id);
-
-        if (empty($profile)) {
-            return $this->sendError('Profile not found');
-        }
-
-        $profile = $this->profileRepository->update($input, $id);
-
-        return $this->sendResponse($profile->toArray(), 'Profile updated successfully');
-    }
-
-    /**
-     * Remove the specified Profile from storage.
-     * DELETE /profiles/{id}
-     *
-     * @param int $id
-     *
-     * @throws \Exception
-     *
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        /** @var Profile $profile */
-        $profile = $this->profileRepository->find($id);
-
-        if (empty($profile)) {
-            return $this->sendError('Profile not found');
-        }
-
-        $profile->delete();
-
-        return $this->sendSuccess('Profile deleted successfully');
+        return $this->sendResponse($profile->toArray(), 'Actualizaste tu Perfil');
     }
 }
