@@ -35,5 +35,8 @@ return [
     'purchases' => 'Ventas',
 
     'store' => 'Tienda',
-    'stores' => 'Tiendas'
+    'stores' => 'Tiendas',
+
+    'shipment_type' => 'Tipo de Envío',
+    'shipment_types' => 'Tipos de Envíos'
 ];

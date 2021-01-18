@@ -744,6 +744,11 @@ let actions = {
                 await commit('SET_SELECTED_PRODUCT');
                 break;
 
+            case 'shipment_types':
+                await commit('SET_SHIPMENT_TYPES', content.data);
+                await commit('SET_SELECTED_SHIPMENT_TYPE');
+                break;
+
             default:
                 break;
         }
@@ -806,6 +811,10 @@ let actions = {
                 await commit('PUSH_PRODUCT', content.data);
                 break;
 
+            case 'shipment_types':
+                await commit('PUSH_SHIPMENT_TYPE', content.data);
+                break;
+
             default:
                 break;
         }
@@ -849,6 +858,10 @@ let actions = {
 
             case 'products':
                 await commit('SET_SELECTED_PRODUCT');
+                break;
+
+            case 'shipment_types':
+                await commit('SET_SELECTED_SHIPMENT_TYPE');
                 break;
 
             default:

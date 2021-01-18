@@ -73,7 +73,7 @@
 	</div>
 	<footer class="app-footer">
 		<div>
-			<strong>Copyright © {{ date('Y') }} <a href="{{ env('APP_URL') }}">{{ env('APP_NAME') }}</a>.</strong>
+			<strong>Copyright © 2021 <a href="{{ env('APP_URL') }}">{{ env('APP_NAME') }}</a>.</strong>
 			All rights reserved.
 		</div>
 		<div class="ml-auto">

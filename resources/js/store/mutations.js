@@ -89,6 +89,10 @@ let mutations = {
         state.products = products;
     },
 
+    SET_SHIPMENT_TYPES(state, shipmentTypes) {
+        state.shipmentTypes = shipmentTypes;
+    },
+
     SET_USER_LOGGED(state, payload) {
         state.userLogged.isAuthenticated = true
         state.userLogged.id = payload.id
@@ -205,6 +209,17 @@ let mutations = {
         state.selected_product = selected_product;
     },
 
+    SET_SELECTED_SHIPMENT_TYPE(
+        state, selected_shipment_type = {
+            id: null,
+            name: "",
+            description: "",
+            cost: 0,
+        }
+    ) {
+        state.selected_shipment_type = selected_shipment_type;
+    },
+
     /**
      * PUSH
      */
@@ -263,6 +278,10 @@ let mutations = {
 
     PUSH_ATTRIBUTE_SELECTED_PRODUCT(state, payload) {
         state.selected_product.attributeValueSelected[payload.attributeIndex] = payload.value
+    },
+
+    PUSH_SHIPMENT_TYPE(state, shipmentType) {
+        state.shipmentTypes.data.push(shipmentType);
     },
 
     /**

@@ -75,6 +75,7 @@ let state = {
     categoriesAll: [],
     parameters: [],
     products: [],
+    shipmentTypes: [],
 
     /**
      * Selected item
@@ -143,6 +144,13 @@ let state = {
         stocks: [],
         attributeValueSelected: [],
         images: []
+    },
+
+    selected_shipment_type: {
+        id: null,
+        name: "",
+        description: "",
+        cost: 0,
     },
 }
 

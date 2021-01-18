@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 
-class ProductController extends AppBaseController
+class ShipmentTypeController extends AppBaseController
 {
     /**
      * Display a listing of the Product.
@@ -16,6 +16,6 @@ class ProductController extends AppBaseController
      */
     public function index(Request $request)
     {
-        return view('admin.products.index');
+        return view('admin.shipmentTypes.index');
     }
 }

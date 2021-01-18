@@ -34,5 +34,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['role:admin']], function () 
     Route::resource('parameters', 'Admin\ParameterController', ["as" => 'admin']);
     Route::resource('products', 'Admin\ProductController', ["as" => 'admin']);
     Route::resource('purchases', 'Admin\PurchaseController', ["as" => 'admin']);
+    Route::resource('purchases', 'Admin\PurchaseController', ["as" => 'admin']);
+    Route::resource('shipmentTypes', 'Admin\ShipmentTypeController', ["as" => 'admin']);
 });
 

@@ -165,6 +165,10 @@ Vue.component('new-product-attributes', require('./components/models/products/ne
 Vue.component('purchases-list', require('./components/models/purchases/lists.vue').default);
 Vue.component('purchases-index', require('./components/models/purchases/index.vue').default);
 
+// shipment Types
+Vue.component('shipment-type-index', require('./components/models/shipmentTypes/index.vue').default);
+Vue.component('shipment-type-list', require('./components/models/shipmentTypes/lists.vue').default);
+Vue.component('shipment-type-form', require('./components/models/shipmentTypes/form.vue').default);
 
 //PUBLIC
 Vue.component('home', require('./components/public/home.vue').default);

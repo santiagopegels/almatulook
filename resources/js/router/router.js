@@ -6,6 +6,7 @@ import categoriesIndex from '../components/models/categories/index.vue'
 import attributesIndex from '../components/models/attributes/index.vue'
 import parametersIndex from '../components/models/parameters/index.vue'
 import permissionsIndex from '../components/models/permissions/index.vue'
+import shipmentTypesIndex from '../components/models/shipmentTypes/index.vue'
 import rolesIndex from '../components/models/roles/index.vue'
 import usersIndex from '../components/models/users/index.vue'
 import purchasesIndex from '../components/models/purchases/index.vue'
@@ -70,6 +71,11 @@ export const router = new Router({
             path: '/admin/purchases',
             name: 'purchasesIndex',
             component: purchasesIndex,
+        },
+        {
+            path: '/admin/shipmentTypes',
+            name: 'shipmentTypesIndex',
+            component: shipmentTypesIndex,
         },
         {
             path: '/product',

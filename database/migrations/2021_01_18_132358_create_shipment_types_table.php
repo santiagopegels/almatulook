@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePurchasesTable extends Migration
+class CreateShipmentTypesTable extends Migration
 {
 
     /**
@@ -14,16 +14,11 @@ class CreatePurchasesTable extends Migration
      */
     public function up()
     {
-        Schema::create('purchases', function (Blueprint $table) {
+        Schema::create('shipment_types', function (Blueprint $table) {
             $table->increments('id');
-            $table->date('purchase_date');
-            $table->float('total');
-
-            $table->unsignedInteger('shipment_type_id');
-            $table->foreign('shipment_type_id')->references('id')->on('shipment_types')
-                ->onUpdate('cascade')->onDelete('cascade');
-            $table->float('shipment_cost');
-
+            $table->text('name');
+            $table->text('description')->nullable();
+            $table->decimal('cost',10,2);
             $table->timestamps();
             $table->softDeletes();
         });
@@ -36,6 +31,6 @@ class CreatePurchasesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('purchases');
+        Schema::drop('shipment_types');
     }
 }

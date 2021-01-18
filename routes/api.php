@@ -31,6 +31,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['role:admin']], function () 
     Route::resource('products', 'Admin\ProductAPIController');
     Route::resource('purchases', 'Admin\PurchaseAPIController');
     Route::resource('purchase_details', 'Admin\PurchaseDetailAPIController');
+    Route::resource('shipment_types', 'Admin\ShipmentTypeAPIController');
 
 
     // get all
@@ -49,6 +50,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['role:admin']], function () 
     Route::post('attributes/{id}/restore', ['uses' => 'Admin\AttributeAPIController@restore']);
     Route::post('values/{id}/restore', ['uses' => 'Admin\ValueAPIController@restore']);
     Route::post('categories/{id}/restore', ['uses' => 'Admin\CategoryAPIController@restore']);
+    Route::post('shipment_types/{id}/restore', ['uses' => 'Admin\ShipmentTypeAPIController@restore']);
 
     //extra
     Route::post('product/{product_id}/deleteStock', ['uses' => 'Admin\ProductAPIController@deleteStock']);
@@ -60,5 +62,3 @@ Route::get('categories_all', 'CategoryAPIController@all');
 Route::get('user_logged', 'UserAPIController@getUserLogged');
 Route::post('profiles', 'ProfileAPIController@updateProfile');
 Route::get('profiles', 'ProfileAPIController@index');
-
-
