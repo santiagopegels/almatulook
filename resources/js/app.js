@@ -24,7 +24,7 @@ import vSelect from 'vue-select'
 import {router} from './router/router'
 import VueSweetalert2 from 'vue-sweetalert2';
 import Antd from 'ant-design-vue';
-import Transitions from 'vue2-transitions'
+import Transitions from 'vue2-transitions';
 
 
 Vue.config.baseurl = process.env.MIX_APP_URL;

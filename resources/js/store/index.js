@@ -4,6 +4,8 @@ import actions from './actions'
 import mutations from './mutations'
 import getters from './getters'
 import state from "./state";
+import VuexPersistence from 'vuex-persist';
+
 
 Vue.use(Vuex);
 
@@ -11,5 +13,6 @@ export default new Vuex.Store({
     state,
     mutations,
     getters,
-    actions
+    actions,
+    plugins: [new VuexPersistence().plugin]
 })
