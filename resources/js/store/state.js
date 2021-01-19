@@ -17,7 +17,7 @@ let state = {
     orderProducts: null,
     selectedValuesToFilter: [],
     bagProducts: [],
-    shipCost: 249,
+    shipCost: 0,
 
     purchaseInfo: {
         isGuest: true,
@@ -151,6 +151,7 @@ let state = {
         name: "",
         description: "",
         cost: 0,
+        addressRequired: true,
     },
 }
 

@@ -1,10 +1,10 @@
 <template>
     <div>
         <a-row type="flex" justify="space-between">
-            <h2 class="bold">SUBTOTAL</h2>
+            <h2 class="bold">SUBTOTAL (Sin Envío)</h2>
             <h2 class="bold"> {{  getSubtotal | currency }}</h2>
         </a-row>
-            <a-button type="primary" block size="large" @click="goToPurchaseIndex()">
+            <a-button :disabled="!bagProducts.length >0" type="primary" block size="large" @click="goToPurchaseIndex()">
                 Comprar
             </a-button>
     </div>

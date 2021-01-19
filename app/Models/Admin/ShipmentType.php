@@ -19,7 +19,7 @@ class ShipmentType extends Model
     use SoftDeletes;
 
     public $table = 'shipment_types';
-    
+
 
     protected $dates = ['deleted_at'];
 
@@ -28,7 +28,8 @@ class ShipmentType extends Model
     public $fillable = [
         'name',
         'description',
-        'cost'
+        'cost',
+        'address_required'
     ];
 
     /**
@@ -40,7 +41,8 @@ class ShipmentType extends Model
         'id' => 'integer',
         'name' => 'string',
         'description' => 'string',
-        'cost' => 'decimal:2'
+        'cost' => 'decimal:2',
+        'address_required' => 'boolean'
     ];
 
     /**
@@ -50,8 +52,9 @@ class ShipmentType extends Model
      */
     public static $rules = [
         'name' => 'required',
-        'cost' => 'required'
+        'cost' => 'required',
+        'address_required' => 'required'
     ];
 
-    
+
 }

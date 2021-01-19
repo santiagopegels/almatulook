@@ -1,8 +1,8 @@
 <template>
     <div>
         <a-row type="flex" justify="space-between">
-            <img class="cart-drawer-content-item-list-img"
-                 :src="product.images[0]"/>
+            <img v-if="" class="cart-drawer-content-item-list-img"
+                 :src="product.images.length > 0 ? product.images[0] : logo"/>
 
             <h3>{{product.name}}</h3>
 
@@ -15,9 +15,14 @@
     </div>
 </template>
 <script>
-import store from '../../../store/index'
+import logo from '../../../../../public/img/logo/logo.png'
 export default {
     props: ['product'],
+    data(){
+        return {
+            logo: logo
+        }
+    },
     methods: {
         showConfirm(product) {
             let self = this

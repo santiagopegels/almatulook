@@ -98,6 +98,14 @@ let mutations = {
         state.userLogged.id = payload.id
     },
 
+    SET_PURCHASE_USER_EMAIL(state, email) {
+        state.purchaseInfo.data.user.email = email;
+    },
+
+    SET_SHIP_COST(state, cost) {
+        state.shipCost = cost;
+    },
+
     SET_USER_PROFILE(state, payload) {
         state.purchaseInfo.data.profile.personalInfo.name = payload.name
         state.purchaseInfo.data.profile.personalInfo.lastName = payload.lastname
@@ -215,6 +223,7 @@ let mutations = {
             name: "",
             description: "",
             cost: 0,
+            addressRequired: true
         }
     ) {
         state.selected_shipment_type = selected_shipment_type;

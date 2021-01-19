@@ -29,7 +29,8 @@
             <div class="form-dashed">
                 <first-step v-if="current == 0" @next-step="next()" />
                 <second-step v-if="current == 1" @next-step="next()" @prev-step="prev()"/>
-                <third-step v-if="current == 2" @prev-step="prev()"/>
+                <third-step v-if="current == 2" @next-step="next()" @prev-step="prev()"/>
+                <four-step v-if="current == 3" @prev-step="prev"/>
             </div>
         </a-col>
         <a-col class="summary-content"
@@ -54,7 +55,11 @@ export default {
                     icon: 'user',
                 },
                 {
-                    title: 'Envío',
+                    title: 'Tipo de Envío',
+                    icon: 'compass',
+                },
+                {
+                    title: 'Dirección',
                     icon: 'environment',
                 },
                 {
@@ -73,8 +78,8 @@ export default {
             this.current++;
             window.scrollTo(0,0);
         },
-        prev() {
-            this.current--;
+        prev(value) {
+            value ? this.current = this.current - value : this.current--;
             window.scrollTo(0,0);
         },
         showSteps() {

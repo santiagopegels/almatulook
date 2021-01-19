@@ -59,6 +59,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['role:admin']], function () 
 Route::get('products', 'ProductAPIController@index');
 Route::get('attributes_all', 'AttributeAPIController@all');
 Route::get('categories_all', 'CategoryAPIController@all');
+Route::get('shipment_types_all', 'ShipmentTypeAPIController@all');
 Route::get('user_logged', 'UserAPIController@getUserLogged');
 Route::post('profiles', 'ProfileAPIController@updateProfile');
 Route::get('profiles', 'ProfileAPIController@index');

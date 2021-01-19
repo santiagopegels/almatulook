@@ -19,6 +19,8 @@ class CreateShipmentTypesTable extends Migration
             $table->text('name');
             $table->text('description')->nullable();
             $table->decimal('cost',10,2);
+            $table->boolean('address_required');
+
             $table->timestamps();
             $table->softDeletes();
         });

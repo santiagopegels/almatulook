@@ -689,6 +689,7 @@ let actions = {
      * @param {*} params
      */
     async setData(commit, content = {params, data}) {
+        console.log(content)
         switch (content.params.model) {
 
             case 'users':
@@ -745,6 +746,11 @@ let actions = {
                 break;
 
             case 'shipment_types':
+                await commit('SET_SHIPMENT_TYPES', content.data);
+                await commit('SET_SELECTED_SHIPMENT_TYPE');
+                break;
+
+            case 'shipment_types_all':
                 await commit('SET_SHIPMENT_TYPES', content.data);
                 await commit('SET_SELECTED_SHIPMENT_TYPE');
                 break;

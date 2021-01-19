@@ -27,11 +27,11 @@
                 </a-col>
             </a-row>
             <a-row type="flex" justify="space-between" class="bold">
-                <a-col>
-                    Costo de envío
+                <a-col style="display: flex">
+                    Costo de envío &nbsp; <p style="font-size: 0.8rem" v-show="selected_shipment_type.id">  ({{  selected_shipment_type.name  }}) </p>
                 </a-col>
                 <a-col>
-                    {{ shipCost | currency }}
+                     {{ shipCost | currency }}
                 </a-col>
             </a-row>
             <a-divider></a-divider>
@@ -40,7 +40,7 @@
                     <h1>Total</h1>
                 </a-col>
                 <a-col>
-                    <h1>{{ getSubtotal + shipCost | currency }}</h1>
+                    <h1>{{ Number(getSubtotal) + Number(shipCost) | currency }}</h1>
                 </a-col>
             </a-row>
         </a-card>
@@ -51,7 +51,7 @@ import {mapGetters} from 'vuex'
 
 export default {
     computed: {
-        ...mapGetters(['bagProducts', 'shipCost']),
+        ...mapGetters(['bagProducts', 'shipCost', 'selected_shipment_type']),
         getSubtotal() {
             const subtotalReducer = (subtotal, product) => subtotal + Number(product.price);
             return this.bagProducts.reduce(subtotalReducer, 0)

@@ -17,7 +17,8 @@
 					<th scope="col">Tipo de Envío</th>
 					<th scope="col">Descripción</th>
 					<th scope="col">Costo</th>
-					<th scope="col" class="text-center">
+                    <th scope="col">Requiere Dirección</th>
+                    <th scope="col" class="text-center">
 						<i class="icon-settings"></i>
 					</th>
 				</tr>
@@ -30,7 +31,8 @@
 						<span class="badge">{{model.description}}</span>
 					</td>
 					<td>{{model.cost | currency}}</td>
-					<td class="text-center">
+                    <td>{{model.address_required ? 'Si' : 'No'}}</td>
+                    <td class="text-center">
 						<form method="POST" @submit="handleSubmitDelete($event, model)" accept-charset="UTF-8">
 							<div>
 								<button
@@ -192,7 +194,8 @@ export default {
 				name: model.name,
 				description: model.description,
                 cost: model.cost,
-			});
+                addressRequired: model.address_required,
+            });
 		},
 
 		/**
