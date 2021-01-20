@@ -27,6 +27,11 @@ import {
     mapGetters
 } from "vuex";
 export default {
+    components: {
+        usersForm: () => import('./form.vue'),
+        usersList: () => import('./lists.vue'),
+        usersFilters: () => import('./filters.vue')
+    },
     props: {
         title: {
             type: String,

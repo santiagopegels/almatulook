@@ -15,6 +15,10 @@ import {
 } from "vuex";
 
 export default {
+    components: {
+        CategoriesTreeview: () => import('./treeview.vue'),
+        CategoriesForm: () => import('./form.vue'),
+    },
     props: {
     },
     data: function () {

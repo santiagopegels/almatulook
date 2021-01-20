@@ -87,9 +87,6 @@ Vue.toasted.register('ToastedSuccess',
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-
 /**
  * forms
  */
@@ -102,10 +99,7 @@ Vue.component('previous-button', require('./components/public/purchases/wizardSt
  */
 
 // users
-Vue.component('users-form', require('./components/models/users/form.vue').default);
-Vue.component('users-list', require('./components/models/users/lists.vue').default);
-Vue.component('users-index', require('./components/models/users/index.vue').default);
-Vue.component('users-filters', require('./components/models/users/filters.vue').default);
+Vue.component('users-index', () => import('./components/models/users/index.vue').default);
 
 // roles
 Vue.component('roles-form', require('./components/models/roles/form.vue').default);
@@ -135,11 +129,9 @@ Vue.component('values-filters', require('./components/models/values/filters.vue'
 Vue.component('values-checkbox', require('./components/models/values/checkbox.vue').default);
 
 // categories
-Vue.component('categories-form', require('./components/models/categories/form.vue').default);
 Vue.component('categories-list', require('./components/models/categories/lists.vue').default);
 Vue.component('categories-index', require('./components/models/categories/index.vue').default);
 Vue.component('categories-filters', require('./components/models/categories/filters.vue').default);
-Vue.component('categories-treeview', require('./components/models/categories/treeview.vue').default);
 Vue.component('categories-subcategories', require('./components/models/categories/subcategoriesInput.vue').default);
 Vue.component('categories-checkbox-attributes', require('./components/models/categories/checkboxAttributes.vue').default);
 Vue.component('categories-select', require('./components/models/categories/select.vue').default);
