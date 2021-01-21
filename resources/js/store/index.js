@@ -9,7 +9,14 @@ import VuexPersistence from 'vuex-persist';
 Vue.use(Vuex);
 
 const vuexSession = new VuexPersistence({
-    storage: window.sessionStorage
+    storage: window.sessionStorage,
+    reducer: (state) => ({
+        userLogged: state.userLogged,
+        isCheckedBagSession: state.isCheckedBagSession,
+        bagProducts: state.bagProducts,
+        purchaseInfo: state.purchaseInfo,
+        categoriesAll: state.categoriesAll,
+    }),
 })
 
 export default new Vuex.Store({

@@ -11,6 +11,7 @@ let state = {
         isAuthenticated: false,
         id: null
     },
+    isCheckedBagSession: false,
 
     results: [],
     term: "",

@@ -13,6 +13,10 @@ let mutations = {
         state.showCartSideBar = !state.showCartSideBar;
     },
 
+    TOGGLE_CHECK_BAG_SESSION(state) {
+        state.isCheckedBagSession = !state.isCheckedBagSession;
+    },
+
     TOGGLE_SHOW_SIDEBAR_DRAWER_LAYOUT(state) {
         state.showSiderDrawerLayout = !state.showSiderDrawerLayout;
     },
@@ -87,6 +91,10 @@ let mutations = {
 
     SET_PRODUCTS(state, products) {
         state.products = products;
+    },
+
+    SET_BAG_PRODUCTS(state, products) {
+        state.bagProducts = products;
     },
 
     SET_SHIPMENT_TYPES(state, shipmentTypes) {
@@ -278,7 +286,6 @@ let mutations = {
     },
 
     PUSH_BAG_PRODUCT(state, product) {
-        delete product['attributes']
         state.bagProducts.push(product);
     },
 

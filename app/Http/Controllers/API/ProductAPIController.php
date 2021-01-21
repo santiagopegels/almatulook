@@ -114,8 +114,23 @@ class ProductAPIController extends AppBaseController
      */
     public function addProductToBag(Request $request)
     {
-        $request->session()->push('bag.products', $request->all());
+        session()->push('bag.products', $request->all());
 
-        return $this->sendResponse('nada', 'Product retrieved successfully');
+        return $this->sendResponse('nada', 'Product saved into bag');
+    }
+
+    /**
+     * Display the specified Product.
+     * Get /products/bag
+     *
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function getProductsBag(Request $request)
+    {
+        $products = session()->get('bag.products');
+
+        return $this->sendResponse($products, 'Bag retrieved successfully');
     }
 }

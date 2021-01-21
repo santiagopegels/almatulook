@@ -160,11 +160,11 @@ let actions = {
 
     pushProductToBag({commit}, payload) {
 
-        let {id, attributeValueSelected } = payload
+        delete payload['attributes']
 
         return new Promise(async (resolve, reject) => {
 
-            window.axios.post('/api/products/add/product/bag', {id, attributeValueSelected}, {}).then(async response => {
+            window.axios.post('/api/products/add/product/bag', payload, {}).then(async response => {
                 if (response.data.success) {
                     console.log(response.data)
                     await commit('PUSH_BAG_PRODUCT', payload)
@@ -668,6 +668,38 @@ let actions = {
             window.axios.get(path).then(response => {
                 if (response.data.data) {
                     commit('SET_USER_PROFILE', response.data.data);
+                    commit('SET_LOADING', false);
+                    resolve({
+                        status: true,
+                        message: response.data.data
+                    });
+                } else {
+                    resolve({
+                        status: true,
+                        message: null
+                    });
+                }
+            })
+        });
+    },
+
+    fetchUserBag({commit}) {
+        return new Promise(async (resolve, reject) => {
+
+            commit('SET_LOADING', true);
+            let params = {
+                model: 'products',
+                additional_path: 'bag'
+            }
+
+            let path = await actions.getPublicEndpoint(params);
+
+            console.log(`path.${params.model}`, path);
+
+            window.axios.get(path).then(async response => {
+                if (response.data.data) {
+                    await commit('SET_BAG_PRODUCTS', response.data.data);
+                    await commit('TOGGLE_CHECK_BAG_SESSION');
                     commit('SET_LOADING', false);
                     resolve({
                         status: true,

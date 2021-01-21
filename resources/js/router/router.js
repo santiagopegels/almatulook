@@ -102,9 +102,16 @@ export const router = new Router({
 
 router.beforeEach((to, from, next) => {
     const isAuthenticated = store.state.userLogged.isAuthenticated
+    const isCheckedBagSession = store.state.userLogged.isAuthenticated
+
+    if (!isCheckedBagSession){
+        store.dispatch('fetchUserBag')
+    }
     if (to.name == 'home' && !isAuthenticated){
         store.dispatch('fetchUserLogged')
         next()
     }
     else next()
 })
+
+
