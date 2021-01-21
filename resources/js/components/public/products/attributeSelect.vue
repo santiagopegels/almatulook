@@ -23,16 +23,17 @@ export default {
         await this.attribute.forEach(item => Vue.set(item, 'type', 'default'))
     },
     methods: {
-        async setAttributeSelected(value) {
+        async setAttributeSelected(valueObject) {
             await this.attribute.forEach(item => item.type = 'default')
-            value.type = 'primary'
+            valueObject.type = 'primary'
+            let {value_id, attribute_id, value, attribute} = valueObject
             await this.$store.commit('PUSH_ATTRIBUTE_SELECTED_PRODUCT', {
-                value: value,
+                value: {value_id, attribute_id, value, attribute},
                 attributeIndex: this.attributeNumber
             })
             this.$emit('change', {
                 attributeSelectedIndex: this.attributeNumber,
-                children: value.children ? value.children : null
+                children: valueObject.children ? valueObject.children : null
             })
         }
     }

@@ -158,6 +158,41 @@ let actions = {
         });
     },
 
+    pushProductToBag({commit}, payload) {
+
+        let {id, attributeValueSelected } = payload
+
+        return new Promise(async (resolve, reject) => {
+
+            window.axios.post('/api/products/add/product/bag', {id, attributeValueSelected}, {}).then(async response => {
+                if (response.data.success) {
+                    console.log(response.data)
+                    await commit('PUSH_BAG_PRODUCT', payload)
+                    await commit('TOGGLE_SHOW_CART_SIDEBAR')
+                    await commit('SET_LOADING', false);
+                    resolve({
+                        status: true,
+                        message: response.data.data
+                    });
+                } else {
+                    commit('SET_LOADING', false);
+                    reject({
+                        status: false,
+                        message: response.data.message
+                    });
+                }
+
+            }).catch(error => {
+                console.error(`pushProductToBag`, error);
+                commit('SET_LOADING', false);
+                reject({
+                    status: false,
+                    message: error
+                });
+            });
+        });
+    },
+
 
     /**
      *  ***** NEW ACTIONS ******

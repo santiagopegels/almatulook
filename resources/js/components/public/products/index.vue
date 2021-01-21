@@ -39,8 +39,7 @@ export default {
     },
     methods: {
         async addToCart(){
-            await this.$store.commit('PUSH_BAG_PRODUCT', this.selected_product)
-            await this.$store.commit('TOGGLE_SHOW_CART_SIDEBAR')
+            await this.$store.dispatch('pushProductToBag', this.selected_product)
         }
     }
 }

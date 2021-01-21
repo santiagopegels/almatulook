@@ -63,3 +63,4 @@ Route::get('shipment_types_all', 'ShipmentTypeAPIController@all');
 Route::get('user_logged', 'UserAPIController@getUserLogged');
 Route::post('profiles', 'ProfileAPIController@updateProfile');
 Route::get('profiles', 'ProfileAPIController@index');
+Route::post('products/add/product/bag', 'ProductAPIController@addProductToBag');

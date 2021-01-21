@@ -106,48 +106,16 @@ class ProductAPIController extends AppBaseController
 
     /**
      * Display the specified Product.
-     * GET|HEAD /products/{id}
+     * Post /products/add/product/bag
      *
-     * @param int $id
-     *
-     * @return Response
-     */
-    public function show($id)
-    {
-        /** @var Product $product */
-        $product = $this->productRepository->find($id);
-
-        if (empty($product)) {
-            return $this->sendError('Product not found');
-        }
-
-        return $this->sendResponse($product->toArray(), 'Product retrieved successfully');
-    }
-
-    /**
-     * Update the specified Product in storage.
-     * PUT/PATCH /products/{id}
-     *
-     * @param int $id
-     * @param UpdateProductAPIRequest $request
+     * @param Request $request
      *
      * @return Response
      */
-    public function update($id, Request $request)
+    public function addProductToBag(Request $request)
     {
-        $input = $request->all();
-        /** @var Product $product */
-        $product = $this->productRepository->find($id);
+        $request->session()->push('bag.products', $request->all());
 
-        if (empty($product)) {
-            return $this->sendError('Product not found');
-        }
-
-        $product = $this->productRepository->update($input, $id);
-        if (isset($input['stocks'])) {
-            $this->productRepository->updateStock($product, $input['stocks']);
-        }
-
-        return $this->sendResponse($product->toArray(), 'Product updated successfully');
+        return $this->sendResponse('nada', 'Product retrieved successfully');
     }
 }

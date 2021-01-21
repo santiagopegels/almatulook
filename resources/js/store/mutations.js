@@ -278,6 +278,7 @@ let mutations = {
     },
 
     PUSH_BAG_PRODUCT(state, product) {
+        delete product['attributes']
         state.bagProducts.push(product);
     },
 
