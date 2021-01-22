@@ -158,40 +158,6 @@ let actions = {
         });
     },
 
-    pushProductToBag({commit}, payload) {
-
-        delete payload['attributes']
-
-        return new Promise(async (resolve, reject) => {
-
-            window.axios.post('/api/products/add/product/bag', payload, {}).then(async response => {
-                if (response.data.success) {
-                    console.log(response.data)
-                    await commit('PUSH_BAG_PRODUCT', payload)
-                    await commit('TOGGLE_SHOW_CART_SIDEBAR')
-                    await commit('SET_LOADING', false);
-                    resolve({
-                        status: true,
-                        message: response.data.data
-                    });
-                } else {
-                    commit('SET_LOADING', false);
-                    reject({
-                        status: false,
-                        message: response.data.message
-                    });
-                }
-
-            }).catch(error => {
-                console.error(`pushProductToBag`, error);
-                commit('SET_LOADING', false);
-                reject({
-                    status: false,
-                    message: error
-                });
-            });
-        });
-    },
 
 
     /**
@@ -534,6 +500,74 @@ let actions = {
             });
         })
     },
+
+    pushProductToBag({commit}, payload) {
+
+        delete payload['attributes']
+
+        return new Promise(async (resolve, reject) => {
+
+            window.axios.post('/api/products/add/product/bag', payload, {}).then(async response => {
+                if (response.data.success) {
+                    await commit('PUSH_BAG_PRODUCT', payload)
+                    await commit('TOGGLE_SHOW_CART_SIDEBAR')
+                    await commit('SET_LOADING', false);
+                    resolve({
+                        status: true,
+                        message: response.data.data
+                    });
+                } else {
+                    commit('SET_LOADING', false);
+                    reject({
+                        status: false,
+                        message: response.data.message
+                    });
+                }
+
+            }).catch(error => {
+                console.error(`pushProductToBag`, error);
+                commit('SET_LOADING', false);
+                reject({
+                    status: false,
+                    message: error
+                });
+            });
+        });
+    },
+
+    removeProductToBag({commit}, payload) {
+
+        delete payload['attributes']
+
+        return new Promise(async (resolve, reject) => {
+
+            window.axios.post('/api/products/remove/product/bag', payload, {}).then(async response => {
+                if (response.data.success) {
+                    await commit('REMOVE_BAG_PRODUCT', payload)
+                    await commit('SET_LOADING', false);
+                    resolve({
+                        status: true,
+                        message: response.data.data
+                    });
+                } else {
+                    commit('SET_LOADING', false);
+                    reject({
+                        status: false,
+                        message: response.data.message
+                    });
+                }
+
+            }).catch(error => {
+                console.error(`pushProductToBag`, error);
+                commit('SET_LOADING', false);
+                reject({
+                    status: false,
+                    message: error
+                });
+            });
+        });
+    },
+
 
     /**
      * FETCH ALL DATA

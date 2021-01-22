@@ -105,7 +105,7 @@ class ProductAPIController extends AppBaseController
     }
 
     /**
-     * Display the specified Product.
+     * Add a specified Product to Bag.
      * Post /products/add/product/bag
      *
      * @param Request $request
@@ -116,7 +116,31 @@ class ProductAPIController extends AppBaseController
     {
         session()->push('bag.products', $request->all());
 
-        return $this->sendResponse('nada', 'Product saved into bag');
+        return $this->sendResponse('success', 'Product saved into bag');
+    }
+
+    /**
+     * Remove a specified Product from Bag.
+     * Post /products/remove/product/bag
+     *
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function removeProductFromBag(Request $request)
+    {
+        $productToRemove = $request->all();
+
+        $products = session()->pull('bag.products');
+        foreach ($products as $index => $product) {
+            if ($product['id'] == $productToRemove['id']) {
+                unset($products[$index]);
+            }
+        }
+        array_unshift($products);
+        session()->put('bag.products', $products);
+
+        return $this->sendResponse('success', 'Product removed from bag');
     }
 
     /**
@@ -130,7 +154,6 @@ class ProductAPIController extends AppBaseController
     public function getProductsBag(Request $request)
     {
         $products = session()->get('bag.products');
-
         return $this->sendResponse($products, 'Bag retrieved successfully');
     }
 }

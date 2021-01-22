@@ -31,7 +31,7 @@ export default {
                 content: `El producto ${this.product.name} será removido de su carrito de compras.`,
                 cancelText: 'Cancelar',
                 onOk() {
-                    self.$store.commit('REMOVE_BAG_PRODUCT', product)
+                    self.$store.dispatch('removeProductToBag', product)
                 },
                 onCancel() {},
             });
