@@ -202,6 +202,7 @@ Vue.component('summary-purchase-product', require('./components/public/purchases
 Vue.component('summary-purchase-step-guest-form', require('./components/public/purchases/wizardSteps/guestForm.vue').default);
 Vue.component('summary-purchase-step-login-form', require('./components/public/purchases/wizardSteps/loginForm.vue').default);
 Vue.component('summary-purchase-step-profile-form', require('./components/public/purchases/wizardSteps/profileForm.vue').default);
+Vue.component('summary-purchase-step-profile-info', require('./components/public/purchases/wizardSteps/profileInfo.vue').default);
 
 //Cart Resume
 Vue.component('cart-resume-index', require('./components/public/cartResume/index.vue').default);

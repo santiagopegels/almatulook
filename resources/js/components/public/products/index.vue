@@ -23,7 +23,7 @@
                 <a-divider></a-divider>
                 <product-attribute-select-content/>
                 <a-divider></a-divider>
-                <a-button class="swingHorizontal" style="margin-top:10px; width:97%; height: 50px;" size="large" block type="primary"
+                <a-button :class="{'swingHorizontal': !canAddProductToBag}" style="margin-top:10px; width:97%; height: 50px;" size="large" block type="primary"
                           @click="addToCart()" :disabled="!canAddProductToBag">
                    Agregar a la Bolsa
                 </a-button>
@@ -43,6 +43,14 @@ export default {
         async addToCart() {
             if (!await this.productSelectedExistIntoBag()) {
                 await this.$store.dispatch('pushProductToBag', this.selected_product)
+                    .then(response => {
+                        if(response.status){
+                            this.$router.push({name: 'home'})
+                        }
+                    })
+            } else {
+                this.$store.commit('TOGGLE_SHOW_CART_SIDEBAR')
+                this.$router.push({name: 'home'})
             }
         },
         async productSelectedExistIntoBag() {

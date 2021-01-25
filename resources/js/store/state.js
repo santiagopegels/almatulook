@@ -25,7 +25,6 @@ let state = {
         data: {
             user: {
                 email: null,
-                password: null,
             },
             profile: {
                 personalInfo: {

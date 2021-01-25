@@ -1,6 +1,6 @@
 <template>
     <div>
-        <previous-button @prev-step="prevStep()"/>
+        <previous-button v-if="showPrevStepButton" @prev-step="prevStep()"/>
         <a-icon type="compass" class="header-icon"/>
         <h1>Tipo de Envío</h1>
         <a-radio-group v-model="selected_shipment_type.id" @change="onChange">
@@ -38,6 +38,7 @@ export default {
     computed: {
         ...mapGetters(['shipmentTypes', 'selected_shipment_type']),
     },
+    props: ['showPrevStepButton'],
     async mounted() {
         if (!this.shipmentTypes.length > 0) {
             await this.fetchShipmentTypesAll()

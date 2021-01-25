@@ -28,7 +28,11 @@
             </a-steps>
             <div class="form-dashed">
                 <first-step v-if="current == 0" @next-step="next()" />
-                <second-step v-if="current == 1" @next-step="next()" @prev-step="prev()"/>
+                <second-step v-if="current == 1"
+                             @next-step="next()"
+                             @prev-step="prev()"
+                             :showPrevStepButton="!this.userLogged.isAuthenticated"
+                />
                 <third-step v-if="current == 2" @next-step="next()" @prev-step="prev()"/>
                 <four-step v-if="current == 3" @prev-step="prev"/>
             </div>
@@ -45,6 +49,8 @@
     </div>
 </template>
 <script>
+import {mapGetters} from "vuex";
+
 export default {
     data() {
         return {
@@ -70,7 +76,11 @@ export default {
             isShowSteps: true
         };
     },
-    mounted() {
+    computed: {
+        ...mapGetters(['userLogged', 'purchaseInfo'])
+    },
+    async mounted() {
+        await this.loadUserData()
         this.showSteps()
     },
     methods: {
@@ -85,11 +95,24 @@ export default {
         showSteps() {
             window.innerWidth <= 480 ? this.isShowSteps = false : this.isShowSteps = true
         },
+        async loadUserData(){
+            if (this.userLogged.isAuthenticated){
+                if(!this.purchaseInfo.data.profile.contact.address.deliveryAddress){
+                    await this.fetchProfile()
+                }
+                this.current = 1;
+            }
+        },
         changeStep(current){
             if(current < this.current){
                 this.current = current;
             }
-        }
+        },
+        async fetchProfile(){
+            await this.$store.dispatch('fetchUserProfile',{
+                model: 'profiles'
+            })
+        },
     },
 };
 </script>

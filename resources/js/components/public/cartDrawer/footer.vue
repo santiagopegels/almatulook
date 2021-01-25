@@ -4,7 +4,7 @@
             <h2 class="bold">SUBTOTAL (Sin Envío)</h2>
             <h2 class="bold"> {{  getSubtotal | currency }}</h2>
         </a-row>
-            <a-button :disabled="!bagProducts.length >0" type="primary" block size="large" @click="goToPurchaseIndex()">
+            <a-button :class="{'swingHorizontal': !bagProducts.length >0}" :disabled="!bagProducts.length >0" type="primary" block size="large" @click="goToPurchaseIndex()">
                 Comprar
             </a-button>
     </div>
