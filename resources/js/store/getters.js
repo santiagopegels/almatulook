@@ -4,6 +4,10 @@ let getters = {
         return state.isLoading;
     },
 
+    current: state => {
+        return state.current;
+    },
+
     showCartSideBar: state => {
         return state.showCartSideBar;
     },

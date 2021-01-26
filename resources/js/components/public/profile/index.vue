@@ -60,6 +60,7 @@ export default {
             })
                 .then(result => {
                 this.$toasted.global.ToastedSuccess({message: result.message});
+                this.$router.go(-1)
             })
                 .catch(error => this.$toasted.global.ToastedError({ message: error.message}))
         }
