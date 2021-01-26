@@ -16,7 +16,6 @@ import 'es6-promise/auto';
 import Vuex from 'vuex';
 import Vuelidate from 'vuelidate';
 import Toasted from 'vue-toasted';
-import VueDayjs from 'vue-dayjs-plugin';
 import VueCurrencyInput from 'vue-currency-input'
 import {router} from './router/router'
 import Antd from 'ant-design-vue';
@@ -29,7 +28,6 @@ console.log('MIX_APP_URL', process.env.MIX_APP_URL);
 Vue.component('paginate', Paginate);
 Vue.use(Vuex);
 Vue.use(Toasted);
-Vue.use(VueDayjs);
 Vue.use(Vuelidate);
 Vue.use(Antd);
 Vue.use(Transitions)
@@ -123,12 +121,7 @@ Vue.component('values-filters', require('./components/models/values/filters.vue'
 Vue.component('values-checkbox', require('./components/models/values/checkbox.vue').default);
 
 // categories
-Vue.component('categories-list', require('./components/models/categories/lists.vue').default);
 Vue.component('categories-index', require('./components/models/categories/index.vue').default);
-Vue.component('categories-filters', require('./components/models/categories/filters.vue').default);
-Vue.component('categories-subcategories', require('./components/models/categories/subcategoriesInput.vue').default);
-Vue.component('categories-checkbox-attributes', require('./components/models/categories/checkboxAttributes.vue').default);
-Vue.component('categories-select', require('./components/models/categories/select.vue').default);
 
 // parameters
 Vue.component('parameters-list', require('./components/models/parameters/lists.vue').default);

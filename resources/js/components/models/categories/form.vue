@@ -65,6 +65,10 @@ import {
 } from "vuelidate/lib/validators";
 
 export default {
+    components: {
+        CategoriesSubcategories: () => import(/* webpackChunkName: "js/admin-categories" */ './subcategoriesInput'),
+        CategoriesCheckboxAttributes: () => import(/* webpackChunkName: "js/admin-categories" */ './checkboxAttributes'),
+    },
     props: {},
     data: function () {
         return {

@@ -16,8 +16,8 @@ import {
 
 export default {
     components: {
-        CategoriesTreeview: () => import('./treeview.vue'),
-        CategoriesForm: () => import('./form.vue'),
+        CategoriesTreeview: () => import(/* webpackChunkName: "js/admin-categories" */ './treeview.vue'),
+        CategoriesForm: () => import(/* webpackChunkName: "js/admin-categories" */ './form.vue'),
     },
     props: {
     },

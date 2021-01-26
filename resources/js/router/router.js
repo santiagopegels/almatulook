@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import productIndex from '../components/models/products/index.vue'
 import productForm from '../components/models/products/newProduct/index.vue'
-import categoriesIndex from '../components/models/categories/index.vue'
 import attributesIndex from '../components/models/attributes/index.vue'
 import parametersIndex from '../components/models/parameters/index.vue'
 import permissionsIndex from '../components/models/permissions/index.vue'
@@ -40,7 +39,7 @@ export const router = new Router({
         {
             path: '/admin/categories',
             name: 'categoriesIndex',
-            component: categoriesIndex,
+            component: () => import(/* webpackChunkName: "admin-categories" */ '../components/models/categories/index.vue'),
         },
         {
             path: '/admin/attributes',
