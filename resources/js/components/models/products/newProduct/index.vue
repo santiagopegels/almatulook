@@ -13,9 +13,11 @@
 import {
     mapGetters
 } from "vuex";
-import Form from "./form";
 export default {
-    components: {Form},
+    components: {
+        NewProductForm: () => import(/* webpackChunkName: "js/admin-products" */ './form'),
+        ProductsCard: () => import(/* webpackChunkName: "js/admin-products" */ '../card'),
+    },
     props: {
     },
     data: function () {

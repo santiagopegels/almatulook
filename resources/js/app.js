@@ -120,26 +120,11 @@ Vue.component('values-index', require('./components/models/values/index.vue').de
 Vue.component('values-filters', require('./components/models/values/filters.vue').default);
 Vue.component('values-checkbox', require('./components/models/values/checkbox.vue').default);
 
-// categories
-Vue.component('categories-index', require('./components/models/categories/index.vue').default);
-
 // parameters
 Vue.component('parameters-list', require('./components/models/parameters/lists.vue').default);
 Vue.component('parameters-index', require('./components/models/parameters/index.vue').default);
 Vue.component('parameters-filters', require('./components/models/parameters/filters.vue').default);
 Vue.component('parameters-form', require('./components/models/parameters/form.vue').default);
-
-// products
-Vue.component('products-list', require('./components/models/products/lists.vue').default);
-Vue.component('products-index', require('./components/models/products/index.vue').default);
-Vue.component('products-filters', require('./components/models/products/filters.vue').default);
-Vue.component('products-card', require('./components/models/products/card.vue').default);
-
-
-// new products
-Vue.component('new-product-index', require('./components/models/products/newProduct/index.vue').default);
-Vue.component('new-product-form', require('./components/models/products/newProduct/form.vue').default);
-Vue.component('new-product-attributes', require('./components/models/products/newProduct/attributesProduct.vue').default);
 
 // purchase
 Vue.component('purchases-list', require('./components/models/purchases/lists.vue').default);

@@ -99,7 +99,10 @@ import {
 } from "vuelidate/lib/validators";
 
 export default {
-    props: {},
+    components: {
+        CategoriesSelect: () => import(/* webpackChunkName: "js/admin-products" */ '../../categories/select'),
+        NewProductAttributes: () => import(/* webpackChunkName: "js/admin-products" */ './attributesProduct')
+    },
     data: function () {
         return {
             images: [],

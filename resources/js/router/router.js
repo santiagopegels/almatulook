@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import productIndex from '../components/models/products/index.vue'
 import productForm from '../components/models/products/newProduct/index.vue'
 import attributesIndex from '../components/models/attributes/index.vue'
 import parametersIndex from '../components/models/parameters/index.vue'
@@ -29,17 +28,17 @@ export const router = new Router({
         {
             path: '/admin/products',
             name: 'productIndex',
-            component: productIndex,
+            component: () => import(/* webpackChunkName: "js/admin-products" */ '../components/models/products/index.vue'),
         },
         {
             path: '/admin/products/create',
             name: 'productForm',
-            component: productForm,
+            component: () => import(/* webpackChunkName: "js/admin-products" */ '../components/models/products/newProduct/index.vue'),
         },
         {
             path: '/admin/categories',
             name: 'categoriesIndex',
-            component: () => import(/* webpackChunkName: "admin-categories" */ '../components/models/categories/index.vue'),
+            component: () => import(/* webpackChunkName: "js/admin-categories" */ '../components/models/categories/index.vue'),
         },
         {
             path: '/admin/attributes',
