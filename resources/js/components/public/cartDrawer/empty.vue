@@ -1,6 +1,6 @@
 <template>
     <a-row style="text-align: center">
-        <h1>Su carrito está vacío</h1>
+        <h1>Su bolsa de compras está vacía</h1>
         <img width="30%" height="30%" :src="emptyBag" />
         <a-divider></a-divider>
     </a-row>

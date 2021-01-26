@@ -26,7 +26,13 @@
                     <a-icon slot="icon" :type="item.icon" />
                 </a-step>
             </a-steps>
-            <div class="form-dashed">
+            <div v-if="!bagProducts.length > 0" class="form-dashed">
+            <h2>
+                No hay productos en su bolsa de compras
+            </h2>
+                <img width="30%" height="30%" :src="emptyBag" />
+            </div>
+            <div v-else class="form-dashed">
                 <first-step v-if="current == 0" @next-step="next()" />
                 <second-step v-if="current == 1"
                              @next-step="next()"
@@ -50,6 +56,7 @@
 </template>
 <script>
 import {mapGetters} from "vuex";
+import emptyBag from '../../../../../public/img/shopping-bag.svg'
 
 export default {
     data() {
@@ -73,11 +80,12 @@ export default {
                     icon: 'credit-card',
                 },
             ],
-            isShowSteps: true
+            isShowSteps: true,
+            emptyBag: emptyBag
         };
     },
     computed: {
-        ...mapGetters(['userLogged', 'purchaseInfo'])
+        ...mapGetters(['userLogged', 'purchaseInfo', 'bagProducts'])
     },
     async mounted() {
         await this.loadUserData()

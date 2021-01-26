@@ -9,12 +9,22 @@
     </div>
 </template>
 <script>
+import {mapGetters} from "vuex";
+
 export default {
     data() {
         return {
             showLoginForm: false,
             showGuestForm: true
         }
+    },
+    mounted() {
+        if(this.userLogged.isAuthenticated){
+            this.nextStep()
+        }
+    },
+    computed:{
+        ...mapGetters(['userLogged', 'purchaseInfo', 'bagProducts'])
     },
     methods: {
         handleLoginForm() {
