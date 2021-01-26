@@ -7,7 +7,7 @@
                 <button v-if="hasId && !selected_category.deleted_at" title="Eliminar" type="submit"
                         @click="deleteCategory(selected_category)"
                         class="btn btn-outline-danger btn-sm mr-2">
-                        <i class="fa fa-trash"></i>
+                        <i class="icon-trash"></i>
                 </button>
             <span v-if="hasId" class="badge badge-warning">
                 ID

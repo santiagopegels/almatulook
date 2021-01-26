@@ -28,7 +28,7 @@
                     title="Eliminar"
                     @click="removeElement(stockDataIndex)"
             >
-                <i class="fa fa-times"></i>
+                <i class="icon-close"></i>
             </button>
         </div>
         <span class="border-bottom"></span>

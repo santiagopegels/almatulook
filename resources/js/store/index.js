@@ -15,7 +15,6 @@ const vuexSession = new VuexPersistence({
         isCheckedBagSession: state.isCheckedBagSession,
         bagProducts: state.bagProducts,
         purchaseInfo: state.purchaseInfo,
-        categoriesAll: state.categoriesAll,
         selected_product: state.selected_product,
     }),
 })

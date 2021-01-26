@@ -2,7 +2,7 @@
     <div class="form-group">
         <label>Subcategorías
             <button type="button" class="btn" @click="addSubcategory()">
-                <i class="fa fa-plus-circle text-success fa-lg" aria-hidden="true"></i>
+                <i class="icon-plus text-success" aria-hidden="true"></i>
             </button>
         </label>
         <div v-for="(subcategory, index) in subcategories" class="form-group mb-2" :value="index" :key="index">
@@ -16,7 +16,7 @@
                        class="form-control" placeholder="Subcategoría"/>
                 <div class="input-group-append ml-2">
                     <button class="close" type="button" title="Eliminar" @click="deleteSubcategory(subcategory)">
-                        <i class="fa fa-times"></i>
+                        <i class="icon-close"></i>
                     </button>
                 </div>
                 <div v-if="validate && !$v.subcategories.$each[index].name.required" id="error" class="d-block invalid-feedback">El nombre de la

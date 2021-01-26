@@ -8,8 +8,8 @@
                 Productos
                 </div>
                 <div class="align-item-center">
-                    <button @click="createNewProduct()" class="btn btn-brand btn-success">
-                        <i class="fa fa-plus"></i><span>Nuevo Producto</span>
+                    <button @click="createNewProduct()" class="btn btn-success">
+                        <i class="icon-plus" /><span> Nuevo Producto</span>
                     </button>
                 </div>
             </div>

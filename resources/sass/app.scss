@@ -1,10 +1,6 @@
 // Fonts
 @import url("https://fonts.googleapis.com/css?family=Nunito");
 
-// Override Boostrap variables
-
-@import "~bootstrap/scss/mixins";
-
 // Variables
 @import "variables";
 @import "utils";
@@ -12,16 +8,8 @@
 @import "login";
 @import "~@coreui/coreui/scss/variables";
 
-// Bootstrap
-@import "~bootstrap/scss/bootstrap";
-
 // Icons
 @import "~simple-line-icons/dist/styles/simple-line-icons.scss";
-@import "~font-awesome/scss/font-awesome.scss";
 
 // Coreui
-//@import "~@coreui/coreui/dist/css/coreui.min.css";
 @import "~@coreui/coreui/scss/coreui";
-
-// Custom
-@import "~vue-select/src/scss/vue-select";

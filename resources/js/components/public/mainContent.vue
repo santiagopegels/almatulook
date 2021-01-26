@@ -5,7 +5,7 @@
             <a-row type="flex" justify="center" v-if="isLoading">
                 <a-spin style="padding:5px;" size="large"/>
             </a-row>
-            <fade-transition :duration="800" group v-if="!isLoading">
+            <fade-transition :duration="400" group v-if="!isLoading">
                 <a-row v-if="this.products.data" key="productList" type="flex" justify="center">
                     <home-product-card v-for="product in this.products.data" :key="product.id"
                                        :product="product"

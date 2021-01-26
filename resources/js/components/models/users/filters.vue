@@ -11,7 +11,7 @@
 			/>
 			<span class="input-group-append">
 				<button type="submit" :disabled="$v.$invalid" class="btn btn-outline-primary">
-					<i class="fa fa-search"></i> Buscar
+					<i class="icon-magnifier"></i> Buscar
 				</button>
 			</span>
 			<span class="input-group-append" title="Quitar filtro">
@@ -22,7 +22,7 @@
 					class="btn btn-outline-primary"
 					@click="clearFilter()"
 				>
-					<i class="fa fa-times"></i>
+					<i class="icon-close"></i>
 				</button>
 			</span>
 			<!-- <div

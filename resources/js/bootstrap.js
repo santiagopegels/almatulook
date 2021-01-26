@@ -5,13 +5,6 @@
  */
 
 try {
-    window.$ = window.jQuery = require('jquery');
-    window._ = require('lodash');
-    window.Popper = require('popper.js').default;
-
-    require('bootstrap');
-    require('@coreui/coreui');
-
     window.axios = require('axios');
 
 } catch (error) {

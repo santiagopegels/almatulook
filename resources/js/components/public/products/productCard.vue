@@ -13,7 +13,7 @@
             <div slot="nextArrow" slot-scope="props" class="custom-slick-arrow" style="right: 10px">
                 <a-icon type="right-circle"/>
             </div>
-            <img @click="pushShowProductRoute(product)" v-if="product.images.length > 0" v-for="image in product.images" class="carousel-img" :src="image"/>
+            <img @click="pushShowProductRoute(product)" v-if="product.images.length > 0" v-for="image in product.images" class="carousel-img" :src="image" loading="laz"/>
             <img @click="pushShowProductRoute(product)" v-if="product.images.length == 0" :src="logo"/>
         </a-carousel>
         <a-card-meta class="product-card-title-container" @click="pushShowProductRoute(product)"

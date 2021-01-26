@@ -4,9 +4,7 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-window.$ = window.jQuery = require('jquery');
 require('./bootstrap');
-require('@coreui/coreui');
 
 window.axios = require('axios');
 
@@ -20,9 +18,7 @@ import Vuelidate from 'vuelidate';
 import Toasted from 'vue-toasted';
 import VueDayjs from 'vue-dayjs-plugin';
 import VueCurrencyInput from 'vue-currency-input'
-import vSelect from 'vue-select'
 import {router} from './router/router'
-import VueSweetalert2 from 'vue-sweetalert2';
 import Antd from 'ant-design-vue';
 import Transitions from 'vue2-transitions';
 
@@ -31,12 +27,10 @@ Vue.config.baseurl = process.env.MIX_APP_URL;
 console.log('MIX_APP_URL', process.env.MIX_APP_URL);
 
 Vue.component('paginate', Paginate);
-Vue.component('v-select', vSelect)
 Vue.use(Vuex);
 Vue.use(Toasted);
 Vue.use(VueDayjs);
 Vue.use(Vuelidate);
-Vue.use(VueSweetalert2);
 Vue.use(Antd);
 Vue.use(Transitions)
 

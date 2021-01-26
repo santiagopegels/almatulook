@@ -20,7 +20,7 @@
                 <td class="text-center">
                     <form method="POST" @submit="handleSubmitDelete($event, model)" accept-charset="UTF-8">
                         <button type="button" title="Editar" :disabled="model.deleted_at" @click="selectedParameter(model)" class="btn btn-outline-warning btn-sm">
-                            <i class="fa fa-edit"></i>
+                            <i class="icon-note"></i>
                         </button>
                     </form>
                 </td>

@@ -66,7 +66,7 @@ import {
 } from "vuex";
 import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
-
+import Swal from 'sweetalert2'
 export default {
     components: {
         Loading,
@@ -192,14 +192,14 @@ export default {
             //msg without last enter \n
             msg = msg.substring(0, msg.length - 2);
 
-            await this.$swal({
+            await Swal.fire({
                 title: "Venta De Producto",
                 text: "Algo",
                 html: `¿Está seguro que desea vender <b> ${product.name}</b> con las siguientes características?<pre class="mt-3"> ${msg} </pre>`,
                 type: "question",
                 showCancelButton: true,
                 confirmButtonText:
-                    'Si, vender! <i class="fa fa-thumbs-up"></i>',
+                    'Si, vender! <i class="icon-like"></i>',
                 cancelButtonText:
                     'Cancelar',
             }).then(result => {

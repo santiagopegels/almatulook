@@ -24,13 +24,13 @@
                 <td class="text-center">
                     <form method="POST" @submit="handleSubmitDelete($event, model)" accept-charset="UTF-8">
                         <button type="button" title="Editar" :disabled="model.deleted_at" @click="selectedPermission(model)" class="btn btn-outline-warning btn-sm">
-                            <i class="fa fa-edit"></i>
+                            <i class="icon-note"></i>
                         </button>
                         <button v-if="!model.deleted_at" title="Eliminar" type="submit" onclick="return confirm('¿Estás seguro de que quieres eliminar este elemento?')" class="btn btn-outline-danger btn-sm">
-                            <i class="fa fa-trash"></i>
+                            <i class="icon-trash"></i>
                         </button>
                         <button v-else title="Restaurar" type="button" class="btn btn-success btn-sm" @click="restore(model)">
-                            <i class="fa fa-refresh"></i>
+                            <i class="icon-refresh"></i>
                         </button>
                     </form>
                 </td>

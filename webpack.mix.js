@@ -1,5 +1,11 @@
 const mix = require('laravel-mix');
+const shoudlAnalyze = process.argv.includes('--analyze')
 
+
+if (shoudlAnalyze) {
+    require('laravel-mix-bundle-analyzer');
+    mix.bundleAnalyzer();
+}
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management

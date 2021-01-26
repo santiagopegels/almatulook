@@ -7,6 +7,7 @@
                     <iframe
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d885.7356954359516!2d-55.89734757075276!3d-27.377502308037393!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9457be4c02db2367%3A0xe56353233df6f293!2sCmte.%20Rebollo%201961%2C%20N3301IZC%20Posadas%2C%20Misiones!5e0!3m2!1ses!2sar!4v1592313917862!5m2!1ses!2sar"
                         frameborder="0"
+                        importance="low"
                         allowfullscreen="true"
                         aria-hidden="false"
                         class="footer-findus-content-map"
@@ -55,12 +56,8 @@
 </template>
 <script>
 import logo from "../../../../../public/img/logo/logo.png";
-import WhatsappIcon from '../../generals/icons/whatsappIcon'
 
 export default {
-    components: {
-        WhatsappIcon
-    },
     data: function () {
         return {
             logo: logo,
