@@ -44,7 +44,6 @@
                     <div v-else>
                         <a-dropdown>
                             <a-menu slot="overlay">
-
                                 <a-menu-item key="1">
                                     <router-link to="/profile">
                                         <a-icon type="form"/>
@@ -52,7 +51,7 @@
                                     </router-link>
                                 </a-menu-item>
                                 <a-menu-item key="2">
-                                    <a href="/logout" title="Cerrar Sesión">
+                                    <a href="/logout" title="Cerrar Sesión" @click="logout()">
                                         <a-icon type="logout"/>
                                         Cerrar Sesión
                                     </a>
@@ -88,6 +87,9 @@ export default {
         async filterProducts(term) {
             this.$store.commit('SET_PAGE', 1)
             this.$store.commit('SET_TERM', term)
+        },
+        logout(){
+            this.$store.commit('SET_USER_LOGGED')
         }
     }
 }

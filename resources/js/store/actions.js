@@ -684,7 +684,10 @@ let actions = {
 
             window.axios.get(path).then(response => {
                 if (response.data.data) {
-                    commit('SET_USER_LOGGED', {id: response.data.data});
+                    commit('SET_USER_LOGGED', {
+                        id: response.data.data,
+                        isAuthenticated: true
+                    });
                 }
             })
         });

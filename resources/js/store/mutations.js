@@ -101,9 +101,11 @@ let mutations = {
         state.shipmentTypes = shipmentTypes;
     },
 
-    SET_USER_LOGGED(state, payload) {
-        state.userLogged.isAuthenticated = true
-        state.userLogged.id = payload.id
+    SET_USER_LOGGED(state, payload = {
+        id: null,
+        isAuthenticated: false
+    }) {
+        state.userLogged = payload
     },
 
     SET_PURCHASE_USER_EMAIL(state, email) {
