@@ -101,7 +101,8 @@ import {
 export default {
     components: {
         CategoriesSelect: () => import(/* webpackChunkName: "js/admin-products" */ '../../categories/select'),
-        NewProductAttributes: () => import(/* webpackChunkName: "js/admin-products" */ './attributesProduct')
+        NewProductAttributes: () => import(/* webpackChunkName: "js/admin-products" */ './attributesProduct'),
+        UploadImages: () => import(/* webpackChunkName: "js/admin-products" */ '../../../forms/upload-images')
     },
     data: function () {
         return {

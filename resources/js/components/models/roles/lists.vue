@@ -96,6 +96,7 @@
 import { mapGetters } from "vuex";
 import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
+import {orderBy} from 'lodash'
 export default {
 	props: {},
 	data: function () {
@@ -186,7 +187,7 @@ export default {
         },
 
 		orderedRoles: function () {
-			return _.orderBy(this.roles.data, "id");
+			return orderBy(this.roles.data, "id");
 		},
 
 		async selectedRole(model) {

@@ -97,6 +97,7 @@
 import { mapGetters } from "vuex";
 import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
+import {orderBy} from 'lodash'
 export default {
 	props: {},
 	data: function () {
@@ -185,7 +186,7 @@ export default {
         },
 
 		orderedShipmentTypes: function () {
-			return _.orderBy(this.shipmentTypes.data, "id");
+			return orderBy(this.shipmentTypes.data, "id");
 		},
 
 		async selectedShipmentType(model) {

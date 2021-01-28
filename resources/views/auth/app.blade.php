@@ -11,7 +11,7 @@
 
 <body class="app flex-row justify-content-center mt-3">
 <div class="container">
-    <main class="main" id="app">
+    <main class="main">
         @include('coreui-templates::common.errors')
         <div class="clearfix"></div>
         @include('flash::message')
@@ -26,6 +26,5 @@
 </div>
 </body>
 
-@include('admin.layouts.partials.scripts')
 
 </html>

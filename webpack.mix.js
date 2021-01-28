@@ -1,10 +1,18 @@
 const mix = require('laravel-mix');
+const webpack = require('webpack');
 const shoudlAnalyze = process.argv.includes('--analyze')
 
+mix.webpackConfig({
+    plugins: [
+        new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /es-us/),
+    ]
+});
 
 if (shoudlAnalyze) {
     require('laravel-mix-bundle-analyzer');
-    mix.bundleAnalyzer();
+    mix.bundleAnalyzer({
+        analyzerPort: 8909,
+    });
 }
 /*
  |--------------------------------------------------------------------------

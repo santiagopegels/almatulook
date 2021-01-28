@@ -39,6 +39,7 @@ import {
 } from "vuex";
 import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
+import {orderBy} from 'lodash'
 export default {
     props: {},
     data: function () {
@@ -99,7 +100,7 @@ export default {
         },
 
         orderedParameters: function () {
-            return _.orderBy(this.parameters.data, "id");
+            return orderBy(this.parameters.data, "id");
         },
 
         selectedParameter(model) {

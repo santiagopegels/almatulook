@@ -44,7 +44,7 @@ import {
 } from "vuex";
 import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
-
+import {orderBy} from 'lodash'
 export default {
     props: {},
     data: function () {
@@ -86,7 +86,7 @@ export default {
     },
     methods: {
         orderedObjects: function () {
-            return _.orderBy(this.categories.data, "id");
+            return orderBy(this.categories.data, "id");
         },
 
         async handleSubmitDelete(e, data) {

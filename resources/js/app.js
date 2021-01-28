@@ -4,12 +4,9 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
-
 window.axios = require('axios');
 
 window.Vue = require('vue')
-
 import store from './store/index';
 import Paginate from 'vuejs-paginate';
 import 'es6-promise/auto';
@@ -18,7 +15,7 @@ import Vuelidate from 'vuelidate';
 import Toasted from 'vue-toasted';
 import VueCurrencyInput from 'vue-currency-input'
 import {router} from './router/router'
-import Antd from 'ant-design-vue';
+import Antd from 'ant-design-vue/dist/antd.min.js';
 import Transitions from 'vue2-transitions';
 
 
@@ -83,7 +80,6 @@ Vue.toasted.register('ToastedSuccess',
  * forms
  */
 
-Vue.component('upload-images', require('./components/forms/upload-images.vue').default);
 Vue.component('previous-button', require('./components/public/purchases/wizardSteps/previousButton.vue').default);
 
 /**
