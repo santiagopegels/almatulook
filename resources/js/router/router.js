@@ -81,7 +81,7 @@ export const router = new Router({
         {
             path: '/purchase',
             name: 'publicPurchaseIndex',
-            component: publicPurchaseIndex,
+            component: () => import(/* webpackChunkName: "js/purchases" */ '../components/public/purchases/index.vue'),
         },
         {
             path: '/cart',

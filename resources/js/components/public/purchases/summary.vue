@@ -50,6 +50,9 @@
 import {mapGetters} from 'vuex'
 
 export default {
+    components: {
+        SummaryPurchaseProduct: () => import(/* webpackChunkName: "js/purchases" */ './productSummaryRow.vue'),
+    },
     computed: {
         ...mapGetters(['bagProducts', 'shipCost', 'selected_shipment_type']),
         getSubtotal() {

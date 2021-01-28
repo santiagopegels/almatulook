@@ -11,6 +11,10 @@
 <script>
 import {mapGetters} from 'vuex'
 export default {
+    components: {
+        SummaryPurchaseStepProfileForm: () => import(/* webpackChunkName: "js/purchases" */ './profileForm.vue'),
+        SummaryPurchaseStepProfileInfo: () => import(/* webpackChunkName: "js/purchases" */ './profileInfo.vue'),
+    },
     computed: {
       ...mapGetters(['selected_shipment_type', 'userLogged'])
     },

@@ -40,7 +40,7 @@
                              :showPrevStepButton="!this.userLogged.isAuthenticated"
                 />
                 <third-step v-if="current == 2" @next-step="next()" @prev-step="prev()"/>
-                <four-step v-if="current == 3" @prev-step="prev"/>
+                <fourth-step v-if="current == 3" @prev-step="prev"/>
             </div>
         </a-col>
         <a-col class="summary-content"
@@ -59,6 +59,13 @@ import {mapGetters} from "vuex";
 import emptyBag from '../../../../../public/img/shopping-bag.svg'
 
 export default {
+    components: {
+        FirstStep: () => import(/* webpackChunkName: "js/purchases" */ './wizardSteps/firstStep.vue'),
+        SecondStep: () => import(/* webpackChunkName: "js/purchases" */ './wizardSteps/secondStep.vue'),
+        ThirdStep: () => import(/* webpackChunkName: "js/purchases" */ './wizardSteps/thirdStep.vue'),
+        FourthStep: () => import(/* webpackChunkName: "js/purchases" */ './wizardSteps/fourStep.vue'),
+        SummaryPurchase: () => import(/* webpackChunkName: "js/purchases" */ './summary.vue'),
+    },
     data() {
         return {
             current: 0,

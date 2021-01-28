@@ -118,19 +118,6 @@ Vue.component('product-images-carousel', require('./components/public/products/i
 Vue.component('product-attribute-select-content', require('./components/public/products/attributeSelectContent.vue').default);
 Vue.component('product-attribute-select', require('./components/public/products/attributeSelect.vue').default);
 
-//Purchase
-Vue.component('purchase-index', require('./components/public/purchases/index.vue').default);
-Vue.component('first-step', require('./components/public/purchases/wizardSteps/firstStep.vue').default);
-Vue.component('second-step', require('./components/public/purchases/wizardSteps/secondStep.vue').default);
-Vue.component('third-step', require('./components/public/purchases/wizardSteps/thirdStep.vue').default);
-Vue.component('four-step', require('./components/public/purchases/wizardSteps/fourStep.vue').default);
-Vue.component('summary-purchase', require('./components/public/purchases/summary.vue').default);
-Vue.component('summary-purchase-product', require('./components/public/purchases/productSummaryRow.vue').default);
-Vue.component('summary-purchase-step-guest-form', require('./components/public/purchases/wizardSteps/guestForm.vue').default);
-Vue.component('summary-purchase-step-login-form', require('./components/public/purchases/wizardSteps/loginForm.vue').default);
-Vue.component('summary-purchase-step-profile-form', require('./components/public/purchases/wizardSteps/profileForm.vue').default);
-Vue.component('summary-purchase-step-profile-info', require('./components/public/purchases/wizardSteps/profileInfo.vue').default);
-
 //Cart Resume
 Vue.component('cart-resume-index', require('./components/public/cartResume/index.vue').default);
 Vue.component('cart-resume-content', require('./components/public/cartResume/content.vue').default);

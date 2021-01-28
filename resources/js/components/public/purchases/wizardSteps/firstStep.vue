@@ -12,6 +12,10 @@
 import {mapGetters} from "vuex";
 
 export default {
+    components: {
+        SummaryPurchaseStepLoginForm: () => import(/* webpackChunkName: "js/purchases" */ './loginForm.vue'),
+        SummaryPurchaseStepGuestForm: () => import(/* webpackChunkName: "js/purchases" */ './guestForm.vue'),
+    },
     data() {
         return {
             showLoginForm: false,
