@@ -51,7 +51,13 @@ import {
 } from "vuex";
 
 export default {
-    props: {
+    components: {
+        AttributesList: () => import(/* webpackChunkName: "js/admin-attributes" */ './lists.vue'),
+        AttributesForm: () => import(/* webpackChunkName: "js/admin-attributes" */ './form.vue'),
+        AttributesFilters: () => import(/* webpackChunkName: "js/admin-attributes" */ './filters.vue'),
+        ValuesList: () => import(/* webpackChunkName: "js/admin-attributes" */ '../values/lists.vue'),
+        ValuesForm: () => import(/* webpackChunkName: "js/admin-attributes" */ '../values/form.vue'),
+        ValuesFilters: () => import(/* webpackChunkName: "js/admin-attributes" */ '../values/filters.vue')
     },
     data: function () {
         return {};

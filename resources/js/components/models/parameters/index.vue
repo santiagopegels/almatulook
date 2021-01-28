@@ -28,7 +28,10 @@
 import {mapGetters} from "vuex";
 
 export default {
-    props: {
+    components: {
+        ParametersList: () => import(/* webpackChunkName: "js/admin-parameters" */ './lists.vue'),
+        ParametersForm: () => import(/* webpackChunkName: "js/admin-parameters" */ './form.vue'),
+        ParametersFilters: () => import(/* webpackChunkName: "js/admin-parameters" */ './filters.vue'),
     },
     data: function () {
         return {};

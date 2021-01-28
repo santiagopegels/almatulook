@@ -56,7 +56,9 @@ import {
 } from "vuelidate/lib/validators";
 
 export default {
-    props: {},
+    components: {
+        ValuesCheckbox: () => import(/* webpackChunkName: "js/admin-attributes" */ '../values/checkbox.vue'),
+    },
     data: function () {
         return {
             submitted: false,

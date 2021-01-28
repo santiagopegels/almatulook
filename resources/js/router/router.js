@@ -1,12 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import productForm from '../components/models/products/newProduct/index.vue'
-import attributesIndex from '../components/models/attributes/index.vue'
 import parametersIndex from '../components/models/parameters/index.vue'
 import permissionsIndex from '../components/models/permissions/index.vue'
 import shipmentTypesIndex from '../components/models/shipmentTypes/index.vue'
 import rolesIndex from '../components/models/roles/index.vue'
-import usersIndex from '../components/models/users/index.vue'
 import purchasesIndex from '../components/models/purchases/index.vue'
 import home from "../components/public/home";
 import publicProductIndex from '../components/public/products/index.vue'
@@ -43,37 +41,37 @@ export const router = new Router({
         {
             path: '/admin/attributes',
             name: 'attributesIndex',
-            component: attributesIndex,
+            component: () => import(/* webpackChunkName: "js/admin-attributes" */ '../components/models/attributes/index.vue'),
         },
         {
             path: '/admin/parameters',
             name: 'parametersIndex',
-            component: parametersIndex,
+            component: () => import(/* webpackChunkName: "js/admin-parameters" */ '../components/models/parameters/index.vue'),
         },
         {
             path: '/admin/users',
             name: 'usersIndex',
-            component: usersIndex,
+            component: () => import(/* webpackChunkName: "js/admin-users" */ '../components/models/users/index.vue'),
         },
         {
             path: '/admin/roles',
             name: 'rolesIndex',
-            component: rolesIndex,
+            component: () => import(/* webpackChunkName: "js/admin-roles" */ '../components/models/roles/index.vue'),
         },
         {
             path: '/admin/permissions',
             name: 'permissionsIndex',
-            component: permissionsIndex,
+            component: () => import(/* webpackChunkName: "js/admin-permissions" */ '../components/models/permissions/index.vue'),
         },
         {
             path: '/admin/purchases',
             name: 'purchasesIndex',
-            component: purchasesIndex,
+            component: () => import(/* webpackChunkName: "js/admin-purchases" */ '../components/models/purchases/index.vue'),
         },
         {
             path: '/admin/shipmentTypes',
             name: 'shipmentTypesIndex',
-            component: shipmentTypesIndex,
+            component: () => import(/* webpackChunkName: "js/admin-shipment" */ '../components/models/shipmentTypes/index.vue'),
         },
         {
             path: '/product',

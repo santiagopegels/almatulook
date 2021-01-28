@@ -30,7 +30,10 @@ import {
 } from "vuex";
 
 export default {
-    props: {
+    components: {
+        PurchasesList: () => import(/* webpackChunkName: "js/admin-purchases" */ './lists.vue'),
+        ProductsFilters: () => import(/* webpackChunkName: "js/admin-purchases" */ '../products/filters.vue'),
+        ProductsCard: () => import(/* webpackChunkName: "js/admin-purchases" */ '../products/card.vue'),
     },
     data: function () {
         return {};

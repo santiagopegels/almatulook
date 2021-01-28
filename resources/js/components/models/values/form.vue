@@ -54,7 +54,9 @@ import {
 } from "vuelidate/lib/validators";
 
 export default {
-    props: {},
+    components: {
+        AttributesCheckbox: () => import(/* webpackChunkName: "js/admin-attributes" */ '../attributes/checkbox.vue'),
+    },
     data: function () {
         return {
             submitted: false,

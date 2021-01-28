@@ -25,6 +25,10 @@
 <script>
 import { mapGetters } from "vuex";
 export default {
+    components: {
+        RolesList: () => import(/* webpackChunkName: "js/admin-roles" */ './lists.vue'),
+        RolesForm: () => import(/* webpackChunkName: "js/admin-roles" */ './form.vue')
+    },
 	props: {
 		title: {
 			type: String,

@@ -60,7 +60,7 @@ export default {
             this.fetch();
         },
         clearFilter() {
-            this.term = "";
+            this.term = null;
             this.fetch();
         },
 

@@ -90,51 +90,6 @@ Vue.component('previous-button', require('./components/public/purchases/wizardSt
  * models
  */
 
-// users
-Vue.component('users-index', () => import('./components/models/users/index.vue').default);
-
-// roles
-Vue.component('roles-form', require('./components/models/roles/form.vue').default);
-Vue.component('roles-list', require('./components/models/roles/lists.vue').default);
-Vue.component('roles-index', require('./components/models/roles/index.vue').default);
-Vue.component('roles-checkbox', require('./components/models/roles/checkbox.vue').default);
-
-// permissions
-Vue.component('permissions-form', require('./components/models/permissions/form.vue').default);
-Vue.component('permissions-list', require('./components/models/permissions/lists.vue').default);
-Vue.component('permissions-index', require('./components/models/permissions/index.vue').default);
-Vue.component('permissions-checkbox', require('./components/models/permissions/checkbox.vue').default);
-Vue.component('permissions-module', require('./components/models/permissions/module.vue').default);
-
-// attributes
-Vue.component('attributes-form', require('./components/models/attributes/form.vue').default);
-Vue.component('attributes-list', require('./components/models/attributes/lists.vue').default);
-Vue.component('attributes-index', require('./components/models/attributes/index.vue').default);
-Vue.component('attributes-filters', require('./components/models/attributes/filters.vue').default);
-Vue.component('attributes-checkbox', require('./components/models/attributes/checkbox.vue').default);
-
-// values
-Vue.component('values-form', require('./components/models/values/form.vue').default);
-Vue.component('values-list', require('./components/models/values/lists.vue').default);
-Vue.component('values-index', require('./components/models/values/index.vue').default);
-Vue.component('values-filters', require('./components/models/values/filters.vue').default);
-Vue.component('values-checkbox', require('./components/models/values/checkbox.vue').default);
-
-// parameters
-Vue.component('parameters-list', require('./components/models/parameters/lists.vue').default);
-Vue.component('parameters-index', require('./components/models/parameters/index.vue').default);
-Vue.component('parameters-filters', require('./components/models/parameters/filters.vue').default);
-Vue.component('parameters-form', require('./components/models/parameters/form.vue').default);
-
-// purchase
-Vue.component('purchases-list', require('./components/models/purchases/lists.vue').default);
-Vue.component('purchases-index', require('./components/models/purchases/index.vue').default);
-
-// shipment Types
-Vue.component('shipment-type-index', require('./components/models/shipmentTypes/index.vue').default);
-Vue.component('shipment-type-list', require('./components/models/shipmentTypes/lists.vue').default);
-Vue.component('shipment-type-form', require('./components/models/shipmentTypes/form.vue').default);
-
 //PUBLIC
 Vue.component('home', require('./components/public/home.vue').default);
 Vue.component('main-content', require('./components/public/mainContent.vue').default);

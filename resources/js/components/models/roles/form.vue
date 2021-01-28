@@ -108,7 +108,9 @@ import {
 	integer,
 } from "vuelidate/lib/validators";
 export default {
-	props: {},
+	components: {
+        PermissionsCheckbox: () => import(/* webpackChunkName: "js/admin-roles" */ '../permissions/checkbox.vue')
+    },
 	data: function () {
 		return {
 			submitted: false,

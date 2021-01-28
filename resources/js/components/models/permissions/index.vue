@@ -21,6 +21,11 @@
 <script>
 import { mapGetters } from "vuex";
 export default {
+    components: {
+        PermissionsList: () => import(/* webpackChunkName: "js/admin-permissions" */ './lists.vue'),
+        PermissionsForm: () => import(/* webpackChunkName: "js/admin-permissions" */ './form.vue'),
+        PermissionsModule: () => import(/* webpackChunkName: "js/admin-permissions" */ './module.vue'),
+    },
 	props: {
 		title: {
 			type: String,

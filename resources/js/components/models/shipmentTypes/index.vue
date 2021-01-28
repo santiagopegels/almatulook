@@ -25,6 +25,10 @@
 <script>
 import { mapGetters } from "vuex";
 export default {
+    components: {
+        ShipmentTypeList: () => import(/* webpackChunkName: "js/admin-shipment" */ './lists.vue'),
+        ShipmentTypeForm: () => import(/* webpackChunkName: "js/admin-shipment" */ './form.vue'),
+    },
 	data: function () {
 		return {};
 	},

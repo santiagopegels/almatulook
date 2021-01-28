@@ -28,9 +28,9 @@ import {
 } from "vuex";
 export default {
     components: {
-        usersForm: () => import('./form.vue'),
-        usersList: () => import('./lists.vue'),
-        usersFilters: () => import('./filters.vue')
+        usersForm: () => import(/* webpackChunkName: "js/admin-users" */ './form.vue'),
+        usersList: () => import(/* webpackChunkName: "js/admin-users" */ './lists.vue'),
+        usersFilters: () => import(/* webpackChunkName: "js/admin-users" */ './filters.vue')
     },
     props: {
         title: {
