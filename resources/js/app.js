@@ -185,8 +185,6 @@ Vue.component('cart-resume-content', require('./components/public/cartResume/con
 Vue.component('cart-resume-product-row', require('./components/public/cartResume/productRow.vue').default)
 Vue.component('cart-resume-summary', require('./components/public/cartResume/summary.vue').default);
 
-//Profile
-Vue.component('profile-index', require('./components/public/profile/index.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

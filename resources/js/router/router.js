@@ -10,7 +10,6 @@ import home from "../components/public/home";
 import publicProductIndex from '../components/public/products/index.vue'
 import publicPurchaseIndex from '../components/public/purchases/index.vue'
 import cartResumeIndex from '../components/public/cartResume/index.vue'
-import profileIndex from '../components/public/profile/index.vue'
 import store from '../store/index'
 
 
@@ -91,7 +90,7 @@ export const router = new Router({
         {
             path: '/profile',
             name: 'profileIndex',
-            component: profileIndex,
+            component: () => import(/* webpackChunkName: "js/profile" */ '../components/public/profile/index.vue'),
         },
     ]
 })
