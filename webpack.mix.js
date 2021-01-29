@@ -5,13 +5,23 @@ const shoudlAnalyze = process.argv.includes('--analyze')
 mix.webpackConfig({
     plugins: [
         new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /es-us/),
-    ]
+    ],
+    resolve: {
+        alias: {
+            "@ant-design/icons/lib/dist$": path.resolve(__dirname, "./resources/js/icons.js")
+        }
+    }
 });
+
+mix.babelConfig({
+    plugins: ['@babel/plugin-syntax-dynamic-import'],
+});
+
 
 if (shoudlAnalyze) {
     require('laravel-mix-bundle-analyzer');
     mix.bundleAnalyzer({
-        analyzerPort: 8909,
+        analyzerPort: 8918,
     });
 }
 /*
