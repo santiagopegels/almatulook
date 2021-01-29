@@ -25,6 +25,9 @@
 import {mapGetters} from 'vuex'
 
 export default {
+    components: {
+        SummaryPurchaseStepProfileForm: () => import(/* webpackChunkName: "js/profile" */ '../purchases/wizardSteps/profileForm.vue'),
+    },
     data(){
         return {
             model: 'profiles',

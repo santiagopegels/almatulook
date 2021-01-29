@@ -56,8 +56,11 @@
 </template>
 <script>
 import logo from "../../../../../public/img/logo/logo.png";
-
+import WhatsappIcon from '../../generals/icons/whatsappIcon'
 export default {
+    components: {
+        WhatsappIcon
+    },
     data: function () {
         return {
             logo: logo,

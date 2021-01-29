@@ -15,18 +15,83 @@ import Vuelidate from 'vuelidate';
 import Toasted from 'vue-toasted';
 import VueCurrencyInput from 'vue-currency-input'
 import {router} from './router/router'
-import Antd from 'ant-design-vue/dist/antd.min.js';
+import {
+    Button,
+    Layout,
+    Row,
+    Col,
+    Card,
+    Carousel,
+    Input,
+    Icon,
+    Avatar,
+    Badge,
+    Pagination,
+    Checkbox,
+    Form,
+    Space,
+    Spin,
+    Select,
+    Menu,
+    Divider,
+    Drawer,
+    Cascader,
+    Modal,
+    Steps,
+    Radio,
+    InputNumber,
+    Dropdown,
+    Empty
+} from 'ant-design-vue';
 import Transitions from 'vue2-transitions';
 
+Modal.install(Vue)
+Vue.prototype.$confirm = Modal.confirm;
 
 Vue.config.baseurl = process.env.MIX_APP_URL;
 console.log('MIX_APP_URL', process.env.MIX_APP_URL);
 
 Vue.component('paginate', Paginate);
+Vue.component(Button.name, Button);
+Vue.component(Layout.name, Layout);
+Vue.component(Layout.Content.name, Layout.Content);
+Vue.component(Layout.Footer.name, Layout.Footer);
+Vue.component(Layout.Sider.name, Layout.Sider);
+Vue.component(Row.name, Row);
+Vue.component(Col.name, Col)
+Vue.component(Card.name, Card);
+Vue.component(Card.Meta.name, Card.Meta);
+Vue.component(Carousel.name, Carousel);
+Vue.component(Input.name, Input);
+Vue.component(Input.Search.name, Input.Search);
+Vue.component(Icon.name, Icon);
+Vue.component(Avatar.name, Avatar);
+Vue.component(Badge.name, Badge);
+Vue.component(Pagination.name, Pagination);
+Vue.component(Checkbox.name, Checkbox);
+Vue.component(Checkbox.Group.name, Checkbox.Group);
+Vue.component(Form.name, Form);
+Vue.component(Form.Item.name, Form.Item)
+Vue.component(Space.name, Space);
+Vue.component(Spin.name, Spin);
+Vue.component(Select.name, Select)
+Vue.component(Select.Option.name, Select.Option);
+Vue.component(Menu.name, Menu);
+Vue.component(Menu.Item.name, Menu.Item)
+Vue.component(Divider.name, Divider);
+Vue.component(Drawer.name, Drawer);
+Vue.component(Cascader.name, Cascader);
+Vue.component(Modal.name, Modal);
+Vue.component(Steps.name, Steps);
+Vue.component(Steps.Step.name, Steps.Step);
+Vue.component(Radio.name, Radio);
+Vue.component(Radio.Group.name, Radio.Group);
+Vue.component(InputNumber.name, InputNumber);
+Vue.component(Dropdown.name, Dropdown);
+Vue.component(Empty.name, Empty);
 Vue.use(Vuex);
 Vue.use(Toasted);
 Vue.use(Vuelidate);
-Vue.use(Antd);
 Vue.use(Transitions)
 
 
