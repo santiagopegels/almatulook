@@ -7,6 +7,7 @@ use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 /**
  * Class Product
@@ -65,6 +66,14 @@ class Product extends Model implements HasMedia
         $this->addMediaCollection('products');
     }
 
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this->addMediaConversion('thumb')
+            ->width(800)
+            ->height(1000)
+            ->sharpen(10);
+    }
+
     public function getTotalStock()
     {
         return ProductAttributeValueGroup::where('product_id', $this->id)->sum('stock');
@@ -73,10 +82,10 @@ class Product extends Model implements HasMedia
     public function getImages()
     {
         $images = $this->getMedia('products');
+        $imagesURL = [];
         if ($images) {
-            $imagesURL = [];
             foreach ($images as $image) {
-                array_push($imagesURL, $image->getUrl());
+                array_push($imagesURL, $image->getUrl('thumb'));
             }
         }
 

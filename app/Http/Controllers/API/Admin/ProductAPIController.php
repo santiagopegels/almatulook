@@ -85,7 +85,9 @@ class ProductAPIController extends AppBaseController
 
         if(isset($input['images'])){
             foreach ($input['images'] as $image){
-                $product->addMediaFromBase64($image['binary'])->toMediaCollection('products');
+                $product
+                    ->addMediaFromBase64($image['binary'])
+                    ->toMediaCollection('products');
             }
         }
 

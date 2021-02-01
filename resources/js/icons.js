@@ -67,6 +67,9 @@ export {
 export {
     default as QuestionCircleOutline
 } from "@ant-design/icons/lib/outline/QuestionCircleOutline";
+export {
+    default as MailOutline
+} from "@ant-design/icons/lib/outline/MailOutline";
 
 //Two Tones
 export {
