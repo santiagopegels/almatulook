@@ -24,7 +24,7 @@
 
 <script>
 import VueUploadMultipleImage from "vue-upload-multiple-image";
-
+import resizeImage from "../../utils";
 export default {
     props: {
         limit: {
@@ -56,6 +56,7 @@ export default {
             const values = Object.values(data);
             this.images = [];
             values.forEach((element) => {
+                console.log(element)
                 this.images.push({
                     name: new Date().getTime(),
                     extension: "data:image/png;base64",
@@ -66,6 +67,11 @@ export default {
             return this.images;
         },
         async uploadImageSuccess(formData, index, fileList) {
+            console.log(fileList[index])
+            await resizeImage(fileList[index].path, 1200, 1400).then((result) => {
+                fileList[index].path = result
+            });
+
             this.miniatureImages.push(fileList[index])
             await this.updateFileList(fileList);
         },

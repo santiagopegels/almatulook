@@ -66,14 +66,6 @@ class Product extends Model implements HasMedia
         $this->addMediaCollection('products');
     }
 
-    public function registerMediaConversions(Media $media = null): void
-    {
-        $this->addMediaConversion('thumb')
-            ->width(800)
-            ->height(1000)
-            ->sharpen(10);
-    }
-
     public function getTotalStock()
     {
         return ProductAttributeValueGroup::where('product_id', $this->id)->sum('stock');
@@ -85,7 +77,7 @@ class Product extends Model implements HasMedia
         $imagesURL = [];
         if ($images) {
             foreach ($images as $image) {
-                array_push($imagesURL, $image->getUrl('thumb'));
+                array_push($imagesURL, $image->getUrl());
             }
         }
 
