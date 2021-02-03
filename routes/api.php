@@ -66,3 +66,4 @@ Route::get('profiles', 'ProfileAPIController@index');
 Route::post('products/add/product/bag', 'ProductAPIController@addProductToBag');
 Route::post('products/remove/product/bag', 'ProductAPIController@removeProductFromBag');
 Route::get('products/bag', 'ProductAPIController@getProductsBag');
+Route::get('generate/payment', 'PaymentsAPIController@generateIdPayment');

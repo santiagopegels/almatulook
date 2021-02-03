@@ -568,6 +568,35 @@ let actions = {
         });
     },
 
+    generatePaymentId({commit}, payload) {
+
+        return new Promise(async (resolve, reject) => {
+
+            window.axios.get('/api/generate/payment', payload, {}).then(async response => {
+                if (response.data.success) {
+                    await commit('SET_LOADING', false);
+                    resolve({
+                        status: true,
+                        message: response.data.data
+                    });
+                } else {
+                    commit('SET_LOADING', false);
+                    reject({
+                        status: false,
+                        message: response.data.message
+                    });
+                }
+
+            }).catch(error => {
+                console.error(`generatePaymentID`, error);
+                commit('SET_LOADING', false);
+                reject({
+                    status: false,
+                    message: error
+                });
+            });
+        });
+    },
 
     /**
      * FETCH ALL DATA
