@@ -47,6 +47,9 @@ export {
     default as EnvironmentOutline
 } from "@ant-design/icons/lib/outline/EnvironmentOutline";
 export {
+    default as LoadingOutline
+} from "@ant-design/icons/lib/outline/LoadingOutline";
+export {
     default as CreditCardOutline
 } from "@ant-design/icons/lib/outline/CreditCardOutline";
 export {

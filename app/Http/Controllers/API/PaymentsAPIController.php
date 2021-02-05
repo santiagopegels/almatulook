@@ -24,8 +24,8 @@ class PaymentsAPIController extends AppBaseController
     public function generateIdPayment(Request $request)
     {
         $method = new \App\PaymentMethods\MercadoPago;
-        $algo = $method->setupPaymentAndGetRedirectURL();
+        $idPayment = $method->setupPaymentAndGetRedirectURL();
 
-        return $this->sendResponse($algo, 'Payment ID generated successfully');
+        return $this->sendResponse($idPayment, 'Payment ID generated successfully');
     }
 }

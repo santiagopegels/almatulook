@@ -3,19 +3,16 @@
         <previous-button @prev-step="prevStep()"/>
         <a-icon type="credit-card" class="header-icon"/>
         <h1>Realizar Pago</h1>
-        <img style="background: grey;width: 200px; height: 200px">
-        <p>Escaneá el QR y pagá tu compra con MercadoPago</p>
-        <a :href="linkToPay">
-            <a-button type="primary" block size="large">
-                Pagar con Tarjeta en MercadoPago
-            </a-button>
-        </a>
+        <img style="padding: 5px" :src="mercadopagoLogo" class="responsive"/>
+        <a-button type="primary" block size="large" :loading="!linkToPay">
+            <a :href="linkToPay"> Pagar con MercadoPago</a>
+        </a-button>
     </div>
 </template>
 
 <script>
 import {mapGetters} from "vuex";
-
+import mercadopagoLogo from "../../../../../../public/img/mercadopago.png"
 export default {
     computed: {
         ...mapGetters(['selected_shipment_type'])
@@ -23,6 +20,7 @@ export default {
     data() {
         return {
             linkToPay: null,
+            mercadopagoLogo: mercadopagoLogo
         }
     },
     async mounted() {
@@ -52,3 +50,10 @@ export default {
     },
 };
 </script>
+
+<style>
+.responsive {
+    max-width: 100%;
+    height: auto;
+}
+</style>
