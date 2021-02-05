@@ -20,17 +20,34 @@ class MercadoPago
     }
 
 
-    public function setupPaymentAndGetRedirectURL(): string
+    public function setupPaymentAndGetRedirectURL($order): string
     {
         $preference = new Preference();
+        $products = $order['products'];
+        $internalPayer = $order['payer']['data'];
+        $shipmentCost = $order['shipment_cost'];
+        $itemsArray = array();
 
-        $item = new Item();
-        $item->title = 'Mi producto';
-        $item->quantity = 1;
-        $item->unit_price = 75.56;
-        $preference->items = array($item);
+        foreach ($products as $product) {
+            $item = new Item();
+            $item->id = $product['id'];
+            $item->title = $product['name'];
+            $item->quantity = 1;
+            $item->unit_price = $product['price'];
+            array_push($itemsArray, $item);
+        }
+
+        $preference->items = $itemsArray;
+
+        $preference->shipments = (object)array(
+            "cost" => (float)$shipmentCost,
+            "mode" => 'not_specified'
+        );
+
         $payer = new Payer();
-        $payer->email = 'test_user_35686199@testuser.com';
+        $payer->name = $internalPayer['profile']['personalInfo']['name'];
+        $payer->surname = $internalPayer['profile']['personalInfo']['lastName'];
+        $payer->email = $internalPayer['user']['email'];
         $preference->payer = $payer;
 
         $preference->back_urls = array(

@@ -16,6 +16,7 @@ const vuexSession = new VuexPersistence({
         bagProducts: state.bagProducts,
         purchaseInfo: state.purchaseInfo,
         selected_product: state.selected_product,
+        selected_shipment_type: state.selected_shipment_type,
     }),
 })
 

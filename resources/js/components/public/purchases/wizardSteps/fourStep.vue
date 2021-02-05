@@ -15,7 +15,7 @@ import {mapGetters} from "vuex";
 import mercadopagoLogo from "../../../../../../public/img/mercadopago.png"
 export default {
     computed: {
-        ...mapGetters(['selected_shipment_type'])
+        ...mapGetters(['selected_shipment_type', 'bagProducts', 'purchaseInfo', 'selected_shipment_type'])
     },
     data() {
         return {
@@ -43,7 +43,11 @@ export default {
             this.$emit('prev-step', arg)
         },
         async generatePaymentId() {
-            await this.$store.dispatch('generatePaymentId').then(result => {
+            await this.$store.dispatch('generatePaymentId', {
+                products: this.bagProducts,
+                payer: this.purchaseInfo,
+                shipment_cost: this.selected_shipment_type.cost
+            }).then(result => {
                 this.linkToPay = result.message
             })
         }

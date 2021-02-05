@@ -31,7 +31,7 @@
                     Costo de envío &nbsp; <p style="font-size: 0.8rem" v-show="selected_shipment_type.id">  ({{  selected_shipment_type.name  }}) </p>
                 </a-col>
                 <a-col>
-                     {{ shipCost | currency }}
+                     {{ selected_shipment_type.cost | currency }}
                 </a-col>
             </a-row>
             <a-divider></a-divider>
@@ -40,7 +40,7 @@
                     <h1>Total</h1>
                 </a-col>
                 <a-col>
-                    <h1>{{ Number(getSubtotal) + Number(shipCost) | currency }}</h1>
+                    <h1>{{ Number(getSubtotal) + Number(selected_shipment_type.cost) | currency }}</h1>
                 </a-col>
             </a-row>
         </a-card>

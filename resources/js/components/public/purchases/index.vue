@@ -68,7 +68,7 @@ export default {
     },
     data() {
         return {
-            current: 0,
+            current: 3,
             steps: [
                 {
                     title: 'Login',
