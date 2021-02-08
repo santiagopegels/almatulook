@@ -67,3 +67,4 @@ Route::post('products/add/product/bag', 'ProductAPIController@addProductToBag');
 Route::post('products/remove/product/bag', 'ProductAPIController@removeProductFromBag');
 Route::get('products/bag', 'ProductAPIController@getProductsBag');
 Route::post('generate/payment', 'PaymentsAPIController@generateIdPayment');
+Route::post('payment', 'PaymentsAPIController@store');

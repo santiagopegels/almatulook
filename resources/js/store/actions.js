@@ -572,7 +572,7 @@ let actions = {
 
         return new Promise(async (resolve, reject) => {
 
-            window.axios.get('/api/generate/payment', payload, {}).then(async response => {
+            window.axios.post('/api/generate/payment', payload, {}).then(async response => {
                 if (response.data.success) {
                     await commit('SET_LOADING', false);
                     resolve({
@@ -766,6 +766,29 @@ let actions = {
                 if (response.data.data) {
                     await commit('SET_BAG_PRODUCTS', response.data.data);
                     await commit('TOGGLE_CHECK_BAG_SESSION');
+                    commit('SET_LOADING', false);
+                    resolve({
+                        status: true,
+                        message: response.data.data
+                    });
+                } else {
+                    resolve({
+                        status: true,
+                        message: null
+                    });
+                }
+            })
+        });
+    },
+
+    savePayment({commit}, params) {
+        return new Promise(async (resolve, reject) => {
+
+            commit('SET_LOADING', true);
+
+            window.axios.post('api/payment', params).then(response => {
+                if (response.data.data) {
+                    //Eliminar todos los datos de la compra
                     commit('SET_LOADING', false);
                     resolve({
                         status: true,

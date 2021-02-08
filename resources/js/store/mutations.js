@@ -127,6 +127,10 @@ let mutations = {
         state.purchaseInfo.data.profile.contact.address.cp = payload.cp
     },
 
+    SET_MERCADO_PAGO_DATA(state, payload) {
+        state.mercadoPagoData = payload;
+    },
+
     /**
      * SET SELECTED
      */

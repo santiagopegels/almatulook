@@ -20,6 +20,7 @@ let state = {
     selectedValuesToFilter: [],
     bagProducts: [],
     shipCost: 0,
+    mercadoPagoData: {},
 
     purchaseInfo: {
         isGuest: true,

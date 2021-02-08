@@ -16,7 +16,7 @@ class PaymentsAPIController extends AppBaseController
 
     /**
      * Display a listing of the Product.
-     * GET|HEAD /products
+     * POST|HEAD generate/payment
      *
      * @param Request $request
      * @return Response
@@ -29,5 +29,17 @@ class PaymentsAPIController extends AppBaseController
         $idPayment = $method->setupPaymentAndGetRedirectURL($order);
 
         return $this->sendResponse($idPayment, 'Payment ID generated successfully');
+    }
+
+    /**
+     * Display a listing of the Product.
+     * POST|HEAD /payment
+     *
+     * @param Request $request
+     * @return Response
+     */
+    public function store(Request $request)
+    {
+        dd($request->all());
     }
 }
