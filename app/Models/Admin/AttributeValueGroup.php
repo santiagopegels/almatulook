@@ -18,8 +18,11 @@ class AttributeValueGroup extends Model
         return $this->belongsTo(AttributeValue::class);
     }
 
-    static public function getGroupIdByAttributes($attributes){
-        $attributesValuesIds = AttributeValue::getIdsByAttributeAndValueArray($attributes);
+    static public function getGroupIdByAttributes($attributes, $getAttributesIds = true){
+        $getAttributesIds ?
+            $attributesValuesIds = AttributeValue::getIdsByAttributeAndValueArray($attributes)
+            :
+            $attributesValuesIds = $attributes;
         $attributeValueGroup = AttributeValueGroup::select('group_id');
         foreach ($attributesValuesIds as $index => $attributeValueId) {
                 $attributeValueGroup->whereExists(function ($query) use ($attributeValueId) {

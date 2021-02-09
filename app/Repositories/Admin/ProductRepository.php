@@ -112,8 +112,7 @@ class ProductRepository extends BaseRepository
     //Verify if exist group id for attributes ids
     public function getAttributeValueGroupId($attributesValuesIds)
     {
-
-        $groupId = $this->getGroupIdByAttributesIds($attributesValuesIds);
+        $groupId = AttributeValueGroup::getGroupIdByAttributes($attributesValuesIds, false);
 
         if (!is_null($groupId)) {
             return $groupId;
@@ -127,26 +126,5 @@ class ProductRepository extends BaseRepository
             }
             return $maxNumberGroupId;
         }
-    }
-
-    public function getGroupIdByAttributesIds($attributesValuesIds)
-    {
-        $attributeValueGroup = AttributeValueGroup::select('group_id');
-        foreach ($attributesValuesIds as $index => $attributeValueId) {
-            if ($index === 0) {
-                $attributeValueGroup->where('attribute_value_id', $attributeValueId);
-            } else {
-                $attributeValueGroup->orWhere('attribute_value_id', $attributeValueId);
-            }
-        }
-
-        $attributeValueGroup = $attributeValueGroup->groupBy('group_id')
-            ->havingRaw('COUNT(group_id) = ?', [count($attributesValuesIds)])
-            ->get();
-        if (count($attributeValueGroup) === 1) {
-            return $attributeValueGroup[0]->group_id;
-        }
-
-        return null;
     }
 }
