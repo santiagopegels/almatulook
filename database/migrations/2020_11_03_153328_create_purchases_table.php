@@ -24,6 +24,10 @@ class CreatePurchasesTable extends Migration
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->float('shipment_cost');
 
+            $table->unsignedSmallInteger('status_order');
+            $table->foreign('status_order')->references('order')->on('status_orders')
+                ->onUpdate('cascade')->onDelete('cascade');
+
             $table->timestamps();
             $table->softDeletes();
         });

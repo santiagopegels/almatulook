@@ -25,7 +25,10 @@ class Purchase extends Model
 
 
     public $fillable = [
-        'total'
+        'total',
+        'shipment_type_id',
+        'shipment_cost',
+        'status_order'
     ];
 
     /**
@@ -35,7 +38,10 @@ class Purchase extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'total' => 'float'
+        'total' => 'float',
+        'shipment_type_id' => 'integer',
+        'shipment_cost' => 'float',
+        'status_order' => 'integer'
     ];
 
     /**
