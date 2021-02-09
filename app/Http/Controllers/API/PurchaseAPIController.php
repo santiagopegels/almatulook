@@ -37,7 +37,7 @@ class PurchaseAPIController extends AppBaseController
     public function store(Request $request)
     {
         $products = $request->get('products');
-        $purchase = $this->purchaseRepository->createPublicPurchase($products);
+        $purchase = $this->purchaseRepository->createPurchase($products);
         return $purchase;
     }
 

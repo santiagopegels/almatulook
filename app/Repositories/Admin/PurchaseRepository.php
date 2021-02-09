@@ -49,15 +49,18 @@ class PurchaseRepository extends BaseRepository
         try {
             DB::beginTransaction();
             $totalPurchase = 0;
+            $productId = 0;
+            $attributes = null;
             $purchase = Purchase::create([
                 'total' => $totalPurchase
             ]);
             foreach ($products as $product){
-                !isset($product['product_id']) ? $product['product_id'] = $product['id'] : null;
+                isset($product['product_id']) ? $productId = $product['product_id'] : $productId = $product['id'];
+                isset($product['attributes']['attributes']) ? $attributes = $product['attributes']['attributes'] : $attributes = $product['attributeValueSelected'];
                 $quantity = $product['quantity'];
-                $productObject = Product::find($product['product_id']);
+                $productObject = Product::find($productId);
 
-                $groupId = AttributeValueGroup::getGroupIdByAttributes($product['attributes']['attributes']);
+                $groupId = AttributeValueGroup::getGroupIdByAttributes($attributes);
                 $productAttributesValuesGroup = ProductAttributeValueGroup::where('product_id', $productObject->id)
                     ->where('attribute_group_id', $groupId)->first();
 
@@ -88,51 +91,5 @@ class PurchaseRepository extends BaseRepository
             DB::rollBack();
             return $notification;
         }
-    }
-
-    public function createPublicPurchase($products){
-        try {
-            DB::beginTransaction();
-            $totalPurchase = 0;
-            $purchase = Purchase::create([
-                'total' => $totalPurchase
-            ]);
-            foreach ($products as $product){
-                $quantity = $product['quantity'];
-                $productObject = Product::find($product['id']);
-
-                $groupId = AttributeValueGroup::getGroupIdByAttributes($product['attributeValueSelected']);
-
-                $productAttributesValuesGroup = ProductAttributeValueGroup::where('product_id', $productObject->id)
-                    ->where('attribute_group_id', $groupId)->first();
-
-                $totalPurchase += $quantity * $productObject->price;
-                $productAttributesValuesGroup->stock -= $quantity;
-                $productAttributesValuesGroup->save();
-
-                PurchaseDetail::create([
-                    'quantity' => $quantity,
-                    'price_purchase_moment' => $productObject->price,
-                    'subtotal' => $quantity * $productObject->price,
-                    'product_id' => $productObject->id,
-                    'purchase_id' => $purchase->id,
-                    'group_id' => $groupId
-                ]);
-            }
-
-            $purchase->total = $totalPurchase;
-            $purchase->save();
-
-            DB::commit();
-            return $purchase;
-        } catch(\Exception $e){
-            $notification = [
-                'alert-type' => 'error',
-                'message' => __($e->getMessage()),
-            ];
-            DB::rollBack();
-            return $notification;
-        }
-
     }
 }
