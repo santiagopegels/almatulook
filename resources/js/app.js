@@ -109,7 +109,7 @@ Vue.toasted.register('ToastedError',
         type: 'error',
         theme: "bubble",
         position: "top-right",
-        duration: 4000,
+        duration: 5000,
         fullWidth: false,
         closeOnSwipe: true,
         singleton: true

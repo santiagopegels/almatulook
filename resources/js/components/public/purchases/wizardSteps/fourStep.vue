@@ -52,16 +52,19 @@ export default {
                 this.linkToPay = result.message
             })
         },
-       async generatePurchase() {
-           await this.$store.dispatch('storePurchase', {
+        async generatePurchase() {
+            await this.$store.dispatch('storePurchase', {
                 products: this.bagProducts,
                 payer: this.purchaseInfo,
-                shipment: this.selected_shipment_type.id
+                shipment: this.selected_shipment_type
             }).then(response => {
-                if(response.message.id && response.status){
+                if (response.message.id && response.status) {
                     this.createAndGoPaymentLink()
                 }
-           })
+            }) .catch(error => {
+                console.log(error)
+                this.$toasted.global.ToastedError({message: error.message.response.data.message})
+            });
         },
         createAndGoPaymentLink() {
             let anchorElement = document.createElement('a')

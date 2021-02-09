@@ -1,5 +1,8 @@
 <template>
     <div>
+        <loading :opacity="opacity" loader="spinner" transition="fade" :active.sync="isLoading" :can-cancel="false"
+                 :is-full-page="true" color="#20a8d8" background-color="rgba(0,0,0,0.8)"></loading>
+
         <a-row style="padding-top: 20px; background: #e0e0db" type="flex" justify="center">
             <a-col
                 :xs="{span: 18, offset: 6}"
@@ -57,6 +60,8 @@
 <script>
 import {mapGetters} from "vuex";
 import emptyBag from '../../../../../public/img/shopping-bag.svg'
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
 
 export default {
     components: {
@@ -65,9 +70,11 @@ export default {
         ThirdStep: () => import(/* webpackChunkName: "js/purchases" */ './wizardSteps/thirdStep.vue'),
         FourthStep: () => import(/* webpackChunkName: "js/purchases" */ './wizardSteps/fourStep.vue'),
         SummaryPurchase: () => import(/* webpackChunkName: "js/purchases" */ './summary.vue'),
+        Loading,
     },
     data() {
         return {
+            opacity: 0.3,
             current: 3,
             steps: [
                 {
@@ -92,7 +99,7 @@ export default {
         };
     },
     computed: {
-        ...mapGetters(['userLogged', 'purchaseInfo', 'bagProducts'])
+        ...mapGetters(['userLogged', 'purchaseInfo', 'bagProducts', 'isLoading'])
     },
     async mounted() {
         await this.loadUserData()

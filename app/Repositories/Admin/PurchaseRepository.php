@@ -9,14 +9,12 @@ use App\Models\Admin\PurchaseDetail;
 use App\ProductAttributeValueGroup;
 use App\Repositories\BaseRepository;
 use Illuminate\Support\Facades\DB;
-use mysql_xdevapi\Exception;
 
 /**
  * Class PurchaseRepository
  * @package App\Repositories\Admin
  * @version November 3, 2020, 3:33 pm UTC
-*/
-
+ */
 class PurchaseRepository extends BaseRepository
 {
     /**
@@ -45,16 +43,15 @@ class PurchaseRepository extends BaseRepository
         return Purchase::class;
     }
 
-    public function createPurchase($products){
+    public function createPurchase($products, $shipmentType = ['id' => null, 'cost' => 0], $statusOrder = null)
+    {
         try {
             DB::beginTransaction();
             $totalPurchase = 0;
-            $productId = 0;
-            $attributes = null;
             $purchase = Purchase::create([
                 'total' => $totalPurchase
             ]);
-            foreach ($products as $product){
+            foreach ($products as $product) {
                 isset($product['product_id']) ? $productId = $product['product_id'] : $productId = $product['id'];
                 isset($product['attributes']['attributes']) ? $attributes = $product['attributes']['attributes'] : $attributes = $product['attributeValueSelected'];
                 $quantity = $product['quantity'];
@@ -65,11 +62,16 @@ class PurchaseRepository extends BaseRepository
                     ->where('attribute_group_id', $groupId)->first();
 
                 $totalPurchase += $quantity * $productObject->price;
-                $productAttributesValuesGroup->stock -= $quantity;
+                if($productAttributesValuesGroup > 0){
+                    $productAttributesValuesGroup->stock -= $quantity;
+                } else {
+                    throw new \Exception('El producto '.$productObject->name.' no tiene stock.');
+                }
+
                 $productAttributesValuesGroup->save();
 
                 PurchaseDetail::create([
-                   'quantity' => $quantity,
+                    'quantity' => $quantity,
                     'price_purchase_moment' => $productObject->price,
                     'subtotal' => $quantity * $productObject->price,
                     'product_id' => $productObject->id,
@@ -79,17 +81,16 @@ class PurchaseRepository extends BaseRepository
             }
 
             $purchase->total = $totalPurchase;
+            $purchase->shipment_type_id = $shipmentType->id;
+            $purchase->shipment_cost = $shipmentType->cost;
+            $purchase->status_order = 0;
             $purchase->save();
 
             DB::commit();
             return $purchase;
-        } catch(\Exception $e){
-            $notification = [
-                'alert-type' => 'error',
-                'message' => __($e->getMessage()),
-            ];
+        } catch (\Exception $e) {
             DB::rollBack();
-            return $notification;
+            abort(400, $e->getMessage());
         }
     }
 }

@@ -602,7 +602,7 @@ let actions = {
     storePurchase({commit}, params) {
         return new Promise(async (resolve, reject) => {
 
-            commit('SET_LOADING', true);
+            //commit('SET_LOADING', true);
 
             window.axios.post('api/purchase', params).then(response => {
                 if (response.data.data) {
@@ -617,7 +617,14 @@ let actions = {
                         message: null
                     });
                 }
-            })
+            }).catch(error => {
+                console.log(`generatePurchase`, error);
+                commit('SET_LOADING', false);
+                reject({
+                    status: false,
+                    message: error
+                });
+            });
         });
     },
 
