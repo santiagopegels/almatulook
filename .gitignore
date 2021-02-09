@@ -16,6 +16,7 @@ public/css
 public/js
 public/mix-manifest.json
 public/hot
+public/vendors~js
 storage/*.key
 .env
 Homestead.yaml
@@ -24,6 +25,9 @@ Homestead.json
 
 ###NPM###
 package-lock.json
+
+###COMPOSER###
+composer.lock
 
 ### Docker ###
 deploy/mysql-data
