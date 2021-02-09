@@ -75,7 +75,7 @@ export default {
     data() {
         return {
             opacity: 0.3,
-            current: 3,
+            current: 0,
             steps: [
                 {
                     title: 'Login',

@@ -36,7 +36,8 @@ class PurchaseAPIController extends AppBaseController
     public function store(Request $request)
     {
         $products = $request->get('products');
-        $purchase = $this->purchaseRepository->createPurchase($products);
+        $shipmentType = $request->get('shipment');
+        $purchase = $this->purchaseRepository->createPurchase($products, $shipmentType);
         return $this->sendResponse($purchase, 'Purchase retrieved successfully');
     }
 

@@ -43,11 +43,12 @@ class PurchaseRepository extends BaseRepository
         return Purchase::class;
     }
 
-    public function createPurchase($products, $shipmentType = ['id' => null, 'cost' => 0], $statusOrder = null)
+    public function createPurchase($products, $shipmentType = array('id' => null, 'cost' => 0), $statusOrder = null)
     {
         try {
             DB::beginTransaction();
             $totalPurchase = 0;
+            $shipmentType = (object)$shipmentType;
             $purchase = Purchase::create([
                 'total' => $totalPurchase
             ]);
@@ -62,7 +63,8 @@ class PurchaseRepository extends BaseRepository
                     ->where('attribute_group_id', $groupId)->first();
 
                 $totalPurchase += $quantity * $productObject->price;
-                if($productAttributesValuesGroup > 0){
+
+                if($productAttributesValuesGroup->stock > 0){
                     $productAttributesValuesGroup->stock -= $quantity;
                 } else {
                     throw new \Exception('El producto '.$productObject->name.' no tiene stock.');
@@ -85,7 +87,6 @@ class PurchaseRepository extends BaseRepository
             $purchase->shipment_cost = $shipmentType->cost;
             $purchase->status_order = 0;
             $purchase->save();
-
             DB::commit();
             return $purchase;
         } catch (\Exception $e) {

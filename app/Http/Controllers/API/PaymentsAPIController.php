@@ -30,16 +30,4 @@ class PaymentsAPIController extends AppBaseController
 
         return $this->sendResponse($idPayment, 'Payment ID generated successfully');
     }
-
-    /**
-     * Display a listing of the Product.
-     * POST|HEAD /payment
-     *
-     * @param Request $request
-     * @return Response
-     */
-    public function store(Request $request)
-    {
-        dd($request->all());
-    }
 }

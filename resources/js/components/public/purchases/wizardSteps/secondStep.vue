@@ -53,7 +53,6 @@ export default {
         },
         async onChange(e) {
             let shipmentTypeSelected = await this.shipmentTypes.filter(item => item.id == e.target.value)[0]
-            this.$store.commit('SET_SHIP_COST', shipmentTypeSelected.cost)
             this.$store.commit('SET_SELECTED_SHIPMENT_TYPE', {
                 id: shipmentTypeSelected.id,
                 cost: shipmentTypeSelected.cost,
