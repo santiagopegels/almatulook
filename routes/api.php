@@ -32,6 +32,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['role:admin']], function () 
     Route::resource('purchases', 'Admin\PurchaseAPIController');
     Route::resource('purchase_details', 'Admin\PurchaseDetailAPIController');
     Route::resource('shipment_types', 'Admin\ShipmentTypeAPIController');
+    Route::resource('status_orders', 'Admin\StatusOrderAPIController');
 
 
     // get all

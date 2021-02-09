@@ -57,9 +57,13 @@ export default {
                 products: this.bagProducts,
                 payer: this.purchaseInfo,
                 shipment: this.selected_shipment_type.id
-            })
+            }).then(response => {
+                if(response.message.id && response.status){
+                    this.createAndGoPaymentLink()
+                }
+           })
         },
-        createAnchorElement() {
+        createAndGoPaymentLink() {
             let anchorElement = document.createElement('a')
             anchorElement.href = this.linkToPay
             anchorElement.click()

@@ -911,6 +911,11 @@ let actions = {
                 await commit('SET_SELECTED_SHIPMENT_TYPE');
                 break;
 
+            case 'status_orders':
+                await commit('SET_ORDER_STATUS', content.data);
+                await commit('SET_SELECTED_ORDER_STATUS');
+                break;
+
             default:
                 break;
         }
@@ -977,6 +982,10 @@ let actions = {
                 await commit('PUSH_SHIPMENT_TYPE', content.data);
                 break;
 
+            case 'status_orders':
+                await commit('PUSH_ORDER_STATUS', content.data);
+                break;
+
             default:
                 break;
         }
@@ -1024,6 +1033,10 @@ let actions = {
 
             case 'shipment_types':
                 await commit('SET_SELECTED_SHIPMENT_TYPE');
+                break;
+
+            case 'status_orders':
+                await commit('SET_SELECTED_ORDER_STATUS');
                 break;
 
             default:

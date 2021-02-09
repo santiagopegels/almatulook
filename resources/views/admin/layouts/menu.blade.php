@@ -37,6 +37,12 @@
         <span>@lang('model.shipment_types')</span>
     </a>
 </li>
+<li class="nav-item {{ Request::is('orderStatus*') ? 'active' : '' }}">
+    <a class="nav-link {{ Request::is('orderStatus*') ? 'active' : '' }}" href=" {!! route('admin.orderStatus.index') !!}">
+        <i class="nav-icon icon-cursor"></i>
+        <span>@lang('model.order_status')</span>
+    </a>
+</li>
 <li class="nav-title">Administrador</li>
 <li class="nav-item {{ Request::is('users*') ? 'active' : '' }}">
     <a class="nav-link {{ Request::is('users*') ? 'active' : '' }}" href=" {!! route('admin.users.index') !!}">

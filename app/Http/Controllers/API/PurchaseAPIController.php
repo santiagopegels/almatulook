@@ -14,7 +14,6 @@ use Response;
  * Class PurchaseController
  * @package App\Http\Controllers\API
  */
-
 class PurchaseAPIController extends AppBaseController
 {
     /** @var  PurchaseRepository */
@@ -38,7 +37,7 @@ class PurchaseAPIController extends AppBaseController
     {
         $products = $request->get('products');
         $purchase = $this->purchaseRepository->createPurchase($products);
-        return $purchase;
+        return $this->sendResponse($purchase, 'Purchase retrieved successfully');
     }
 
 

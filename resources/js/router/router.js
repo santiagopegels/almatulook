@@ -78,6 +78,12 @@ export const router = new Router({
             component: () => import(/* webpackChunkName: "js/admin-shipment" */ '../components/models/shipmentTypes/index.vue'),
         },
         {
+            path: '/admin/orderStatus',
+            name: 'orderStatusIndex',
+            component: () => import(/* webpackChunkName: "js/admin-order-status" */ '../components/models/ordersStatus/index.vue'),
+        },
+        //PUBLIC
+        {
             path: '/product',
             name: 'publicProductIndex',
             component: publicProductIndex,

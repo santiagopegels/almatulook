@@ -38,5 +38,8 @@ return [
     'stores' => 'Tiendas',
 
     'shipment_type' => 'Tipo de Envío',
-    'shipment_types' => 'Tipos de Envíos'
+    'shipment_types' => 'Tipos de Envíos',
+
+    'order_statu' => 'Estado de Orden',
+    'order_status' => 'Estados de Orden',
 ];

@@ -78,6 +78,7 @@ let state = {
     parameters: [],
     products: [],
     shipmentTypes: [],
+    orderStatus: [],
 
     /**
      * Selected item
@@ -154,6 +155,13 @@ let state = {
         description: "",
         cost: 0,
         addressRequired: true,
+    },
+
+    selected_order_status: {
+        id: null,
+        status: "",
+        order: null,
+        can_delete_order: false
     },
 }
 

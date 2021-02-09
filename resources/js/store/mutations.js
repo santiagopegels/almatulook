@@ -101,6 +101,10 @@ let mutations = {
         state.shipmentTypes = shipmentTypes;
     },
 
+    SET_ORDER_STATUS(state, orderStatus) {
+        state.orderStatus = orderStatus;
+    },
+
     SET_USER_LOGGED(state, payload = {
         id: null,
         isAuthenticated: false
@@ -243,6 +247,17 @@ let mutations = {
         state.selected_shipment_type = selected_shipment_type;
     },
 
+    SET_SELECTED_ORDER_STATUS(
+        state, selected_order_status = {
+            id: null,
+            status: "",
+            order: null,
+            can_delete_order: false
+        }
+    ) {
+        state.selected_order_status = selected_order_status;
+    },
+
     /**
      * PUSH
      */
@@ -305,6 +320,10 @@ let mutations = {
 
     PUSH_SHIPMENT_TYPE(state, shipmentType) {
         state.shipmentTypes.data.push(shipmentType);
+    },
+
+    PUSH_ORDER_STATUS(state, orderStatus) {
+        state.orderStatus.data.push(orderStatus);
     },
 
     /**

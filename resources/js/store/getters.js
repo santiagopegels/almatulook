@@ -110,6 +110,10 @@ let getters = {
         return state.shipmentTypes;
     },
 
+    orderStatus: state => {
+        return state.orderStatus;
+    },
+
     /** SELECTED */
 
     selected_user: state => {
@@ -146,6 +150,10 @@ let getters = {
 
     selected_shipment_type: state => {
         return state.selected_shipment_type;
+    },
+
+    selected_order_status: state => {
+        return state.selected_order_status;
     },
 }
 
