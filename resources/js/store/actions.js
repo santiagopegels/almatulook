@@ -504,6 +504,7 @@ let actions = {
     pushProductToBag({commit}, payload) {
 
         delete payload['attributes']
+        payload.quantity = 1
 
         return new Promise(async (resolve, reject) => {
 
@@ -595,6 +596,28 @@ let actions = {
                     message: error
                 });
             });
+        });
+    },
+
+    storePurchase({commit}, params) {
+        return new Promise(async (resolve, reject) => {
+
+            commit('SET_LOADING', true);
+
+            window.axios.post('api/purchase', params).then(response => {
+                if (response.data.data) {
+                    commit('SET_LOADING', false);
+                    resolve({
+                        status: true,
+                        message: response.data.data
+                    });
+                } else {
+                    resolve({
+                        status: true,
+                        message: null
+                    });
+                }
+            })
         });
     },
 
@@ -766,29 +789,6 @@ let actions = {
                 if (response.data.data) {
                     await commit('SET_BAG_PRODUCTS', response.data.data);
                     await commit('TOGGLE_CHECK_BAG_SESSION');
-                    commit('SET_LOADING', false);
-                    resolve({
-                        status: true,
-                        message: response.data.data
-                    });
-                } else {
-                    resolve({
-                        status: true,
-                        message: null
-                    });
-                }
-            })
-        });
-    },
-
-    savePayment({commit}, params) {
-        return new Promise(async (resolve, reject) => {
-
-            commit('SET_LOADING', true);
-
-            window.axios.post('api/payment', params).then(response => {
-                if (response.data.data) {
-                    //Eliminar todos los datos de la compra
                     commit('SET_LOADING', false);
                     resolve({
                         status: true,

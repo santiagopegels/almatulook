@@ -28,6 +28,8 @@ class CreatePurchaseDetailsTable extends Migration
             $table->foreign('purchase_id')->references('id')->on('purchases')
                 ->onDelete('cascade')->onUpdate('cascade');
 
+            $table->integer('group_id');
+
             $table->timestamps();
             $table->softDeletes();
         });

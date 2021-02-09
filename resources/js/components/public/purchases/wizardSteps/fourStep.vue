@@ -4,8 +4,8 @@
         <a-icon type="credit-card" class="header-icon"/>
         <h1>Realizar Pago</h1>
         <img style="padding: 5px" :src="mercadopagoLogo" class="responsive"/>
-        <a-button type="primary" block size="large" :loading="!linkToPay">
-            <a :href="linkToPay"> Pagar con MercadoPago</a>
+        <a-button type="primary" block size="large" :loading="!linkToPay" @click="generatePurchase">
+            Pagar con MercadoPago
         </a-button>
     </div>
 </template>
@@ -13,6 +13,7 @@
 <script>
 import {mapGetters} from "vuex";
 import mercadopagoLogo from "../../../../../../public/img/mercadopago.png"
+
 export default {
     computed: {
         ...mapGetters(['selected_shipment_type', 'bagProducts', 'purchaseInfo', 'selected_shipment_type'])
@@ -50,6 +51,18 @@ export default {
             }).then(result => {
                 this.linkToPay = result.message
             })
+        },
+       async generatePurchase() {
+           await this.$store.dispatch('storePurchase', {
+                products: this.bagProducts,
+                payer: this.purchaseInfo,
+                shipment: this.selected_shipment_type.id
+            })
+        },
+        createAnchorElement() {
+            let anchorElement = document.createElement('a')
+            anchorElement.href = this.linkToPay
+            anchorElement.click()
         }
     },
 };

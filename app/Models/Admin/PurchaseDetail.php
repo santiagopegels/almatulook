@@ -30,7 +30,8 @@ class PurchaseDetail extends Model
         'price_purchase_moment',
         'subtotal',
         'product_id',
-        'purchase_id'
+        'purchase_id',
+        'group_id'
     ];
 
     /**
@@ -44,7 +45,8 @@ class PurchaseDetail extends Model
         'price_purchase_moment' => 'decimal:2',
         'subtotal' => 'decimal:2',
         'product_id' => 'integer',
-        'purchase_id' => 'integer'
+        'purchase_id' => 'integer',
+        'group_id' => 'integer'
     ];
 
     /**
