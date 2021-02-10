@@ -32,6 +32,8 @@ class CreatePurchasesTable extends Migration
             $table->foreign('status_order')->references('order')->on('status_orders')
                 ->onUpdate('cascade')->onDelete('cascade');
 
+            $table->string('preference_id')->nullable();
+
             $table->timestamps();
             $table->softDeletes();
         });

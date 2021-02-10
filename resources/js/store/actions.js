@@ -628,7 +628,7 @@ let actions = {
         });
     },
 
-    savePayment({commit}, params) {
+    storePayment({commit}, params) {
         return new Promise(async (resolve, reject) => {
 
             commit('SET_LOADING', true);
@@ -647,7 +647,7 @@ let actions = {
                     });
                 }
             }).catch(error => {
-                console.log(`generatePurchase`, error);
+                console.log(`storePayment`, error);
                 commit('SET_LOADING', false);
                 reject({
                     status: false,

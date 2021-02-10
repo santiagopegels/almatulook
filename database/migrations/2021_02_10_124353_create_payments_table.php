@@ -15,9 +15,12 @@ class CreatePaymentsTable extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->string('payment_method');
-            $table->string('voucher_payment');
+            $table->string('payment_site');
+            $table->string('payment_id');
             $table->string('status');
+            $table->string('payment_type')->nullable();
+            $table->string('preference_id')->nullable();
+            $table->string('merchant_order_id')->nullable();
 
             $table->unsignedInteger('purchase_id');
             $table->foreign('purchase_id')->references('id')->on('purchases')

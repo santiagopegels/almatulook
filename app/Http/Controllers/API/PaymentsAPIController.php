@@ -26,9 +26,9 @@ class PaymentsAPIController extends AppBaseController
         $order = $request->all();
 
         $method = new \App\PaymentMethods\MercadoPago;
-        $idPayment = $method->setupPaymentAndGetRedirectURL($order);
+        $paymentRegister = $method->setupPaymentAndGetRedirectURL($order);
 
-        return $this->sendResponse($idPayment, 'Payment ID generated successfully');
+        return $this->sendResponse($paymentRegister, 'Payment ID generated successfully');
     }
 
     /**
@@ -40,11 +40,9 @@ class PaymentsAPIController extends AppBaseController
      */
     public function store(Request $request)
     {
-        $order = $request->all();
+        $input = $request->all();
 
-        $method = new \App\PaymentMethods\MercadoPago;
-        $idPayment = $method->setupPaymentAndGetRedirectURL($order);
-
+        dd($input);
         return $this->sendResponse($idPayment, 'Payment ID generated successfully');
     }
 }

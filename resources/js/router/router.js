@@ -21,11 +21,12 @@ export const router = new Router({
             path: '/',
             name: 'home',
             component: home,
-/*            beforeEnter: (to, from, next) => {
+            beforeEnter: (to, from, next) => {
                 if(to.query.site_id === 'MLA') {
-                    store.dispatch('savePayment', to.query)
+                    store.dispatch('storePayment', to.query)
                 }
-            }*/
+                next()
+            }
         },
         {
             path: '/admin/products',

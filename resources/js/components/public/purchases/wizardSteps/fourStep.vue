@@ -21,6 +21,7 @@ export default {
     data() {
         return {
             linkToPay: null,
+            preferenceId: null, //ID that return mercadopago Payment Manage
             mercadopagoLogo: mercadopagoLogo
         }
     },
@@ -49,20 +50,21 @@ export default {
                 payer: this.purchaseInfo,
                 shipment_cost: this.selected_shipment_type.cost
             }).then(result => {
-                this.linkToPay = result.message
+                this.linkToPay = result.message.init_point
+                this.preferenceId = result.message.preference_id
             })
         },
         async generatePurchase() {
             await this.$store.dispatch('storePurchase', {
                 products: this.bagProducts,
                 payer: this.purchaseInfo,
-                shipment: this.selected_shipment_type
+                shipment: this.selected_shipment_type,
+                preference_id: this.preferenceId
             }).then(response => {
                 if (response.message.id && response.status) {
-                    console.log(response.message)
                     this.createAndGoPaymentLink()
                 }
-            }) .catch(error => {
+            }).catch(error => {
                 this.$toasted.global.ToastedError({message: error.message.response.data.message})
             });
         },

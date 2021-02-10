@@ -1,3 +1,6 @@
 Vendedor : {"id":710563867,"nickname":"TESTWFSBUM01","password":"qatest3940","site_status":"active","email":"test_user_93973442@testuser.com"}
 
 Comprador: {"id":710574914,"nickname":"TESTCWOEFGMK","password":"qatest5641","site_status":"active","email":"test_user_18531481@testuser.com"}
+
+
+http://localhost/?collection_id=1233620575&collection_status=approved&payment_id=1233620575&status=approved&external_reference=null&payment_type=credit_card&merchant_order_id=2314212352&preference_id=710563867-d1362470-3479-4c1a-8313-7a1a069da154&site_id=MLA&processing_mode=aggregator&merchant_account_id=null

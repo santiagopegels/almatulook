@@ -28,7 +28,8 @@ class Purchase extends Model
         'total',
         'shipment_type_id',
         'shipment_cost',
-        'status_order'
+        'status_order',
+        'preference_id'
     ];
 
     /**
@@ -41,7 +42,8 @@ class Purchase extends Model
         'total' => 'float',
         'shipment_type_id' => 'integer',
         'shipment_cost' => 'float',
-        'status_order' => 'integer'
+        'status_order' => 'integer',
+        'preference_id' => 'string'
     ];
 
     /**

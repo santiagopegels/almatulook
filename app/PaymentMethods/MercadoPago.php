@@ -20,7 +20,7 @@ class MercadoPago
     }
 
 
-    public function setupPaymentAndGetRedirectURL($order): string
+    public function setupPaymentAndGetRedirectURL($order): array
     {
         $preference = new Preference();
         $products = $order['products'];
@@ -58,6 +58,9 @@ class MercadoPago
 
         $preference->save();
 
-        return $preference->init_point;
+        return array(
+            'init_point' =>  $preference->init_point,
+            'preference_id' => $preference->id
+        );
     }
 }
