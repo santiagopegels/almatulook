@@ -37,7 +37,9 @@ class PurchaseAPIController extends AppBaseController
     {
         $products = $request->get('products');
         $shipmentType = $request->get('shipment');
+        $payer = $request->get('payer');
         $purchase = $this->purchaseRepository->createPurchase($products, $shipmentType);
+        $this->purchaseRepository->registerPayer($payer, $purchase);
         return $this->sendResponse($purchase, 'Purchase retrieved successfully');
     }
 

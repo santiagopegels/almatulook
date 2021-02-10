@@ -121,6 +121,7 @@ let mutations = {
     },
 
     SET_USER_PROFILE(state, payload) {
+        state.purchaseInfo.isGuest = false
         state.purchaseInfo.data.profile.personalInfo.name = payload.name
         state.purchaseInfo.data.profile.personalInfo.lastName = payload.lastname
         state.purchaseInfo.data.profile.contact.cellphone = Number(payload.cellphone)
@@ -133,6 +134,10 @@ let mutations = {
 
     SET_MERCADO_PAGO_DATA(state, payload) {
         state.mercadoPagoData = payload;
+    },
+
+    SET_PURCHASE(state, payload) {
+        state.purchase = payload
     },
 
     /**

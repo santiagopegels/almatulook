@@ -15,13 +15,30 @@ class PaymentsAPIController extends AppBaseController
 {
 
     /**
-     * Display a listing of the Product.
+     * Display a id of payment.
      * POST|HEAD generate/payment
      *
      * @param Request $request
      * @return Response
      */
     public function generateIdPayment(Request $request)
+    {
+        $order = $request->all();
+
+        $method = new \App\PaymentMethods\MercadoPago;
+        $idPayment = $method->setupPaymentAndGetRedirectURL($order);
+
+        return $this->sendResponse($idPayment, 'Payment ID generated successfully');
+    }
+
+    /**
+     * Store payment.
+     * POST|HEAD /payment
+     *
+     * @param Request $request
+     * @return Response
+     */
+    public function store(Request $request)
     {
         $order = $request->all();
 

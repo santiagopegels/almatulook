@@ -4,10 +4,12 @@ namespace App\Repositories\Admin;
 
 use App\Models\Admin\AttributeValueGroup;
 use App\Models\Admin\Product;
+use App\Models\Admin\Profile;
 use App\Models\Admin\Purchase;
 use App\Models\Admin\PurchaseDetail;
 use App\ProductAttributeValueGroup;
 use App\Repositories\BaseRepository;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -64,10 +66,10 @@ class PurchaseRepository extends BaseRepository
 
                 $totalPurchase += $quantity * $productObject->price;
 
-                if($productAttributesValuesGroup->stock > 0){
+                if ($productAttributesValuesGroup->stock > 0) {
                     $productAttributesValuesGroup->stock -= $quantity;
                 } else {
-                    throw new \Exception('El producto '.$productObject->name.' no tiene stock.');
+                    throw new \Exception('El producto ' . $productObject->name . ' no tiene stock.');
                 }
 
                 $productAttributesValuesGroup->save();
@@ -92,6 +94,30 @@ class PurchaseRepository extends BaseRepository
         } catch (\Exception $e) {
             DB::rollBack();
             abort(400, $e->getMessage());
+        }
+    }
+
+    public function registerPayer($payer, $purchase)
+    {
+        if (!$payer['isGuest'] && Auth::check()) {
+            $profile = Profile::where('user_id', Auth::id())->first();
+            $purchase->profile()->associate($profile);
+            $purchase->save();
+        } else {
+            $data = $payer['data'];
+            $profile = Profile::create([
+                'name' => $data['profile']['personalInfo']['name'],
+                'lastname' => $data['profile']['personalInfo']['lastName'],
+                'email' => $data['user']['email'],
+                'cellphone' => $data['profile']['contact']['cellphone'],
+                'deliveryAddress' => $data['profile']['contact']['address']['deliveryAddress'],
+                'flat' => $data['profile']['contact']['address']['flat'],
+                'city' => $data['profile']['contact']['address']['city'],
+                'province' => $data['profile']['contact']['address']['province'],
+                'cp' => $data['profile']['contact']['address']['cp'],
+            ]);
+            $purchase->profile()->associate($profile);
+            $purchase->save();
         }
     }
 }

@@ -59,10 +59,10 @@ export default {
                 shipment: this.selected_shipment_type
             }).then(response => {
                 if (response.message.id && response.status) {
+                    console.log(response.message)
                     this.createAndGoPaymentLink()
                 }
             }) .catch(error => {
-                console.log(error)
                 this.$toasted.global.ToastedError({message: error.message.response.data.message})
             });
         },

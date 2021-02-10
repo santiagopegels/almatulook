@@ -21,6 +21,7 @@ let state = {
     bagProducts: [],
     shipCost: 0,
     mercadoPagoData: {},
+    purchase: {},
 
     purchaseInfo: {
         isGuest: true,

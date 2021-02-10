@@ -6,18 +6,18 @@ use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class Purchase
+ * Class Parameter
  * @package App\Models\Admin
- * @version November 3, 2020, 3:33 pm UTC
+ * @version September 12, 2020, 3:41 pm UTC
  *
- * @property string $purchase_date
- * @property number $total
+ * @property string $parameter
+ * @property string $value
  */
-class Purchase extends Model
+class Payment extends Model
 {
     use SoftDeletes;
 
-    public $table = 'purchases';
+    public $table = 'payments';
 
 
     protected $dates = ['deleted_at'];
@@ -25,10 +25,10 @@ class Purchase extends Model
 
 
     public $fillable = [
-        'total',
-        'shipment_type_id',
-        'shipment_cost',
-        'status_order'
+        'payment_method',
+        'voucher_payment',
+        'status',
+        'purchase_id'
     ];
 
     /**
@@ -38,10 +38,9 @@ class Purchase extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'total' => 'float',
-        'shipment_type_id' => 'integer',
-        'shipment_cost' => 'float',
-        'status_order' => 'integer'
+        'voucher_payment' => 'string',
+        'status' => 'string',
+        'purchase_id' => 'integer'
     ];
 
     /**
@@ -53,7 +52,5 @@ class Purchase extends Model
 
     ];
 
-    public function profile(){
-        return $this->belongsTo(Profile::class);
-    }
+
 }

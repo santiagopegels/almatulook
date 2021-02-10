@@ -24,8 +24,8 @@ class CreateProfilesTable extends Migration
             $table->string('city');
             $table->string('province');
             $table->integer('cp')->nullable();
-
-            $table->unsignedBigInteger('user_id')->unsigned();
+            $table->string('email')->nullable();
+            $table->unsignedBigInteger('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users')
                 ->onUpdate('cascade')->onDelete('cascade');
 

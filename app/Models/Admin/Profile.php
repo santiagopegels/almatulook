@@ -39,7 +39,8 @@ class Profile extends Model
         'city',
         'province',
         'cp',
-        'user_id'
+        'user_id',
+        'email'
     ];
 
     /**
@@ -57,7 +58,8 @@ class Profile extends Model
         'city' => 'string',
         'province' => 'string',
         'cp' => 'integer',
-        'user_id' => 'integer'
+        'user_id' => 'integer',
+        'email' => 'string'
     ];
 
     /**
@@ -74,5 +76,8 @@ class Profile extends Model
         'province' => 'required'
     ];
 
+    public function purchases(){
+        return $this->hasMany(Purchase::class);
+    }
 
 }

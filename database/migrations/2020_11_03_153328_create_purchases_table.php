@@ -28,6 +28,10 @@ class CreatePurchasesTable extends Migration
             $table->foreign('status_order')->references('order')->on('status_orders')
                 ->onUpdate('cascade')->onDelete('cascade');
 
+            $table->unsignedSmallInteger('profile_id');
+            $table->foreign('status_order')->references('order')->on('status_orders')
+                ->onUpdate('cascade')->onDelete('cascade');
+
             $table->timestamps();
             $table->softDeletes();
         });

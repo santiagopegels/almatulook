@@ -602,9 +602,38 @@ let actions = {
     storePurchase({commit}, params) {
         return new Promise(async (resolve, reject) => {
 
-            //commit('SET_LOADING', true);
+           // commit('SET_LOADING', true);
 
             window.axios.post('api/purchase', params).then(response => {
+                if (response.data.data) {
+                    commit('SET_LOADING', false);
+                    resolve({
+                        status: true,
+                        message: response.data.data
+                    });
+                } else {
+                    resolve({
+                        status: true,
+                        message: null
+                    });
+                }
+            }).catch(error => {
+                console.log(`generatePurchase`, error);
+                commit('SET_LOADING', false);
+                reject({
+                    status: false,
+                    message: error
+                });
+            });
+        });
+    },
+
+    savePayment({commit}, params) {
+        return new Promise(async (resolve, reject) => {
+
+            commit('SET_LOADING', true);
+
+            window.axios.post('api/payment', params).then(response => {
                 if (response.data.data) {
                     commit('SET_LOADING', false);
                     resolve({
