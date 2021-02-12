@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker-compose -f deploy/docker-compose.yml down
+docker-compose --env-file=../.env -f deploy/docker-compose.yml down
