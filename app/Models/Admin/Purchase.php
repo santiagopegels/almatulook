@@ -29,7 +29,6 @@ class Purchase extends Model
         'shipment_type_id',
         'shipment_cost',
         'status_order',
-        'preference_id'
     ];
 
     /**
@@ -43,7 +42,6 @@ class Purchase extends Model
         'shipment_type_id' => 'integer',
         'shipment_cost' => 'float',
         'status_order' => 'integer',
-        'preference_id' => 'string'
     ];
 
     /**

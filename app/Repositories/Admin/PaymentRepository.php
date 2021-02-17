@@ -3,10 +3,7 @@
 namespace App\Repositories\Admin;
 
 use App\Models\Admin\Payment;
-use App\Models\Admin\Purchase;
 use App\Repositories\BaseRepository;
-use Illuminate\Support\Facades\DB;
-use function Symfony\Component\String\s;
 
 /**
  * Class PaymentRepository
@@ -45,17 +42,15 @@ class PaymentRepository extends BaseRepository
 
     public function storePayment($payment)
     {
-        $purchase = Purchase::where('preference_id', $payment['preference_id'])->first();
-        $paymentObject = $purchase->payment;
-        if (is_null($paymentObject)) {
-            $paymentObject = Payment::create([
+        $paymentObject = Payment::where('preference_id', $payment['preference_id'])->first();
+
+        if (!is_null($paymentObject) and $paymentObject->status == 'pending') {
+            $paymentObject = $paymentObject->update([
                 'payment_site' => $payment['site_id'],
                 'payment_id' => $payment['payment_id'],
                 'status' => $payment['status'],
                 'payment_type' => $payment['payment_type'],
-                'preference_id' => $payment['preference_id'],
                 'merchant_order_id' => $payment['merchant_order_id'],
-                'purchase_id' => $purchase->id
             ]);
         }
         return $paymentObject;

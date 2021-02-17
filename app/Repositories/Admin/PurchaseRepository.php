@@ -3,6 +3,7 @@
 namespace App\Repositories\Admin;
 
 use App\Models\Admin\AttributeValueGroup;
+use App\Models\Admin\Payment;
 use App\Models\Admin\Product;
 use App\Models\Admin\Profile;
 use App\Models\Admin\Purchase;
@@ -88,8 +89,16 @@ class PurchaseRepository extends BaseRepository
             $purchase->shipment_type_id = $shipmentType->id;
             $purchase->shipment_cost = $shipmentType->cost;
             $purchase->status_order = 0;
-            $purchase->preference_id = $preferenceId;
             $purchase->save();
+
+            if(!is_null($preferenceId)){
+                Payment::create([
+                    'status' => 'pending',
+                    'preference_id' => $preferenceId,
+                    'purchase_id' => $purchase->id
+                ]);
+            }
+
             DB::commit();
             return $purchase;
         } catch (\Exception $e) {
