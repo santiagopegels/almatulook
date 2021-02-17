@@ -9,6 +9,7 @@
             >
                 <a-button type="ghost" style="border: 0px" ><a-icon type="tags"/><span>CATEGORIAS</span></a-button>
             </a-cascader>
+            <a-button v-show="selected_category.id" type="ghost" @click="cleanFilter"> &times; Limpiar Categoría</a-button>
         </a-menu>
     </div>
 </template>
@@ -27,7 +28,7 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(['categoriesAll'])
+        ...mapGetters(['categoriesAll', 'selected_category'])
     },
     methods: {
         async fetch() {
@@ -40,6 +41,9 @@ export default {
             let categorySelected = selectedOptions[selectedOptions.length -1]
             await this.$store.commit('SET_SELECTED_CATEGORY', categorySelected)
         },
+        cleanFilter(){
+            this.$store.commit('SET_SELECTED_CATEGORY')
+        }
     }
 };
 </script>

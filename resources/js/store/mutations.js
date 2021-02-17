@@ -466,6 +466,10 @@ let mutations = {
         }
     },
 
+    REMOVE_ALL_SELECTED_VALUES_FILTER(state) {
+            state.selectedValuesToFilter = []
+    },
+
     REMOVE_ATTRIBUTE_SELECTED_PRODUCT(state, attributeId) {
         try {
             let index = state.selected_product.attributeValueSelected.findIndex(item => item.attribute_id === attributeId);

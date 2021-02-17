@@ -18,6 +18,13 @@
                 </a-select>
             </a-form-item>
         </a-row>
+            <a-button
+                v-show="selectedValuesToFilter.length > 0"
+                type="link"
+                @click="cleanFilters"
+            >
+                &times; Limpiar Filtros
+            </a-button>
         <a-row style="padding: 5px; margin-left: 15px;" v-for="attribute in attributesAll" :key="attribute.id">
             <a-form-item>
                 <h3>{{attribute.name}}</h3>
@@ -41,27 +48,28 @@
 </template>
 <script>
 import {mapGetters} from 'vuex'
+
 export default {
-    data(){
+    data() {
         return {
             orderBy: 'launching',
             checked: true
         }
     },
-    async mounted(){
-        if(!this.attributesAll.length > 0){
-          await this.fetchAttributesAll()
-      }
+    async mounted() {
+        if (!this.attributesAll.length > 0) {
+            await this.fetchAttributesAll()
+        }
     },
-    computed:{
-      ...mapGetters(['orderProducts', 'attributesAll', 'selectedValuesToFilter'])
+    computed: {
+        ...mapGetters(['orderProducts', 'attributesAll', 'selectedValuesToFilter'])
     },
     watch: {
-      orderBy: function (value){
-          this.$store.commit('SET_ORDER_PRODUCTS', value)
-      }
+        orderBy: function (value) {
+            this.$store.commit('SET_ORDER_PRODUCTS', value)
+        }
     },
-    methods:{
+    methods: {
         async fetchAttributesAll() {
             await this.$store.dispatch("fetchAllPublic", {
                 model: 'attributes',
@@ -69,12 +77,15 @@ export default {
                 .catch(error => this.$toasted.global.ToastedError({message: error.message.message}));
         },
         async onChange(checkedValue) {
-            if(this.selectedValuesToFilter.includes(checkedValue)){
+            if (this.selectedValuesToFilter.includes(checkedValue)) {
                 await this.$store.commit('REMOVE_SELECTED_VALUES_FILTER', checkedValue)
             } else {
                 await this.$store.commit('PUSH_SELECTED_VALUES_FILTER', checkedValue)
             }
         },
+        cleanFilters(){
+            this.$store.commit('REMOVE_ALL_SELECTED_VALUES_FILTER')
+        }
     }
 }
 </script>
