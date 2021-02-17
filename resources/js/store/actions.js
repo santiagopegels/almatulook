@@ -569,6 +569,36 @@ let actions = {
         });
     },
 
+    removeAllProductsToBag({commit}, payload) {
+
+        return new Promise(async (resolve, reject) => {
+
+            window.axios.post('/api/products/remove/all/product/bag', payload, {}).then(async response => {
+                if (response.data.success) {
+                    await commit('REMOVE_BAG_PRODUCT', [])
+                    resolve({
+                        status: true,
+                        message: response.data.data
+                    });
+                } else {
+                    commit('SET_LOADING', false);
+                    reject({
+                        status: false,
+                        message: response.data.message
+                    });
+                }
+
+            }).catch(error => {
+                console.error(`pushProductToBag`, error);
+                commit('SET_LOADING', false);
+                reject({
+                    status: false,
+                    message: error
+                });
+            });
+        });
+    },
+
     generatePaymentId({commit}, payload) {
 
         return new Promise(async (resolve, reject) => {
@@ -602,7 +632,7 @@ let actions = {
     storePurchase({commit}, params) {
         return new Promise(async (resolve, reject) => {
 
-           // commit('SET_LOADING', true);
+            commit('SET_LOADING', true);
 
             window.axios.post('api/purchase', params).then(response => {
                 if (response.data.data) {
@@ -636,6 +666,7 @@ let actions = {
             window.axios.post('api/payment', params).then(response => {
                 if (response.data.data) {
                     commit('SET_LOADING', false);
+                    commit('SET_BAG_PRODUCTS', []);
                     resolve({
                         status: true,
                         message: response.data.data

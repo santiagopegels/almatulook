@@ -58,15 +58,19 @@ Route::group(['prefix' => 'admin', 'middleware' => ['role:admin']], function () 
 });
 
 Route::get('products', 'ProductAPIController@index');
+Route::post('products/add/product/bag', 'ProductAPIController@addProductToBag');
+Route::post('products/remove/product/bag', 'ProductAPIController@removeProductFromBag');
+Route::post('products/remove/all/product/bag', 'ProductAPIController@removeAllProductsFromBag');
+Route::get('products/bag', 'ProductAPIController@getProductsBag');
+
+Route::post('profiles', 'ProfileAPIController@updateProfile');
+Route::get('profiles', 'ProfileAPIController@index');
+
+Route::post('generate/payment', 'PaymentsAPIController@generateIdPayment');
+Route::post('payment', 'PaymentsAPIController@store');
+
 Route::get('attributes_all', 'AttributeAPIController@all');
 Route::get('categories_all', 'CategoryAPIController@all');
 Route::get('shipment_types_all', 'ShipmentTypeAPIController@all');
 Route::get('user_logged', 'UserAPIController@getUserLogged');
-Route::post('profiles', 'ProfileAPIController@updateProfile');
-Route::get('profiles', 'ProfileAPIController@index');
-Route::post('products/add/product/bag', 'ProductAPIController@addProductToBag');
-Route::post('products/remove/product/bag', 'ProductAPIController@removeProductFromBag');
-Route::get('products/bag', 'ProductAPIController@getProductsBag');
-Route::post('generate/payment', 'PaymentsAPIController@generateIdPayment');
-Route::post('payment', 'PaymentsAPIController@store');
 Route::post('purchase', 'PurchaseAPIController@store');

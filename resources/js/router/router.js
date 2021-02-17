@@ -23,6 +23,7 @@ export const router = new Router({
             component: home,
             beforeEnter: (to, from, next) => {
                 if (to.query.site_id === 'MLA') {
+                    store.dispatch('removeAllProductsToBag')
                     store.dispatch('storePayment', to.query)
                 }
                 next()
@@ -111,9 +112,10 @@ router.beforeEach((to, from, next) => {
     const isAuthenticated = store.state.userLogged.isAuthenticated
     const isCheckedBagSession = store.state.userLogged.isAuthenticated
 
-    if (!isCheckedBagSession) {
+    if (!isCheckedBagSession && !to.query.payment_id) {
         store.dispatch('fetchUserBag')
     }
+
     if (to.name == 'home' && !isAuthenticated) {
         store.dispatch('fetchUserLogged')
         next()

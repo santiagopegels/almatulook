@@ -144,6 +144,21 @@ class ProductAPIController extends AppBaseController
     }
 
     /**
+     * Remove all Products from Bag.
+     * Post /products/remove/all/product/bag
+     *
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function removeAllProductsFromBag(Request $request)
+    {
+        session()->remove('bag.products');
+
+        return $this->sendResponse('success', 'Products removed from bag');
+    }
+
+    /**
      * Display the specified Product.
      * Get /products/bag
      *
