@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\AppBaseController;
-use App\PaymentMethods\MercadoPago;
+use App\Repositories\Admin\PaymentRepository;
 use Illuminate\Http\Request;
 use Response;
 
@@ -13,6 +13,14 @@ use Response;
  */
 class PaymentsAPIController extends AppBaseController
 {
+
+    /** @var  PaymentRepository */
+    private $paymentRepository;
+
+    public function __construct(PaymentRepository $paymentRepository)
+    {
+        $this->paymentRepository = $paymentRepository;
+    }
 
     /**
      * Display a id of payment.
@@ -42,7 +50,8 @@ class PaymentsAPIController extends AppBaseController
     {
         $input = $request->all();
 
-        dd($input);
-        return $this->sendResponse($idPayment, 'Payment ID generated successfully');
+        $payment =  $this->paymentRepository->storePayment($input);
+
+        return $this->sendResponse($payment, 'Payment generated successfully');
     }
 }

@@ -23,11 +23,13 @@ class Payment extends Model
     protected $dates = ['deleted_at'];
 
 
-
     public $fillable = [
-        'payment_method',
-        'voucher_payment',
+        'payment_site',
+        'payment_id',
         'status',
+        'payment_type',
+        'preference_id',
+        'merchant_order_id',
         'purchase_id'
     ];
 
@@ -38,8 +40,11 @@ class Payment extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'voucher_payment' => 'string',
+        'payment_site' => 'string',
         'status' => 'string',
+        'payment_type' => 'string',
+        'preference_id' => 'string',
+        'merchant_order_id' => 'integer',
         'purchase_id' => 'integer'
     ];
 
@@ -52,5 +57,7 @@ class Payment extends Model
 
     ];
 
-
+    public function puchase(){
+        return $this->belongsTo(Purchase::class);
+    }
 }

@@ -41,7 +41,7 @@ import {
     Radio,
     InputNumber,
     Dropdown,
-    Empty
+    Empty,
 } from 'ant-design-vue';
 import Transitions from 'vue2-transitions';
 
@@ -115,6 +115,7 @@ Vue.toasted.register('ToastedError',
         singleton: true
     }
 );
+
 Vue.toasted.register('ToastedSuccess',
     (payload) => {
         return payload.message;

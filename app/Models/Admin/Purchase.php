@@ -58,4 +58,8 @@ class Purchase extends Model
     public function profile(){
         return $this->belongsTo(Profile::class);
     }
+
+    public function payment(){
+        return $this->hasOne(Payment::class);
+    }
 }
