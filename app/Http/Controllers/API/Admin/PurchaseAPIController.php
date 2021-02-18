@@ -35,11 +35,18 @@ class PurchaseAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
+        $input = $request->all();
+        $term = isset($input['term']) && !empty($input['term']) ? $input['term'] : null;
+
         $purchases = Purchase::withoutTrashed()
             ->with('payment')
             ->with('profile')
             ->with('shipment')
-            ->orderBy('created_at', 'DESC');
+            ->orderBy('purchases.created_at', 'DESC');
+
+        if (!is_null($term) and $term != 'null') {
+            $purchases = $purchases->where('purchases.id', 'LIKE', "%{$term}%");
+        }
 
         $purchases = $purchases->paginate(self::$limit);
 

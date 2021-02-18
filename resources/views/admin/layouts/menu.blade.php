@@ -6,16 +6,16 @@
         <span>@lang('model.store')</span>
     </a>
 </li>
-<li class="nav-item {{ Request::is('products*') ? 'active' : '' }}">
-    <a class="nav-link {{ Request::is('products*') ? 'active' : '' }}" href=" {!! route('admin.products.index') !!}">
-        <i class="nav-icon icon-cursor"></i>
-        <span>@lang('model.products')</span>
-    </a>
-</li>
 <li class="nav-item {{ Request::is('purchases*') ? 'active' : '' }}">
     <a class="nav-link {{ Request::is('purchases*') ? 'active' : '' }}" href=" {!! route('admin.purchaseOrdersIndex') !!}">
         <i class="nav-icon icon-cursor"></i>
         <span>@lang('model.purchases_orders')</span>
+    </a>
+</li>
+<li class="nav-item {{ Request::is('products*') ? 'active' : '' }}">
+    <a class="nav-link {{ Request::is('products*') ? 'active' : '' }}" href=" {!! route('admin.products.index') !!}">
+        <i class="nav-icon icon-cursor"></i>
+        <span>@lang('model.products')</span>
     </a>
 </li>
 <li class="nav-title">Configuración</li>

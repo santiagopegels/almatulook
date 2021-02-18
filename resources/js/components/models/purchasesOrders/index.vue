@@ -11,7 +11,7 @@
             <div class="card-body">
                 <div class="row justify-content-end mb-4">
                     <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
-                        <products-filters />
+                        <purchases-orders-filter />
                     </div>
                 </div>
                 <purchases-orders-list />
@@ -29,7 +29,7 @@ import {
 export default {
     components: {
         PurchasesOrdersList: () => import(/* webpackChunkName: "js/admin-purchases-orders" */ './lists.vue'),
-        ProductsFilters: () => import(/* webpackChunkName: "js/admin-purchases" */ '../products/filters.vue'),
+        PurchasesOrdersFilter: () => import(/* webpackChunkName: "js/admin-purchases-orders" */ './filters.vue'),
     },
     computed: {
         ...mapGetters(["isLoading"]),
