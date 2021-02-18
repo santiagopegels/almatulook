@@ -31,12 +31,22 @@
 
 <script>
 import { required } from "vuelidate/lib/validators";
+import {mapGetters} from "vuex";
 export default {
-    props: {},
+    computed: {
+      ...mapGetters(['term']),
+        term: {
+            set(val) {
+                this.$store.state.term = val;
+            },
+            get() {
+                return this.$store.state.term;
+            },
+        },
+    },
     data: function () {
         return {
             submitted: false,
-            term: "",
             model: "purchases",
         };
     },
@@ -53,10 +63,10 @@ export default {
             if (this.$v.$invalid) {
                 return;
             }
-            this.fetch();
+            await this.fetch();
         },
         clearFilter() {
-            this.term = null;
+            this.$store.commit('SET_TERM')
             this.fetch();
         },
 
@@ -65,7 +75,7 @@ export default {
                 page: 1,
                 model: this.model,
             };
-            params.term = this.term;
+            params.term = this.term
             await this.$store.dispatch("fetch", params)
                 .catch(error => this.$toasted.global.ToastedError({ message: error.message.message }));
         },

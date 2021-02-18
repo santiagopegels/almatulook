@@ -42,10 +42,16 @@ class PurchaseAPIController extends AppBaseController
             ->with('payment')
             ->with('profile')
             ->with('shipment')
-            ->orderBy('purchases.created_at', 'DESC');
+            ->orderBy('created_at', 'DESC');
 
         if (!is_null($term) and $term != 'null') {
-            $purchases = $purchases->where('purchases.id', 'LIKE', "%{$term}%");
+            $purchases = $purchases->where('purchases.id', 'LIKE', "%{$term}%")
+                ->orWhereHas('payment', function($query) use ($term) {
+                    $query->where('payment_id', 'LIKE', "%{$term}%");
+                })->orWhereHas('profile', function($query) use ($term) {
+                    $query->where('name', 'LIKE', "%{$term}%")
+                    ->orWhere('lastname', 'LIKE', "%{$term}%");
+                });
         }
 
         $purchases = $purchases->paginate(self::$limit);

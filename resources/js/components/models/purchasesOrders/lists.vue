@@ -9,8 +9,9 @@
                 <th scope="col">Total</th>
                 <th scope="col">Estado</th>
                 <th scope="col">Tipo de Pago</th>
+                <th scope="col">N° de Pago</th>
                 <th scope="col">Envío</th>
-                <th scope="col">Comprador</th>
+                <th scope="col">Cliente</th>
                 <th scope="col" class="text-center">
                     <i class="icon-settings"></i>
                 </th>
@@ -25,6 +26,7 @@
                     'badge badge-warning' : model.payment ? model.payment.status == 'pending' : false
                 }">{{ model.payment ? model.payment.status : null }}</span></td>
                 <td>{{ model.payment ? model.payment.payment_type : null }}</td>
+                <td>{{ model.payment ? model.payment.payment_id : null }}</td>
                 <td>{{ model.shipment ? model.shipment.name : null }}</td>
                 <td>{{ model.profile ? model.profile.name : null }}
                     {{ model.profile ? model.profile.lastname : null }}
@@ -97,7 +99,7 @@ export default {
         this.fetch();
     },
     computed: {
-        ...mapGetters(["purchases", "isLoading", "page"]),
+        ...mapGetters(["purchases", "isLoading", "page", "term"]),
         page: {
             set(val) {
                 this.$store.state.page = val;
@@ -137,7 +139,8 @@ export default {
         async fetch() {
             await this.$store.dispatch("fetchPurchasesOrders", {
                 model: this.model,
-                page: this.page
+                page: this.page,
+                term: this.term
             })
                 .catch(error => this.$toasted.global.ToastedError({message: error.message.message}));
         },
@@ -183,55 +186,6 @@ export default {
                 attributesIds: model.category.attributesIds,
             });
         },
-        async getStockProduct(purchase) {
-            let stockArray = []
-            await purchase.attributes.forEach(attributesArray => {
-                let selectElement = {}
-                attributesArray['attributes'].forEach(attribute => {
-                    selectElement[attribute.attribute] = []
-                    selectElement[attribute.attribute][0] = attribute.value_id
-                })
-                selectElement.stock = Number(attributesArray.stock)
-                stockArray.push(selectElement)
-            })
-            return stockArray
-        },
-        async sellProduct(purchase, attributes) {
-            let msg = ''
-            await attributes.attributes.forEach(attribute => msg += `${attribute.attribute}: <b>${attribute.value}</b>\n`)
-
-            //msg without last enter \n
-            msg = msg.substring(0, msg.length - 2);
-
-            await Swal.fire({
-                title: "Venta De Producto",
-                text: "Algo",
-                html: `¿Está seguro que desea vender <b> ${purchase.name}</b> con las siguientes características?<pre class="mt-3"> ${msg} </pre>`,
-                type: "question",
-                showCancelButton: true,
-                confirmButtonText:
-                    'Si, vender! <i class="icon-like"></i>',
-                cancelButtonText:
-                    'Cancelar',
-            }).then(result => {
-                if (result.isConfirmed) {
-                    this.$store.dispatch('store', {
-                        model: this.model,
-                        data: {
-                            purchases: [{
-                                purchase_id: purchase.id,
-                                attributes: attributes,
-                                quantity: 1
-                            }]
-                        }
-                    }).then(result => {
-                        if (result) {
-                            this.fetch()
-                        }
-                    })
-                }
-            })
-        }
     },
 };
 </script>

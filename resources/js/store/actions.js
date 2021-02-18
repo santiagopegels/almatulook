@@ -78,9 +78,11 @@ let actions = {
             let path = await actions.getEndpoint(params);
 
             path = path.concat('?page=' + (Number(params.page) > 0 ? Number(params.page) : 1));
+
             if (typeof params.term !== typeof undefined && String(params.term).length > 0) {
                 path = path.concat('&term=' + params.term);
             }
+
             window.axios.get(path).then(async response => {
                 if (response.data.success) {
                     await actions.setData(commit, {params: params, data: response.data.data});
