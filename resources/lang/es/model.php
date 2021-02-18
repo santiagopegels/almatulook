@@ -42,4 +42,7 @@ return [
 
     'order_statu' => 'Estado de Orden',
     'order_status' => 'Estados de Orden',
+
+    'purchase_order' => 'Orden de Compra',
+    'purchases_orders' => 'Ordenes de Compra'
 ];

@@ -12,6 +12,12 @@
         <span>@lang('model.products')</span>
     </a>
 </li>
+<li class="nav-item {{ Request::is('purchases*') ? 'active' : '' }}">
+    <a class="nav-link {{ Request::is('purchases*') ? 'active' : '' }}" href=" {!! route('admin.purchaseOrdersIndex') !!}">
+        <i class="nav-icon icon-cursor"></i>
+        <span>@lang('model.purchases_orders')</span>
+    </a>
+</li>
 <li class="nav-title">Configuración</li>
 <li class="nav-item {{ Request::is('categories*') ? 'active' : '' }}">
     <a class="nav-link {{ Request::is('categories*') ? 'active' : '' }}" href=" {!! route('admin.categories.index') !!}">

@@ -70,6 +70,44 @@ let actions = {
         });
     },
 
+    fetchPurchasesOrders({commit}, params) {
+        return new Promise(async (resolve, reject) => {
+
+            commit('SET_LOADING', true);
+
+            let path = await actions.getEndpoint(params);
+
+            path = path.concat('?page=' + (Number(params.page) > 0 ? Number(params.page) : 1));
+            if (typeof params.term !== typeof undefined && String(params.term).length > 0) {
+                path = path.concat('&term=' + params.term);
+            }
+            window.axios.get(path).then(async response => {
+                if (response.data.success) {
+                    await actions.setData(commit, {params: params, data: response.data.data});
+                    await commit('SET_LOADING', false);
+                    resolve({
+                        status: true,
+                        message: response.data.data
+                    });
+                } else {
+                    commit('SET_LOADING', false);
+                    reject({
+                        status: false,
+                        message: response.data.message
+                    });
+                }
+
+            }).catch(error => {
+                console.error(`fetch.${params.model}`, error);
+                commit('SET_LOADING', false);
+                reject({
+                    status: false,
+                    message: error
+                });
+            });
+        });
+    },
+
     /**
      * DELETE
      */
@@ -79,7 +117,6 @@ let actions = {
         return new Promise((resolve, reject) => {
             commit('SET_LOADING', true);
             const path = `${path_users}/${params.user.id}`;
-            // console.log('path', path);
             window.axios.post(path, params, {}).then(async response => {
                 if (response.data.success) {
                     await commit('REMOVE_USER', params.user);
@@ -912,7 +949,7 @@ let actions = {
      * @param {*} params
      */
     async setData(commit, content = {params, data}) {
-        console.log(content)
+        console.log(content.data)
         switch (content.params.model) {
 
             case 'users':
@@ -981,6 +1018,11 @@ let actions = {
             case 'status_orders':
                 await commit('SET_ORDER_STATUS', content.data);
                 await commit('SET_SELECTED_ORDER_STATUS');
+                break;
+
+            case 'purchases':
+                await commit('SET_PURCHASES', content.data);
+                await commit('SET_SELECTED_PURCHASE');
                 break;
 
             default:

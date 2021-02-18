@@ -80,6 +80,7 @@ let state = {
     products: [],
     shipmentTypes: [],
     orderStatus: [],
+    purchases: [],
 
     /**
      * Selected item
@@ -163,6 +164,9 @@ let state = {
         status: "",
         order: null,
         can_delete_order: false
+    },
+
+    selected_purchase: {
     },
 }
 

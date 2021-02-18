@@ -19,6 +19,7 @@ class PurchaseAPIController extends AppBaseController
 {
     /** @var  PurchaseRepository */
     private $purchaseRepository;
+    private static $limit = 10;
 
     public function __construct(PurchaseRepository $purchaseRepo)
     {
@@ -34,13 +35,15 @@ class PurchaseAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $purchases = $this->purchaseRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
-        );
+        $purchases = Purchase::withoutTrashed()
+            ->with('payment')
+            ->with('profile')
+            ->with('shipment')
+            ->orderBy('created_at', 'DESC');
 
-        return $this->sendResponse($purchases->toArray(), 'Purchases retrieved successfully');
+        $purchases = $purchases->paginate(self::$limit);
+
+        return $this->sendResponse($purchases->toArray(), 'Purchases Types retrieved successfully');
     }
 
     /**

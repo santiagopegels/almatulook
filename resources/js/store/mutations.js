@@ -136,8 +136,8 @@ let mutations = {
         state.mercadoPagoData = payload;
     },
 
-    SET_PURCHASE(state, payload) {
-        state.purchase = payload
+    SET_PURCHASES(state, payload) {
+        state.purchases = payload
     },
 
     /**
@@ -261,6 +261,20 @@ let mutations = {
         }
     ) {
         state.selected_order_status = selected_order_status;
+    },
+
+    SET_SELECTED_PURCHASE(
+        state, selected_purchase = {
+            id: null,
+            shipment_cost: null,
+            shipment_type_id: null,
+            total: 0,
+            payment: {},
+            profile: {},
+            shipment: {}
+        }
+    ) {
+        state.selected_purchase = selected_purchase;
     },
 
     /**

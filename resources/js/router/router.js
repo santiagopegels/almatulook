@@ -1,14 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import productForm from '../components/models/products/newProduct/index.vue'
-import parametersIndex from '../components/models/parameters/index.vue'
-import permissionsIndex from '../components/models/permissions/index.vue'
-import shipmentTypesIndex from '../components/models/shipmentTypes/index.vue'
-import rolesIndex from '../components/models/roles/index.vue'
-import purchasesIndex from '../components/models/purchases/index.vue'
 import home from "../components/public/home";
 import publicProductIndex from '../components/public/products/index.vue'
-import publicPurchaseIndex from '../components/public/purchases/index.vue'
 import cartResumeIndex from '../components/public/cartResume/index.vue'
 import store from '../store/index'
 
@@ -73,6 +66,11 @@ export const router = new Router({
             path: '/admin/purchases',
             name: 'purchasesIndex',
             component: () => import(/* webpackChunkName: "js/admin-purchases" */ '../components/models/purchases/index.vue'),
+        },
+        {
+            path: '/admin/purchases/orders',
+            name: 'purchasesOrdersIndex',
+            component: () => import(/* webpackChunkName: "js/admin-purchases" */ '../components/models/purchasesOrders/index.vue'),
         },
         {
             path: '/admin/shipmentTypes',

@@ -26,8 +26,6 @@ class RoleAPIController extends AppBaseController
 
     public function __construct(RoleRepository $roleRepo)
     {
-        //$this->middleware('api');
-        //$this->middleware(['permission:crear-roles|leer-roles|actualizar-roles|borrar-roles']);
         $this->roleRepository = $roleRepo;
     }
 

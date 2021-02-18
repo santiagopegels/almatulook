@@ -57,6 +57,10 @@ class Purchase extends Model
         return $this->belongsTo(Profile::class);
     }
 
+    public function shipment(){
+        return $this->belongsTo(ShipmentType::class, 'shipment_type_id');
+    }
+
     public function payment(){
         return $this->hasOne(Payment::class);
     }

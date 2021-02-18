@@ -114,6 +114,10 @@ let getters = {
         return state.orderStatus;
     },
 
+    purchases: state => {
+        return state.purchases;
+    },
+
     /** SELECTED */
 
     selected_user: state => {

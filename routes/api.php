@@ -23,7 +23,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['role:admin']], function () 
     // resources
     Route::resource('roles', 'Admin\RoleAPIController');
     Route::resource('permissions', 'Admin\PermissionAPIController');
-    Route::resource('users','Admin\UserAPIController');
+    Route::resource('users', 'Admin\UserAPIController');
     Route::resource('attributes', 'Admin\AttributeAPIController');
     Route::resource('categories', 'Admin\CategoryAPIController');
     Route::resource('values', 'Admin\ValueAPIController');

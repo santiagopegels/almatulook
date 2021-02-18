@@ -56,5 +56,8 @@ class ShipmentType extends Model
         'address_required' => 'required'
     ];
 
+    public function purchases(){
+        return $this->hasMany(Purchase::class);
+    }
 
 }
