@@ -32,19 +32,16 @@
                     {{ model.profile ? model.profile.lastname : null }}
                 </td>
                 <td class="text-center">
-                    <form method="POST" @submit="handleSubmitDelete($event, model)" accept-charset="UTF-8">
                         <div>
                             <button
-                                title="Editar"
-                                :disabled="model.deleted_at"
+                                title="Show"
                                 type="button"
-                                @click="selectedShipmentType(model)"
+                                @click="selectModel(model)"
                                 class="btn btn-outline-success btn-sm"
                             >
                                 <i class="icon-eye"></i>
                             </button>
                         </div>
-                    </form>
                 </td>
             </tr>
             </tbody>
@@ -117,23 +114,10 @@ export default {
         getLastPage: function () {
             return this.purchases.last_page;
         },
-        getTotal: function () {
-            return this.purchases.total;
-        },
     },
     methods: {
         orderedObjects: function () {
             return orderBy(this.purchases.data, "id");
-        },
-
-        async handleSubmitDelete(e, data) {
-            e.preventDefault();
-
-            if (!data.id > 0) {
-                return;
-            }
-
-            await this.delete(data);
         },
 
         async fetch() {
@@ -145,13 +129,6 @@ export default {
                 .catch(error => this.$toasted.global.ToastedError({message: error.message.message}));
         },
 
-        async getAttributesIds(purchases) {
-            if (!purchases) return [];
-            return purchases.map(function (value) {
-                return value.id;
-            });
-        },
-
         /**
          * Event on click paging callback
          */
@@ -160,31 +137,8 @@ export default {
             await this.fetch();
         },
 
-        async showProduct(model) {
-            await this.selectProductAndCategory(model)
-        },
-
-        async editProduct(model) {
-            await this.selectProductAndCategory(model)
-            await this.$router.push({name: "purchaseForm"})
-        },
-
-        async selectProductAndCategory(model) {
-            await this.$store.commit("SET_SELECTED_PRODUCT", {
-                id: model.id,
-                name: model.name,
-                price: Number(model.price),
-                cost_price: Number(model.cost_price),
-                images: model.images,
-                attributes: model.attributes,
-                stocks: await this.getStockProduct(model)
-            });
-            await this.$store.commit("SET_SELECTED_CATEGORY", {
-                id: model.category.id,
-                name: model.category.name,
-                children: model.category.children,
-                attributesIds: model.category.attributesIds,
-            });
+        async selectModel(model) {
+            await this.$store.commit("SET_SELECTED_PURCHASE", model);
         },
     },
 };

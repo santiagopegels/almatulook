@@ -37,6 +37,7 @@
         "serve": "^11.3.2",
         "simple-line-icons": "^2.5.2",
         "vue-currency-input": "^1.22.3",
+        "vue-dayjs-plugin": "^1.0.0",
         "vue-jstree": "^2.1.6",
         "vue-loading-overlay": "^3.3.2",
         "vue-masked-input": "^0.5.2",

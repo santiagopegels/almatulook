@@ -34,11 +34,10 @@ class PurchaseDetailAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $purchaseDetails = $this->purchaseDetailRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
-        );
+        $input = $request->all();
+        $purchaseId = $input['term'];
+
+        $purchaseDetails = PurchaseDetail::where('purchase_id', $purchaseId)->with('product')->get();
 
         return $this->sendResponse($purchaseDetails->toArray(), 'Purchase Details retrieved successfully');
     }

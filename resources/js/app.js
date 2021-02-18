@@ -14,6 +14,7 @@ import Vuex from 'vuex';
 import Vuelidate from 'vuelidate';
 import Toasted from 'vue-toasted';
 import VueCurrencyInput from 'vue-currency-input'
+import VueDayjs from 'vue-dayjs-plugin'
 import {router} from './router/router'
 import {
     Button,
@@ -99,7 +100,7 @@ const pluginCurrencyInputOptions = {
     globalOptions: {currency: {prefix: '$'}, locale: 'nl'}
 }
 Vue.use(VueCurrencyInput, pluginCurrencyInputOptions);
-
+Vue.use(VueDayjs)
 // register the toast with the custom message
 
 Vue.toasted.register('ToastedError',

@@ -159,6 +159,10 @@ let getters = {
     selected_order_status: state => {
         return state.selected_order_status;
     },
+
+    selected_purchase: state => {
+        return state.selected_purchase;
+    },
 }
 
 export default getters

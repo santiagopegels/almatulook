@@ -1027,6 +1027,10 @@ let actions = {
                 await commit('SET_SELECTED_PURCHASE');
                 break;
 
+            case 'purchase_details':
+                await commit('SET_PRODUCTS', content.data);
+                break;
+
             default:
                 break;
         }

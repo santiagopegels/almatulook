@@ -89,6 +89,11 @@ class Product extends Model implements HasMedia
         return $this->belongsTo(Category::class)->with('children');
     }
 
+    public function purchaseDetail()
+    {
+        return $this->hasMany(PurchaseDetail::class);
+    }
+
     public function productAttributeValueGroup(){
         return $this->hasMany(ProductAttributeValueGroup::class);
     }
