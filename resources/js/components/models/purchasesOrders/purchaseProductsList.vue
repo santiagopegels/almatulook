@@ -14,6 +14,7 @@
                         <tr>
                             <th scope="col">Código Producto</th>
                             <th scope="col">Nombre Producto</th>
+                            <th scope="col">Características</th>
                             <th scope="col">Cantidad</th>
                             <th scope="col">Precio de Venta</th>
                             <th scope="col">Subtotal</th>
@@ -23,6 +24,8 @@
                         <tr v-for="model in products" :key="model.id">
                             <td scope="row">{{ model.product.id }}</td>
                             <td scope="row">{{ model.product.name }}</td>
+                            <td scope="row"><h6 class="mb-0" v-for="attribute in model.attribute_value_group">
+                                {{ attribute.attribute_value.attribute.name }}: <b>{{ attribute.attribute_value.value.name }}</b></h6></td>
                             <td scope="row">{{ model.quantity }}</td>
                             <td scope="row">{{ model.price_purchase_moment }}</td>
                             <td scope="row">{{ model.subtotal }}</td>

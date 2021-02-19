@@ -37,7 +37,10 @@ class PurchaseDetailAPIController extends AppBaseController
         $input = $request->all();
         $purchaseId = $input['term'];
 
-        $purchaseDetails = PurchaseDetail::where('purchase_id', $purchaseId)->with('product')->get();
+        $purchaseDetails = PurchaseDetail::where('purchase_id', $purchaseId)
+            ->with('product')
+            ->with('attributeValueGroup')
+            ->get();
 
         return $this->sendResponse($purchaseDetails->toArray(), 'Purchase Details retrieved successfully');
     }

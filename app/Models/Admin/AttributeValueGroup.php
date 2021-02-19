@@ -15,7 +15,9 @@ class AttributeValueGroup extends Model
     ];
 
     public function attributeValue(){
-        return $this->belongsTo(AttributeValue::class);
+        return $this->belongsTo(AttributeValue::class)
+            ->with('attribute')
+            ->with('value');
     }
 
     static public function getGroupIdByAttributes($attributes, $getAttributesIds = true){

@@ -109,16 +109,13 @@ export default {
             return Boolean(this.purchases.data);
         },
         getPurchases() {
-            return this.orderedObjects();
+            return this.purchases.data;
         },
         getLastPage: function () {
             return this.purchases.last_page;
         },
     },
     methods: {
-        orderedObjects: function () {
-            return orderBy(this.purchases.data, "id");
-        },
 
         async fetch() {
             await this.$store.dispatch("fetchPurchasesOrders", {
