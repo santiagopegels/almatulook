@@ -13,6 +13,7 @@ let state = {
     },
     current: 0,
     isCheckedBagSession: false,
+    loginFromPurchaseView: false,
 
     results: [],
     term: "",

@@ -9,6 +9,10 @@ let mutations = {
         state.status = !state.status;
     },
 
+    SET_LOGIN_FROM_PURCHASE_VIEW(state, isFromPurchaseView) {
+        state.loginFromPurchaseView = isFromPurchaseView;
+    },
+
     TOGGLE_SHOW_CART_SIDEBAR(state) {
         state.showCartSideBar = !state.showCartSideBar;
     },

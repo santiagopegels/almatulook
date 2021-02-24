@@ -19,6 +19,13 @@ export const router = new Router({
                     store.dispatch('removeAllProductsToBag')
                     store.dispatch('storePayment', to.query)
                 }
+                if(store.state.loginFromPurchaseView == true){
+                    store.commit('SET_LOGIN_FROM_PURCHASE_VIEW', false)
+
+                    next({
+                        name: 'publicPurchaseIndex',
+                    })
+                }
                 next()
             }
         },

@@ -118,6 +118,7 @@ export default {
             window.innerWidth <= 480 ? this.isShowSteps = false : this.isShowSteps = true
         },
         async loadUserData(){
+            await this.$store.dispatch('fetchUserLogged')
             if (this.userLogged.isAuthenticated){
                 if(!this.purchaseInfo.data.profile.contact.address.deliveryAddress){
                     await this.fetchProfile()
@@ -135,6 +136,7 @@ export default {
                 model: 'profiles'
             })
         },
+
     },
 };
 </script>

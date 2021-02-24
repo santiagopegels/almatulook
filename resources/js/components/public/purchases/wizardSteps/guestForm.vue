@@ -50,7 +50,10 @@ export default {
     },
     methods: {
         purchaseAsUser() {
-            this.$emit('as-user', true);
+            this.$store.commit('SET_LOGIN_FROM_PURCHASE_VIEW', true)
+            let anchorElement = document.createElement('a')
+            anchorElement.href = '/login'
+            anchorElement.click()
         },
         async nextStep(e) {
             e.preventDefault();
