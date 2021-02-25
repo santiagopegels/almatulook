@@ -64,4 +64,8 @@ class Purchase extends Model
     public function payment(){
         return $this->hasOne(Payment::class);
     }
+
+    public function purchaseDetails(){
+        return $this->hasMany(PurchaseDetail::class);
+    }
 }

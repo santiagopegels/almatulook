@@ -66,4 +66,8 @@ class PurchaseDetail extends Model
         return $this->hasMany(AttributeValueGroup::class, 'group_id', 'group_id')->with('attributeValue');
     }
 
+    public function purchase(){
+        return $this->belongsTo(Purchase::class);
+    }
+
 }

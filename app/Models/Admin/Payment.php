@@ -57,7 +57,7 @@ class Payment extends Model
 
     ];
 
-    public function puchase(){
+    public function purchase(){
         return $this->belongsTo(Purchase::class);
     }
 }

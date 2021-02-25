@@ -55,4 +55,16 @@ class PaymentRepository extends BaseRepository
         }
         return $paymentObject;
     }
+
+    static function updatePayment($payment, $externalVoucher){
+            $paymentObject = $payment->update([
+                'payment_site' => 'MLA',
+                'payment_id' => $externalVoucher->id,
+                'status' => $externalVoucher->status,
+                'payment_type' => $externalVoucher->payment_type_id,
+                'merchant_order_id' => $externalVoucher->order->id,
+            ]);
+
+        return $paymentObject;
+    }
 }

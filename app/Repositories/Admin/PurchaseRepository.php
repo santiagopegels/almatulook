@@ -8,6 +8,7 @@ use App\Models\Admin\Product;
 use App\Models\Admin\Profile;
 use App\Models\Admin\Purchase;
 use App\Models\Admin\PurchaseDetail;
+use App\PaymentMethods\MercadoPago;
 use App\ProductAttributeValueGroup;
 use App\Repositories\BaseRepository;
 use Illuminate\Support\Facades\Auth;
@@ -92,6 +93,7 @@ class PurchaseRepository extends BaseRepository
             $purchase->save();
 
             if(!is_null($preferenceId)){
+                MercadoPago::updateExternalReference($preferenceId, $purchase);
                 Payment::create([
                     'status' => 'pending',
                     'preference_id' => $preferenceId,
@@ -129,5 +131,23 @@ class PurchaseRepository extends BaseRepository
             $purchase->profile()->associate($profile);
             $purchase->save();
         }
+    }
+
+    static function deletePurchase($purchase){
+        $purchaseDetails = $purchase->purchaseDetails;
+
+        foreach ($purchaseDetails as $purchaseDetail){
+
+            $productAttributeValueGroup = ProductAttributeValueGroup::where('product_id', $purchaseDetail->product->id)
+                ->where('attribute_group_id', $purchaseDetail->group_id)->first();
+
+            $productAttributeValueGroup->stock = $productAttributeValueGroup->stock + $purchaseDetail->quantity;
+            $productAttributeValueGroup->save();
+            $purchaseDetail->delete();
+        }
+
+        $purchase->delete();
+
+        return $purchase;
     }
 }
