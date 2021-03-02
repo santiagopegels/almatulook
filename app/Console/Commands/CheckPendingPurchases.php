@@ -50,7 +50,7 @@ class CheckPendingPurchases extends Command
             if (!empty($mpPayment)) {
                 PaymentRepository::updatePayment($payment, $mpPayment);
             } else {
-                $dateDiff = date_diff($payment->updated_at, new \DateTime('now'));
+                $dateDiff = date_diff($payment->created_at, new \DateTime('now'));
                 if (($dateDiff->h > 0 or $dateDiff->d > 0) and $payment->status == 'pending') {
                     $purchase = PurchaseRepository::deletePurchase($payment->purchase);
                     if (!is_null($purchase->deleted_at)) {
