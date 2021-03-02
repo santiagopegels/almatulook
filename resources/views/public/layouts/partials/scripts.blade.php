@@ -1,3 +1,3 @@
-<script async type="text/javascript" src="{{ asset('js/app.js', App::environment() == 'production' ) . '?v='. md5(microtime()) }}"></script>
+<script async type="text/javascript" src="{{ mix('js/app.js') }}" defer></script>
 
 @stack('scripts')
