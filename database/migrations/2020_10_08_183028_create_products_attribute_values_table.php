@@ -13,7 +13,7 @@ class CreateProductsAttributeValuesTable extends Migration
      */
     public function up()
     {
-        Schema::create('products_attribute_values', function (Blueprint $table) {
+        Schema::create('products_attribute_values_group', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('product_id');
             $table->string('attribute_group_id')->nullable();

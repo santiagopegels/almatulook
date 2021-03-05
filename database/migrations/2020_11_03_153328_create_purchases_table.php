@@ -22,14 +22,11 @@ class CreatePurchasesTable extends Migration
             $table->unsignedInteger('shipment_type_id');
             $table->foreign('shipment_type_id')->references('id')->on('shipment_types')
                 ->onUpdate('cascade')->onDelete('cascade');
+
             $table->float('shipment_cost');
 
-            $table->unsignedSmallInteger('status_order');
-            $table->foreign('status_order')->references('order')->on('status_orders')
-                ->onUpdate('cascade')->onDelete('cascade');
-
-            $table->unsignedSmallInteger('profile_id');
-            $table->foreign('status_order')->references('order')->on('status_orders')
+            $table->unsignedInteger('profile_id');
+            $table->foreign('profile_id')->references('id')->on('profiles')
                 ->onUpdate('cascade')->onDelete('cascade');
 
             $table->timestamps();

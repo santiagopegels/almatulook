@@ -66,7 +66,6 @@ class LaratrustSeeder extends Seeder
                             $this->command->info("Creating '{$key}' user");
                             // Create default user for each role
                             $user = \App\User::create([
-                                'name' => ucwords(str_replace('-', ' ', $key)),
                                 'email' => $key . '@' . $this->getDomain(),
                                 'password' => '_' . $key,
                                 'email_verified_at' => Carbon::now()
