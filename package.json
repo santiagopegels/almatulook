@@ -8,11 +8,9 @@
         "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --disable-host-check --config=node_modules/laravel-mix/setup/webpack.config.js",
         "prod": "npm run production",
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-        "serve": "serve ./public/js",
         "compress": "bread-compressor -s public/css/*.css public/js/*.js"
     },
     "devDependencies": {
-        "@gfx/zopfli": "^1.0.15",
         "axios": "^0.21.1",
         "bread-compressor-cli": "^1.1.0",
         "cross-env": "^7.0",
@@ -34,7 +32,6 @@
         "less-loader": "^7.0.2",
         "lodash": "^4.17.20",
         "perfect-scrollbar": "^1.5.0",
-        "serve": "^11.3.2",
         "simple-line-icons": "^2.5.2",
         "vue-currency-input": "^1.22.3",
         "vue-dayjs-plugin": "^1.0.0",
