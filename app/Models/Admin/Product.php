@@ -2,7 +2,6 @@
 
 namespace App\Models\Admin;
 
-use App\Models\Admin\ProductAttributeValueGroup;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;

@@ -1,8 +1,7 @@
 <?php
 
-namespace App;
+namespace App\Models\Admin;
 
-use App\Models\Admin\AttributeValueGroup;
 use Illuminate\Database\Eloquent\Model;
 
 class ProductAttributeValueGroup extends Model
