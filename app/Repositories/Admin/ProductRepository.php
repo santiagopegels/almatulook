@@ -5,7 +5,7 @@ namespace App\Repositories\Admin;
 use App\Models\Admin\Attribute;
 use App\Models\Admin\Product;
 use App\Models\Admin\AttributeValueGroup;
-use App\ProductAttributeValueGroup;
+use App\Models\Admin\ProductAttributeValueGroup;
 use App\Repositories\BaseRepository;
 use Illuminate\Support\Facades\DB;
 use function Symfony\Component\String\s;
