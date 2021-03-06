@@ -39,7 +39,7 @@ class AttributeValueGroup extends Model
             ->havingRaw('COUNT(group_id) = ?', [count($attributesValuesIds)])
             ->first();
 
-        return $attributeValueGroup['group_id'];
+        return !empty($attributeValueGroup) ? $attributeValueGroup['group_id'] : null;
     }
 
 }

@@ -47,7 +47,7 @@ class PurchaseRepository extends BaseRepository
         return Purchase::class;
     }
 
-    public function createPurchase($products, $shipmentType = array('id' => null, 'cost' => 0), $statusOrder = null, $preferenceId)
+    public function createPurchase($products, $shipmentType = array('id' => null, 'cost' => 0), $statusOrder = null, $preferenceId = null)
     {
         try {
             DB::beginTransaction();
