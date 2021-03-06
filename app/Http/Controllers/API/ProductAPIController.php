@@ -7,7 +7,7 @@ use App\Models\Admin\AttributeValue;
 use App\Models\Admin\AttributeValueGroup;
 use App\Models\Admin\Category;
 use App\Models\Admin\Product;
-use App\ProductAttributeValueGroup;
+use App\Models\Admin\ProductAttributeValueGroup;
 use App\Repositories\Admin\ProductRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;

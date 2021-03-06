@@ -9,7 +9,7 @@ use App\Models\Admin\Profile;
 use App\Models\Admin\Purchase;
 use App\Models\Admin\PurchaseDetail;
 use App\PaymentMethods\MercadoPago;
-use App\ProductAttributeValueGroup;
+use App\Models\Admin\ProductAttributeValueGroup;
 use App\Repositories\BaseRepository;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
