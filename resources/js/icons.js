@@ -1,3 +1,4 @@
+//Outlines
 export {
     default as UserOutline
 } from "@ant-design/icons/lib/outline/UserOutline";
@@ -76,7 +77,10 @@ export {
 export {
     default as MailOutline
 } from "@ant-design/icons/lib/outline/MailOutline";
-
+//Fills
+export {
+    default as CloseCircleFill
+} from "@ant-design/icons/lib/fill/CloseCircleFill";
 //Two Tones
 export {
     default as PhoneTwoTone
