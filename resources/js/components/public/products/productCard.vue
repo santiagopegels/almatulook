@@ -87,7 +87,7 @@ export default {
     width: 25px;
     height: 25px;
     font-size: 25px;
-    color: #fff;
+    color: #000;
     background-color: rgba(31, 45, 61, 0.11);
     opacity: 0.3;
 }
@@ -97,7 +97,7 @@ export default {
 }
 
 .ant-carousel >>> .custom-slick-arrow:hover {
-    opacity: 0.5;
+    opacity: 0.7;
 }
 
 .ant-carousel >>> .slick-slide h3 {

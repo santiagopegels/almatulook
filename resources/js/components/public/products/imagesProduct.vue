@@ -55,7 +55,7 @@ export default {
     font-size: 50px;
     color: #000;
     background-color: rgba(31, 45, 61, 0.11);
-    opacity: 0.5;
+    opacity: 0.3;
 }
 
 .ant-carousel >>> .custom-slick-arrow:before {
