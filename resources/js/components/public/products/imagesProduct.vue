@@ -1,5 +1,5 @@
 <template>
-    <a-carousel style="width: 100%;" arrows>
+    <a-carousel style="width: 95%;" arrows>
         <div
             slot="prevArrow"
             slot-scope="props"
@@ -53,9 +53,9 @@ export default {
     width: 50px;
     height: 50px;
     font-size: 50px;
-    color: #fff;
+    color: #000;
     background-color: rgba(31, 45, 61, 0.11);
-    opacity: 0.3;
+    opacity: 0.5;
 }
 
 .ant-carousel >>> .custom-slick-arrow:before {
@@ -63,7 +63,7 @@ export default {
 }
 
 .ant-carousel >>> .custom-slick-arrow:hover {
-    opacity: 0.5;
+    opacity: 0.7;
 }
 
 .ant-carousel >>> .slick-slide h3 {
