@@ -127,4 +127,12 @@ class ProductRepository extends BaseRepository
             return $maxNumberGroupId;
         }
     }
+
+    public function saveImages(Product $product, $images){
+        foreach ($images as $image){
+            $product
+                ->addMediaFromBase64($image['binary'])
+                ->toMediaCollection('products');
+        }
+    }
 }

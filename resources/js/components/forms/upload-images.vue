@@ -31,11 +31,15 @@ export default {
             type: Number,
             default: 5,
         },
+        editImages: {
+            type: Array,
+            default: []
+        }
     },
     data: function () {
         return {
             images: [],
-            miniatureImages: []
+            miniatureImages: [],
         };
     },
 
@@ -43,20 +47,32 @@ export default {
         VueUploadMultipleImage,
     },
 
-    created() {},
-    mounted() {},
+    async mounted() {
+        if(this.editImages.length > 0){
+            await this.editImages.forEach(image => {
+                resizeImage(image, 1200, 1400).then((result) => {
+                    this.miniatureImages.push({
+                        default: 1,
+                        highlight: 1,
+                        name: new Date().getTime(),
+                        path: result,
+                    })
+                });
+            })
+        }
+    },
     computed: {},
     watch: {},
     methods: {
         async updateFileList(fileList) {
             this.$emit("on-upload-images", await this.parserImages(fileList));
         },
+
         async parserImages(data) {
             if (!data) return [];
             const values = Object.values(data);
             this.images = [];
             values.forEach((element) => {
-                console.log(element)
                 this.images.push({
                     name: new Date().getTime(),
                     extension: "data:image/png;base64",
@@ -66,8 +82,8 @@ export default {
             });
             return this.images;
         },
+
         async uploadImageSuccess(formData, index, fileList) {
-            console.log(fileList[index])
             await resizeImage(fileList[index].path, 1200, 1400).then((result) => {
                 fileList[index].path = result
             });

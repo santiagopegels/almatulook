@@ -886,7 +886,6 @@ let actions = {
     fetchUserBag({commit}) {
         return new Promise(async (resolve, reject) => {
 
-            commit('SET_LOADING', true);
             let params = {
                 model: 'products',
                 additional_path: 'bag'

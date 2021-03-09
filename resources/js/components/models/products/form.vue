@@ -85,11 +85,6 @@ export default {
             };
         }
     },
-
-    created() {
-    },
-    mounted() {
-    },
     computed: {
         ...mapGetters(["isLoading", "selected_value", "page"]),
         hasId() {

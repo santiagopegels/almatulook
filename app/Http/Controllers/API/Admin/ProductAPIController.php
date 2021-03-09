@@ -84,11 +84,7 @@ class ProductAPIController extends AppBaseController
         }
 
         if(isset($input['images'])){
-            foreach ($input['images'] as $image){
-                $product
-                    ->addMediaFromBase64($image['binary'])
-                    ->toMediaCollection('products');
-            }
+            $this->productRepository->saveImages($product, $input['images']);
         }
 
         return $this->sendResponse($product->toArray(), 'Product saved successfully');
@@ -134,8 +130,14 @@ class ProductAPIController extends AppBaseController
         }
 
         $product = $this->productRepository->update($input, $id);
+
         if(isset($input['stocks'])){
             $this->productRepository->updateStock($product, $input['stocks']);
+        }
+
+        if(isset($input['images'])){
+            $product->clearMediaCollection('products');
+            $this->productRepository->saveImages($product, $input['images']);
         }
 
         return $this->sendResponse($product->toArray(), 'Product updated successfully');

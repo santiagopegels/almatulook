@@ -40,14 +40,6 @@ export default {
         ProductsCard: () => import(/* webpackChunkName: "js/admin-products" */ './card'),
         ProductsFilters: () => import(/* webpackChunkName: "js/admin-products" */ './filters'),
     },
-    props: {
-    },
-    data: function () {
-        return {};
-    },
-    created() {},
-    mounted() {
-    },
     computed: {
         ...mapGetters(["isLoading", 'selected_product']),
     },

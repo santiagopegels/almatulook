@@ -45,10 +45,6 @@ export default {
             term: { required },
         };
     },
-
-    created() {},
-    mounted() {},
-    computed: {},
     methods: {
         async handleSubmit(e) {
             e.preventDefault();

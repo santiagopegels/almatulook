@@ -71,7 +71,7 @@
                     <new-product-attributes/>
                 </div>
 
-                <upload-images ref="uploadImages" @on-upload-images="onUploadImages"/>
+                <upload-images :editImages="selected_product.images" ref="uploadImages" @on-upload-images="onUploadImages"/>
 
                 <div class="form-group">
                     <div>
@@ -128,11 +128,6 @@ export default {
                 },
             },
         };
-    },
-
-    created() {
-    },
-    mounted() {
     },
     computed: {
         ...mapGetters(["isLoading", "selected_product", "page", "categoriesAll", "selected_category"]),
@@ -219,14 +214,6 @@ export default {
             await this.$store.commit('SET_SELECTED_PRODUCT')
             await this.$store.commit('SET_SELECTED_CATEGORY')
             this.$router.go(-1)
-        },
-
-        async fetch() {
-            await this.$store.dispatch("fetch", {
-                model: this.model,
-                page: this.page
-            })
-                .catch(error => this.$toasted.global.ToastedError({message: error.message.message}));
         },
 
         onUploadImages(data) {

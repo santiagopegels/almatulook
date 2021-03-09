@@ -79,10 +79,6 @@ export default {
             index: 0
         };
     },
-    created() {
-    },
-    mounted() {
-    },
     computed: {
         ...mapGetters(['selected_product', 'selected_category']),
     },
