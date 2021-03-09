@@ -89,7 +89,7 @@ class PurchaseRepository extends BaseRepository
             $purchase->total = $totalPurchase;
             $purchase->shipment_type_id = $shipmentType->id;
             $purchase->shipment_cost = $shipmentType->cost;
-            $purchase->status_order = 0;
+            $purchase->profile_id = Auth::check() ? Auth::id() : null;
             $purchase->save();
 
             if(!is_null($preferenceId)){
@@ -98,6 +98,13 @@ class PurchaseRepository extends BaseRepository
                     'status' => 'pending',
                     'preference_id' => $preferenceId,
                     'purchase_id' => $purchase->id
+                ]);
+            } else {
+                Payment::create([
+                    'status' => 'approved',
+                    'payment_site' => 'Local',
+                    'purchase_id' => $purchase->id,
+                    'purchase_type' => 'Efectivo'
                 ]);
             }
 

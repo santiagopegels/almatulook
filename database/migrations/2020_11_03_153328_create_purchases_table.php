@@ -18,13 +18,13 @@ class CreatePurchasesTable extends Migration
             $table->increments('id');
             $table->float('total');
 
-            $table->unsignedInteger('shipment_type_id');
+            $table->unsignedInteger('shipment_type_id')->nullable();
             $table->foreign('shipment_type_id')->references('id')->on('shipment_types')
                 ->onUpdate('cascade')->onDelete('cascade');
 
-            $table->float('shipment_cost');
+            $table->float('shipment_cost')->default(0);
 
-            $table->unsignedInteger('profile_id');
+            $table->unsignedInteger('profile_id')->nullable();
             $table->foreign('profile_id')->references('id')->on('profiles')
                 ->onUpdate('cascade')->onDelete('cascade');
 

@@ -71,6 +71,12 @@ class LaratrustSeeder extends Seeder
                                 'email_verified_at' => Carbon::now()
                             ]);
                             $user->attachRole($role);
+
+                            $profile = \App\Models\Admin\Profile::create([
+                                'name' => 'Admin',
+                                'user_id' => $user->id
+                            ]);
+
                         }
                     }
                 } else {
