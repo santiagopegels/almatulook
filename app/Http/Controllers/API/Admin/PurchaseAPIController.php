@@ -72,6 +72,7 @@ class PurchaseAPIController extends AppBaseController
         $input = $request->all();
 
         $purchase = $this->purchaseRepository->createPurchase($input['products']);
+        $this->purchaseRepository->registerPayer(null, $purchase);
 
         return $this->sendResponse($purchase->toArray(), 'Purchase saved successfully');
     }

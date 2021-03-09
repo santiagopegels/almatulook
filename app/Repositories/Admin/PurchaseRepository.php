@@ -89,7 +89,6 @@ class PurchaseRepository extends BaseRepository
             $purchase->total = $totalPurchase;
             $purchase->shipment_type_id = $shipmentType->id;
             $purchase->shipment_cost = $shipmentType->cost;
-            $purchase->profile_id = Auth::check() ? Auth::id() : null;
             $purchase->save();
 
             if(!is_null($preferenceId)){
@@ -104,7 +103,7 @@ class PurchaseRepository extends BaseRepository
                     'status' => 'approved',
                     'payment_site' => 'Local',
                     'purchase_id' => $purchase->id,
-                    'purchase_type' => 'Efectivo'
+                    'payment_type' => 'cash'
                 ]);
             }
 
@@ -118,7 +117,7 @@ class PurchaseRepository extends BaseRepository
 
     public function registerPayer($payer, $purchase)
     {
-        if (!$payer['isGuest'] && Auth::check()) {
+        if (Auth::check()) {
             $profile = Profile::where('user_id', Auth::id())->first();
             $purchase->profile()->associate($profile);
             $purchase->save();
