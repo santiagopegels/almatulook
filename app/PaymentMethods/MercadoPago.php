@@ -52,7 +52,7 @@ class MercadoPago
         $preference->payer = $payer;
 
         $preference->back_urls = array(
-            "success" => "localhost",
+            "success" => env('APP_URL')
         );
 
         $preference->expires = true;
