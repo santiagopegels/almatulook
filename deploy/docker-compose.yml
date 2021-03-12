@@ -9,6 +9,7 @@ services:
       volumes:
         - ../:/application
         - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+        #- /etc/letsencrypt/archive/{dominio}:/etc/nginx/certs/
       expose:
         - 80
       ports:
