@@ -2,10 +2,10 @@ image: registry.gitlab.com/santiagopegels/almatulook
 services:
   - mysql:5.7
 variables:
-  MYSQL_ROOT_PASSWORD: root
-  MYSQL_USER: homestead
-  MYSQL_PASSWORD: secret
-  MYSQL_DATABASE: homestead
+  MYSQL_ROOT_PASSWORD: root123
+  MYSQL_USER: admin
+  MYSQL_PASSWORD: admin
+  MYSQL_DATABASE: almatulook
 
 stages:
   - test
