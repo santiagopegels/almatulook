@@ -1,4 +1,4 @@
-image: registry.gitlab.com/santiagopegels/almatulookt:latest
+image: registry.gitlab.com/santiagopegels/almatulook
 services:
   - mysql:5.7
 variables:
