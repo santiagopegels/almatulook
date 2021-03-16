@@ -26,6 +26,6 @@ composer install --prefer-dist --no-scripts -q -o
 @endtask
 @task('update_symlinks')
 echo 'Linking current release'
-ln -nfs {{ $new_release_dir }} {{ $app_dir }}/current
+ln -nfs {{ $new_release_dir }} {{ $app_dir }}
 echo "{{ $password }}" | sudo -S chmod 777 -R {{ $app_dir }}
 @endtask
