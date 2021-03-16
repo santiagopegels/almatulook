@@ -6,8 +6,7 @@ variables:
   MYSQL_USER: homestead
   MYSQL_PASSWORD: secret
   MYSQL_DATABASE: homestead
-  APP_ENV: testing
-  
+
 stages:
   - test
   - deploy
