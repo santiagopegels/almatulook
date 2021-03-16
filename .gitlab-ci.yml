@@ -6,6 +6,7 @@ variables:
   MYSQL_ROOT_PASSWORD: root123
   DB_HOST: mysql
   DB_USERNAME: admin
+  DB_PASSWORD: admin
 stages:
   - test
   - deploy
