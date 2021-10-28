@@ -10,6 +10,9 @@ RUN apt-get update \
     && composer global require hirak/prestissimo \
     && apt-get clean; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
 
+RUN apt-get update \
+    && apt-get -y --no-install-recommends install  php7.4-xdebug
+    
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY cron/app /etc/cron.d/app
 
