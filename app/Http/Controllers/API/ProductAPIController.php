@@ -132,12 +132,13 @@ class ProductAPIController extends AppBaseController
         $productToRemove = $request->all();
 
         $products = session()->pull('bag.products');
-        foreach ($products as $index => $product) {
-            if ($product['id'] == $productToRemove['id']) {
-                unset($products[$index]);
-            }
-        }
+
+        $key = array_search($productToRemove['id'], array_column($products, 'id'));
+
+        unset($products[$key]);
+
         array_unshift($products);
+
         session()->put('bag.products', $products);
 
         return $this->sendResponse('success', 'Product removed from bag');
