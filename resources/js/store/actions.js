@@ -147,40 +147,6 @@ let actions = {
         });
     },
 
-    deleteStock({commit}, params) {
-        console.log(`delete.product.stock`, params);
-        return new Promise(async (resolve, reject) => {
-            commit('SET_LOADING', true);
-            const path = `${api_admin}/product/${params.product_id}/deleteStock`
-
-            window.axios.post(path, params, {}).then(async response => {
-                console.log(`response.${params.model}`, response);
-                if (response.data.success) {
-                    await actions.removeFromData(commit, {model: params.model});
-                    await commit('SET_LOADING', false);
-                    resolve({
-                        status: true,
-                        message: response.data.data
-                    });
-                } else {
-                    commit('SET_LOADING', false);
-                    reject({
-                        status: false,
-                        message: response.data.message
-                    });
-                }
-
-            }).catch(error => {
-                console.error(`delete.${params.model}`, error);
-                commit('SET_LOADING', false);
-                reject({
-                    status: false,
-                    message: error
-                });
-            });
-        });
-    },
-
     pushUserData({commit}, user) {
         console.log('pushUserData', user);
         return new Promise(async (resolve, reject) => {

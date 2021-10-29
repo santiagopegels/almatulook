@@ -52,9 +52,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['role:admin']], function () 
     Route::post('values/{id}/restore', ['uses' => 'Admin\ValueAPIController@restore']);
     Route::post('categories/{id}/restore', ['uses' => 'Admin\CategoryAPIController@restore']);
     Route::post('shipment_types/{id}/restore', ['uses' => 'Admin\ShipmentTypeAPIController@restore']);
-
-    //extra
-    Route::post('product/{product_id}/deleteStock', ['uses' => 'Admin\ProductAPIController@deleteStock']);
 });
 
 Route::get('products', 'ProductAPIController@index');
