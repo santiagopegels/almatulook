@@ -9,8 +9,7 @@ use App\Repositories\BaseRepository;
  * Class PurchaseDetailRepository
  * @package App\Repositories\Admin
  * @version November 6, 2020, 6:39 pm UTC
-*/
-
+ */
 class PurchaseDetailRepository extends BaseRepository
 {
     /**
@@ -38,5 +37,17 @@ class PurchaseDetailRepository extends BaseRepository
     public function model()
     {
         return PurchaseDetail::class;
+    }
+
+    public function index($input)
+    {
+        $purchaseId = $input['term'];
+
+        $purchaseDetails = PurchaseDetail::where('purchase_id', $purchaseId)
+            ->with('product')
+            ->with('attributeValueGroup')
+            ->get();
+
+        return $purchaseDetails;
     }
 }
