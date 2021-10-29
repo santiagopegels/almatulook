@@ -7,6 +7,7 @@ use App\Models\Admin\AttributeValueGroup;
 use App\Models\Admin\ProductAttributeValueGroup;
 use App\Repositories\BaseRepository;
 use App\Services\AttributeService;
+use App\Services\AttributeValueGroupService;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -91,7 +92,9 @@ class ProductRepository extends BaseRepository
                         ->first()->id;
 
                 }
-                $attributeValueGroupId = $this->getAttributeValueGroupId($attributeValueIds);
+
+                $attributeValueGroupId = AttributeValueGroupService::getAttributeValueGroupId($attributeValueIds);
+
                 ProductAttributeValueGroup::create([
                     'product_id' => $product->id,
                     'attribute_group_id' => $attributeValueGroupId,
@@ -105,25 +108,6 @@ class ProductRepository extends BaseRepository
     {
         ProductAttributeValueGroup::where('product_id', $product->id)->delete();
         $this->storeStock($product, $stocks);
-    }
-
-    //Verify if exist group id for attributes ids
-    public function getAttributeValueGroupId($attributesValuesIds)
-    {
-        $groupId = AttributeValueGroup::getGroupIdByAttributes($attributesValuesIds, false);
-
-        if (!is_null($groupId)) {
-            return $groupId;
-        } else {
-            $maxNumberGroupId = AttributeValueGroup::max('group_id') + 1;
-            foreach ($attributesValuesIds as $attributeValueId) {
-                AttributeValueGroup::create([
-                    'attribute_value_id' => $attributeValueId,
-                    'group_id' => $maxNumberGroupId
-                ]);
-            }
-            return $maxNumberGroupId;
-        }
     }
 
     public function saveImages(Product $product, $images){
