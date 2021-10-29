@@ -17,7 +17,6 @@ use Response;
  * Class ProductController
  * @package App\Http\Controllers\API\Admin
  */
-
 class ProductAPIController extends AppBaseController
 {
     private static $limit = 10;
@@ -41,27 +40,7 @@ class ProductAPIController extends AppBaseController
     {
         $input = $request->all();
 
-        $term = isset($input['term']) && !empty($input['term']) ? $input['term'] : null;
-        $onlyWithAvailableStock = isset($input['withAvailableStock']) && !empty($input['withAvailableStock']) ? $input['withAvailableStock'] : null;
-
-        $products = Product::query();
-
-        if ($onlyWithAvailableStock) {
-            $products = $products
-                ->whereExists(function ($query) {
-                    $query->select('pavg.id')
-                        ->from('products_attribute_values_group as pavg')
-                        ->whereRaw('pavg.product_id = products.id')
-                        ->whereRaw('pavg.stock > 0');
-                });
-        }
-
-        if (!is_null($term)) {
-            $products = $products->where('id', 'like', "%{$term}%")
-                ->orWhere('name', 'like', "%{$term}%");
-        }
-
-        $products = $products->paginate(self::$limit);
+        $products = $this->productRepository->index($input);
 
         return $this->sendResponse(new ProductCollection($products), 'Products retrieved successfully');
     }
@@ -79,11 +58,11 @@ class ProductAPIController extends AppBaseController
         $input = $request->all();
         $product = $this->productRepository->create($input);
 
-        if(isset($input['stocks'])){
+        if (isset($input['stocks'])) {
             $this->productRepository->storeStock($product, $input['stocks']);
         }
 
-        if(isset($input['images'])){
+        if (isset($input['images'])) {
             $this->productRepository->saveImages($product, $input['images']);
         }
 
@@ -131,11 +110,11 @@ class ProductAPIController extends AppBaseController
 
         $product = $this->productRepository->update($input, $id);
 
-        if(isset($input['stocks'])){
+        if (isset($input['stocks'])) {
             $this->productRepository->updateStock($product, $input['stocks']);
         }
 
-        if(isset($input['images'])){
+        if (isset($input['images'])) {
             $product->clearMediaCollection('products');
             $this->productRepository->saveImages($product, $input['images']);
         }
@@ -149,9 +128,9 @@ class ProductAPIController extends AppBaseController
      *
      * @param int $id
      *
+     * @return Response
      * @throws \Exception
      *
-     * @return Response
      */
     public function destroy($id)
     {
@@ -164,27 +143,5 @@ class ProductAPIController extends AppBaseController
         $product->delete();
 
         return $this->sendSuccess('Product deleted successfully');
-    }
-
-    public function deleteStock(Request $request){
-        $input = $request->all();
-
-        $validator = Validator::make($input, [
-            'product_id' => 'required',
-            'attributes' => 'required'
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()]);
-        }
-        unset($input['attributes']['stock']);
-        $groupId = $this->productRepository->getAttributeValueGroupId($input['attributes']);
-        $productAttributeValueGroup = ProductAttributeValueGroup::where('product_id', $input['product_id'])->where('attribute_group_id', $groupId)->first();
-
-        if(!is_null($productAttributeValueGroup)){
-            $productAttributeValueGroup->delete();
-        }
-
-        return $this->sendSuccess('Stock deleted successfully');
     }
 }
