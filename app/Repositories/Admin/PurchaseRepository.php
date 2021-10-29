@@ -21,6 +21,8 @@ use Illuminate\Support\Facades\DB;
  */
 class PurchaseRepository extends BaseRepository
 {
+    private static $limit = 10;
+
     /**
      * @var array
      */
@@ -45,6 +47,30 @@ class PurchaseRepository extends BaseRepository
     public function model()
     {
         return Purchase::class;
+    }
+
+    public function index($input){
+        $term = isset($input['term']) && !empty($input['term']) ? $input['term'] : null;
+
+        $purchases = Purchase::withoutTrashed()
+            ->with('payment')
+            ->with('profile')
+            ->with('shipment')
+            ->orderBy('created_at', 'DESC');
+
+        if (!is_null($term) and $term != 'null') {
+            $purchases = $purchases->where('purchases.id', 'LIKE', "%{$term}%")
+                ->orWhereHas('payment', function($query) use ($term) {
+                    $query->where('payment_id', 'LIKE', "%{$term}%");
+                })->orWhereHas('profile', function($query) use ($term) {
+                    $query->where('name', 'LIKE', "%{$term}%")
+                        ->orWhere('lastname', 'LIKE', "%{$term}%");
+                });
+        }
+
+        $purchases = $purchases->paginate(self::$limit);
+
+        return $purchases;
     }
 
     public function createPurchase($products, $shipmentType = array('id' => null, 'cost' => 0), $statusOrder = null, $preferenceId = null)

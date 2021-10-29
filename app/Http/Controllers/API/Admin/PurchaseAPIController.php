@@ -19,7 +19,6 @@ class PurchaseAPIController extends AppBaseController
 {
     /** @var  PurchaseRepository */
     private $purchaseRepository;
-    private static $limit = 10;
 
     public function __construct(PurchaseRepository $purchaseRepo)
     {
@@ -36,25 +35,8 @@ class PurchaseAPIController extends AppBaseController
     public function index(Request $request)
     {
         $input = $request->all();
-        $term = isset($input['term']) && !empty($input['term']) ? $input['term'] : null;
 
-        $purchases = Purchase::withoutTrashed()
-            ->with('payment')
-            ->with('profile')
-            ->with('shipment')
-            ->orderBy('created_at', 'DESC');
-
-        if (!is_null($term) and $term != 'null') {
-            $purchases = $purchases->where('purchases.id', 'LIKE', "%{$term}%")
-                ->orWhereHas('payment', function($query) use ($term) {
-                    $query->where('payment_id', 'LIKE', "%{$term}%");
-                })->orWhereHas('profile', function($query) use ($term) {
-                    $query->where('name', 'LIKE', "%{$term}%")
-                    ->orWhere('lastname', 'LIKE', "%{$term}%");
-                });
-        }
-
-        $purchases = $purchases->paginate(self::$limit);
+        $purchases = $this->purchaseRepository->index($input);
 
         return $this->sendResponse($purchases->toArray(), 'Purchases Types retrieved successfully');
     }
