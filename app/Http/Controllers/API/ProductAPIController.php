@@ -3,16 +3,9 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Resources\ProductCollection;
-use App\Models\Admin\AttributeValue;
-use App\Models\Admin\AttributeValueGroup;
-use App\Models\Admin\Category;
-use App\Models\Admin\Product;
-use App\Models\Admin\ProductAttributeValueGroup;
-use App\Repositories\Admin\ProductRepository;
-use App\Services\AttributeValueService;
+use App\Repositories\ProductRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
-use Illuminate\Support\Facades\Validator;
 use Response;
 
 /**
