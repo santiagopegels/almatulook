@@ -1,5 +1,6 @@
 {
     "private": true,
+    "homepage": "https://santiagopegels.github.io/almatulook",
     "scripts": {
         "dev": "npm run development",
         "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
@@ -7,10 +8,12 @@
         "watch-poll": "npm run watch -- --watch-poll",
         "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --disable-host-check --config=node_modules/laravel-mix/setup/webpack.config.js",
         "prod": "npm run production",
-        "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-        "compress": "bread-compressor -s public/css/*.css public/js/*.js"
+        "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --max_old_space_size=4096 --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "compress": "bread-compressor -s public/css/*.css public/js/*.js",
+        "deploy": "gh-pages -d public"
     },
     "devDependencies": {
+        "gh-pages": "^3.2.3",
         "laravel-mix-bundle-analyzer": "^1.0.5",
         "webpack-bundle-analyzer": "^4.4.0"
     },
