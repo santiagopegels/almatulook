@@ -20,7 +20,7 @@
                         <img :src="logo" class="footer-logo-img"/>
                     </router-link>
                     <a-row type="flex" justify="space-between" style="margin-top: 5px;">
-                        <a href="https://api.whatsapp.com/send?phone=5493764675330&text=Hola%20AlmaTuLook%20quería%20hacer%20una%20consulta%20sobre&source=&data="
+                        <a href="https://api.whatsapp.com/send?phone=5493764666666&text=Hola%20AlmaTuLook%20quería%20hacer%20una%20consulta%20sobre&source=&data="
                            class="social-button whatsApp" target="_blank">
                             <a-icon type="whatsapp"/>
                         </a>
@@ -36,7 +36,7 @@
                         <a-space direction="vertical">
                             <li>
                                 <a-icon type="phone" theme="twoTone" two-tone-color="#9E7B1A"/>
-                                +543764675330
+                                +543764666666
                             </li>
                             <li>
                                 <a-icon type="mail" theme="twoTone" two-tone-color="#9E7B1A"/>
