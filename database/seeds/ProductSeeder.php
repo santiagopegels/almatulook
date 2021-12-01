@@ -44,6 +44,18 @@ class ProductSeeder extends Seeder
             'stock' => 50,
         ]);
 
+        \App\Models\Admin\ProductAttributeValueGroup::create([
+            'product_id' => $product2->id,
+            'attribute_group_id' => 3,
+            'stock' => 20,
+        ]);
+
+        \App\Models\Admin\ProductAttributeValueGroup::create([
+            'product_id' => $product2->id,
+            'attribute_group_id' => 4,
+            'stock' => 25,
+        ]);
+
         $product1
             ->addMediaFromBase64(self::$images[2])
             ->toMediaCollection('products');
@@ -77,6 +89,26 @@ class ProductSeeder extends Seeder
         \App\Models\Admin\AttributeValueGroup::create([
             'attribute_value_id' => 8,
             'group_id'=> 2,
+        ]);
+
+        \App\Models\Admin\AttributeValueGroup::create([
+            'attribute_value_id' => 2,
+            'group_id'=> 3,
+        ]);
+
+        \App\Models\Admin\AttributeValueGroup::create([
+            'attribute_value_id' => 11,
+            'group_id'=> 3,
+        ]);
+
+        \App\Models\Admin\AttributeValueGroup::create([
+            'attribute_value_id' => 4,
+            'group_id'=> 4,
+        ]);
+
+        \App\Models\Admin\AttributeValueGroup::create([
+            'attribute_value_id' => 10,
+            'group_id'=> 4,
         ]);
     }
 }
